@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import classes from "./loginForm.module.css";
 
-function LoginForm() {
+function LoginForm({ createAccount }) {
   const emailRef = useRef("");
   const passwordRef = useRef("");
 
   const handleCreateAccountBtn = () => {
     // logica para crear cuenta here
+    createAccount();
   };
 
   const handleLoginBtn = () => {
