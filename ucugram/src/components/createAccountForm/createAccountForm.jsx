@@ -8,6 +8,8 @@ function CreateAccountForm({ closeModal }) {
   const nameRef = useRef("");
   const lastNameRef = useRef("");
 
+  const PASSWORD_WARNING = "Password must be at least 10 characters";  
+
   const handleGoBackBtn = () => {
     closeModal();
   };
@@ -57,11 +59,11 @@ function CreateAccountForm({ closeModal }) {
             </div>
           </div>
           <div className={classes.field}>
-            <label className="label">User Name</label>
+            <label className="label">Username</label>
             <input
               className="input"
               type="text"
-              placeholder="Choose a new user name"
+              placeholder="Choose a username"
               ref={userNameRef}
             ></input>
           </div>
@@ -79,7 +81,8 @@ function CreateAccountForm({ closeModal }) {
             <input
               className="input"
               type="password"
-              placeholder="Enter password"
+              placeholder="Enter a password"
+              title={PASSWORD_WARNING}
               ref={passwordRef}
             ></input>
           </div>
