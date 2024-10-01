@@ -14,31 +14,33 @@ function MyProfile({ user }) {
               <Avatar user={user} />
             </div>
             <div className={classes.profileInformation}>
-              <p style={{ font: "25px Segoe UI", width: "50%" }}>
-                <strong>{user.name}</strong>
-              </p>
-              <button className={`button ${classes.profileButton}`}>
-                Edit profile
-              </button>
+              <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
+                <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
+                  <strong>{user.name}</strong>
+                </p>
+                <button className={`button ${classes.profileButton}`}>
+                  Edit profile
+                </button>
+              </div>
               <div className={classes.accountInformation}>
-                <p style={{ gridColumn: 1, gridRow: 1 }}>
-                  <strong>{user.posts}</strong> posts
-                </p>
-                <p style={{ gridColumn: 2, gridRow: 1 }}>
-                  <strong>{user.friends}</strong> friends
-                </p>
-                <div style={{ gridColumn: "1 / 4", gridRow: 2, marginTop:"15px" }}>
-                  <p>
-                    mini descripción del perfil 😊
-                  </p>
+                <div className={classes.statItem}>
+                  <span>
+                    <strong>{user.posts}</strong> posts
+                  </span>
+                </div>
+                <div className={classes.statItem}>
+                  <span>
+                    <strong>{user.friends}</strong> friends
+                  </span>
+                </div>
+                <div className={classes.profileDescription}>
+                  <p>{user.description}</p>
                 </div>
               </div>
               <div></div>
             </div>
           </div>
-          <div>
-            aca va el resto del perfil
-          </div>
+          <div>aca va el resto del perfil</div>
         </div>
       </div>
     </div>
