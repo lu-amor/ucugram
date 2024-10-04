@@ -1,0 +1,106 @@
+{   
+    "posts": [
+        {
+          "id": 1,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Hermoso día en la playa",
+          "likes": 150,
+          "comments": [
+            { "id": 1, "text": "¡Qué buena foto!" },
+            { "id": 2, "text": "Increíble vista." }
+          ]
+        },
+        {
+          "id": 2,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Caminando por el parque",
+          "likes": 98,
+          "comments": [
+            { "id": 1, "text": "Qué tranquilo se ve." },
+            { "id": 2, "text": "Es un lugar increíble para desconectar." }
+          ]
+        },
+        {
+          "id": 3,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Disfrutando de un buen café en la mañana",
+          "likes": 200,
+          "comments": [
+            { "id": 1, "text": "El café siempre es una buena idea." },
+            { "id": 2, "text": "¡Salud por ese café!" }
+          ]
+        },
+        {
+          "id": 4,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Atardecer en la montaña",
+          "likes": 230,
+          "comments": [
+            { "id": 1, "text": "El mejor lugar para relajarse." },
+            { "id": 2, "text": "Qué colores tan espectaculares." }
+          ]
+        },
+        {
+          "id": 5,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Explorando nuevas ciudades",
+          "likes": 175,
+          "comments": [
+            { "id": 1, "text": "Qué ganas de viajar." },
+            { "id": 2, "text": "Espero visitar ese lugar pronto." }
+          ]
+        },
+        {
+          "id": 6,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Cocinando una deliciosa cena",
+          "likes": 110,
+          "comments": [
+            { "id": 1, "text": "¡Eso se ve delicioso!" },
+            { "id": 2, "text": "¿Cuál es la receta?" }
+          ]
+        },
+        {
+          "id": 7,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Ruta de senderismo con amigos",
+          "likes": 90,
+          "comments": [
+            { "id": 1, "text": "Se ve increíble esa ruta." },
+            { "id": 2, "text": "Nada como disfrutar la naturaleza." }
+          ]
+        },
+        {
+          "id": 8,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Día de entrenamiento en el gimnasio",
+          "likes": 145,
+          "comments": [
+            { "id": 1, "text": "Motivación al 100%." },
+            { "id": 2, "text": "¡Vamos por más!" }
+          ]
+        },
+        {
+          "id": 9,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Noche de película con amigos",
+          "likes": 85,
+          "comments": [
+            { "id": 1, "text": "¡Qué buen plan!" },
+            { "id": 2, "text": "Las palomitas no pueden faltar." }
+          ]
+        },
+        {
+          "id": 10,
+          "imageUrl": "https://via.placeholder.com/300",
+          "description": "Paseo en bicicleta al aire libre",
+          "likes": 180,
+          "comments": [
+            { "id": 1, "text": "¡Me encanta andar en bici!" },
+            { "id": 2, "text": "Un buen paseo para el cuerpo y la mente." }
+          ]
+        }
+      ]
+       
+    
+}
