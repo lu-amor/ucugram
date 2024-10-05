@@ -1,9 +1,11 @@
 import React, { useRef, useState } from "react";
 import classes from "./loginForm.module.css";
+import { useNavigate } from "react-router-dom";
 
-function LoginForm({ createAccount }) {
+function LoginForm({ createAccount, closeModal }) {
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const navigate = useNavigate();
 
   const handleCreateAccountBtn = () => {
     // logica para crear cuenta here
@@ -15,11 +17,17 @@ function LoginForm({ createAccount }) {
     const newPassword = passwordRef.current.value;
 
     // aca se hace algo más
+
+    navigate("/myProfile"); // aca va a tener que estar la ruta del usuario
   };
 
   return (
     <div className={classes.modal}>
       <div className={classes.modalContent}>
+          <button
+            className={`${classes.delete} delete`}
+            onClick={closeModal}
+          ></button>
         <div className={classes.modalContainer}>
           <div className={classes.logoContainer}>
             <img src="/ucugram-logo.png" className={classes.logo} />
@@ -51,7 +59,8 @@ function LoginForm({ createAccount }) {
           </div>
           <div className={classes.buttonContainer}>
             <button
-              className={`button ${classes.loginButton}`}
+              className="button"
+              id={classes.loginButton}
               onClick={handleLoginBtn}
             >
               Login

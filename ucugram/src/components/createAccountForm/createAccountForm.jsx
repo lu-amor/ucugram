@@ -1,17 +1,17 @@
 import React, { useRef, useState } from "react";
 import classes from "./createAccountForm.module.css";
 
-function CreateAccountForm({ closeModal }) {
+function CreateAccountForm({ goLogin, closeModal }) {
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const userNameRef = useRef("");
   const nameRef = useRef("");
   const lastNameRef = useRef("");
 
-  const PASSWORD_WARNING = "Password must be at least 10 characters";  
+  const PASSWORD_WARNING = "Password must be at least 10 characters";
 
   const handleGoBackBtn = () => {
-    closeModal();
+    goLogin();
   };
 
   const handleCreateAccountBtn = () => {
@@ -21,12 +21,16 @@ function CreateAccountForm({ closeModal }) {
     const newName = nameRef.current.value;
     const newLastName = lastNameRef.current.value;
 
-    // more logic here 
+    // more logic here
   };
 
   return (
     <div className={classes.modal}>
       <div className={classes.modalContent}>
+        <button
+          className={`${classes.delete} delete`}
+          onClick={closeModal}
+        ></button>
         <div className={classes.modalContainer}>
           <div className={classes.logoContainer}>
             <img src="/ucugram-logo.png" className={classes.logo} />
@@ -87,13 +91,13 @@ function CreateAccountForm({ closeModal }) {
             ></input>
           </div>
           <div className={classes.buttonContainer}>
-            <button className={`button ${classes.loginButton}`}>
+            <button className="button" id={classes.createAccountButton}>
               Create new account
             </button>
           </div>
           <div style={{ marginTop: "10px" }}>
             <button style={{ font: "12px arial" }} onClick={handleGoBackBtn}>
-              {"<"} back
+              {"<"} go login
             </button>
           </div>
         </div>
