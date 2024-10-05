@@ -1,1 +1,12 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
+
+.App {
+    margin-top: 20px; 
+  }
+
+.is-primary {
+    background-color: rgb(2, 2, 94);
+    color :#f8f9fa;
+}
