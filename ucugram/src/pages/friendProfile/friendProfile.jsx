@@ -6,7 +6,7 @@ import Avatar from "../../components/avatar/avatar.jsx";
 function FriendProfile({ user }) {
   return (
     <div className="columns">
-      <SideNavBar />
+      <SideNavBar user={user} />
       <div className="column is-10">
         <div className={classes.profileContainer}>
           <div className={classes.header}>
