@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import classes from "./HomePage.module.css";
+import React, {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import classes from "./AuthNavBar.module.css";
 import LoginForm from "../../components/loginForm/loginForm.jsx";
 import CreateAccountForm from "../../components/createAccountForm/createAccountForm.jsx";
 
-const HomePage = () => {
+function AuthNavBar() {
   const [showCreateAccountForm, setShowCreateAccountForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const navigate = useNavigate();
 
   const handleCreateAccountBtn = () => {
     setShowCreateAccountForm(true);
@@ -16,15 +18,26 @@ const HomePage = () => {
     setShowCreateAccountForm(false);
     setShowLoginForm(true);
   };
-  
+
   const closeModals = () => {
     setShowCreateAccountForm(false);
     setShowLoginForm(false);
+  };
 
+  const goHome = () => {
+    navigate("/home");
+  }
+
+  const goDoc = () => {
+    navigate("/documentation");
+  }
+
+  const goAboutUs = () => {
+    navigate("/about-us");
   }
 
   return (
-    <div className="loginPage">
+    <div>
       {/* contenedor para la barra de navegación */}
       <div className={classes.navBar}>
         <div className={classes.logoContainer}>
@@ -36,11 +49,11 @@ const HomePage = () => {
             src="/ucugram-text-sinFondo.png"
             style={{ alignSelf: "center", height: "65%", width: "auto" }}
           />
-        </div>
-        <div className="navbar-start">
-          <a className="navbar-item">Home</a>
-          <a className="navbar-item">Documentation</a>
-          <a className="navbar-item">About us</a>
+          <div className={classes.navBarOptions}>
+            <button onClick={goHome}>Home</button>
+            <button onClick={goDoc}>Documentation</button>
+            <button onClick={goAboutUs}>About us</button>
+          </div>
         </div>
         <div className={classes.buttonsContainer}>
           <button
@@ -59,12 +72,14 @@ const HomePage = () => {
           </button>
         </div>
       </div>
-      {showLoginForm && <LoginForm createAccount={handleCreateAccountBtn} closeModal={closeModals} />}
+      {showLoginForm && (
+        <LoginForm createAccount={handleCreateAccountBtn} closeModal={closeModals} />
+      )}
       {showCreateAccountForm && (
-        <CreateAccountForm goLogin={handleGoLoginModalBtn} closeModal={closeModals}/>
+        <CreateAccountForm goLogin={handleGoLoginModalBtn} closeModal={closeModals} />
       )}
     </div>
   );
-};
+}
 
-export default HomePage;
+export default AuthNavBar;

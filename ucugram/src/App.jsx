@@ -3,8 +3,11 @@ import FeedPage from "./pages/feedPage/feedPage";
 import MyProfile from "./pages/myProfile/myProfile";
 import FriendProfile from "./pages/friendProfile/friendProfile";
 import SideNavBar from "./components/sideNavBar/sideNavBar";
-import HomePage from "./pages/homePage/HomePage";
+import AuthPage from "./pages/authPage/AuthPage";
+import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 import Avatar from "./components/avatar/avatar";
+import DocPage from "./pages/DocPage/DocPage";
+
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
@@ -29,12 +32,14 @@ function App() {
       {/* esto es para que vaya por defecto a la pagina de welcome */}
       <Route path="/*" element={<Navigate replace to="/home" />} />
       
-        <Route path="/home" element={<HomePage />}></Route>
+        <Route path="/home" element={<AuthPage />}></Route>
         <Route path="/myProfile" element={<MyProfile user={user} />}></Route>
         <Route
           path="/friendProfile"
           element={<MyProfile user={friend} />}
         ></Route>
+        <Route path="/documentation" element={<DocPage/>}></Route>
+        <Route path="/about-us" element={<AboutUsPage/>}></Route>
 
     </Routes>
   );
