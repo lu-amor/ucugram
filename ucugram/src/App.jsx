@@ -1,6 +1,5 @@
 import React from "react";
 import PostGrid from 'ucugram/src/components/postGrid/postGrid.jsx';
-//import PostGrid from "./components/PostGrid";
 import "bulma/css/bulma.min.css";
 import "ucugram/src/App.css"; 
 

@@ -23,9 +23,11 @@ const PostGrid = () => {
 
   return (
     <div className="grid-container">
-      {posts.map((post) => (
-        <PostItem key={post.id} post={post} />
-      ))}
+          {posts.map((post) => (
+            <PostItem 
+            key={post.id} 
+            post={post} />
+          ))}
     </div>
   );
 };
