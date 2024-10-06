@@ -12,7 +12,7 @@ const user = {
 
 const NavBar = () => {
     return (
-        <aside className="menu">
+        <aside className={`menu ${classes.barraNav}`}>
             <img src="/ucugram-text.png" alt="logo" className={classes.isologo}/>
             <ul className="menu-list">
                 <li><a><NavBarItem icono="home" link={houseIcon} nombre="Home" /></a></li>

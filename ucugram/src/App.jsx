@@ -3,6 +3,7 @@ import FeedPage from "./pages/feedPage/feedPage";
 import MyProfile from "./pages/myProfile/myProfile";
 import FriendProfile from "./pages/friendProfile/friendProfile";
 import SideNavBar from "./components/sideNavBar/sideNavBar";
+import Notifications from "./pages/notifications/notifications";
 // import LoginPage from './pages/loginPage/loginPage'
 import Avatar from "./components/avatar/avatar";
 
@@ -24,9 +25,7 @@ function App() {
   }
   return (
     <>
-      <FriendProfile
-        user={friend}
-      />
+      <Notifications user={user} />
     </>
   );
 }
