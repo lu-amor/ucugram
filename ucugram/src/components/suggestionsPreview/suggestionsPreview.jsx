@@ -1,5 +1,6 @@
 import React from 'react';
 import Slider from 'react-slick';
+import FollowButton from '../followButton/followButton';
 import 'ucugram/src/components/suggestionsPreview/suggestionsPreview.css';
 
 const SuggestionsPreview = ({ suggestions }) => {
@@ -33,6 +34,10 @@ const SuggestionsPreview = ({ suggestions }) => {
             <div className="card-info">
               <h3 className="title is-6">{suggestion.name}</h3> 
             </div>
+            <div className="follow-section">
+              <FollowButton userId={suggestion.id} initialFollows={suggestion.follows}/>
+            </div>
+
           </div>
         ))}
       </Slider>
