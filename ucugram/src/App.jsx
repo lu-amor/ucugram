@@ -1,23 +1,3 @@
-// import React from 'react'
-// import FeedPage from './pages/feedPage/feedPage'
-// import MyProfile from './pages/myProfile/myProfile'
-// import FriendProfile from './pages/friendProfile/friendProfile'
-// import SideNavBar from './components/sideNavBar/sideNavBar'
-
-// import './App.css'
-
-// function App() {
-//   return (
-//     <>
-//       <FeedPage />
-//     </>
-//   )
-// }
-
-// export default App
-
-// ----------------------------------------------------------------------------
-
 import React, { useState } from 'react';
 import SuggestionsPreview from 'ucugram/src/components/suggestionsPreview/suggestionsPreview.jsx';
 import AllSuggestions from 'ucugram/src/components/allSuggestions/allSuggestions.jsx';

@@ -2,6 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import FollowButton from '../followButton/followButton';
 import 'ucugram/src/components/suggestionsPreview/suggestionsPreview.css';
+import Avatar from '../avatar/avatar';
 
 const SuggestionsPreview = ({ suggestions }) => {
   const settings = {
@@ -27,9 +28,7 @@ const SuggestionsPreview = ({ suggestions }) => {
         {suggestions.map((suggestion) => (
           <div key={suggestion.id} className="suggestion-card card"> 
             <div className="card-avatar">
-              <figure className="image is-128x128 "> 
-                <img src={suggestion.avatar} alt={suggestion.name} className="is-rounded" /> 
-              </figure>
+              <Avatar user={suggestion} ></Avatar>
             </div>
             <div className="card-info">
               <h3 className="title is-6">{suggestion.name}</h3> 

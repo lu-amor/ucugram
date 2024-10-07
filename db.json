@@ -1,11 +1,11 @@
 {
     "suggestions": [
-      { "id": 1, "name": "Juan Pérez", "avatar": "https://randomuser.me/api/portraits/men/1.jpg" },
-      { "id": 2, "name": "María González", "avatar": "https://randomuser.me/api/portraits/women/2.jpg" },
-      { "id": 3, "name": "Carlos Ruiz", "avatar": "https://randomuser.me/api/portraits/men/3.jpg" },
-      { "id": 4, "name": "Ana Martínez", "avatar": "https://randomuser.me/api/portraits/women/4.jpg" },
-      { "id": 5, "name": "Luis Mora", "avatar": "https://randomuser.me/api/portraits/men/5.jpg" },
-      { "id": 6, "name": "Sara Díaz", "avatar": "https://randomuser.me/api/portraits/women/6.jpg" }
+      { "id": 1, "name": "Juan Pérez", "profilePhoto": "https://randomuser.me/api/portraits/men/1.jpg" , "follows": 1432},
+      { "id": 2, "name": "María González", "profilePhoto": "https://randomuser.me/api/portraits/women/2.jpg" , "follows": 509 },
+      { "id": 3, "name": "Carlos Ruiz", "profilePhoto": "https://randomuser.me/api/portraits/men/3.jpg", "follows": 796 },
+      { "id": 4, "name": "Ana Martínez", "profilePhoto": "https://randomuser.me/api/portraits/women/4.jpg", "follows": 1508 },
+      { "id": 5, "name": "Luis Mora", "profilePhoto": "https://randomuser.me/api/portraits/men/5.jpg", "follows": 2585 },
+      { "id": 6, "name": "Sara Díaz", "profilePhoto": "https://randomuser.me/api/portraits/women/6.jpg", "follows": 2008 }
     ]
   }
   
