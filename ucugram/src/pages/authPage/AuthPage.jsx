@@ -5,11 +5,16 @@ import LoginForm from "../../components/loginForm/loginForm.jsx";
 import CreateAccountForm from "../../components/createAccountForm/createAccountForm.jsx";
 
 const AuthPage = () => {
-
   return (
     <div>
       <AuthNavBar />
-      <p>esto es el home de la pagina, el mensaje de bienventdos!</p>
+      <div className={classes.homePageContainer}>
+        <div className={classes.title}>
+          <p>BIENVENIDO</p>
+          <p>A LA VIDA UNIVERSITARIA DE LA UCU</p>
+          <p>EN EL MUNDO DIGITAL</p>
+        </div>
+      </div>
     </div>
   );
 };
