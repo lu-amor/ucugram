@@ -1,25 +1,13 @@
-import React, { useState, useEffect } from "react";
 import PostItem from "ucugram/src/components/postItem/postItem.jsx";
+import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import "ucugram/src/components/postGrid/postGrid.css"
 
-const url = 'http://localhost:3000/posts';
 
 const PostGrid = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts, loading, error } = useFetchPosts();
 
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(url, { method: "GET" });
-      const data = await response.json();
-      setPosts(data);
-    } catch (error) {
-      console.error("Error fetching posts:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  if (loading) return <div>Loading posts...</div>;
+  if (error) return <div>Error loading posts!</div>;
 
   return (
     <div className="grid-container">

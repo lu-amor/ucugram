@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
+//import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
 import PostModal from 'ucugram/src/components/postModal/postModal.jsx';
 import "ucugram/src/components/postItem/postItem.css";
 

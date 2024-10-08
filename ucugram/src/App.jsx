@@ -3,6 +3,7 @@ import PostGrid from 'ucugram/src/components/postGrid/postGrid.jsx';
 import "bulma/css/bulma.min.css";
 import "ucugram/src/App.css"; 
 
+
 function App() {
   return (
     <div className="App">
@@ -16,4 +17,3 @@ function App() {
 }
 
 export default App;
-

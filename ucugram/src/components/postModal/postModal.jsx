@@ -1,7 +1,10 @@
 import React from "react";
 import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
+import CommentButton from "../commentButton/commentButton";
+import CommentInput from "../commentInput/commentInput";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faShare } from '@fortawesome/free-solid-svg-icons';
+import './postModal.css';
 
 
 const PostModal = ({ post, isOpen, onClose }) => {
@@ -10,40 +13,50 @@ const PostModal = ({ post, isOpen, onClose }) => {
   return (
     <div className={`modal ${isOpen ? "is-active" : ""}`}>
       <div className="modal-background" onClick={onClose}></div>
-      <div className="modal-card">
-        <header className="modal-card-head">
-          <button className="delete" aria-label="close" onClick={onClose}></button>
-        </header>
-        <section className="modal-card-body">
-          <figure className="image is-4by3">
+
+      <button 
+          className="modal-close is-large"  
+          aria-label="close" 
+          onClick={onClose} >
+      </button>
+
+      <div className="modal-content">
+
+        <div className="modal-card-body">
+          <figure className="pic is-4by3">
             <img src={post.imageUrl} alt={post.description} />
           </figure>
-          {/* <p>{post.description}</p> */}
-          <div className="buttons is-centered mt-4">
-            <div className="like-section">
-              <LikeButton postId={post.id} initialLikes={post.likes} />
-            </div>
 
-            <button className="button is-light">
-              <FontAwesomeIcon icon={faComment} />
-            </button>
+          <div className="data-container">
+              <div className="post-header">
+                <h3><strong>{post.user}</strong></h3>
+              </div>
 
-            <button className="button is-light">
-              <FontAwesomeIcon icon={faShare} />
-            </button>
+
+              <p className="pic-description"><strong>{post.user}</strong> {post.description}</p>
+
+              <ul className="comments-section">
+                {post.comments.map((comment) => (
+                  <li 
+                  key={comment.id}>
+                  <p><strong>{comment.user}</strong> {comment.text} </p>
+                  </li>
+                  ))}
+              </ul>
+              
+
+              <div className="buttons is-centered mt-4">
+
+                  <LikeButton className="like-section" postId={post.id} initialLikes={post.likes} />
+
+                  <FontAwesomeIcon className="share-button" icon={faShare}/>
+
+                  <CommentButton className="comment-button" postId={post.id} />
+
+              </div> 
+
           </div>
-          {/* <div className="comments-section">
-            <h2 className="title is-5">Comentarios:</h2>
-            <ul>
-              {post.comments.map((comment) => (
-                <li key={comment.id}>{comment.text}</li>
-              ))}
-            </ul>
-          </div> */}
-        </section>
-        {/* <footer className="modal-card-foot">
-          <button className="button is-link" onClick={onClose}>Cerrar</button>
-        </footer> */}
+        </div>
       </div>
     </div>
   );

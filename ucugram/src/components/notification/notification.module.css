@@ -1,0 +1,49 @@
+.notificationContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 3rem;
+    padding-left: 2rem;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.closeButton {
+    justify-self: right;
+    justify-content: right;
+    align-self: right;
+    align-content: right;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.user {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.time {
+    margin-left: 7px;
+    color: grey;
+    font-size: 10px;
+    align-self: center;
+    margin-top: -15px;
+}
+
+.customButton {
+    background-color: #009ce6;
+    color: white;
+    border: none;
+    margin-left: auto;
+    cursor: pointer;
+    height: 35px;
+    align-self: flex-start;
+    margin-top: -5px;
+}
+
+.post {
+    border: none;
+    margin-left: auto;
+    height: 35px;
+    align-self: flex-start;
+}
