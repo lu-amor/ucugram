@@ -23,7 +23,7 @@ const SuggestionsPreview = ({ suggestions }) => {
 
   return (
     <div className="suggestions-preview">
-      <h2 className="title is-4">Sugerencias para ti</h2> 
+      <h2 className="title is-4">Suggestions for you</h2> 
       <Slider {...settings}>
         {suggestions.map((suggestion) => (
           <div key={suggestion.id} className="suggestion-card card"> 

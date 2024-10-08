@@ -8,7 +8,7 @@ const FollowButton = ({ userId, initialFollows }) => {
     <div>
       <button className={`button ${isFollowed ? "is-light" : "is-primary"}`} 
       onClick={toggleFollow}>
-        {isFollowed ? "Siguiendo" : "Seguir"} 
+        {isFollowed ? "Following" : "Follow"} 
         {/* {follows} */}
       </button>
     </div>
