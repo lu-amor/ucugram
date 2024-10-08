@@ -40,7 +40,6 @@ function App() {
         ></Route>
         <Route path="/documentation" element={<DocPage/>}></Route>
         <Route path="/about-us" element={<AboutUsPage/>}></Route>
-
     </Routes>
   );
 }

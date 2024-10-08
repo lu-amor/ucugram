@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
-import Footer from "../../components/footer/footer.jsx";
+import React from "react";
+import Footer from "../../components/footer/footer";
+import Developer from "../../components/developer/developer";
 
-const AboutUsPage = () => {
-  return (
-    <div>
-      <AuthNavBar />
-      <div>
+const AboutUs = ({developers}) => {
+    return (
+        <div>
             <h1>About Us</h1>
             <p>
                 Ucugram is a social network that allows you to share your photos with people from the university. 
@@ -14,7 +12,7 @@ const AboutUsPage = () => {
                 Ucugram is a project developed by students of the Universidad Católica del Uruguay.
             </p>
             <h2>Meet us!</h2>
-{/*             <div>
+            <div>
                 {developers.map((developer, index) => (
                     <Developer
                         key={index}
@@ -24,11 +22,10 @@ const AboutUsPage = () => {
                         linkedin={developer.linkedin}
                     />
                 ))}
-            </div> */}
+            </div>
             <Footer />
         </div>
-    </div>
-  );
+    );
 };
 
-export default AboutUsPage;
+export default AboutUs;
