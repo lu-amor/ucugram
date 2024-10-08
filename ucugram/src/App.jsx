@@ -1,17 +1,19 @@
-import React from 'react'
-import FeedPage from './pages/feedPage/feedPage'
-import MyProfile from './pages/myProfile/myProfile'
-import FriendProfile from './pages/friendProfile/friendProfile'
-import SideNavBar from './components/sideNavBar/sideNavBar'
+import React from "react";
+import PostGrid from 'ucugram/src/components/postGrid/postGrid.jsx';
+import "bulma/css/bulma.min.css";
+import "ucugram/src/App.css"; 
 
-import './App.css'
 
 function App() {
   return (
-    <>
-      <FeedPage />
-    </>
-  )
+    <div className="App">
+      <section className="section">
+        <div className="container">
+          <PostGrid />
+        </div>
+      </section>
+    </div>
+  );
 }
 
-export default App
+export default App;
