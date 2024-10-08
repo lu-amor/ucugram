@@ -15,11 +15,13 @@
     align-content: right;
     margin-left: 20px;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .user {
     font-weight: bold;
     margin-right: 10px;
+    cursor: pointer;
 }
 
 .time {
@@ -46,4 +48,11 @@
     margin-left: auto;
     height: 35px;
     align-self: flex-start;
+}
+
+.avatarContainer {
+    width: 31px;
+    height: auto;
+    margin-right: 8px;
+    margin-left: 21px;
 }
