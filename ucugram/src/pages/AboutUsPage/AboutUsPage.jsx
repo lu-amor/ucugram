@@ -4,7 +4,7 @@ import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
 const AboutUsPage = () => {
   return (
     <div>
-      <AuthNavBar />
+      <AuthNavBar navItem="about-us"/>
       <p>acá va nuestra info</p>
     </div>
   );

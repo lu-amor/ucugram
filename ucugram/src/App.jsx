@@ -36,7 +36,7 @@ function App() {
         <Route path="/myProfile" element={<MyProfile user={user} />}></Route>
         <Route
           path="/friendProfile"
-          element={<MyProfile user={friend} />}
+          element={<FriendProfile user={friend} />}
         ></Route>
         <Route path="/documentation" element={<DocPage/>}></Route>
         <Route path="/about-us" element={<AboutUsPage/>}></Route>

@@ -6,7 +6,7 @@ const DocPage = () => {
 
   return (
     <div>
-      <AuthNavBar />
+      <AuthNavBar navItem="documentation"/>
       <p>esto es la documentacion del coso</p>
     </div>
   );

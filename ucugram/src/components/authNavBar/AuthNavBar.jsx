@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./AuthNavBar.module.css";
 import LoginForm from "../../components/loginForm/loginForm.jsx";
 import CreateAccountForm from "../../components/createAccountForm/createAccountForm.jsx";
 
-function AuthNavBar() {
+function AuthNavBar({navItem}) {
   const [showCreateAccountForm, setShowCreateAccountForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  // const [navItem, setnavItem] = useState(navItems.home);
   const navigate = useNavigate();
 
   const handleCreateAccountBtn = () => {
@@ -26,15 +27,15 @@ function AuthNavBar() {
 
   const goHome = () => {
     navigate("/home");
-  }
+  };
 
   const goDoc = () => {
     navigate("/documentation");
-  }
+  };
 
   const goAboutUs = () => {
     navigate("/about-us");
-  }
+  };
 
   return (
     <div>
@@ -50,9 +51,33 @@ function AuthNavBar() {
             style={{ alignSelf: "center", height: "65%", width: "auto" }}
           />
           <div className={classes.navBarOptions}>
-            <button onClick={goHome}>Home</button>
-            <button onClick={goDoc}>Documentation</button>
-            <button onClick={goAboutUs}>About us</button>
+            <button onClick={goHome} className={classes.underlineButton}>
+              {navItem === "home" ? (
+                <strong>
+                  Home
+                </strong>
+              ) : (
+                <span>Home</span>
+              )}
+            </button>
+            <button onClick={goDoc} className={classes.underlineButton}>
+              {navItem === "documentation" ? (
+                <strong>
+                  Documentation
+                </strong>
+              ) : (
+                <span>Documentation</span>
+              )}
+            </button>
+            <button onClick={goAboutUs} className={classes.underlineButton}>
+              {navItem === "about-us" ? (
+                <strong>
+                  About us
+                </strong>
+              ) : (
+                <span>About us</span>
+              )}
+            </button>
           </div>
         </div>
         <div className={classes.buttonsContainer}>
@@ -73,10 +98,16 @@ function AuthNavBar() {
         </div>
       </div>
       {showLoginForm && (
-        <LoginForm createAccount={handleCreateAccountBtn} closeModal={closeModals} />
+        <LoginForm
+          createAccount={handleCreateAccountBtn}
+          closeModal={closeModals}
+        />
       )}
       {showCreateAccountForm && (
-        <CreateAccountForm goLogin={handleGoLoginModalBtn} closeModal={closeModals} />
+        <CreateAccountForm
+          goLogin={handleGoLoginModalBtn}
+          closeModal={closeModals}
+        />
       )}
     </div>
   );
