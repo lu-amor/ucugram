@@ -18,6 +18,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 60%;
+    height: auto; 
+    margin-left: 20px;
 }
 
 .profileInformation {
