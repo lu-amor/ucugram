@@ -6,6 +6,7 @@ import SideNavBar from "./components/sideNavBar/sideNavBar";
 import Notifications from "./pages/notifications/notifications";
 // import LoginPage from './pages/loginPage/loginPage'
 import Avatar from "./components/avatar/avatar";
+import Footer from "./components/footer/footer";
 
 function App() {
   const notificationsList = [
@@ -52,7 +53,8 @@ function App() {
   }
   return (
     <>
-      <Notifications user={user} notificationsList={notificationsList}/>
+      {/*<Notifications user={user} notificationsList={notificationsList}/>*/}
+      <Footer />
     </>
   );
 }
