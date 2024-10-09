@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import classes from "./AuthPage.module.css";
 import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
-import AuthFooter from "../../components/authFooter/authFooter.jsx";
-
+import Footer from "../../components/footer/footer.jsx";
 
 const AuthPage = () => {
   return (
@@ -20,7 +19,7 @@ const AuthPage = () => {
         </div>
       </div>
       <footer className={classes.footer}>
-        <AuthFooter/>
+        <Footer/>
       </footer>
     </div>
   );
