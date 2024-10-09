@@ -1,0 +1,79 @@
+.footer {
+    background-color: #a189bd;
+    display: flex;
+    flex-direction: row;
+    padding: 22px 20px 15px 20px;
+}
+
+.title {
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+}
+
+.text {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 1px;
+}
+
+/*--------------------------------------------------------*/
+
+.centro {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ucugramLogo {
+    width: 5rem;
+    height: auto;
+}
+
+.divider {
+    background: white;
+    border: none;
+    width: 0.2rem;
+    height: 100%;
+    margin-left: 15px;
+    margin-right: 25px;
+}
+
+.page {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-bottom: 3px;
+    font-size: 16px;
+}
+
+/*--------------------------------------------------------*/
+
+.redes {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-bottom: -12px;
+}
+
+.copyright {
+    margin-top: auto;
+    color: white;
+    font-size: 10px;
+}
+
+.socialMediaIcons {
+    align-items: flex-end;
+    justify-content: flex-end;
+
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

@@ -33,7 +33,8 @@
 
 #signInButton {
     align-self: center;
-    background-color: rgb(64, 56, 187);
+    background-color:#173363;
+    border-color: #173363;
     color:white;
     height: 45px;
     width: 90px;

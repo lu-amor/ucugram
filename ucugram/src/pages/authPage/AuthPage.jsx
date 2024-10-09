@@ -3,6 +3,7 @@ import classes from "./AuthPage.module.css";
 import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
 import AuthFooter from "../../components/authFooter/authFooter.jsx";
 
+
 const AuthPage = () => {
   return (
     <div className={classes.page}>
