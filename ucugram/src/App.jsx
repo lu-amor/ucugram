@@ -27,6 +27,12 @@ function App() {
     description: "This is my profile description 😊",
   };
 
+  const developers = [
+    {name: "Manuela", avatar: "../public/profile_img-by-AI.jpeg", github: "manuela", mail: "manuela.guedez@correo.ucu.edu.uy", linkedin: "ManuGuedez"},
+    {name: "Paulina", avatar: "../public/profile_img-by-AI.jpeg", github: "paulina", mail: "paulina.vidal@correo.ucu.edu.uy", linkedin: "PaulinaVidal22"},
+    {name: "Lucía", avatar: "../public/profile_img-by-AI.jpeg", github: "https://github.com/lu-amor", mail: "lucia.amor@correo.ucu.edu.uy", linkedin: "https://www.linkedin.com/in/luc%C3%ADa-amor-9183192b4/"}
+  ]
+
   return (
     <Routes>
       {/* esto es para que vaya por defecto a la pagina de welcome */}
@@ -39,7 +45,7 @@ function App() {
           element={<FriendProfile user={friend} />}
         ></Route>
         <Route path="/documentation" element={<DocPage/>}></Route>
-        <Route path="/about-us" element={<AboutUsPage/>}></Route>
+        <Route path="/about-us" element={<AboutUsPage developers={developers}/>}></Route>
     </Routes>
   );
 }
