@@ -1,36 +1,63 @@
-import React, { useState } from 'react';
-import SuggestionsPreview from 'ucugram/src/components/suggestionsPreview/suggestionsPreview.jsx';
-import AllSuggestions from 'ucugram/src/components/allSuggestions/allSuggestions.jsx';
-import useFetchSuggestions from 'ucugram/src/hooks/useFetchSuggestions.jsx';
-import 'bulma/css/bulma.css';
-import './App.css';
+import React from "react";
+import FeedPage from "./pages/feedPage/feedPage";
+import MyProfile from "./pages/myProfile/myProfile";
+import FriendProfile from "./pages/friendProfile/friendProfile";
+import SideNavBar from "./components/sideNavBar/sideNavBar";
+import Notifications from "./pages/notifications/notifications";
+// import LoginPage from './pages/loginPage/loginPage'
+import Avatar from "./components/avatar/avatar";
+import Footer from "./components/footer/footer";
 
-const App = () => {
-  const { suggestions, loading, error } = useFetchSuggestions(); 
-  const [showAll, setShowAll] = useState(false);
+function App() {
+  const notificationsList = [
+    {
+      id: 1,
+      type: "like",
+      user: {
+        profilePhoto: "/profile_img-by-AI.jpeg",
+        name: "nombre_amigo",
+        posts: 1.861, // después esto va a ser una lista por ej. 
+        friends: 454, // lista o dict con usuarios amigos
+        description: "This is my profile description 😊"
+      },
+      time: "2h"
+    },
+    {
+      id: 2,
+      type: "follow",
+      user: {
+        profilePhoto: "/profile_img-by-AI.jpeg",
+        name: "nombre_amigo",
+        posts: 1.861, // después esto va a ser una lista por ej. 
+        friends: 454, // lista o dict con usuarios amigos
+        description: "This is my profile description 😊"
+      },
+      time: "2h"
+    }
+  ];
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error loading suggestions!</div>;
+  const user = {
+    profilePhoto: "/ucugram-logo.png",
+    name: "nombre_ususario",
+    posts: 11, // después esto va a ser una lista por ej. 
+    friends: 17, // lista o dict con usuarios amigos
+    description: "This is the best app I have ever seen! 😊"
+  };
 
+  const friend = {
+    profilePhoto: "/profile_img-by-AI.jpeg",
+    name: "nombre_amigo",
+    posts: 1.861, // después esto va a ser una lista por ej. 
+    friends: 454, // lista o dict con usuarios amigos
+    description: "This is my profile description 😊"
+  }
   return (
-    <div className="App container">
-      {showAll ? (
-        <AllSuggestions suggestions={suggestions} onBack={() => setShowAll(false)}/>
-      ) : (
-        <SuggestionsPreview suggestions={suggestions} />
-      )}
-      {!showAll && (
-        <footer className='has-text-right'>
-        {/* "show-all-btn" en className */}
-          <button className="button show-all-btn is-primary mt-4 has-text-white" onClick={() => setShowAll(true)}>
-            Ver todas las sugerencias
-          </button>
-        </footer>
-      )}
-    </div>
+    <>
+      {/*<Notifications user={user} notificationsList={notificationsList}/>*/}
+      <Footer />
+    </>
   );
-};
+}
 
 export default App;
-
 
