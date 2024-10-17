@@ -1,12 +1,37 @@
 .isologo {
-    width: 75%;
-    height: auto;
+    width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding-top: 60px;
-    padding-left: 45px;
+    padding-top: 45px;
+    padding-left: 40px;
     padding-bottom: 20px;
 }
 
+@media (max-width: 1024px) {
+    .isologo {
+        width: 305px;
+        padding-top: 40px;
+        padding-left: 35px;
+        padding-bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .isologo {
+        width: 152px;
+        padding-top: 40px;
+        padding-left: 40px;
+        padding-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .isologo {
+        width: 100px;
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-bottom: 5px;
+    }
+}

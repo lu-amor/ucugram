@@ -1,11 +1,21 @@
 .navBarItem {
     display: flex;
     align-items: center;
+    height: 24px;
 }
 
 .icono {
     width: 20px;
     height: auto;
-    margin-right: 8px;
+    margin-right: 12px;
     margin-left: 25px;
+}
+
+.avatar {
+    width: 31px;
+    height: auto;
+    border-radius: 100%;
+    margin-right: 8px;
+    margin-left: 21px;
+    padding-top: 5px;
 }
