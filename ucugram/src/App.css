@@ -1,9 +1,13 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 
-
-.App {
-    margin-top: 20px; 
+.like-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
   }
 
 .is-primary {
@@ -27,3 +31,4 @@
   background-color: #0dafb1; 
   border-color: #0dafb1;
 }
+

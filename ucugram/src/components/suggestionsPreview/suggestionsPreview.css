@@ -45,34 +45,6 @@
     align-content: center;
     text-align: center;
   }
-  
-  .card-info h3 {
-    margin-top: 10px;
-    font-size: 18px;
-    color: #009ce6;
-  }
-
-  .follow-section {
-    margin-top: 15px;
-  }
-  
-  .follow-section button {
-    background-color: #ea5b0c; 
-    color: white;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .follow-section button:hover {
-    background-color:#009ce6; 
-  }
-  
-  .slick-dots li button:before {
-    color: #173363; 
-  }
 
   
   
