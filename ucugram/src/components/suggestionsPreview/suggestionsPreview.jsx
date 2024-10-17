@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider from 'react-slick';
 import FollowButton from '../followButton/followButton';
-import 'ucugram/src/components/suggestionsPreview/suggestionsPreview.css';
 import Avatar from '../avatar/avatar';
+import 'ucugram/src/components/suggestionsPreview/suggestionsPreview.css';
 
 const SuggestionsPreview = ({ suggestions }) => {
   const settings = {
@@ -23,17 +23,17 @@ const SuggestionsPreview = ({ suggestions }) => {
 
   return (
     <div className="suggestions-preview">
-      <h2 className="title is-4">Suggestions for you</h2> 
+      <h2 className="title is-4 has-text-centered">Suggestions for you</h2> 
       <Slider {...settings}>
         {suggestions.map((suggestion) => (
-          <div key={suggestion.id} className="suggestion-card card"> 
+          <div key={suggestion.id} className="suggestion-card card "> 
             <div className="card-avatar">
               <Avatar user={suggestion} ></Avatar>
             </div>
             <div className="card-info">
-              <h3 className="title is-6">{suggestion.name}</h3> 
+              <h3 className="title is-6 has-text-weight-semibold has-text-info">{suggestion.name}</h3> 
             </div>
-            <div className="follow-section">
+            <div className="follow-section mt-2">
               <FollowButton userId={suggestion.id} initialFollows={suggestion.follows}/>
             </div>
 

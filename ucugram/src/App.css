@@ -7,6 +7,23 @@
   }
 
 .is-primary {
-    background-color: rgb(2, 2, 94);
+    background-color: #173363;
     color :#f8f9fa;
+}
+
+.show-all-btn {
+  background-color: #ea5b0c; 
+  border-color: #ea5b0c; 
+  color: white; 
+  transition: background-color 0.3s ease;
+}
+
+.show-all-btn:hover {
+  background-color: #a189bd; 
+  border-color: #a189bd; 
+}
+
+.show-all-btn:focus {
+  background-color: #0dafb1; 
+  border-color: #0dafb1;
 }

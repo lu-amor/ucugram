@@ -1,53 +1,13 @@
-/* .all-suggestions {
-    width: 90%;
-    margin: 0 auto;
-  }
-  
-  .suggestions-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .suggestion-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .item-avatar img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 15px;
-  }
-  
-  .item-info h3 {
-    font-size: 18px;
-  }
-  
-  .back-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .back-button:hover {
-    background-color: #0056b3;
-  } */
-
   .all-suggestions {
     padding: 20px;
+    background-color: #a189bd; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+.all-sugg-title h2 {
+  color : #173363;
+}
   
   .suggestions-list {
     list-style: none;
@@ -59,6 +19,14 @@
     align-items: center;
     justify-content: space-between; 
     margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff; 
+    transition: background-color 0.3s ease;
+  }
+
+  .suggestion-item:hover {
+    background-color: #f7c600; 
   }
 
   .item-avatar img {
@@ -70,6 +38,11 @@
   
   .item-info h3 {
     margin: 0;
+    color: #173363;
+  }
+
+  .sugg-user {
+    color: #173363;
   }
   
   .follow-section {
@@ -79,15 +52,16 @@
 
   .back-button {
     margin-top: 20px;
-    background-color: #3273dc;
+    background-color: #ea5b0c;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .back-button:hover {
-    background-color: #275aa8;
+    background-color: #ea5b0c;
   }
   
   

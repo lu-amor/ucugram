@@ -7,7 +7,7 @@ const AllSuggestions = ({ suggestions, onBack }) => {
   return (
     <div className="all-suggestions">
 
-      <h2 className="title is-4">All suggestions</h2>
+      <h2 className="title all-sugg-title is-4 has-text-centered ">All suggestions</h2>
 
       <ul className="suggestions-list">
         {suggestions.map((suggestion) => (
@@ -18,7 +18,7 @@ const AllSuggestions = ({ suggestions, onBack }) => {
             </div>
 
             <div className="item-info">
-              <h3>{suggestion.name}</h3>
+              <h3 className="sugg-user has-text-dark">{suggestion.name}</h3>
             </div>
 
             <div className="follow-section">
@@ -29,7 +29,7 @@ const AllSuggestions = ({ suggestions, onBack }) => {
         ))}
       </ul>
 
-      <button onClick={onBack} className="back-button button is-primary">go back</button>
+      <button onClick={onBack} className="back-button button is-primary mt-4">go back</button>
 
     </div>
   );
