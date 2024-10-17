@@ -3,6 +3,7 @@
     {
       "id": "1",
       "user": "AntoVidal",
+      "date": "2024-02-01",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Hermoso día en la playa",
       "likes": 150,
@@ -22,6 +23,7 @@
     {
       "id": "2",
       "user": "luliOli",
+      "date": "2024-03-10",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Caminando por el parque",
       "likes": 98,
@@ -41,6 +43,7 @@
     {
       "id": "3",
       "user": "luEboli",
+      "date": "2024-01-15",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Disfrutando de un buen café en la mañana",
       "likes": 200,
@@ -60,6 +63,7 @@
     {
       "id": "4",
       "user": "juliGuedez",
+      "date": "2024-02-20",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Atardecer en la montaña",
       "likes": 230,
@@ -79,6 +83,7 @@
     {
       "id": "5",
       "user": "gastonPereira",
+      "date": "2024-03-05",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Explorando nuevas ciudades",
       "likes": 175,
@@ -98,6 +103,7 @@
     {
       "id": "6",
       "user": "beluPerez",
+      "date": "2024-02-18",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Cocinando una deliciosa cena",
       "likes": 110,
@@ -117,6 +123,7 @@
     {
       "id": "7",
       "user": "Belutee",
+      "date": "2024-03-12",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Ruta de senderismo con amigos",
       "likes": 90,
@@ -136,6 +143,7 @@
     {
       "id": "8",
       "user": "GabSismondi",
+      "date": "2024-01-25",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Día de entrenamiento en el gimnasio",
       "likes": 145,
@@ -155,6 +163,7 @@
     {
       "id": "9",
       "user": "aliciaFerrarez",
+      "date": "2024-02-28",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Noche de película con amigos",
       "likes": 85,
@@ -174,6 +183,7 @@
     {
       "id": "10",
       "user": "mauroMachado",
+      "date": "2024-03-01",
       "imageUrl": "https://via.placeholder.com/300",
       "description": "Paseo en bicicleta al aire libre",
       "likes": 180,
