@@ -44,6 +44,8 @@ function App() {
           path="/friendProfile"
           element={<FriendProfile user={friend} />}
         ></Route>
+        <Route path="/feed" element={<FeedPage />}></Route>
+        {/*<Route path="/notifications" element={<NotificationsPage />}></Route>*/}
         <Route path="/documentation" element={<DocPage/>}></Route>
         <Route path="/about-us" element={<AboutUsPage developers={developers}/>}></Route>
     </Routes>
