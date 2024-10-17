@@ -31,7 +31,7 @@ const SuggestionsPreview = ({ suggestions }) => {
               <Avatar user={suggestion} ></Avatar>
             </div>
             <div className="card-info">
-              <h3 className="title is-6 has-text-weight-semibold has-text-info">{suggestion.name}</h3> 
+              <h3 className="title is-6 has-text-weight-semibold ">{suggestion.name}</h3> 
             </div>
             <div className="follow-section mt-2">
               <FollowButton userId={suggestion.id} initialFollows={suggestion.follows}/>

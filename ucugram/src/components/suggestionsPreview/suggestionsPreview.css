@@ -15,7 +15,7 @@
   .suggestion-card {
     /* background-color: #f8f9fa; */
     /* background-color: #fff; */
-    background-color: #f7c600;
+    background-color: #a189bd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 15px;
@@ -50,7 +50,6 @@
     margin-top: 10px;
     font-size: 18px;
     color: #009ce6;
-    /* color: rgb(2, 2, 94); */
   }
 
   .follow-section {
@@ -68,7 +67,7 @@
   }
 
   .follow-section button:hover {
-    background-color: #a189bd; 
+    background-color:#009ce6; 
   }
   
   .slick-dots li button:before {

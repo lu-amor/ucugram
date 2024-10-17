@@ -52,16 +52,21 @@
 
   .back-button {
     margin-top: 20px;
-    background-color: #ea5b0c;
     color: white;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    background-color : #173363;
     transition: background-color 0.3s ease;
   }
   
   .back-button:hover {
     background-color: #ea5b0c;
+  }
+
+  .back-button:focus {
+    background-color: #0dafb1; 
+    border-color: #0dafb1;
   }
   
   

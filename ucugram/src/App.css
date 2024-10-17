@@ -12,15 +12,15 @@
 }
 
 .show-all-btn {
-  background-color: #ea5b0c; 
-  border-color: #ea5b0c; 
+  background-color:#173363 ; 
+  border-color: #173363; 
   color: white; 
   transition: background-color 0.3s ease;
 }
 
 .show-all-btn:hover {
-  background-color: #a189bd; 
-  border-color: #a189bd; 
+  background-color:#ea5b0c; 
+  border-color: #ea5b0c; 
 }
 
 .show-all-btn:focus {
