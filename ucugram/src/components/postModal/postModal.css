@@ -10,59 +10,140 @@
     align-items: center;
   }
 
-  .post-header {
-    border-bottom: 1px solid #353536; 
+  .modal-content {
+    display: flex;
+    /* background-color: white; */
+    background-color: #f7c600;
+    border-radius: 10px;
+    max-width: 90%;  
+    max-height: 90%; 
+    overflow: hidden;
   }
 
   .modal-card-body {
     display: flex;
     flex-direction: row;
+    /* background-color: white;
     border-radius: 10px;
+    max-width: 900px; 
+    height: 600px;  */
+    overflow: hidden; 
+  }
+
+  /* .pic {
+    width: 60%; 
+    height: 100%;
+    margin: 0;
+  } */
+
+  .pic {
+    flex-shrink: 0;
+    margin: 0;
+  }
+
+  /* .pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  } */
+  .pic img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; 
   }
 
   .data-container{
     width: 40%;
-    height: 100%;
+    background-color: #173363;
+    /* height: 100%; */
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid #0dafb1;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* image {
+    width: 100%;
+    height: 100%;
+  } */
+
+  /* figure .pic {
+    width: 60%; 
+    height: 100%; 
+    margin: 0; 
+  } */
+  
+  /* figure .pic img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover; 
+  } */
+
+
+  .post-header {
+    /* border-bottom: 1px solid #353536;  */
+    border-bottom: 1px solid #009ce6;
+    padding-bottom: 10px;
+  }
+  
+  .post-date {
+    /* color: #8e8e8e; */
+    color: #a189bd;
+    font-size: 12px;
+    margin-top: 5px;
   }
 
   .pic-description {
     margin-top: 10px;
+    font-size: 14px;
+    color: #ffffff;
   }
 
   .comments-section {
+    /* margin-top: 10px; */
+    max-height: 200px; 
     overflow-y: auto;
-  }
-  
-  image {
-    width: 100%;
-    height: 100%;
+    /* border-top: 1px solid #353536; */
+    border-top: 1px solid #009ce6;
+    padding-top: 10px;
   }
 
-  figure.pic {
-    width: 60%; 
-    height: 100%; 
-    margin: 0; 
-  }
-  
-  figure.pic img {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    object-fit: cover; /* Para que la imagen se ajuste sin distorsión */
+  .comments-section p {
+    font-size: 14px;
+    color: #ffffff;
   }
 
   .buttons {
     display: flex;
     justify-content: space-around; 
-    width: 200px;
-    margin: 10px auto;
+    width: 100%;
+    /* width: 200px; */
+    /* margin: 10px auto; */
+    margin-top: 10px;
   }
   
   .like-section,
   .comment-button,
   .share-button {
     font-size: 1.5em; 
+    /* color: #262626; */
+    color: #ea5b0c;
+    cursor: pointer;
   }
   
   
