@@ -59,6 +59,8 @@ const PostContainer = ({post}) => {
                     ))}
                 </ul>
 
+                {/* <CommentInput></CommentInput> */}
+
             </div>
 
             <PostModal post={post} isOpen={isModalOpen} onClose={handleModalClose} />
