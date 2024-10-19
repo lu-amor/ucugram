@@ -4,7 +4,7 @@ import { faComment } from '@fortawesome/free-solid-svg-icons';
 import CommentInput from '../commentInput/commentInput'; 
 import useComment from 'ucugram/src/hooks/useComment'; 
 
-const CommentButton = ({ postId }) => {
+const CommentButton = ({ postId}) => {
   const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
 
   const handleCommentPublished = () => {
@@ -12,17 +12,17 @@ const CommentButton = ({ postId }) => {
   };
 
   return (
-    <div>
+    <>
       <button className="comment-button" onClick={toggleCommentVisibility}>
         <FontAwesomeIcon icon={faComment} />
-      </button>
+      </button> 
 
       {isCommentVisible && (
-        <div className="comment-input">
+        <div className={`comment-input ${isCommentVisible ? "visible" : ""}`}>
           <CommentInput postId={postId} handleCommentPublished={handleCommentPublished}/>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

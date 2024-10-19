@@ -41,7 +41,7 @@ export default function CommentInput({ postId, handleCommentPublished }) {
 
       <button 
         type="submit" 
-        className="publish-button is-primary"
+        className="publish-button"
         onClick={handleCommentPublished}
         disabled={loading}>
         {loading ? 'Publishing...' : 'Publish'}

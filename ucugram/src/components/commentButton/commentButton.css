@@ -3,8 +3,17 @@
     flex-direction: column;
     margin-top: 1rem;
     padding-top: 15px; 
-    /* border-top: 1px solid #353536;  */
+    width: 100%;
+    visibility: hidden; 
+    height: 0;          
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
   }
+
+.comment-input.visible {
+    visibility: visible; 
+    height: auto;        
+}
   
 
   

@@ -1,17 +1,23 @@
 import React from "react";
-import PostGrid from 'ucugram/src/components/postGrid/postGrid.jsx';
+import PostContainer from "./components/postContainer/postContainer";
+import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import "bulma/css/bulma.min.css";
 import "ucugram/src/App.css"; 
 
 
 function App() {
+  const { posts, loading, error } = useFetchPosts();
+
+  if (loading) return <div>Loading posts...</div>;
+  if (error) return <div>Error loading posts!</div>;
+
   return (
-    <div className="App">
-      <section className="section">
-        <div className="container">
-          <PostGrid />
-        </div>
-      </section>
+    <div className="post-container">
+          {posts.map((post) => (
+            <PostContainer 
+            key={post.id} 
+            post={post} />
+          ))}
     </div>
   );
 }
