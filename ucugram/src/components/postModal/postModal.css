@@ -2,23 +2,19 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
+  .modal-card-body {
+    max-width: 90%;
+  }
+
   .modal-content {
+    justify-content: center;
     display: flex;
-    background-color: #f7c600;
-    border-radius: 10px;
-    width: 80%;
-    height: 60%;
-    max-width: 1200px;  
-    max-height: 700px; 
-    overflow: hidden;
   }
 
   .modal-card-body {
@@ -32,27 +28,27 @@
     overflow: hidden; 
   }
 
-
   .pic {
-    /* flex-shrink: 0; */
-    width: 65%;
-    height: 100%;
-    margin: 0;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
-
-
+  
   .pic img {
-    /* display: block; */
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
+    transform: translate(-50%, -50%);
   }
-
+  
   .data-container{
-    width: 40%;
+    width: 100%;
     background-color: #173363;
     height: 100%;
-    padding: 20px;
     display: flex;
     flex-direction: column;
     border-left: 5px solid #0dafb1;
@@ -70,30 +66,10 @@
     border-radius: 50%;
     margin-right: 10px;
   }
-  
-  /* image {
-    width: 100%;
-    height: 100%;
-  } */
-
-  /* figure .pic {
-    width: 60%; 
-    height: 100%; 
-    margin: 0; 
-  } */
-  
-  /* figure .pic img {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    object-fit: cover; 
-  } */
-
 
   .post-header {
     /* border-bottom: 1px solid #353536;  */
     border-bottom: 1px solid #009ce6;
-    padding-bottom: 10px;
   }
   
   .post-date {
@@ -125,15 +101,13 @@
 
   .buttons {
     display: flex;
-    justify-content: space-around; 
+    justify-content: space-around;
     width: 100%;
     /* width: 200px; */
     /* margin: 10px auto; */
-    margin-top: 10px;
     position: relative;
     z-index: 1; 
   }
-
   
   .like-section,
   .comment-button,
@@ -144,7 +118,6 @@
     cursor: pointer;
   }
   
-  
   .modal-close {
     position: absolute;
     top: 20px;
@@ -153,6 +126,58 @@
     background-color: transparent;
     border: none;
     font-size: 2em; 
+  }
+
+  @media (max-width: 768px) {
+    .modal-card-body {
+      margin-left: 1rem;
+      margin-right: 1rem;
+      max-width: 90%;
+    }
+  
+    .data-container {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 580px) {
+    .modal-content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      height: auto;
+    }
+  
+    .modal-card-body {
+      flex-direction: column;
+      max-width: 70%;
+    }
+
+    .pic {
+      position: relative;
+      width: 50%;
+      max-width: 50%;
+      overflow: hidden;
+    }
+    
+    .pic img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+    }
+  
+    .comments-section {
+      max-height: 120px;
+    }
+
+    .data-container {
+      border-top: 5px solid #0dafb1;
+      border-left: none;
+    }
   }
 
 
