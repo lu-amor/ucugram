@@ -12,9 +12,20 @@ function LoginForm({ createAccount, closeModal }) {
     createAccount();
   };
 
+  const validateEmail = (email) => {
+    // para validar correos @ucu.edu.uy o @correo.ucu.edu.uy
+    const ucuEmailPattern = /^[a-zA-Z0-9._%+-]+@(ucu\.edu\.uy|correo\.ucu\.edu\.uy)$/;
+    return ucuEmailPattern.test(email);
+  };
+
   const handleLoginBtn = () => {
     const newEmail = emailRef.current.value;
     const newPassword = passwordRef.current.value;
+
+    if (!validateEmail(newEmail)) {
+      alert("Por favor, ingresa un email válido de la UCU.");
+      return;
+    }
 
     // aca se hace algo más
 
@@ -43,7 +54,7 @@ function LoginForm({ createAccount, closeModal }) {
             <label className="label">email</label>
             <input
               className="input"
-              type="text"
+              type="email"
               placeholder="Enter your email"
               ref={emailRef}
             ></input>

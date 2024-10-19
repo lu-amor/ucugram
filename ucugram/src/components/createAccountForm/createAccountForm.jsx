@@ -14,12 +14,23 @@ function CreateAccountForm({ goLogin, closeModal }) {
     goLogin();
   };
 
+  const validateEmail = (email) => {
+    // para validar correos @ucu.edu.uy o @correo.ucu.edu.uy
+    const ucuEmailPattern = /^[a-zA-Z0-9._%+-]+@(ucu\.edu\.uy|correo\.ucu\.edu\.uy)$/;
+    return ucuEmailPattern.test(email);
+  };
+
   const handleCreateAccountBtn = () => {
     const newEmail = emailRef.current.value;
     const newPassword = passwordRef.current.value;
     const newUserName = userNameRef.current.value;
     const newName = nameRef.current.value;
     const newLastName = lastNameRef.current.value;
+
+    if (!validateEmail(newEmail)) {
+      alert("Por favor, ingresa un email válido de la UCU.");
+      return;
+    }
 
     // more logic here
   };
@@ -75,7 +86,7 @@ function CreateAccountForm({ goLogin, closeModal }) {
             <label className="label">email</label>
             <input
               className="input"
-              type="text"
+              type="email"
               placeholder="Enter your email"
               ref={emailRef}
             ></input>
@@ -91,7 +102,7 @@ function CreateAccountForm({ goLogin, closeModal }) {
             ></input>
           </div>
           <div className={classes.buttonContainer}>
-            <button className="button" id={classes.createAccountButton}>
+            <button className="button" id={classes.createAccountButton} onClick={handleCreateAccountBtn}>
               Create new account
             </button>
           </div>
