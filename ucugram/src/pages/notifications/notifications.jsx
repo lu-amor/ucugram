@@ -4,6 +4,7 @@ import classes from "./notifications.module.css";
 import Icon from '@mdi/react';
 import { mdiChevronLeft } from '@mdi/js';
 import Notification from "../../components/notification/notification";
+import { useNavigate } from "react-router-dom";
 
 const convertTimeToSeconds = (time) => {
 const value = parseInt(time.slice(0, -1));
@@ -24,6 +25,7 @@ switch (unit) {
 };
 
 function Notifications({ user, notificationsList }) {
+    const navigate = useNavigate();
     const [notifications, setNotifications] = useState(notificationsList);
 
     useEffect(() => {
@@ -38,13 +40,17 @@ function Notifications({ user, notificationsList }) {
         setNotifications(notifications.filter(notification => notification.id !== id));
     };
 
+    const goFeed = () => {
+        navigate("/feed");
+    }
+
     return (
         <div className="columns">
             <SideNavBar user={user} />
             <div className="column is-10">
                 <h1 className={classes.header}>
                     <div className={classes.goBack}>
-                        <Icon path={mdiChevronLeft} size={2} onClick={close /*ruteo a feed*/}/>
+                        <Icon path={mdiChevronLeft} size={2} onClick={goFeed}/>
                     </div>
                     Notifications
                 </h1>

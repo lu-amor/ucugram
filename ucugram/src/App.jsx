@@ -62,7 +62,7 @@ function App() {
 
   return (
     <Routes>
-      {/* esto es para que vaya por defecto a la pagina de welcome */}
+      {/* esto es para que vaya por defecto a la pagina de home */}
       <Route path="/*" element={<Navigate replace to="/home" />} />
       
         <Route path="/home" element={<AuthPage />}></Route>

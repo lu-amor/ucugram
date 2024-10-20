@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
 import Developer from "../../components/developer/developer.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
+import Footer from "../../components/footer/footer.jsx";
 import classes from "./aboutUsPage.module.css";
 
 const AboutUsPage = ({developers}) => {
