@@ -5,12 +5,39 @@ import FriendProfile from "./pages/friendProfile/friendProfile";
 import SideNavBar from "./components/sideNavBar/sideNavBar";
 import AuthPage from "./pages/authPage/AuthPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
-import Avatar from "./components/avatar/avatar";
 import DocPage from "./pages/DocPage/DocPage";
+import Notifications from "./pages/notifications/notifications";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
+  const notificationsList = [
+    {
+      id: 1,
+      type: "like",
+      user: {
+        profilePhoto: "/profile_img-by-AI.jpeg",
+        name: "nombre_amigo",
+        posts: 1.861, // después esto va a ser una lista por ej. 
+        friends: 454, // lista o dict con usuarios amigos
+        description: "This is my profile description 😊"
+      },
+      time: "2h"
+    },
+    {
+      id: 2,
+      type: "follow",
+      user: {
+        profilePhoto: "/profile_img-by-AI.jpeg",
+        name: "nombre_amigo",
+        posts: 1.861, // después esto va a ser una lista por ej. 
+        friends: 454, // lista o dict con usuarios amigos
+        description: "This is my profile description 😊"
+      },
+      time: "2h"
+    }
+  ];
+
   const user = {
     profilePhoto: "/ucugram-logo.png",
     name: "nombre_ususario",
@@ -45,7 +72,7 @@ function App() {
           element={<FriendProfile user={friend} />}
         ></Route>
         <Route path="/feed" element={<FeedPage />}></Route>
-        {/*<Route path="/notifications" element={<NotificationsPage />}></Route>*/}
+        <Route path="/notifications" element={<Notifications user={user} notificationsList={notificationsList}/>}></Route>
         <Route path="/documentation" element={<DocPage/>}></Route>
         <Route path="/about-us" element={<AboutUsPage developers={developers}/>}></Route>
     </Routes>
@@ -53,3 +80,4 @@ function App() {
 }
 
 export default App;
+
