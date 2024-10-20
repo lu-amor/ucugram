@@ -57,18 +57,18 @@ function AuthNavBar({navItem}) {
         <div className={classes.logoContainer} onClick={goHome}>
           <img
             src="/ucugram-logo.png"
-            style={{ alignSelf: "center", height: "2rem", width: "100%" }}
+            className={classes.logoUcugram}
           />
           <img
             src="/ucugram-text-sinFondo.png"
-            style={{ alignSelf: "center", height: "2rem", width: "100%", marginRight: "20px" }}
+            className={classes.textoUcugram}
           />
         </div>
         {windowWidth > 850 ? (
           <div className={classes.navBarOptions}>
             <button onClick={goHome} className={classes.underlineButton}>
               {navItem === "home" ? (
-                <strong className={`${classes.buttonSelected}`}>
+                <strong>
                   Home
                 </strong>
               ) : (
@@ -77,7 +77,7 @@ function AuthNavBar({navItem}) {
             </button>
             <button onClick={goDoc} className={classes.underlineButton}>
               {navItem === "documentation" ? (
-                <strong className={`${classes.buttonSelected}`}>
+                <strong>
                   Documentation
                 </strong>
               ) : (
@@ -86,7 +86,7 @@ function AuthNavBar({navItem}) {
             </button>
             <button onClick={goAboutUs} className={classes.underlineButton}>
               {navItem === "about-us" ? (
-                <strong className={`${classes.buttonSelected}`}>
+                <strong>
                   About us
                 </strong>
               ) : (

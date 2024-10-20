@@ -7,7 +7,7 @@ import classes from "./aboutUsPage.module.css";
 const AboutUsPage = ({developers}) => {
   return (
     <div className={`${classes.pageContainer}`}>
-      <AuthNavBar />
+      <AuthNavBar navItem="about-us" />
       <div className={`${classes.content}`}>
             <h1 className="has-text-centered title is-2 mt-5" style={{color: "#173363"}}>About Us</h1>
             <p className={`has-text-centered mx-6`} style={{color: "#173363"}}>
