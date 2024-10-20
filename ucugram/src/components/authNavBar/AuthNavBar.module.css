@@ -13,13 +13,13 @@
     align-items: center;
 }
 
-.logoUcugram {
+.logoContainer img:first-child {
     align-self: center;
     height: 3rem;
     width: 100%;
 }
 
-.textoUcugram {
+.logoContainer img:last-child  {
     align-self: center;
     height: 2.5rem;
     width: 100%;
@@ -108,13 +108,13 @@
 }
 
 /* Media query for screens smaller than 420px */
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     .navBarComponent {
         padding: 0 10px;
     }
 
-    .logoUcugram {
-        height: 2.5rem;
+    .logoContainer img:first-child {
+        height: 2rem;
         margin-right: 0.3rem;
     }
 
@@ -140,5 +140,15 @@
 
     .underlineButton {
         font-size: 16px;
+    }
+}
+
+@media (max-width: 370px) {
+    .logoContainer img:last-child {
+        display: none;
+    }
+
+    .logoContainer img:first-child {
+        height: 3rem;
     }
 }

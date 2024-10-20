@@ -11,7 +11,6 @@ function AuthNavBar({navItem}) {
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  // const [navItem, setnavItem] = useState(navItems.home);
   const navigate = useNavigate();
 
   const handleCreateAccountBtn = () => {
@@ -57,14 +56,12 @@ function AuthNavBar({navItem}) {
         <div className={classes.logoContainer} onClick={goHome}>
           <img
             src="/ucugram-logo.png"
-            className={classes.logoUcugram}
           />
           <img
             src="/ucugram-text-sinFondo.png"
-            className={classes.textoUcugram}
           />
         </div>
-        {windowWidth > 850 ? (
+        {windowWidth >= 850 ? (
           <div className={classes.navBarOptions}>
             <button onClick={goHome} className={classes.underlineButton}>
               {navItem === "home" ? (

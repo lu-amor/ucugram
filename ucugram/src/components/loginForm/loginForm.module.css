@@ -70,3 +70,10 @@
 .delete {
    margin-left: 95%;
 }
+
+@media (max-width: 450px) {
+    .modalContent {
+        width: 90%; 
+        max-width: none;
+    }
+}
