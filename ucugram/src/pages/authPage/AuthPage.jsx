@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from "./AuthPage.module.css";
 import AuthNavBar from "../../components/authNavBar/AuthNavBar.jsx";
-import Footer from "../../components/Footer/Footer.jsx";
+import Footer from "../../components/footer/footer.jsx";
 
 
 const AuthPage = () => {
