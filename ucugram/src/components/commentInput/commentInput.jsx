@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import UseAddComment from "ucugram/src/hooks/useAddComment.jsx";
 import "ucugram/src/components/commentInput/commentInput.css";
+import Icon from '@mdi/react';
+import { mdiSend, mdiLoading } from '@mdi/js';
 
 export default function CommentInput({ postId, handleCommentPublished }) {
     // const [comments, setComments] = useState([]);
@@ -30,25 +32,24 @@ export default function CommentInput({ postId, handleCommentPublished }) {
   return (
     <form onSubmit={handleSubmit}>
       {/* textarea o input */}
-      <textarea
+      <input
         type="text"
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Add a comment..."
-        className="input_holder"
+        className="input_holder is-small has-text-info has-text-weight-semibold"
         disabled={loading}
       />
 
       <button 
         type="submit" 
-        className="publish-button"
+        className="button publish-button is-small is-danger has-text-white"
         onClick={handleCommentPublished}
         disabled={loading}>
-        {loading ? 'Publishing...' : 'Publish'}
+        {loading ? <Icon path={mdiLoading} size={0.7} className="spinner" /> : <Icon path={mdiSend} size={0.7} />}
       </button>
 
       {error && <div className="error-message">{error}</div>}
-
     </form>
   );
 }

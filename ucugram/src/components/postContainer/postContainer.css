@@ -84,25 +84,6 @@
   .like-section,
   .comment-button,
   .share-button {
-    font-size: 1.5em; 
     color: #ea5b0c;
     cursor: pointer;
-  }
-
-  .comment-button:hover,
-  .share-button:hover {
-    font-size: 1.5em; 
-    color: #a189bd;
-    cursor: pointer;
-  }
-
-  .comment-button:focus,
-  .share-button:focus {
-    font-size: 1.5em; 
-    color: #0dafb1;
-    cursor: pointer;
-  }
-  
-
-
-  
+  }  
