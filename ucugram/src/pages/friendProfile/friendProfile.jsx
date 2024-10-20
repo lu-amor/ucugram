@@ -2,12 +2,14 @@ import React from "react";
 import classes from "./FriendProfile.module.css";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import Avatar from "../../components/avatar/avatar.jsx";
+import PostGrid from "../../components/postGrid/postGrid";
+
 
 function FriendProfile({ user }) {
   return (
     <div className="columns">
       <SideNavBar user={user} />
-      <div className="column is-10">
+      <div className="column is-10" style={{height:"100vh", overflowY:"auto"}}>
         <div className={classes.profileContainer}>
           <div className={classes.header}>
             <div className={classes.avatar}>
@@ -42,7 +44,9 @@ function FriendProfile({ user }) {
               <div></div>
             </div>
           </div>
-          <div>aca va el resto del perfil</div>
+          <div className={classes.postsContainer}> 
+            <PostGrid />
+          </div>
         </div>
       </div>
     </div>

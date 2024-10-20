@@ -47,7 +47,7 @@ function Notifications({ user, notificationsList }) {
     return (
         <div className="columns">
             <SideNavBar user={user} />
-            <div className="column is-10">
+            <div className="column is-10" style={{height:"100vh", overflowY:"auto"}}>
                 <h1 className={classes.header}>
                     <div className={classes.goBack}>
                         <Icon path={mdiChevronLeft} size={2} onClick={goFeed}/>
