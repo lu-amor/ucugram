@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./AuthNavBar.module.css";
 import LoginForm from "../../components/loginForm/loginForm.jsx";
 import CreateAccountForm from "../../components/createAccountForm/createAccountForm.jsx";
+import Icon from '@mdi/react';
+import { mdiExitToApp, mdiMenu } from '@mdi/js';
 
 function AuthNavBar({navItem}) {
   const [showCreateAccountForm, setShowCreateAccountForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   // const [navItem, setnavItem] = useState(navItems.home);
   const navigate = useNavigate();
 
@@ -25,6 +29,17 @@ function AuthNavBar({navItem}) {
     setShowLoginForm(false);
   };
 
+  const handleMenuClick = () => setShowMenu(!showMenu);
+
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', updateWindowWidth);
+    return () => window.removeEventListener('resize', updateWindowWidth);
+  }, []);
+
   const goHome = () => {
     navigate("/home");
   };
@@ -38,18 +53,18 @@ function AuthNavBar({navItem}) {
   };
 
   return (
-    <div>
-      {/* contenedor para la barra de navegación */}
-      <div className={classes.navBar}>
-        <div className={classes.logoContainer}>
+    <div className={classes.navBarComponent}>
+        <div className={classes.logoContainer} onClick={goHome}>
           <img
             src="/ucugram-logo.png"
-            style={{ alignSelf: "center", height: "85%", width: "auto" }}
+            className={classes.logoUcugram}
           />
           <img
             src="/ucugram-text-sinFondo.png"
-            style={{ alignSelf: "center", height: "65%", width: "auto" }}
+            className={classes.textoUcugram}
           />
+        </div>
+        {windowWidth > 850 ? (
           <div className={classes.navBarOptions}>
             <button onClick={goHome} className={classes.underlineButton}>
               {navItem === "home" ? (
@@ -79,7 +94,18 @@ function AuthNavBar({navItem}) {
               )}
             </button>
           </div>
-        </div>
+      ) : (
+        <>
+          <Icon path={mdiMenu} size={1.5} color="white" className={classes.menuIcon} onClick={handleMenuClick} />
+          {showMenu && (
+            <div className={classes.menu}>
+              <button onClick={goHome}>Home</button>
+              <button onClick={goDoc}>Documentation</button>
+              <button onClick={goAboutUs}>About us</button>
+            </div>
+          )}
+        </>
+        )}
         <div className={classes.buttonsContainer}>
           <button
             className="button"
@@ -96,7 +122,6 @@ function AuthNavBar({navItem}) {
             Sign up
           </button>
         </div>
-      </div>
       {showLoginForm && (
         <LoginForm
           createAccount={handleCreateAccountBtn}
