@@ -1,11 +1,204 @@
 {
-    "suggestions": [
-      { "id": 1, "name": "Juan Pérez", "profilePhoto": "https://randomuser.me/api/portraits/men/1.jpg" , "follows": 1432},
-      { "id": 2, "name": "María González", "profilePhoto": "https://randomuser.me/api/portraits/women/2.jpg" , "follows": 509 },
-      { "id": 3, "name": "Carlos Ruiz", "profilePhoto": "https://randomuser.me/api/portraits/men/3.jpg", "follows": 796 },
-      { "id": 4, "name": "Ana Martínez", "profilePhoto": "https://randomuser.me/api/portraits/women/4.jpg", "follows": 1508 },
-      { "id": 5, "name": "Luis Mora", "profilePhoto": "https://randomuser.me/api/portraits/men/5.jpg", "follows": 2585 },
-      { "id": 6, "name": "Sara Díaz", "profilePhoto": "https://randomuser.me/api/portraits/women/6.jpg", "follows": 2008 }
-    ]
-  }
-  
+  "posts": [
+    {
+      "id": "1",
+      "user": "AntoVidal",
+      "date": "2024-02-01",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Hermoso día en la playa",
+      "likes": 150,
+      "comments": [
+        {
+          "id": 1,
+          "user": "emiAcha",
+          "text": "¡Qué buena foto!"
+        },
+        {
+          "id": 2,
+          "user": "sofiHernandez",
+          "text": "Increíble vista."
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "user": "luliOli",
+      "date": "2024-03-10",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Caminando por el parque",
+      "likes": 98,
+      "comments": [
+        {
+          "id": 1,
+          "user": "gastonPereira",
+          "text": "Qué tranquilo se ve."
+        },
+        {
+          "id": 2,
+          "user": "mauroMachado",
+          "text": "Es un lugar increíble para desconectar."
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "user": "luEboli",
+      "date": "2024-01-15",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Disfrutando de un buen café en la mañana",
+      "likes": 200,
+      "comments": [
+        {
+          "id": 1,
+          "user": "luliOli",
+          "text": "El café siempre es una buena idea."
+        },
+        {
+          "id": 2,
+          "user": "beluPerez",
+          "text": "¡Salud por ese café!"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "user": "juliGuedez",
+      "date": "2024-02-20",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Atardecer en la montaña",
+      "likes": 230,
+      "comments": [
+        {
+          "id": 1,
+          "user": "sofiHernandez",
+          "text": "El mejor lugar para relajarse."
+        },
+        {
+          "id": 2,
+          "user": "aliciaFerrarez",
+          "text": "Qué colores tan espectaculares."
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "user": "gastonPereira",
+      "date": "2024-03-05",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Explorando nuevas ciudades",
+      "likes": 175,
+      "comments": [
+        {
+          "id": 1,
+          "user": "luliOli",
+          "text": "Qué ganas de viajar."
+        },
+        {
+          "id": 2,
+          "user": "juliGuedez",
+          "text": "Espero visitar ese lugar pronto."
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "user": "beluPerez",
+      "date": "2024-02-18",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Cocinando una deliciosa cena",
+      "likes": 110,
+      "comments": [
+        {
+          "id": 1,
+          "user": "MartiAmor",
+          "text": "¡Eso se ve delicioso!"
+        },
+        {
+          "id": 2,
+          "user": "Belutee",
+          "text": "¿Cuál es la receta?"
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "user": "Belutee",
+      "date": "2024-03-12",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Ruta de senderismo con amigos",
+      "likes": 90,
+      "comments": [
+        {
+          "id": 1,
+          "user": " AgusCandia",
+          "text": "Se ve increíble esa ruta."
+        },
+        {
+          "id": 2,
+          "user": "MiliBunge",
+          "text": "Nada como disfrutar la naturaleza."
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "user": "GabSismondi",
+      "date": "2024-01-25",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Día de entrenamiento en el gimnasio",
+      "likes": 145,
+      "comments": [
+        {
+          "id": 1,
+          "user": "luAmor",
+          "text": "Motivación al 100%."
+        },
+        {
+          "id": 2,
+          "user": "ManuGleivas",
+          "text": "¡Vamos por más!"
+        }
+      ]
+    },
+    {
+      "id": "9",
+      "user": "aliciaFerrarez",
+      "date": "2024-02-28",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Noche de película con amigos",
+      "likes": 85,
+      "comments": [
+        {
+          "id": 1,
+          "user": "Paulii",
+          "text": "¡Qué buen plan!"
+        },
+        {
+          "id": 2,
+          "user": "AntoVidal",
+          "text": "Las palomitas no pueden faltar."
+        }
+      ]
+    },
+    {
+      "id": "10",
+      "user": "mauroMachado",
+      "date": "2024-03-01",
+      "imageUrl": "https://via.placeholder.com/300",
+      "description": "Paseo en bicicleta al aire libre",
+      "likes": 180,
+      "comments": [
+        {
+          "id": 1,
+          "user": "GabSismondi",
+          "text": "¡Me encanta andar en bici!"
+        },
+        {
+          "id": 2,
+          "user": "luEboli",
+          "text": "Un buen paseo para el cuerpo y la mente."
+        }
+      ]
+    }
+  ]
+}

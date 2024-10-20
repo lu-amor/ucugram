@@ -1,4 +1,8 @@
 import React from "react";
+import PostContainer from "./components/postContainer/postContainer";
+import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
+import "bulma/css/bulma.min.css";
+import "ucugram/src/App.css"; 
 import FeedPage from "./pages/feedPage/feedPage";
 import MyProfile from "./pages/myProfile/myProfile";
 import FriendProfile from "./pages/friendProfile/friendProfile";
@@ -11,32 +15,19 @@ import Notifications from "./pages/notifications/notifications";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
-  const notificationsList = [
-    {
-      id: 1,
-      type: "like",
-      user: {
-        profilePhoto: "/profile_img-by-AI.jpeg",
-        name: "nombre_amigo",
-        posts: 1.861, // después esto va a ser una lista por ej. 
-        friends: 454, // lista o dict con usuarios amigos
-        description: "This is my profile description 😊"
-      },
-      time: "2h"
-    },
-    {
-      id: 2,
-      type: "follow",
-      user: {
-        profilePhoto: "/profile_img-by-AI.jpeg",
-        name: "nombre_amigo",
-        posts: 1.861, // después esto va a ser una lista por ej. 
-        friends: 454, // lista o dict con usuarios amigos
-        description: "This is my profile description 😊"
-      },
-      time: "2h"
-    }
-  ];
+  const { posts, loading, error } = useFetchPosts();
+
+//   if (loading) return <div>Loading posts...</div>;
+//   if (error) return <div>Error loading posts!</div>;
+
+//   return (
+//     <div className="post-container">
+//           {posts.map((post) => (
+//             <PostContainer 
+//             key={post.id} 
+//             post={post} />
+//           ))}
+//     </div>
 
   const user = {
     profilePhoto: "/ucugram-logo.png",
@@ -80,4 +71,3 @@ function App() {
 }
 
 export default App;
-
