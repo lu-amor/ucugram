@@ -11,6 +11,7 @@ import './postModal.css';
 const PostModal = ({ post, isOpen, onClose }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
+  const likeButtonRef = useRef(null); 
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,6 +25,12 @@ const PostModal = ({ post, isOpen, onClose }) => {
     };
   }, []);
 
+  const handleDoubleClick = () => {
+    if (likeButtonRef.current !== null) {
+      likeButtonRef.current.click(); // simulo el click en el botón de like
+    }
+  };
+
   if (!isOpen || !post) return null;
 
   return (
@@ -36,7 +43,7 @@ const PostModal = ({ post, isOpen, onClose }) => {
       </button>
       <div className="modal-content" >
         <div className="modal-card-body p-0">
-          <figure className="image is-square">
+          <figure className="image is-square" onDoubleClick={handleDoubleClick}>
             <img src={post.imageUrl} alt={post.description}  />
           </figure>
 
@@ -61,7 +68,7 @@ const PostModal = ({ post, isOpen, onClose }) => {
                 </ul>
               </div>
               <div className="buttons mb-3 mt-1">
-                  <LikeButton className="like-section" postId={post.id} initialLikes={post.likes} modal={true}/>
+                  <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={true}/>
                   <CommentButton className="ml-3" postId={post.id} toggleCommentVisibility={toggleCommentVisibility}/>
                   <Icon path={mdiShareVariant} size={1.4} className="ml-auto mr-4" color='#ea5b0c' />
               </div>
@@ -75,7 +82,7 @@ const PostModal = ({ post, isOpen, onClose }) => {
           ) : (
             <div className="data-container p-4">
               <div className="buttons mt-1 mb-2">
-                  <LikeButton className="like-section" postId={post.id} initialLikes={post.likes} modal={true}/>
+                  <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={true}/>
                   <CommentButton className="ml-3" postId={post.id} toggleCommentVisibility={toggleCommentVisibility}/>
                   <Icon path={mdiShareVariant} size={1.4} className="ml-auto" color='#ea5b0c' />
               </div>

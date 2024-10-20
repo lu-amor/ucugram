@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
 import Avatar from 'ucugram/src/components/avatar/avatar.jsx';
 import PostModal from "../postModal/postModal";
@@ -11,6 +11,13 @@ import './postContainer.css';
 const PostContainer = ({ post }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
+    const likeButtonRef = useRef(null); 
+
+    const handleDoubleClick = () => {
+        if (likeButtonRef.current !== null) {
+            likeButtonRef.current.click(); // simulo el click en el botón de like
+        }
+    };
 
     const handleModalOpen = () => {
         setIsModalOpen(true);
@@ -30,7 +37,7 @@ const PostContainer = ({ post }) => {
 
             <div className="columns is-centered m-0">
                 <div className="column is-half p-0">
-                    <figure className="image is-square">
+                    <figure className="image is-square" onDoubleClick={handleDoubleClick}>
                         <img src={post.imageUrl} alt={post.description} />
                     </figure>
                 </div>
@@ -38,7 +45,7 @@ const PostContainer = ({ post }) => {
                 <div className="column is-half p-0">
                     <div className="data-box">
                         <div className="buttons mt-1">
-                            <LikeButton className="like-section" postId={post.id} initialLikes={post.likes} modal={false} />
+                            <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={false} />
                             <Icon path={mdiComment} size={1.6} onClick={toggleCommentVisibility} className='ml-auto' color='#ea5b0c'/>
                             <Icon path={mdiShare} size={2} color='#ea5b0c'/>
                         </div>
