@@ -41,7 +41,7 @@
 }
 
 
-.loginButton {
+#createAccountButton {
     background-color: rgb(30, 30, 109);
     color: white;
     width: 70%;
@@ -72,3 +72,7 @@
     height: auto;
     padding-bottom: 10px;
 }
+
+.delete {
+    margin-left: 95%;
+ }
