@@ -1,7 +1,9 @@
 import React, { useRef, useState } from "react";
 import classes from "./createAccountForm.module.css";
+import useCreateUser from "../../hooks/useCreateUser";
 
 function CreateAccountForm({ goLogin, closeModal }) {
+  const { postUserAW, createdUser, loading, error } = useCreateUser();
   const emailRef = useRef("");
   const passwordRef = useRef("");
   const userNameRef = useRef("");
@@ -16,20 +18,52 @@ function CreateAccountForm({ goLogin, closeModal }) {
 
   const validateEmail = (email) => {
     // para validar correos @ucu.edu.uy o @correo.ucu.edu.uy
-    const ucuEmailPattern = /^[a-zA-Z0-9._%+-]+@(ucu\.edu\.uy|correo\.ucu\.edu\.uy)$/;
+    const ucuEmailPattern =
+      /^[a-zA-Z0-9._%+-]+@(ucu\.edu\.uy|correo\.ucu\.edu\.uy)$/;
     return ucuEmailPattern.test(email);
   };
 
-  const handleCreateAccountBtn = () => {
-    const newEmail = emailRef.current.value;
-    const newPassword = passwordRef.current.value;
-    const newUserName = userNameRef.current.value;
-    const newName = nameRef.current.value;
-    const newLastName = lastNameRef.current.value;
+  const handleCreateAccountBtn = async () => {
+    const newEmail = emailRef.current.value.trim();
+    const newPassword = passwordRef.current.value.trim();
+    const newUserName = userNameRef.current.value.trim();
+    const newName = nameRef.current.value.trim();
+    const newLastName = lastNameRef.current.value.trim();
+
+    if (
+      newEmail === "" ||
+      newPassword === "" ||
+      newUserName === "" ||
+      newName === "" ||
+      newLastName === ""
+    ) {
+      window.alert("Faltan completar datos!!");
+    }
 
     if (!validateEmail(newEmail)) {
-      alert("Por favor, ingresa un email válido de la UCU.");
+      window.alert("Por favor, ingresa un email válido de la UCU.");
       return;
+    }
+
+    if (newPassword.length < 10) {
+      window.alert(PASSWORD_WARNING);
+    }
+
+    const newUser = {
+      username: newUserName,
+      email: newEmail,
+      password: newPassword,
+    };
+
+    try {
+      await postUserAW(newUser);
+      closeModal(); 
+    } catch (err) {
+      console.error(err); 
+      // manejar el error de otra forma
+      window.alert(
+        "Hubo un problema creando el usuario. Por favor, revisa los datos."
+      );
     }
 
     // more logic here
@@ -102,7 +136,11 @@ function CreateAccountForm({ goLogin, closeModal }) {
             ></input>
           </div>
           <div className={classes.buttonContainer}>
-            <button className="button" id={classes.createAccountButton} onClick={handleCreateAccountBtn}>
+            <button
+              className="button"
+              id={classes.createAccountButton}
+              onClick={handleCreateAccountBtn}
+            >
               Create new account
             </button>
           </div>

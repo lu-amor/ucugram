@@ -8,7 +8,7 @@ const AuthPage = () => {
   return (
     <div className={classes.page}>
       <header className={classes.header}>
-        <AuthNavBar navItem="home" />
+        <AuthNavBar navItem="home"/>
       </header>
       <div className={classes.homePageContainer}>
         <div className={classes.overlay}>

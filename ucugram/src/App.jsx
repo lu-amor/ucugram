@@ -1,31 +1,34 @@
-import React from "react";
-import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import "bulma/css/bulma.min.css";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "ucugram/src/App.css";
-import FeedPage from "./pages/feedPage/feedPage";
-import MyProfile from "./pages/myProfile/myProfile";
-import FriendProfile from "./pages/friendProfile/friendProfile";
-import AuthPage from "./pages/authPage/AuthPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
+import AuthPage from "./pages/authPage/AuthPage";
 import DocPage from "./pages/DocPage/DocPage";
+import FeedPage from "./pages/feedPage/feedPage";
+import FriendProfile from "./pages/friendProfile/friendProfile";
+import MyProfile from "./pages/myProfile/myProfile";
 import Notifications from "./pages/notifications/notifications";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+export const url = "http://localhost:3001/api/";
 
 function App() {
-  const { posts, loading, error } = useFetchPosts();
+  async function postUserAW(user) {
+    try {
+      const response = await fetch(url + "auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
 
-  //   if (loading) return <div>Loading posts...</div>;
-  //   if (error) return <div>Error loading posts!</div>;
-
-  //   return (
-  //     <div className="post-container">
-  //           {posts.map((post) => (
-  //             <PostContainer
-  //             key={post.id}
-  //             post={post} />
-  //           ))}
-  //     </div>
+      const newUserWithId = await response.json();
+      return newUserWithId;
+    } catch (error) {
+      console.log("Error posting data: ", error);
+    }
+  }
 
   const notificationsList = [
     {
@@ -112,7 +115,10 @@ function App() {
           <Notifications user={user} notificationsList={notificationsList} />
         }
       ></Route>
-      <Route path="/documentation" element={<DocPage />}></Route>
+      <Route
+        path="/documentation"
+        element={<DocPage />}
+      ></Route>
       <Route
         path="/about-us"
         element={<AboutUsPage developers={developers} />}
