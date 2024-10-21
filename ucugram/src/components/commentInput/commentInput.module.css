@@ -3,7 +3,7 @@ form {
   align-items: center;
 }
 
-.input_holder {
+.inputHolder {
     background-color: rgba(153, 153, 153, 0.711);
     transition: 3ms;
     border-radius: 5px;
@@ -14,7 +14,7 @@ form {
     width: 100%;
   }
 
-  .publish-button {
+  .publishButton {
     background-color: #ea5b0c;
     color: white;
     box-shadow: 0 2px 8px 0 rgba(0, 0, 9, 0.5);
@@ -24,7 +24,7 @@ form {
     cursor: pointer;
   }
 
-  .publish-button:hover, .publish-button:active {
+  .publishButton:hover, .publishButton:active {
     background-color: #f7c600 ;
   }
 

@@ -6,7 +6,7 @@ const CommentButton = ({ toggleCommentVisibility }) => {
 
   return (
     <>
-      <button className="comment-button" onClick={toggleCommentVisibility}>
+      <button onClick={toggleCommentVisibility}>
         <Icon path={mdiComment} size={1.3} className='mt-2' />
       </button> 
     </>
