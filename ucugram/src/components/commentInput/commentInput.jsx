@@ -37,7 +37,7 @@ export default function CommentInput({ postId, handleCommentPublished }) {
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Add a comment..."
-        className={`${classes.inputHolder} is-small has-text-white has-text-weight-bold`}
+        className={`${classes.inputHolder} is-small has-text-info has-text-weight-bold`}
         disabled={loading}
       />
 

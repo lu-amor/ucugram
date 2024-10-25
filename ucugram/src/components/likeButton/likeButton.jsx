@@ -5,15 +5,14 @@ import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 
 const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
   const { likes, isLiked, toggleLike } = useLike(initialLikes, postId);
-  
 
   if (modal) {
     return (
       <div>
         <button
           ref={ref}
-          className={`button ${isLiked ? "is-primary" : ""}`}
-          style={{ borderRadius: "8px" }}
+          className={`button ${isLiked ? "is-info" : ""}`}
+          style={{ borderRadius: "8px", color: isLiked ? "#ffffff" : "#173363" }}
           onClick={toggleLike}
         >
           {isLiked ? (
@@ -22,7 +21,7 @@ const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
             <Icon
               path={mdiHeartOutline}
               size={1}
-              color="#173363"
+              color="#ea5b0c"
               className="mr-1"
             />
           )}{" "}
@@ -52,7 +51,7 @@ const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
             />
           )}{" "}
         </button>
-        <p style={{ fontSize: "20px", color: "white", fontWeight: "700" }}>
+        <p style={{ fontSize: "20px", color: "#173363", fontWeight: "700" }}>
           {likes}
         </p>
       </div>

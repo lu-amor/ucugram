@@ -10,10 +10,7 @@ import { mdiMenu } from "@mdi/js";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const [showDropdown, setShowDropdown] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const toggleDropdown = () => setShowDropdown(!showDropdown);
 
   const goFeed = () => {
     navigate("/feed");
@@ -36,42 +33,34 @@ const NavBar = () => {
     return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
-  return windowWidth < 950 ? (
+  return windowWidth < 951 ? (
     <>
-      <Icon
-        path={mdiMenu}
-        size={1.5}
-        className={classes.menuIcon}
-        onClick={toggleDropdown}
-      />
-      {showDropdown && (
-        <div className={classes.dropdownMenu}>
-          <button onClick={goFeed}>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem icono="home" link={houseIcon} nombre="Home" />
-            </a>
-          </button>
-          <button>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem
-                icono="notifications"
-                link={bellIcon}
-                nombre="Notifications"
-              />
-            </a>
-          </button>
-          <button onClick={goMyProfile}>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem icono="profile" link="" nombre="My profile" />
-            </a>
-          </button>
-        </div>
-      )}
+      <div className={classes.dropdownMenu}>
+        <button onClick={goFeed}>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+          </a>
+        </button>
+        <button>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem
+              icono="notifications"
+              link={bellIcon}
+              nombre="Notifications"
+            />
+          </a>
+        </button>
+        <button onClick={goMyProfile}>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem icono="profile" link="" nombre="My profile" />
+          </a>
+        </button>
+      </div>
     </>
   ) : (
-    <aside className="menu">
+    <aside className={`menu ${classes.barraLat}`}>
       <img src="/ucugram-text.png" alt="logo" className={classes.isologo} />
-      <ul className="menu-list">
+      <ul className={`menu-list ${classes.menuItems}`}>
         <li onClick={goFeed}>
           <a>
             <NavBarItem icono="home" link={houseIcon} nombre="Home" />

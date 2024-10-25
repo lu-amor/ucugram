@@ -7,7 +7,7 @@ const CommentButton = ({ toggleCommentVisibility }) => {
   return (
     <>
       <button onClick={toggleCommentVisibility}>
-        <Icon path={mdiComment} size={1.3} className='mt-2' />
+        <Icon path={mdiComment} size={1.3} className='mt-2' color="#ea5b0c"/>
       </button> 
     </>
   );

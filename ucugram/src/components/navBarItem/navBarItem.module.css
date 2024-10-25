@@ -2,6 +2,14 @@
     display: flex;
     align-items: center;
     height: 24px;
+    width: 30%;
+}
+
+.navBarItemH {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
 }
 
 .icono {
@@ -11,7 +19,26 @@
     margin-left: 25px;
 }
 
+.iconoH {
+    width: 40px;
+    height: auto;
+    margin-right: 12px;
+    margin-left: 25px;
+}
+
+.menuItems {
+    width: 50px;
+}
 .avatar {
+    width: 31px;
+    height: auto;
+    border-radius: 100%;
+    margin-right: 8px;
+    margin-left: 21px;
+    padding-top: 5px;
+}
+
+.avatarH {
     width: 31px;
     height: auto;
     border-radius: 100%;
