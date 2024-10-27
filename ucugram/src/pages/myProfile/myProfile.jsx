@@ -43,7 +43,7 @@ function MyProfile({ user }) {
               <div></div>
             </div>
           </div>
-           <div className={classes.postsContainer}> 
+          <div className={classes.postsContainer}> 
             <PostGrid />
           </div>
         </div>

@@ -5,8 +5,6 @@ import "ucugram/src/components/postItem/postItem.css";
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
