@@ -7,11 +7,13 @@ import { useNavigate } from "react-router-dom";
 import Notification from "../notification/notification";
 import Icon from "@mdi/react";
 import { mdiMenu } from "@mdi/js";
+import { useLogout } from "../../services/authService";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const logout = useLogout();
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
@@ -30,6 +32,11 @@ const NavBar = () => {
   const updateWindowWidth = () => {
     setWindowWidth(window.innerWidth);
   };
+
+  const handleLogout = () => {
+    logout();
+    navigate('./home')
+  }
 
   useEffect(() => {
     window.addEventListener("resize", updateWindowWidth);
@@ -90,6 +97,11 @@ const NavBar = () => {
           <a>
             <NavBarItem icono="profile" link="" nombre="My profile" />
           </a>
+        </li>
+        <li>
+          <button onClick={handleLogout}>
+            logout
+          </button>
         </li>
       </ul>
     </aside>

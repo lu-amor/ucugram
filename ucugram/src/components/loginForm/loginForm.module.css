@@ -31,7 +31,8 @@
 
 .field {
     margin-bottom: 15px;
-    width: 100%;
+    width: 100%; /* Ocupa todo el ancho */
+    display: block; 
 }
 
 #loginButton {
