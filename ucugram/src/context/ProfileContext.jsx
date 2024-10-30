@@ -44,7 +44,6 @@ function profileReducer(state, action) {
 }
 
 // not working
-
 export const ProfileProvider = ({ children }) => {
   const initialState = {
     user: null,

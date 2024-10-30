@@ -13,12 +13,11 @@ function MyProfile({ user1 }) {
   const { state: authState } = useAuth();
   const navigate = useNavigate();
   const getProfile = useGetProfile();
+
   useEffect(() => {
     const userId = authState.user?._id;
-    // console.log("en useeffect: " + userId);
     if(userId !== undefined && userId !== null) {
       getProfile(dispatch, userId);
-      console.log(state.posts[0]);
     }
   }, [authState?.user?._id]);
 
@@ -78,8 +77,8 @@ function MyProfile({ user1 }) {
                   </div>
                 </div>
                 <div className={classes.postsContainer}>
-                  <img src={"http://localhost:3001/" + state.posts[0]?.imageUrl} alt="imagen 1" />
-                  <PostGrid />
+                  {/* <img src={"http://localhost:3001/" + state.posts[0]?.imageUrl} alt="imagen 1" /> */}
+                  <PostGrid posts={state.posts}/>
                 </div>
               </div>
             </div>

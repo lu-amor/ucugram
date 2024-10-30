@@ -5,8 +5,6 @@ import "ucugram/src/components/postItem/postItem.css";
 const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
-
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
@@ -16,16 +14,15 @@ const PostItem = ({ post }) => {
   };
 
   return (
-    <div>
+    <div onClick={() => {console.log("se abre")}}>
       <div className="post-card card" onClick={handleModalOpen}>
         <div className="card-image post-image">
-          <figure className="image is-4by3">
-            <img src={post.imageUrl} alt={post.description} />
+          <figure className="image is-3by3">
+            <img src={"http://localhost:3001/" + post.imageUrl} alt={post.description === undefined ? "not available" : post.description} />
           </figure>
         </div>
       </div>
-
-      <PostModal post={post} isOpen={isModalOpen} onClose={handleModalClose} />
+      {isModalOpen && <PostModal post={post} onClose={handleModalClose}/>}
     </div>
   );
 };

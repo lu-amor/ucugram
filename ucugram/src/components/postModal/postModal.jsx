@@ -8,7 +8,7 @@ import useComment from 'ucugram/src/hooks/useComment';
 import CommentInput from 'ucugram/src/components/commentInput/commentInput.jsx';
 import './postModal.css';
 
-const PostModal = ({ post, isOpen, onClose }) => {
+const PostModal = ({ post, onClose }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
   const likeButtonRef = useRef(null); 
@@ -31,10 +31,8 @@ const PostModal = ({ post, isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen || !post) return null;
-
   return (
-    <div className={`modal ${isOpen ? "is-active" : ""}`}>
+    <div className={"modal is-active"}>
       <div className="modal-background" onClick={onClose}></div>
       <button 
           className="modal-close is-large has-text-white"  
@@ -44,7 +42,7 @@ const PostModal = ({ post, isOpen, onClose }) => {
       <div className="modal-content" >
         <div className="modal-card-body p-0">
           <figure className="image is-square" onDoubleClick={handleDoubleClick}>
-            <img src={post.imageUrl} alt={post.description}  />
+            <img src={"http://localhost:3001/" + post.imageUrl} alt={post.description}  />
           </figure>
 
           {windowWidth > 950 ? (
