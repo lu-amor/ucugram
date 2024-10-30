@@ -5,19 +5,19 @@ import { url } from "../App";
 
 export const useGetProfile = () => {
   const { state: authState } = useAuth();
+  const { dispatch } = useProfile();
 
-  const getProfile = async (dispatch, userId) => {
+  const getProfile = async ( userId) => {
     try {
       dispatch({ type: PROFILE_ACTIONS.SET_LOADING });
       const response = await fetch(url + "user/profile/" + userId, {
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${authState.token}`,
+          Authorization: `Bearer ${authState.token}`,
         },
       });
 
       const data = await response.json();
-      console.log(data)
       if (response.ok) {
         dispatch({
           type: PROFILE_ACTIONS.SET_PROFILE,

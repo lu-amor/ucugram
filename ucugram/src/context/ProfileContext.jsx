@@ -1,12 +1,8 @@
 import React, {
-  act,
   createContext,
   useContext,
   useReducer,
-  useState,
-  useEffect,
 } from "react";
-import { useAuth } from "./AuthContext";
 
 const ProfileContext = createContext();
 
@@ -61,12 +57,5 @@ export const ProfileProvider = ({ children }) => {
 };
 
 export const useProfile = () => {
-  const initialState = {
-    user: null,
-    posts: [],
-    loading: false,
-    error: null,
-  };
-  const [state, dispatch] = useReducer(profileReducer, initialState);
-  return { state, dispatch };
+  return useContext(ProfileContext);
 };

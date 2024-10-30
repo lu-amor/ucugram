@@ -7,11 +7,14 @@ import Avatar from 'ucugram/src/components/avatar/avatar.jsx'
 import useComment from 'ucugram/src/hooks/useComment';
 import CommentInput from 'ucugram/src/components/commentInput/commentInput.jsx';
 import './postModal.css';
+import { useProfile } from "../../context/ProfileContext";
 
 const PostModal = ({ post, onClose }) => {
+  const {state: profileState} = useProfile();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
   const likeButtonRef = useRef(null); 
+  const user = profileState.user;
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,13 +52,13 @@ const PostModal = ({ post, onClose }) => {
             <div className="data-container p-4">
               <div className="post-text">
                 <div className="post-header is-flex is-justify-content-space-between">
-                  <div className="user-info is-flex is-align-items-center">
-                    <Avatar className="user-avatar" user={post.user} ></Avatar>
-                    <h3 className="ml-2" ><strong className="has-text-white">{post.user}</strong></h3>
+                  <div className="user-info is-flex is-align-items-center" style={{width:"25px", height:"25px"}}>
+                    <Avatar className="user-avatar" user={user} ></Avatar>
+                    <h3 className="ml-2" ><strong className="has-text-white">{user.username}</strong></h3>
                   </div>
-                  <p className="post-date">{post.date}</p>
+                  <p className="post-date">{post.createdAt.split("T")[0]}</p>
                 </div>
-                <p className="pic-description mt-3"><strong className="has-text-white mr-1 has-text-weight-bold">{post.user}</strong> {post.description}</p>
+                <p className="pic-description mt-3"><strong className="has-text-white mr-1 has-text-weight-bold">{user.username}</strong> {post.description}</p>
 
                 <ul className="comments-section mt-4">
                   {post.comments.map((comment) => (
@@ -90,13 +93,13 @@ const PostModal = ({ post, onClose }) => {
                 </div>
               )}
                 <div className="post-header is-flex is-justify-content-space-between">
-                  <div className="user-info is-flex is-align-items-center">
-                    <Avatar className="user-avatar" user={post.user} ></Avatar>
-                    <h3 className="ml-2" ><strong className="has-text-white">{post.user}</strong></h3>
+                  <div className="user-info is-flex is-align-items-center" style={{width:"20px", height:"20px"}}>
+                    <Avatar className="user-avatar" user={user} ></Avatar>
+                    <h3 className="ml-2" ><strong className="has-text-white">{user.username}</strong></h3>
                   </div>
                   <p className="post-date">{post.date}</p>
                 </div>
-                <p className="pic-description mt-3"><strong className="has-text-white">{post.user}</strong> {post.description}</p>
+                <p className="pic-description mt-3"><strong className="has-text-white">{user.username}</strong> {post.description}</p>
 
                 <ul className="comments-section mt-4">
                   {post.comments.map((comment) => (

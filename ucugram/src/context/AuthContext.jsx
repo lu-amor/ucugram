@@ -25,6 +25,7 @@ export const AUTH_ACTIONS = {
 function authReducer(state, action) {
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN:
+      console.log("user: ", action.payload.user)
       return {
         ...state,
         isAuthenticated: true,
@@ -85,12 +86,12 @@ export const AuthProvider = ({ children }) => {
     if( token !== null && token !== undefined) {
       const decoded = jwtDecode(token);
       const userId = decoded.id;
-      console.log("id " + userId);
+      // console.log("id " + userId);
       dispatch({type: AUTH_ACTIONS.LOADING})
       let userName =  getUserProfile(userId, token);
   
       userName.then((data) => {
-        console.log("user info:" + data);
+        // console.log("user info:" + data);
         dispatch({
           type: AUTH_ACTIONS.LOGIN,
           payload: {

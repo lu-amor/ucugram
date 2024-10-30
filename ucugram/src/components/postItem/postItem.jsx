@@ -14,7 +14,7 @@ const PostItem = ({ post }) => {
   };
 
   return (
-    <div onClick={() => {console.log("se abre")}}>
+    <div>
       <div className="post-card card" onClick={handleModalOpen}>
         <div className="card-image post-image">
           <figure className="image is-3by3">

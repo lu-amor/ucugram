@@ -11,6 +11,7 @@ import MyProfile from "./pages/myProfile/myProfile";
 import Notifications from "./pages/notifications/notifications";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
+import { ProfileProvider } from "./context/ProfileContext";
 
 export const url = "http://localhost:3001/api/";
 
@@ -84,34 +85,39 @@ function App() {
 
   return (
     <AuthProvider>
-      <Routes>
-        {/* esto es para que vaya por defecto a la pagina de home */}
-        <Route path="/*" element={<Navigate replace to="/home" />} />
+      <ProfileProvider>
+        <Routes>
+          {/* esto es para que vaya por defecto a la pagina de home */}
+          <Route path="/*" element={<Navigate replace to="/home" />} />
 
-        <Route path="/home" element={<AuthPage />}></Route>
-        <>
-          <Route path="/myProfile" element={<MyProfile user1={user} />}></Route>
+          <Route path="/home" element={<AuthPage />}></Route>
+          <>
+            <Route
+              path="/myProfile"
+              element={<MyProfile user1={user} />}
+            ></Route>
+            <Route
+              path="/friendProfile"
+              element={<FriendProfile user={friend} />}
+            ></Route>
+            <Route path="/feed" element={<FeedPage />}></Route>
+            <Route
+              path="/notifications"
+              element={
+                <Notifications
+                  user={user}
+                  notificationsList={notificationsList}
+                />
+              }
+            ></Route>
+          </>
+          <Route path="/documentation" element={<DocPage />}></Route>
           <Route
-            path="/friendProfile"
-            element={<FriendProfile user={friend} />}
+            path="/about-us"
+            element={<AboutUsPage developers={developers} />}
           ></Route>
-          <Route path="/feed" element={<FeedPage />}></Route>
-          <Route
-            path="/notifications"
-            element={
-              <Notifications
-                user={user}
-                notificationsList={notificationsList}
-              />
-            }
-          ></Route>
-        </>
-        <Route path="/documentation" element={<DocPage />}></Route>
-        <Route
-          path="/about-us"
-          element={<AboutUsPage developers={developers} />}
-        ></Route>
-      </Routes>
+        </Routes>
+      </ProfileProvider>
     </AuthProvider>
   );
 }

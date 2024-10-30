@@ -7,8 +7,10 @@ import { useAuth } from "./../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useGetProfile } from "../../hooks/useGetProfile";
 import profileReducer, { initialState } from "../../services/profileReducer";
+import { useProfile } from "../../context/ProfileContext";
 
 function MyProfile({ user1 }) {
+  const { state: profileState } = useProfile();
   const [state, dispatch] = useReducer(profileReducer, initialState);
   const { state: authState } = useAuth();
   const navigate = useNavigate();
@@ -16,8 +18,8 @@ function MyProfile({ user1 }) {
 
   useEffect(() => {
     const userId = authState.user?._id;
-    if(userId !== undefined && userId !== null) {
-      getProfile(dispatch, userId);
+    if (userId !== undefined && userId !== null) {
+      getProfile(userId);
     }
   }, [authState?.user?._id]);
 
@@ -28,7 +30,7 @@ function MyProfile({ user1 }) {
   return (
     <>
       {!authState.isAuthenticated && handleNotAuthenticatedUser}
-      {(state?.loading || authState.loading) ? (
+      {profileState?.loading || authState.loading ? (
         <p>Loading profile...</p> // hacer algo más lindo
       ) : (
         <>
@@ -41,7 +43,7 @@ function MyProfile({ user1 }) {
               <div className={classes.profileContainer}>
                 <div className={classes.header}>
                   <div className={classes.avatar}>
-                    <Avatar user={state.user} />
+                    <Avatar user={profileState.user} />
                   </div>
                   <div className={classes.profileInformation}>
                     <div
@@ -52,7 +54,7 @@ function MyProfile({ user1 }) {
                       }}
                     >
                       <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
-                        <strong>{state.user?.username}</strong>
+                        <strong>{profileState.user?.username}</strong>
                       </p>
                       <button className={`button ${classes.profileButton}`}>
                         Edit profile
@@ -61,12 +63,12 @@ function MyProfile({ user1 }) {
                     <div className={classes.accountInformation}>
                       <div className={classes.statItem}>
                         <span>
-                          <strong>{state.posts?.length}</strong> posts
+                          <strong>{profileState.posts?.length}</strong> posts
                         </span>
                       </div>
                       <div className={classes.statItem}>
                         <span>
-                          <strong>{state.user?.friends.length}</strong> friends
+                          <strong>{profileState.user?.friends.length}</strong> friends
                         </span>
                       </div>
                       <div className={classes.profileDescription}>
@@ -78,7 +80,7 @@ function MyProfile({ user1 }) {
                 </div>
                 <div className={classes.postsContainer}>
                   {/* <img src={"http://localhost:3001/" + state.posts[0]?.imageUrl} alt="imagen 1" /> */}
-                  <PostGrid posts={state.posts}/>
+                  <PostGrid posts={profileState.posts} />
                 </div>
               </div>
             </div>
