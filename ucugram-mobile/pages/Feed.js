@@ -3,16 +3,18 @@ import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, Sc
 import NavBar from "../components/NavBar";
 import PostItem from "../components/PostItem";
 
-const Feed = ({ user, posts }) => {
+const Feed = ({ navigation, route }) => {
+    const { user, posts } = route.params;
     return (
         <View style={styles.container}>
-            {/* logo + sacar margen + sugerencias seguidores */}
+            {/* sugerencias seguidores */}
             <ScrollView>
+                <Image source={require('ucugram-mobile/assets/ucugram texto.png')} style={{width: '40%', height: 30, alignSelf: 'center', marginTop: 15, }}/>
                 {posts.map((post, index) => (
                     <PostItem key={index} post={post} user={user} />
                 ))}
             </ScrollView>
-            <NavBar user={user} activePage="home" />
+            <NavBar user={user} activePage="home" navigation={navigation} />
         </View>
     );
 };
@@ -20,6 +22,8 @@ const Feed = ({ user, posts }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "white",
+        marginTop: 45,
     },
 });
 

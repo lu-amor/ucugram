@@ -2,14 +2,34 @@ import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const NavBar = ({ user, activePage }) => {
+const NavBar = ({ user, activePage, navigation }) => {
     return (
         <View style={styles.navBar}>
             <View style={styles.navBarIcons}>
-                {activePage === "home" ? <Ionicons name="home" size={35} color="#173363" /> : <Ionicons name="home-outline" size={35} color="#173363" />}
-                {activePage === "add" ? <Ionicons name="add-circle" size={35} color="#173363" /> : <Ionicons name="add-circle-outline" size={35} color="#173363" />}
-                {activePage === "notifications" ? <Ionicons name="notifications" size={35} color="#173363" /> : <Ionicons name="notifications-outline" size={35} color="#173363" />}
-                {activePage === "profile" ? <Image source={user.profilePicture} style={styles.avatarActive}/> : <Image source={user.profilePicture} style={styles.avatar}/>}
+                <Ionicons
+                    name = {activePage === "home" ? "home" : "home-outline"}
+                    size = {35}
+                    color = "#173363"
+                    onPress = {() => navigation.navigate('Feed')}
+                />
+                <Ionicons
+                    name = {activePage === "add" ? "add-circle" : "add-circle-outline"}
+                    size = {35}
+                    color = "#173363"
+                    onPress = {() => navigation.navigate('Add')}
+                />
+                <Ionicons
+                    name = {activePage === "notifications" ? "notifications" : "notifications-outline"}
+                    size = {35}
+                    color = "#173363"
+                    onPress = {() => navigation.navigate('Notifications')}
+                />
+                <TouchableOpacity onPress = {() => navigation.navigate('Profile')}>
+                    <Image
+                        source={user.profilePicture}
+                        style = {activePage === "profile" ? styles.avatarActive : styles.avatar}
+                    />
+                </TouchableOpacity>
             </View>
         </View>
     );

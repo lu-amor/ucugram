@@ -80,7 +80,7 @@ const PostItem = ({ post, user }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 60,
+        paddingTop: 10,
     },
     userInfo: {
         flexDirection: "row",

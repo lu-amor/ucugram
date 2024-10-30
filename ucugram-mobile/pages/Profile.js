@@ -1,11 +1,13 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, StatusBar, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
 import ProfileGrid from "../components/ProfileGrid";
 import NavBar from "../components/NavBar";
 
-const Profile = ({ user, posts }) => {
+const Profile = ({ navigation, route }) => {
+    const { user, posts } = route.params;
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="dark-content" backgroundColor='#ffffff'/>
             <ScrollView>
                 <View style={{paddingHorizontal: 20}}>
                     <View style={styles.topInfo}>
@@ -37,7 +39,7 @@ const Profile = ({ user, posts }) => {
                 </View>
                 <ProfileGrid posts={posts}/>
             </ScrollView>
-            <NavBar user={user} activePage="profile" />
+            <NavBar user={user} activePage="profile" navigation={navigation} />
         </View>
     );
     };
@@ -45,8 +47,8 @@ const Profile = ({ user, posts }) => {
     const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop: 45,
         backgroundColor: "white",
-        marginTop: 40,
     },
     avatar: {
         width: 120,

@@ -2,7 +2,13 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from "react";
 import Profile from './pages/Profile';
 import Feed from './pages/Feed';
+import Add from './pages/Add';
+import Notifications from './pages/Notifications';
 import PostItem from './components/PostItem';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
     const posts = [
@@ -62,17 +68,20 @@ export default function App() {
     };
 
     return (
-        <View style={styles.container}>
-            {/* <Profile user={user} posts={posts} /> */}
-            {/* <PostItem post={posts[0]} user={user} /> */}
-            <Feed user={user} posts={posts} />
-        </View>
+        <NavigationContainer style={styles.container}>
+            <Stack.Navigator>
+                <Stack.Screen name="Feed" component={Feed} initialParams={{ user, posts }} options={{headerShown: false}} />
+                <Stack.Screen name="Profile" component={Profile} initialParams={{ user, posts }} options={{headerShown: false}} />
+                <Stack.Screen name="Add" component={Add} initialParams={{ user, posts }} options={{headerShown: false}} />
+                <Stack.Screen name="Notifications" component={Notifications} initialParams={{ user, posts }} options={{headerShown: false}} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'aqua',
+    backgroundColor: '#fff',
   },
 });
