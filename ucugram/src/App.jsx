@@ -43,7 +43,7 @@ function App() {
   ];
 
   const user = {
-    profilePhoto: "/ucugram-logo.png",
+    profilePicture: "/ucugram-logo.png",
     name: "nombre_ususario",
     posts: 11, // después esto va a ser una lista por ej.
     friends: 17, // lista o dict con usuarios amigos
@@ -51,7 +51,7 @@ function App() {
   };
 
   const friend = {
-    profilePhoto: "/profile_img-by-AI.jpeg",
+    profilePicture: "/profile_img-by-AI.jpeg",
     name: "nombre_amigo",
     posts: 1.861, // después esto va a ser una lista por ej.
     friends: 454, // lista o dict con usuarios amigos

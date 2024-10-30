@@ -3,8 +3,13 @@ import React, {
   useContext,
   useReducer,
   useEffect,
-  useState
+  useState,
 } from "react";
+import { useLogin } from "../services/authService";
+import { jwtDecode } from "jwt-decode";
+import { url } from "../App";
+
+
 const AuthContext = createContext();
 
 export const AUTH_ACTIONS = {
@@ -29,7 +34,7 @@ function authReducer(state, action) {
         error: null,
       };
     case AUTH_ACTIONS.LOGOUT:
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
       return {
         ...state,
         isAuthenticated: false,
@@ -49,6 +54,21 @@ function authReducer(state, action) {
   }
 }
 
+const getUserProfile = async (userId, token) => {
+  try {
+    const response = await fetch(url + "user/profile/" + userId, {
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error)
+  }
+};
+
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isAuthenticated: !!localStorage.getItem("token"),
@@ -58,6 +78,29 @@ export const AuthProvider = ({ children }) => {
     error: null,
   };
   const [state, dispatch] = useReducer(authReducer, initialState);
+  const { token } = state;
+
+  // para cuando se refresca la página
+  useEffect(() => {
+    if( token !== null && token !== undefined) {
+      const decoded = jwtDecode(token);
+      const userId = decoded.id;
+      console.log("id " + userId);
+      dispatch({type: AUTH_ACTIONS.LOADING})
+      let userName =  getUserProfile(userId, token);
+  
+      userName.then((data) => {
+        console.log("user info:" + data);
+        dispatch({
+          type: AUTH_ACTIONS.LOGIN,
+          payload: {
+            user: data.user,
+            token: token,
+          },
+        });
+      })
+    }
+  }, [token]);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

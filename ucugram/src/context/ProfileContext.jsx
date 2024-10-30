@@ -4,7 +4,7 @@ import React, {
   useContext,
   useReducer,
   useState,
-  useEffect
+  useEffect,
 } from "react";
 import { useAuth } from "./AuthContext";
 
@@ -46,7 +46,6 @@ function profileReducer(state, action) {
 // not working
 
 export const ProfileProvider = ({ children }) => {
-  const { state: authState } = useAuth();
   const initialState = {
     user: null,
     posts: [],
@@ -54,31 +53,6 @@ export const ProfileProvider = ({ children }) => {
     error: null,
   };
   const [state, dispatch] = useReducer(profileReducer, initialState);
-  
-  useEffect(() => {
-    const fetchProfile = async () => {
-      if (authState.user) {
-        dispatch({ type: "SET_LOADING" });
-        try {
-          const response = await fetch(`http://localhost:3001/api/user/profile/${authState.user.id}`, {
-            headers: {
-              "Authorization": `Bearer ${authState.user.token}`,
-            },
-          });
-          const data = await response.json();
-          if (response.ok) {
-            dispatch({ type: "SET_PROFILE", payload: data });
-          } else {
-            dispatch({ type: "SET_ERROR", payload: data.message });
-          }
-        } catch (error) {
-          dispatch({ type: "SET_ERROR", payload: "Error al cargar el perfil" });
-        }
-      }
-    };
-
-    fetchProfile();
-  }, [authState.user]); // Ejecutar cuando authState.user cambie
 
   return (
     <ProfileContext.Provider value={{ state, dispatch }}>
@@ -88,5 +62,12 @@ export const ProfileProvider = ({ children }) => {
 };
 
 export const useProfile = () => {
-  return useContext(ProfileContext);
+  const initialState = {
+    user: null,
+    posts: [],
+    loading: false,
+    error: null,
+  };
+  const [state, dispatch] = useReducer(profileReducer, initialState);
+  return { state, dispatch };
 };

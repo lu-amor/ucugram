@@ -5,7 +5,7 @@ import classes from "./avatar.module.css";
 function Avatar({ user }) {
     return (
         <>
-            <img className={classes.avatar} src={user.profilePhoto}/>
+            <img className={classes.avatar} src={user?.profilePicture === "" ? "public/default-profilePicture.jpg" : user?.profilePicture }/>
         </>
     )
 }
