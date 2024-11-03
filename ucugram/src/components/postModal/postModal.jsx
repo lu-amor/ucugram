@@ -1,20 +1,23 @@
-import React,  { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
 import CommentButton from "../commentButton/commentButton";
-import Icon from '@mdi/react';
-import { mdiShareVariant } from '@mdi/js';
-import Avatar from 'ucugram/src/components/avatar/avatar.jsx'
-import useComment from 'ucugram/src/hooks/useComment';
-import CommentInput from 'ucugram/src/components/commentInput/commentInput.jsx';
-import './postModal.css';
+import Icon from "@mdi/react";
+import { mdiShareVariant } from "@mdi/js";
+import Avatar from "ucugram/src/components/avatar/avatar.jsx";
+import useComment from "ucugram/src/hooks/useComment";
+import CommentInput from "ucugram/src/components/commentInput/commentInput.jsx";
+import "./postModal.css";
+import useGetComment from "./../../hooks/useGetComment.jsx";
 import { useProfile } from "../../context/ProfileContext";
 
 const PostModal = ({ post, onClose }) => {
-  const {state: profileState} = useProfile();
+  const { state: profileState } = useProfile();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const { isCommentVisible, toggleCommentVisibility, hideComment } = useComment();
-  const likeButtonRef = useRef(null); 
+  const [isCommentVisible, setIsCommentVisible] = useState();
+  const likeButtonRef = useRef(null);
   const user = profileState.user;
+  const [comments, setComments] = useState([]);
+  const getComment = useGetComment();
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,6 +31,26 @@ const PostModal = ({ post, onClose }) => {
     };
   }, []);
 
+  useEffect(() => {
+    const loadComments = async () => {
+      const loadedComments = await Promise.all(
+        post.comments.map(async (commentId) => {
+          const commentInfo = await getComment(commentId);
+          return { commentInfo };
+        })
+      );
+      setComments(loadedComments);
+    };
+
+    loadComments();
+  }, [post.comments]);
+
+  const handleCommentPublished = async (data) => {
+    setIsCommentVisible(false);
+    const commentInfo = await getComment(data._id);
+    setComments((prevComments) => [...prevComments, { commentInfo }]);
+  };
+
   const handleDoubleClick = () => {
     if (likeButtonRef.current !== null) {
       likeButtonRef.current.click(); // simulo el click en el botón de like
@@ -37,77 +60,151 @@ const PostModal = ({ post, onClose }) => {
   return (
     <div className={"modal is-active"}>
       <div className="modal-background" onClick={onClose}></div>
-      <button 
-          className="modal-close is-large has-text-white"  
-          aria-label="close" 
-          onClick={onClose} >
-      </button>
-      <div className="modal-content" >
+      <button
+        className="modal-close is-large has-text-white"
+        aria-label="close"
+        onClick={onClose}
+      ></button>
+      <div className="modal-content">
         <div className="modal-card-body p-0">
           <figure className="image is-square" onDoubleClick={handleDoubleClick}>
-            <img src={"http://localhost:3001/" + post.imageUrl} alt={post.description}  />
+            <img
+              src={"http://localhost:3001/" + post.imageUrl}
+              alt={post.description}
+            />
           </figure>
 
           {windowWidth > 950 ? (
             <div className="data-container p-4">
               <div className="post-text">
                 <div className="post-header is-flex is-justify-content-space-between">
-                  <div className="user-info is-flex is-align-items-center" style={{width:"25px", height:"25px"}}>
-                    <Avatar className="user-avatar" user={user} ></Avatar>
-                    <h3 className="ml-2" ><strong className="has-text-white">{user.username}</strong></h3>
+                  <div
+                    className="user-info is-flex is-align-items-center"
+                    style={{ width: "25px", height: "25px" }}
+                  >
+                    <Avatar className="user-avatar" user={user}></Avatar>
+                    <h3 className="ml-2">
+                      <strong className="has-text-white">
+                        {user.username}
+                      </strong>
+                    </h3>
                   </div>
                   <p className="post-date">{post.createdAt.split("T")[0]}</p>
                 </div>
-                <p className="pic-description mt-3"><strong className="has-text-white mr-1 has-text-weight-bold">{user.username}</strong> {post.description}</p>
+                <p className="pic-description mt-3">
+                  <strong className="has-text-white mr-1 has-text-weight-bold">
+                    {user.username}
+                  </strong>{" "}
+                  {post.description}
+                </p>
 
-                <ul className="comments-section mt-4">
-                  {post.comments.map((comment) => (
-                    <li key={comment.id} className="mb-2">
-                    <p><strong className="has-text-white has-text-weight-bold">{comment.user}</strong> {comment.text} </p>
-                    </li>
-                    ))}
-                </ul>
+                <ul className="comments-box mt-4">
+              {comments.map((comment) => {
+                const info = comment.commentInfo;
+                return (
+                  <li key={info._id} className="mb-2">
+                    <p>
+                      <strong className="has-text-white">
+                        {info.user.username}
+                      </strong>{" "}
+                      {info.content}{" "}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
               </div>
               <div className="buttons mb-3 mt-1">
-                  <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={true}/>
-                  <CommentButton className="ml-3" postId={post.id} toggleCommentVisibility={toggleCommentVisibility}/>
-                  <Icon path={mdiShareVariant} size={1.4} className="ml-auto mr-4" color='#ea5b0c' />
+                <LikeButton
+                  className="like-section"
+                  ref={likeButtonRef}
+                  post={post}
+                  initialLikes={post.likes.length}
+                  modal={true}
+                />
+                <CommentButton
+                  className="ml-3"
+                  postId={post.id}
+                  toggleCommentVisibility={() => setIsCommentVisible(!isCommentVisible)}
+                />
+                <Icon
+                  path={mdiShareVariant}
+                  size={1.4}
+                  className="ml-auto mr-4"
+                  color="#ea5b0c"
+                />
               </div>
 
               {isCommentVisible && (
                 <div className="comment-input-section">
-                  <CommentInput postId={post.id} handleCommentPublished={hideComment} />
+                  <CommentInput
+                    postId={post._id}
+                    handleCommentPublished={handleCommentPublished}
+                  />
                 </div>
               )}
             </div>
           ) : (
             <div className="data-container p-4">
               <div className="buttons mt-1 mb-2">
-                  <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={true}/>
-                  <CommentButton className="ml-3" postId={post.id} toggleCommentVisibility={toggleCommentVisibility}/>
-                  <Icon path={mdiShareVariant} size={1.4} className="ml-auto" color='#ea5b0c' />
+                <LikeButton
+                  className="like-section"
+                  ref={likeButtonRef}
+                  post={post}
+                  initialLikes={post.likes.length}
+                  modal={true}
+                />
+                <CommentButton
+                  className="ml-3"
+                  postId={post.id}
+                  toggleCommentVisibility={() => setIsCommentVisible(!isCommentVisible)}
+                />
+                <Icon
+                  path={mdiShareVariant}
+                  size={1.4}
+                  className="ml-auto"
+                  color="#ea5b0c"
+                />
               </div>
               {isCommentVisible && (
                 <div className="comment-input-section mb-4">
-                  <CommentInput postId={post.id} handleCommentPublished={hideComment} />
+                  <CommentInput
+                    postId={post._id}
+                    handleCommentPublished={handleCommentPublished}
+                  />
                 </div>
               )}
-                <div className="post-header is-flex is-justify-content-space-between">
-                  <div className="user-info is-flex is-align-items-center" style={{width:"20px", height:"20px"}}>
-                    <Avatar className="user-avatar" user={user} ></Avatar>
-                    <h3 className="ml-2" ><strong className="has-text-white">{user.username}</strong></h3>
-                  </div>
-                  <p className="post-date">{post.date}</p>
+              <div className="post-header is-flex is-justify-content-space-between">
+                <div
+                  className="user-info is-flex is-align-items-center"
+                  style={{ width: "20px", height: "20px" }}
+                >
+                  <Avatar className="user-avatar" user={user}></Avatar>
+                  <h3 className="ml-2">
+                    <strong className="has-text-white">{user.username}</strong>
+                  </h3>
                 </div>
-                <p className="pic-description mt-3"><strong className="has-text-white">{user.username}</strong> {post.description}</p>
-
-                <ul className="comments-section mt-4">
-                  {post.comments.map((comment) => (
-                    <li key={comment.id} className="mb-2">
-                    <p><strong className="has-text-white">{comment.user}</strong> {comment.text} </p>
-                    </li>
-                    ))}
-                </ul>
+                <p className="post-date">{post.date}</p>
+              </div>
+              <p className="pic-description mt-3">
+                <strong className="has-text-white">{user.username}</strong>{" "}
+                {post.description}
+              </p>
+              <ul className="comments-box mt-4">
+              {comments.map((comment) => {
+                const info = comment.commentInfo;
+                return (
+                  <li key={info._id} className="mb-2">
+                    <p>
+                      <strong className="has-text-white">
+                        {info.user.username}
+                      </strong>{" "}
+                      {info.content}{" "}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
             </div>
           )}
         </div>

@@ -1,12 +1,10 @@
-import React, { forwardRef, useEffect } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import useLike from "ucugram/src/hooks/useLike.jsx";
 import Icon from "@mdi/react";
 import { mdiHeart, mdiHeartOutline } from "@mdi/js";
 
-const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
-  const { likes, isLiked, toggleLike } = useLike(initialLikes, postId);
-  
-
+const LikeButton = forwardRef(({ post, modal, initialLikes }, ref) => {
+  const { likes, isLiked, toggleLike } = useLike(post);
   if (modal) {
     return (
       <div>

@@ -9,8 +9,6 @@ import "./postContainer.css";
 import useGetComment from "./../../hooks/useGetComment.jsx";
 
 const PostContainer = ({ post }) => {
-  //   const { isCommentVisible, toggleCommentVisibility, hideComment } =
-  //     useComment();
   const [isCommentVisible, setIsCommentVisible] = useState();
   const likeButtonRef = useRef(null);
   const [comments, setComments] = useState([]);
@@ -70,7 +68,7 @@ const PostContainer = ({ post }) => {
               <LikeButton
                 className="like-section"
                 ref={likeButtonRef}
-                postId={post._id}
+                post={post}
                 initialLikes={post.likes.length}
                 modal={false}
               />
