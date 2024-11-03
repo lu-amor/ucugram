@@ -4,15 +4,12 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 // const url = 'http://localhost:3000/posts';
 
-const useFetchPosts = () => {
+const useGetComment = () => {
   const { state: authState } = useAuth();
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  const fetchPosts = async () => {
+  const getComment = async (commentId) => {
     try {
-      const response = await fetch(url + "posts/feed",
+      const response = await fetch(url + "posts/comments/" + commentId,
         {
           method: "GET",
           headers: {
@@ -22,20 +19,14 @@ const useFetchPosts = () => {
         }
       );
       const data = await response.json();
-      setPosts(data);
-      setLoading(false);
+      return data;
     } catch (err) {
-      setError(err);
-      setLoading(false);
+      return err;
     }
   };
 
-  useEffect(() => {
-    fetchPosts(); 
-  }, []); 
-
-  return { posts, loading, error };
+  return getComment;
 };
 
-export default useFetchPosts;
+export default useGetComment;
 

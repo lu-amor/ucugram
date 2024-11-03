@@ -40,7 +40,6 @@ const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
               size={1.7}
               color="#ea5b0c"
               className="mr-2"
-              onClick={toggleLike}
             />
           ) : (
             <Icon
@@ -48,7 +47,6 @@ const LikeButton = forwardRef(({ postId, modal, initialLikes }, ref) => {
               size={1.8}
               color="#ea5b0c"
               className="mr-1"
-              onClick={toggleLike}
             />
           )}{" "}
         </button>
