@@ -1,54 +1,33 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { url } from './../App.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
-const url = 'http://localhost:3000/posts';
+// const url = "http://localhost:3000/posts";
 
-const UseAddComment = () => {
+const useAddComment = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { state: authState } = useAuth();
 
-
-  const fetchPostById = async (postId) => {
+  const addComment = async (content, postId) => {
     try {
-      const response = await fetch(`${url}/${postId}`);
-      if (!response.ok) {
-        throw new Error(`Error fetching post with id ${postId}`);
-      }
-      return await response.json();
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  const updatePostComments = async (postId, updatedComments) => {
-    try {
-      const response = await fetch(`${url}/${postId}`, {
-        method: 'PATCH',
+      setLoading(true);
+      setError(null);
+      const response = await fetch(url + `posts/${postId}/comments/`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${authState.token}`,
         },
-        body: JSON.stringify({ comments: updatedComments }),
+        body: JSON.stringify(content),
       });
 
-      if (!response.ok) {
-        throw new Error('Error updating comments');
-      }
-      return await response.json();
-    } catch (err) {
-      throw err;
-    }
-  };
-
-  const addComment = async (postId, newComment) => {
-    setLoading(true);
-    setError(null);  
-    try {
-      const post = await fetchPostById(postId);  
-      const updatedComments = [...post.comments, newComment];  
-
-      await updatePostComments(postId, updatedComments);  
+      const data = await response.json();
       setLoading(false);
+      console.log("post result: ", data);
+      return data;
     } catch (err) {
-      setError(err);  
+      setError(err.message);
       setLoading(false);
     }
   };
@@ -56,4 +35,4 @@ const UseAddComment = () => {
   return { addComment, loading, error };
 };
 
-export default UseAddComment;
+export default useAddComment;

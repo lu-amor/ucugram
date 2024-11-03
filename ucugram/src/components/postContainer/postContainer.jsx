@@ -9,8 +9,9 @@ import "./postContainer.css";
 import useGetComment from "./../../hooks/useGetComment.jsx";
 
 const PostContainer = ({ post }) => {
-  const { isCommentVisible, toggleCommentVisibility, hideComment } =
-    useComment();
+  //   const { isCommentVisible, toggleCommentVisibility, hideComment } =
+  //     useComment();
+  const [isCommentVisible, setIsCommentVisible] = useState();
   const likeButtonRef = useRef(null);
   const [comments, setComments] = useState([]);
   const getComment = useGetComment();
@@ -26,7 +27,7 @@ const PostContainer = ({ post }) => {
       const loadedComments = await Promise.all(
         post.comments.map(async (commentId) => {
           const commentInfo = await getComment(commentId);
-          return {commentInfo};
+          return { commentInfo };
         })
       );
       setComments(loadedComments);
@@ -35,16 +36,18 @@ const PostContainer = ({ post }) => {
     loadComments();
   }, [post.comments]);
 
-
-  const getCommentInfo = async (commentId) => {
-    const info = await getComment(commentId);
-    return info;
+  const handleCommentPublished = async (data) => {
+    setIsCommentVisible(false);
+    const commentInfo = await getComment(data._id);
+    setComments((prevComments) => [...prevComments, { commentInfo }]);
   };
 
   return (
     <div className="individual-post-container">
       <div className="post-container-header">
-        <Avatar className="user-avatar" user={post.user.username}></Avatar>
+        <div style={{ width: "30px", height: "30px", marginLeft: "5px" }}>
+          <Avatar className="user-avatar" user={post.user}></Avatar>
+        </div>
         <h3 className="post-username">
           <strong className="has-text-white">{post.user.username}</strong>
         </h3>
@@ -74,7 +77,7 @@ const PostContainer = ({ post }) => {
               <Icon
                 path={mdiComment}
                 size={1.6}
-                onClick={toggleCommentVisibility}
+                onClick={() => setIsCommentVisible(!isCommentVisible)}
                 className="ml-auto"
                 color="#ea5b0c"
               />
@@ -83,8 +86,8 @@ const PostContainer = ({ post }) => {
             {isCommentVisible && (
               <div className="comment-input-section mb-4">
                 <CommentInput
-                  postId={post.id}
-                  handleCommentPublished={hideComment}
+                  postId={post._id}
+                  handleCommentPublished={handleCommentPublished}
                 />
               </div>
             )}
@@ -95,15 +98,17 @@ const PostContainer = ({ post }) => {
             <ul className="comments-box mt-4">
               {comments.map((comment) => {
                 const info = comment.commentInfo;
-                console.log("info: ",info)
                 return (
-                <li key={info._id} className="mb-2">
-                  <p>
-                    <strong className="has-text-white">{info.user.username}</strong>
-                    {" "}{info.content}{" "}
-                  </p>
-                </li>
-              )})}
+                  <li key={info._id} className="mb-2">
+                    <p>
+                      <strong className="has-text-white">
+                        {info.user.username}
+                      </strong>{" "}
+                      {info.content}{" "}
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
