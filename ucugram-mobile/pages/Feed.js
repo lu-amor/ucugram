@@ -1,17 +1,24 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
+import { View, Image, StyleSheet, ScrollView } from "react-native";
 import NavBar from "../components/NavBar";
 import PostItem from "../components/PostItem";
 
 const Feed = ({ navigation, route }) => {
-    const { user, posts } = route.params;
+    const { user, allFriendPosts } = route.params;
+
     return (
         <View style={styles.container}>
-            {/* sugerencias seguidores */}
             <ScrollView>
-                <Image source={require('ucugram-mobile/assets/ucugram texto.png')} style={{width: '40%', height: 30, alignSelf: 'center', marginTop: 15, }}/>
-                {posts.map((post, index) => (
-                    <PostItem key={index} post={post} user={user} />
+                <Image 
+                    source={require('../assets/ucugram texto.png')} 
+                    style={styles.headerImage} 
+                />
+                {allFriendPosts.map((post, index) => (
+                    <PostItem 
+                        key={index} 
+                        post={post} 
+                        user={{ username: post.username, profilePicture: post.profilePicture }} 
+                    />
                 ))}
             </ScrollView>
             <NavBar user={user} activePage="home" navigation={navigation} />
@@ -24,6 +31,12 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "white",
         marginTop: 45,
+    },
+    headerImage: {
+        width: '40%',
+        height: 30,
+        alignSelf: 'center',
+        marginTop: 15,
     },
 });
 

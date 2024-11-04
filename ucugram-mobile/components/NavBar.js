@@ -16,7 +16,7 @@ const NavBar = ({ user, activePage, navigation }) => {
                     name = {activePage === "add" ? "add-circle" : "add-circle-outline"}
                     size = {35}
                     color = "#173363"
-                    onPress = {() => navigation.navigate('Add')}
+                    onPress = {() => navigation.navigate('Add')}r
                 />
                 <Ionicons
                     name = {activePage === "notifications" ? "notifications" : "notifications-outline"}

@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
-const PostItem = ({ post, user }) => {
+const PostItem = ({ post, user, navigation }) => {
     const scale = useSharedValue(1);
     const isZooming = useSharedValue(false);
 
@@ -42,11 +42,13 @@ const PostItem = ({ post, user }) => {
 
     return (
         <GestureHandlerRootView style={styles.container}>
-            <View style={styles.userInfo}>
-                <Image source={user.profilePicture} style={styles.avatar} />
-                <Text style={styles.usernameTop}>{user.username}</Text>
-                <Text style={styles.postDate}>{post.date}</Text>
-            </View>
+            <TouchableOpacity onPress={() => navigation.navigate(post.username, { friend: { username: post.username, profilePicture: post.profilePicture, bio: post.description } })}>
+                <View style={styles.userInfo}>
+                    <Image source={post.profilePicture} style={styles.avatar} />
+                    <Text style={styles.usernameTop}>{post.username}</Text>
+                    <Text style={styles.postDate}>{post.date}</Text>
+                </View>
+            </TouchableOpacity>
             <View style={styles.postCard}>
                 <GestureDetector gesture={pinchGesture}>
                     <Animated.View style={[styles.cardImage, animatedImageStyle]}>
@@ -115,8 +117,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     cardImage: {
-        width: "100%",
-        height: "100%",
+        width: Dimensions.get("window").width,
+        height: Dimensions.get("window").width,
     },
     image: {
         width: "100%",
@@ -144,7 +146,6 @@ const styles = StyleSheet.create({
     },
     postDescription: {
         fontSize: 14,
-        marginTop: 3,
     },
 });
 

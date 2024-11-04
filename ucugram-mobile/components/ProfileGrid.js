@@ -6,6 +6,7 @@ const ProfileGrid = ({posts}) => {
     return (
         <View style={styles.container}>
             <View style={styles.grid}>
+{/*                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
@@ -17,8 +18,13 @@ const ProfileGrid = ({posts}) => {
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
+                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} /> */}
+
+                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
+                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
+                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
+                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
+                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
 
 {/*                 {posts.map((post, index) => {
                     return (
