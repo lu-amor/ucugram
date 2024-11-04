@@ -11,7 +11,7 @@ import { useProfile } from "../../context/ProfileContext";
 
 function MyProfile({ user1 }) {
   const { state: profileState } = useProfile();
-  const [state, dispatch] = useReducer(profileReducer, initialState);
+  // const [state, dispatch] = useReducer(profileReducer, initialState);
   const { state: authState } = useAuth();
   const navigate = useNavigate();
   const getProfile = useGetProfile();

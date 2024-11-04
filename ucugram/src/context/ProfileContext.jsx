@@ -8,7 +8,7 @@ const ProfileContext = createContext();
 
 export const PROFILE_ACTIONS = {
   SET_PROFILE: "set-profile",
-  SET_LOADING: "set-loading",
+  LOADING: "loading",
   SET_ERROR: "set-error",
 };
 
@@ -22,7 +22,7 @@ function profileReducer(state, action) {
         loading: false,
         error: null,
       };
-    case PROFILE_ACTIONS.SET_LOADING:
+    case PROFILE_ACTIONS.LOADING:
       return {
         ...state,
         loading: true,

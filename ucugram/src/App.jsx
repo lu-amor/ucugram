@@ -97,7 +97,7 @@ function App() {
               element={<MyProfile user1={user} />}
             ></Route>
             <Route
-              path="/friendProfile"
+              path="/friendProfile/:username"
               element={<FriendProfile user={friend} />}
             ></Route>
             <Route path="/feed" element={<FeedPage />}></Route>

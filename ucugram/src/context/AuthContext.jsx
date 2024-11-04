@@ -5,10 +5,8 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { useLogin } from "../services/authService";
 import { jwtDecode } from "jwt-decode";
 import { url } from "../App";
-
 
 const AuthContext = createContext();
 
@@ -17,15 +15,17 @@ export const AUTH_ACTIONS = {
   LOGOUT: "logout",
   LOADING: "loading",
   ERROR: "error",
+  RELOAD: "reload",
 };
 
 // la action va a pasar en la dispatch function
 // la función reducer va a devolver el estado actualizado dependiendo de la acción.
 // state va a ser el objeto pasado por parámetro en el useReducer
 function authReducer(state, action) {
+  console.log("action:", action)
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN:
-      console.log("user: ", action.payload.user)
+      console.log("user: ", action.payload.user);
       return {
         ...state,
         isAuthenticated: true,
@@ -50,6 +50,9 @@ function authReducer(state, action) {
         loading: true,
         error: null,
       };
+    case AUTH_ACTIONS.RELOAD:
+      handleReload(action.payload.token, action.payload.dispatch);
+      return {...state}
     default:
       return state;
   }
@@ -60,14 +63,30 @@ const getUserProfile = async (userId, token) => {
     const response = await fetch(url + "user/profile/" + userId, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
+};
+
+export const handleReload = async (token, dispatch) => {
+  const decoded = jwtDecode(token);
+  const userId = decoded.id;
+  dispatch({ type: AUTH_ACTIONS.LOADING });
+  let userName = getUserProfile(userId, token);
+  userName.then((data) => {
+    dispatch({
+      type: AUTH_ACTIONS.LOGIN,
+      payload: {
+        user: data.user,
+        token: token,
+      },
+    });
+  });
 };
 
 export const AuthProvider = ({ children }) => {
@@ -83,23 +102,8 @@ export const AuthProvider = ({ children }) => {
 
   // para cuando se refresca la página
   useEffect(() => {
-    if( token !== null && token !== undefined) {
-      const decoded = jwtDecode(token);
-      const userId = decoded.id;
-      // console.log("id " + userId);
-      dispatch({type: AUTH_ACTIONS.LOADING})
-      let userName =  getUserProfile(userId, token);
-  
-      userName.then((data) => {
-        // console.log("user info:" + data);
-        dispatch({
-          type: AUTH_ACTIONS.LOGIN,
-          payload: {
-            user: data.user,
-            token: token,
-          },
-        });
-      })
+    if (token !== null && token !== undefined) {
+      handleReload(token, dispatch);
     }
   }, [token]);
 

@@ -10,7 +10,7 @@ export default function profileReducer(state, action) {
         loading: false,
         error: null,
       };
-    case PROFILE_ACTIONS.SET_LOADING:
+    case PROFILE_ACTIONS.LOADING:
       return {
         ...state,
         loading: true,

@@ -7,12 +7,18 @@ import useComment from "ucugram/src/hooks/useComment";
 import CommentInput from "ucugram/src/components/commentInput/commentInput.jsx";
 import "./postContainer.css";
 import useGetComment from "./../../hooks/useGetComment.jsx";
+import { useGetProfile } from "../../hooks/useGetProfile";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext.jsx";
 
 const PostContainer = ({ post }) => {
   const [isCommentVisible, setIsCommentVisible] = useState();
   const likeButtonRef = useRef(null);
   const [comments, setComments] = useState([]);
   const getComment = useGetComment();
+  const navigate = useNavigate();
+  const {state: authState} = useAuth();
+  const getProfile = useGetProfile();
 
   const handleDoubleClick = () => {
     if (likeButtonRef.current !== null) {
@@ -40,6 +46,15 @@ const PostContainer = ({ post }) => {
     setComments((prevComments) => [...prevComments, { commentInfo }]);
   };
 
+  const handleGoProfile = async (username, userId) => {
+    if (username !== authState.user.username) {
+      await getProfile(userId)
+      navigate(`/friendProfile/${username}`)
+    } else {
+      navigate("/myProfile")
+    }
+  }
+
   return (
     <div className="individual-post-container">
       <div className="post-container-header">
@@ -47,7 +62,9 @@ const PostContainer = ({ post }) => {
           <Avatar className="user-avatar" user={post.user}></Avatar>
         </div>
         <h3 className="post-username">
-          <strong className="has-text-white">{post.user.username}</strong>
+          <button onClick={() => handleGoProfile(post.user.username, post.user._id)}>
+            <strong className="has-text-white">{post.user.username}</strong>
+          </button>
         </h3>
         <p className="post-date-info">{post.createdAt.split("T")[0]}</p>
       </div>
