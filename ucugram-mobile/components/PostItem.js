@@ -3,8 +3,12 @@ import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity } f
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import CommentsModal from './CommentsModal';
 
 const PostItem = ({ post, user, navigation }) => {
+    const [liked, setLiked] = useState(false);
+    const [commentsVisibility, setCommentsVisibility] = useState(false);
+
     const scale = useSharedValue(1);
     const isZooming = useSharedValue(false);
 
@@ -40,6 +44,10 @@ const PostItem = ({ post, user, navigation }) => {
             };
         });
 
+    const handleLike = () => {
+        setLiked(!liked);
+    };
+
     return (
         <GestureHandlerRootView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate(post.username, { friend: { username: post.username, profilePicture: post.profilePicture, bio: post.description } })}>
@@ -58,12 +66,14 @@ const PostItem = ({ post, user, navigation }) => {
             </View>
             <Animated.View style={[styles.belowPicture, belowPictureStyle]}>
                 <View style={styles.actionButtonsContainer}>
-                    <TouchableOpacity>
-                        <Ionicons name="heart-outline" color='#ea5b0c' size={32} />
+                    <TouchableOpacity onPress={() => handleLike()}>
+                        <Ionicons name={liked ? "heart" : "heart-outline"} color='#ea5b0c' size={32} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Ionicons name="chatbubble-outline" color='#ea5b0c' size={30} />
+                    <Text style={styles.likes}>{post.likes}</Text>
+                    <TouchableOpacity onPress={() => setCommentsVisibility(true)}>
+                        <Ionicons name={"chatbubble-outline"} color='#ea5b0c' size={30} />
                     </TouchableOpacity>
+                    <Text style={styles.likes}>{post.comments}</Text>
                     <TouchableOpacity style={{ marginLeft: 'auto', marginRight: 5 }}>
                         <Ionicons name="share-social-outline" color='#ea5b0c' size={30} />
                     </TouchableOpacity>
@@ -75,6 +85,7 @@ const PostItem = ({ post, user, navigation }) => {
                     </Text>
                 </View>
             </Animated.View>
+            <CommentsModal visible={commentsVisibility} onClose={() => setCommentsVisibility(false)} comments={post.comments} />
         </GestureHandlerRootView>
     );
 };
@@ -131,9 +142,15 @@ const styles = StyleSheet.create({
     },
     actionButtonsContainer: {
         flexDirection: "row",
-        gap: 10,
+        gap: 2,
         marginBottom: 10,
         alignItems: "center",
+    },
+    likes: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#173363",
+        marginRight: 10,
     },
     userDesc: {
         flexDirection: "row",

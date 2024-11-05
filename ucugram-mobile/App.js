@@ -30,16 +30,22 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/charlotte_post_img-by-AI.jpeg'),
           description: 'Lovely town in europe',
+          likes: 8646,
+          comments: 631,
           date: '26-10-2024'
         },
         {
           imageUrl: require('./assets/posts/21.jpg'),
           description: 'sunsetssss',
+          likes: 1000,
+          comments: 453,
           date: '29-10-2024'
         },
         {
           imageUrl: require('./assets/posts/15.jpg'),
           description: 'work from home tuesdays ☕',
+          likes: 7646,
+          comments: 654,
           date: '31-10-2024'
         }
       ]
@@ -54,16 +60,22 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/6.jpg'),
           description: 'radioactive',
+          likes: 9864,
+          comments: 1365,
           date: '25-10-2024'
         },
         {
           imageUrl: require('./assets/posts/4.jpg'),
           description: 'the future is now',
+          likes: 6458,
+          comments: 896,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/26.jpg'),
           description: 'redecorated my room :)',
+          likes: 8414,
+          comments: 987,
           date: '01-11-2024'
         }
       ]
@@ -78,21 +90,29 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/27.jpg'),
           description: 'morning coffee',
+          likes: 6465,
+          comments: 948,
           date: '25-10-2024'
         },
         {
           imageUrl: require('./assets/posts/7.jpg'),
           description: 'coding is life',
+          likes: 697,
+          comments: 354,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/10.jpg'),
           description: 'coding is love',
+          likes: 986,
+          comments: 98,
           date: '01-11-2024'
         },
         {
           imageUrl: require('./assets/posts/11.jpg'),
           description: 'thanks for the support',
+          likes: 8965,
+          comments: 100,
           date: '02-11-2024'
         }
       ]
@@ -107,31 +127,43 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/12.jpg'),
           description: 'a lot of green around here',
+          likes: 986,
+          comments: 98,
           date: '06-10-2024'
         },
         {
           imageUrl: require('./assets/posts/1.jpg'),
           description: 'wonderful day',
+          likes: 74565,
+          comments: 6554,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/3.jpg'),
           description: 'meet me at midnight',
+          likes: 631,
+          comments: 61,
           date: '01-11-2024'
         },
         {
           imageUrl: require('./assets/posts/23.jpg'),
           description: 'sunset in the city',
+          likes: 698,
+          comments: 418,
           date: '04-11-2024'
         },
         {
           imageUrl: require('./assets/posts/9.jpg'),
           description: 'good morning chicago',
+          likes: 8942,
+          comments: 755,
           date: '05-11-2024'
         },
         {
           imageUrl: require('./assets/posts/19.jpg'),
           description: 'day at the beach',
+          likes: 54,
+          comments: 455,
           date: '08-11-2024'
         }
       ]
@@ -146,31 +178,43 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/2.jpg'),
           description: 'discovered this new cafe',
+          likes: 98716,
+          comments: 8761,
           date: '06-10-2024'
         },
         {
           imageUrl: require('./assets/posts/5.jpg'),
           description: 'sunrise in venice',
+          likes: 2492,
+          comments: 896,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/8.jpg'),
           description: 'touristing around',
+          likes: 554,
+          comments: 15,
           date: '06-10-2024'
         },
         {
           imageUrl: require('./assets/posts/14.jpg'),
           description: 'reset sunday',
+          likes: 53,
+          comments: 684,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/16.jpg'),
           description: 'afternoon tea',
+          likes: 350,
+          comments: 100,
           date: '06-10-2024'
         },
         {
           imageUrl: require('./assets/posts/20.jpg'),
           description: 'it\'s nice to have a friend',
+          likes: 68,
+          comments: 965,
           date: '27-10-2024'
         }
       ]
@@ -185,31 +229,43 @@ export default function App() {
         {
           imageUrl: require('./assets/posts/13.jpg'),
           description: 'new collection soon...', 
+          likes: 6415,
+          comments: 948,
           date: '06-10-2024'
         },
         {
           imageUrl: require('./assets/posts/15.jpg'),
           description: 'creative day',
+          likes: 653,
+          comments: 65,
           date: '27-10-2024'
         },
         {
           imageUrl: require('./assets/posts/17.jpg'),
           description: 'lots of inspiration around here',
+          likes: 6354,
+          comments: 10,
           date: '01-11-2024'
         },
         {
           imageUrl: require('./assets/posts/18.jpg'),
           description: '',
+          likes: 60,
+          comments: 15,
           date: '04-11-2024'
         },
         {
           imageUrl: require('./assets/posts/22.jpg'),
           description: 'is there ever too much green?',
+          likes: 10,
+          comments: 22,
           date: '05-11-2024'
         },
         {
           imageUrl: require('./assets/posts/25.jpg'),
           description: 'sweater weather',
+          likes: 100,
+          comments: 35,
           date: '08-11-2024'
         }
       ]
