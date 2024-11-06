@@ -4,27 +4,32 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 // const url = "http://localhost:3000/posts";
 
-const useAddComment = () => {
+const useUploadPhoto = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { state: authState } = useAuth();
 
-  const addComment = async (content, postId) => {
+  const uploadPhoto = async (imageUrl, caption) => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(url + `posts/${postId}/comments/`, {
+      const formData = new FormData();
+      formData.append("image", imageUrl); 
+      formData.append("caption", caption); 
+
+      console.log(imageUrl.path)
+      const response = await fetch(url + `posts/upload`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authState.token}`,
         },
-        body: JSON.stringify(content),
+        body: formData,
       });
 
       const data = await response.json();
       setLoading(false);
-      console.log("post result: ", data);
+      console.log("upload post result: ", data);
       return data;
     } catch (err) {
       setError(err.message);
@@ -32,7 +37,7 @@ const useAddComment = () => {
     }
   };
 
-  return { addComment, loading, error };
+  return { uploadPhoto, loading, error };
 };
 
-export default useAddComment;
+export default useUploadPhoto;

@@ -6,6 +6,7 @@ const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
+    console.log("abre modal")
     setIsModalOpen(true);
   };
 
@@ -18,12 +19,11 @@ const PostItem = ({ post }) => {
       <div className={`${classes.postCard} card`} onClick={handleModalOpen}>
         <div className={`${classes.postImage}`}>
           <figure className={`${classes.imagen} image is-square`}>
-            <img src={post.imageUrl} alt={post.description} />
+            <img src={"http://localhost:3001/" + post.imageUrl} alt={post.description === undefined ? "not available" : post.description} />
           </figure>
         </div>
       </div>
-
-      <PostModal post={post} isOpen={isModalOpen} onClose={handleModalClose} />
+      {isModalOpen && <PostModal post={post} onClose={handleModalClose}/>}
     </div>
   );
 };

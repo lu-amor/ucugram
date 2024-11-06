@@ -1,111 +1,108 @@
-import React, {useState, useEffect} from "react";
-import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
-import classes from "./MyProfile.module.css";
+
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../../components/avatar/avatar";
-import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import PostGrid from "../../components/postGrid/postGrid";
+import SideNavBar from "../../components/sideNavBar/sideNavBar";
+import UploadPhotoModal from "../../components/uploadPhotoModal/uploadPhotoModal";
+import { useProfile } from "../../context/ProfileContext";
+import { useGetProfile } from "../../hooks/useGetProfile";
+import { useAuth } from "./../../context/AuthContext";
+import classes from "./MyProfile.module.css";
 
-function MyProfile({ user }) {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  const updateWindowWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
+function MyProfile({ user1 }) {
+  const { state: profileState } = useProfile();
+  // const [state, dispatch] = useReducer(profileReducer, initialState);
+  const { state: authState } = useAuth();
+  const navigate = useNavigate();
+  const getProfile = useGetProfile();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("resize", updateWindowWidth);
-    return () => window.removeEventListener("resize", updateWindowWidth);
+    const userId = authState.user?._id;
+    if (userId !== undefined && userId !== null) {
+      getProfile(userId);
+    }
+  }, [authState?.user?._id]);
+
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      navigate("./home");
+    }
   }, []);
 
   return (
-    <div className="columns">
-      <SideNavBar />
-      {windowWidth > 950 ? (
-      <div className="column is-10" style={{height:"100vh", overflowY:"auto"}}>
-        <div className={classes.profileContainer}>
-          <div className={classes.header}>
-            <div className={classes.topInfo}>
-              <div className={classes.avatar}>
-                <Avatar user={user} />
-              </div>
-              <div className={`is-flex is-flex-direction-column`}>
-                <div className={`mb-1 mt-1 ${classes.topTopInfo}`}>
-                  <p style={{ font: "25px Segoe UI", marginRight: "20px" }}>
-                    <strong>{user.name}</strong>
-                  </p>
-                  <button className={`button ${classes.profileButton} has-text-danger has-text-weight-bold`}>
-                      Edit profile
+    <>
+      {profileState?.loading || authState.loading ? (
+        <p>Loading profile...</p> // hacer algo más lindo
+      ) : (
+        <>
+          <div className="columns">
+            <SideNavBar />
+            <div
+              className="column is-10"
+              style={{ height: "100vh", overflowY: "auto" }}
+            >
+              <div className={classes.profileContainer}>
+                <div className={classes.header}>
+                  <div className={classes.avatar}>
+                    <Avatar user={profileState.user} />
+                  </div>
+                  <div className={classes.profileInformation}>
+                    <div
+                      style={{
+                        display: "flex",
+                        width: "100%",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
+                        <strong>{profileState.user?.username}</strong>
+                      </p>
+                      <button className={`button ${classes.profileButton}`}>
+                        Edit profile
+                      </button>
+                    </div>
+                    <div className={classes.accountInformation}>
+                      <div className={classes.statItem}>
+                        <span>
+                          <strong>{profileState.posts?.length}</strong> posts
+                        </span>
+                      </div>
+                      <div className={classes.statItem}>
+                        <span>
+                          <strong>{profileState.user?.friends.length}</strong>{" "}
+                          friends
+                        </span>
+                      </div>
+                      <div className={classes.profileDescription}>
+                        <p>{user1.description}</p>
+                      </div>
+                    </div>
+                    <div></div>
+                  </div>
+                </div>
+                <div className={classes.postsContainer}>
+                  {/* <img src={"http://localhost:3001/" + state.posts[0]?.imageUrl} alt="imagen 1" /> */}
+                  <PostGrid posts={profileState.posts} />
+                </div>
+                <div className={classes.buttonContainer}>
+                  <button
+                    className={classes.addPictureButton}
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    +
                   </button>
                 </div>
-                <div className={classes.accountInformation}>
-                  <div className={classes.statItem}>
-                    <span>
-                      <strong>{user.posts}</strong> posts
-                    </span>
-                  </div>
-                  <div className={classes.statItem}>
-                    <span>
-                      <strong>{user.friends}</strong> friends
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={classes.profileInformation}>
-              <div className={classes.accountInformation}>
-                <div className={classes.profileDescription}>
-                  <p>{user.description}</p>
-                </div>
+                {isModalOpen && (
+                  <UploadPhotoModal closeModal={() => setIsModalOpen(false)} />
+                )}
               </div>
             </div>
           </div>
-            <div className={classes.postsContainer}> 
-            <PostGrid />
-          </div>
-        </div>
-      </div>
-      ) : (
-        <div className={classes.profileContainer}>
-          <div className={classes.header}>
-            <div className="is-flex is-flex-direction-row mb-1">
-              <div className={classes.avatar}>
-                <Avatar user={user} />
-              </div>
-              <div>
-                <div className={classes.accountInformation}>
-                  <div className={classes.statItem}>
-                    <span>
-                      <strong>{user.posts}</strong> posts
-                    </span>
-                    </div>
-                    <div className={classes.statItem}>
-                      <span>
-                        <strong>{user.friends}</strong> friends
-                      </span>
-                    </div>
-                </div>
-                <button className={`button ${classes.profileButton} has-text-danger has-text-weight-bold is-small`}>
-                  Edit profile
-                </button>
-              </div>
-            </div>
-            <div className={classes.topInfo}>
-              <div style={{ display: "flex", width: "100%", flexWrap: "wrap" }}>
-                <p style={{ font: "25px Segoe UI", marginTop: '10px' }}>
-                  <strong>{user.name}</strong>
-                </p>
-                <div className={classes.profileDescription}>
-                  <p>{user.description}</p>
-                </div>
-              </div>
-            </div>
-          <div className={classes.postsContainer}> 
-          <PostGrid />
-        </div>
-      </div>
-      </div>
+        </>
       )}
-    </div>
+    </>
   );
 }
 

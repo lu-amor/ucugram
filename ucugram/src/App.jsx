@@ -1,32 +1,21 @@
-import React from "react";
-import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import "bulma/css/bulma.min.css";
+import React, { createContext, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "ucugram/src/App.css";
-import FeedPage from "./pages/feedPage/feedPage";
-import MyProfile from "./pages/myProfile/myProfile";
-import FriendProfile from "./pages/friendProfile/friendProfile";
-import AuthPage from "./pages/authPage/AuthPage";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
+import AuthPage from "./pages/authPage/AuthPage";
 import DocPage from "./pages/DocPage/DocPage";
+import FeedPage from "./pages/feedPage/feedPage";
+import FriendProfile from "./pages/friendProfile/friendProfile";
+import MyProfile from "./pages/myProfile/myProfile";
 import Notifications from "./pages/notifications/notifications";
+import { AuthProvider } from "./context/AuthContext";
+import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
+import { ProfileProvider } from "./context/ProfileContext";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+export const url = "http://localhost:3001/api/";
 
 function App() {
-  const { posts, loading, error } = useFetchPosts();
-
-  //   if (loading) return <div>Loading posts...</div>;
-  //   if (error) return <div>Error loading posts!</div>;
-
-  //   return (
-  //     <div className="post-container">
-  //           {posts.map((post) => (
-  //             <PostContainer
-  //             key={post.id}
-  //             post={post} />
-  //           ))}
-  //     </div>
-
   const notificationsList = [
     {
       id: 1,
@@ -55,7 +44,7 @@ function App() {
   ];
 
   const user = {
-    profilePhoto: "/ucugram-logo.png",
+    profilePicture: "/ucugram-logo.png",
     name: "nombre_ususario",
     posts: 11, // después esto va a ser una lista por ej.
     friends: 17, // lista o dict con usuarios amigos
@@ -63,7 +52,7 @@ function App() {
   };
 
   const friend = {
-    profilePhoto: "/profile_img-by-AI.jpeg",
+    profilePicture: "/profile_img-by-AI.jpeg",
     name: "nombre_amigo",
     posts: 1.861, // después esto va a ser una lista por ej.
     friends: 454, // lista o dict con usuarios amigos
@@ -95,29 +84,41 @@ function App() {
   ];
 
   return (
-    <Routes>
-      {/* esto es para que vaya por defecto a la pagina de home */}
-      <Route path="/*" element={<Navigate replace to="/home" />} />
+    <AuthProvider>
+      <ProfileProvider>
+        <Routes>
+          {/* esto es para que vaya por defecto a la pagina de home */}
+          <Route path="/*" element={<Navigate replace to="/home" />} />
 
-      <Route path="/home" element={<AuthPage />}></Route>
-      <Route path="/myProfile" element={<MyProfile user={user} />}></Route>
-      <Route
-        path="/friendProfile"
-        element={<FriendProfile user={friend} />}
-      ></Route>
-      <Route path="/feed" element={<FeedPage />}></Route>
-      <Route
-        path="/notifications"
-        element={
-          <Notifications user={user} notificationsList={notificationsList} />
-        }
-      ></Route>
-      <Route path="/documentation" element={<DocPage />}></Route>
-      <Route
-        path="/about-us"
-        element={<AboutUsPage developers={developers} />}
-      ></Route>
-    </Routes>
+          <Route path="/home" element={<AuthPage />}></Route>
+          <>
+            <Route
+              path="/myProfile"
+              element={<MyProfile user1={user} />}
+            ></Route>
+            <Route
+              path="/friendProfile/:username"
+              element={<FriendProfile user={friend} />}
+            ></Route>
+            <Route path="/feed" element={<FeedPage />}></Route>
+            <Route
+              path="/notifications"
+              element={
+                <Notifications
+                  user={user}
+                  notificationsList={notificationsList}
+                />
+              }
+            ></Route>
+          </>
+          <Route path="/documentation" element={<DocPage />}></Route>
+          <Route
+            path="/about-us"
+            element={<AboutUsPage developers={developers} />}
+          ></Route>
+        </Routes>
+      </ProfileProvider>
+    </AuthProvider>
   );
 }
 

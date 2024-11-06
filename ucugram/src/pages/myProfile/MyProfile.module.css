@@ -1,62 +1,61 @@
 .profileContainer {
     margin: 20px;
     padding: 10px;
-    width: 90%;
+    height: 100%;
+    min-width: 400px;
+    max-width: 1500px;
 }
 
 .header {
+    display: grid;
+    grid-template-columns: 200px minmax(150px, 50%) auto;
     height: auto;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .avatar {
+    grid-column: 1 ;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6rem;
-    height: auto;
-    margin-right: 3rem;
+    width: 60%;
+    height: auto; 
+    margin-left: 20px;
+}
+
+.profileInformation {
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    min-width: 300px;
 }
 
 .profileButton {
     background-color: rgb(223, 223, 223);
     padding: 5px;
-    margin-top: 10px;
-    width: 100px;
-    align-self: flex-end;
+    margin-top: 5px;
+    width: 160px;
 }
 
 .accountInformation {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;  
     gap: 20px;  
-    justify-content: flex-start;
-    margin-top: 12px;
-}
-
-.topInfo {
-    display: flex;
-    flex-direction: row;
-}
-
-.topTopInfo {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    justify-content: flex-start; 
 }
 
 .statItem {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;  /* Número y texto en vertical */
     align-items: start; 
-    min-width: 70px; 
-    margin-right: 10px;
-    white-space: nowrap;
-    font-size: 20px;
+    min-width: 100px;  /* Asegura que cada elemento tenga un espacio mínimo */
+    margin-top: 10px;
+}
+
+.statItem span {
+    white-space: nowrap;  /* Evita que el número y la palabra se separen en dos líneas */
 }
 
 .profileDescription {
@@ -65,27 +64,33 @@
 }
 
 .postsContainer {
-    margin-top: 1.5rem;
-    width: 100%;
+    margin-top:5rem;
+    height: 100%;
 }
 
-@media (min-width: 950px) {
-    .profileButton {
-        width: 110px;
-        margin-top: 0px;
-        align-self: center;
-    }
+.addPictureButton {
+    font-size: 24px;
+    font-weight: bold;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
 
-    .accountInformation {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;  
-        gap: 20px;  
-        justify-content: flex-start;
-        margin-top: none;
-    }
+.buttonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+}
 
-    .profileDescription {
-        margin-top: 10px;
-    }
+.addPictureButton:hover {
+    background-color: #2563eb;
 }

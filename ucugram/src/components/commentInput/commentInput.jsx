@@ -1,37 +1,35 @@
 import React, { useState } from "react";
-import UseAddComment from "ucugram/src/hooks/useAddComment.jsx";
 import classes from "ucugram/src/components/commentInput/commentInput.module.css";
-import Icon from '@mdi/react';
-import { mdiSend, mdiLoading } from '@mdi/js';
+import useAddComment from "ucugram/src/hooks/useAddComment.jsx";
+import Icon from "@mdi/react";
+import { mdiSend, mdiLoading } from "@mdi/js";
 
 export default function CommentInput({ postId, handleCommentPublished }) {
-    // const [comments, setComments] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const { addComment, loading, error } = useAddComment();
 
-    const [inputValue, setInputValue] = useState("");
-    const { addComment, loading, error } = UseAddComment();
-  
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (inputValue.trim() !== "") {
-          
-          const newComment = {
-            //id: Date.now(),  // Generar un ID temporal
-            user: "currentUser",  //  poner el usuario actual
-            text: inputValue
-          };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (inputValue.trim() !== "") {
+      const content = {
+        content: inputValue,
+      };
 
-          await addComment(postId, newComment);  
-          setInputValue("");
-        }
-    };
+      const result = await addComment(content, postId);
+      console.log("id: ", result._id);
+      if (result._id !== undefined) {
+        handleCommentPublished(result);
+      }
+      setInputValue("");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      {/* textarea o input */}
       <input
         type="text"
         value={inputValue}
@@ -40,15 +38,17 @@ export default function CommentInput({ postId, handleCommentPublished }) {
         className={`${classes.inputHolder} is-small has-text-info has-text-weight-bold`}
         disabled={loading}
       />
-
-      <button 
-        type="submit" 
+      <button
+        type="submit"
         className={`button ${classes.publishButton} is-small is-danger has-text-white`}
-        onClick={handleCommentPublished}
-        disabled={loading}>
-        {loading ? <Icon path={mdiLoading} size={0.7} className={classes.spinner} /> : <Icon path={mdiSend} size={0.7} />}
+        disabled={loading}
+      >
+        {loading ? (
+          <Icon path={mdiLoading} size={0.7} className="spinner" />
+        ) : (
+          <Icon path={mdiSend} size={0.7} />
+        )}
       </button>
-
       {error && <div>{error}</div>}
     </form>
   );

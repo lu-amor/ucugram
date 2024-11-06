@@ -1,6 +1,4 @@
 .avatar {
-/*     width: 60%;
-    height: auto; */
     border-radius: 100%;
     border: 1px solid grey; /* por ahora le pongo esto para poder ver bien el tamaño porque la img es blanca como el fondo*/
 }

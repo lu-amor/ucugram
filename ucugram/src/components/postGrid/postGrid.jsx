@@ -4,20 +4,15 @@ import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import classes from "ucugram/src/components/postGrid/postGrid.module.css"
 
 
-const PostGrid = () => {
-  const { posts, loading, error } = useFetchPosts();
-
-  if (loading) return <div>Loading posts...</div>;
-  if (error) return <div>Error loading posts!</div>;
+const PostGrid = ( {posts} ) => {
 
   return (
     <div className={`${classes.gridContainer}`}>
-      {posts.map((post) => (
-        <PostItem 
-          key={post.id} 
-          post={post}
-        />
-      ))}
+          {posts?.map((post, index) => (
+            <PostItem 
+            key={index} 
+            post={post}/>
+          ))}
     </div>
   );
 };

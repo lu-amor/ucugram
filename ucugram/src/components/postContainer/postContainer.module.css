@@ -72,3 +72,11 @@ figure.image.is-square img {
   margin-left: 5px;
   margin-right: 5px;
 }
+
+@media (max-width: 768px) {
+  .data-box {
+    border-top: 4px solid #009ce6;
+    border-bottom: 7px solid #009ce6;
+    border-left: none;
+  }
+}
