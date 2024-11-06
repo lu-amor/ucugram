@@ -41,7 +41,7 @@
 
 .accountInformation {
     display: flex;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
     gap: 20px;  
     justify-content: flex-start; 
 }

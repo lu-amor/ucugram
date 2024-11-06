@@ -2,7 +2,6 @@
     display: flex;
     align-items: center;
     height: 24px;
-    width: 30%;
 }
 
 .navBarItemH {
@@ -29,8 +28,9 @@
 .menuItems {
     width: 50px;
 }
+
 .avatar {
-    width: 31px;
+    width: 25px;
     height: auto;
     border-radius: 100%;
     margin-right: 8px;

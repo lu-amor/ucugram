@@ -47,28 +47,28 @@ const NavBar = () => {
     <>
       <div className={classes.dropdownMenu}>
         <button onClick={goFeed}>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem icono="home" link={houseIcon} nombre="Home" />
-            </a>
-          </button>
-          <button>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem
-                icono="notifications"
-                link={bellIcon}
-                nombre="Notifications"
-              />
-            </a>
-          </button>
-          <button onClick={goMyProfile}>
-            <a className="has-text-black has-text-weight-medium">
-              <NavBarItem
-                icono="profile"
-                link={<Avatar user={authState.user}/>}
-                nombre="My profile"
-              />
-            </a>
-          </button>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+          </a>
+        </button>
+        <button>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem
+              icono="notifications"
+              link={bellIcon}
+              nombre="Notifications"
+            />
+          </a>
+        </button>
+        <button onClick={goMyProfile}>
+          <a>
+            <NavBarItem
+              icono="profile"
+              link={<Avatar user={authState.user} />}
+              nombre="My profile"
+            />
+          </a>
+        </button>
       </div>
     </>
   ) : (
@@ -91,7 +91,11 @@ const NavBar = () => {
         </li>
         <li onClick={goMyProfile}>
           <a>
-            <NavBarItem icono="profile" link={<Avatar user={authState.user}/>} nombre="My profile" />
+            <NavBarItem
+              icono="profile"
+              link={<Avatar user={authState.user} />}
+              nombre="My profile"
+            />
           </a>
         </li>
         <li>
