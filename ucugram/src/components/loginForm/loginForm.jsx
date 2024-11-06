@@ -42,7 +42,6 @@ function LoginForm({ createAccount, closeModal }) {
     }
   };
 
-
   return (
     <div className={classes.modal}>
       <div className={classes.modalContent}>

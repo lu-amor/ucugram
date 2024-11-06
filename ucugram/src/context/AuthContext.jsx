@@ -87,6 +87,7 @@ export const AuthProvider = ({ children }) => {
     loading: false,
     error: null,
   };
+  
   const [state, dispatch] = useReducer(authReducer, initialState);
   const { token } = state;
 
