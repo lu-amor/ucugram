@@ -80,13 +80,13 @@ const PostItem = ({ post, user, navigation }) => {
                 </View>
                 <View style={styles.userDesc}>
                     <Text>
-                        <Text style={styles.usernameBottom}>{user.username}  </Text>
+                        <Text style={styles.usernameBottom}>{user.username}  </Text> {/* no saquen los espacios porque queda feo y no me deja poner margen :( */}
                         <Text style={styles.postDescription}>{post.description}</Text>
                     </Text>
                 </View>
             </Animated.View>
-            <CommentsModal visible={commentsVisibility} onClose={() => setCommentsVisibility(false)} comments={post.comments} />
-        </GestureHandlerRootView>
+            <CommentsModal visible={commentsVisibility} onClose={() => setCommentsVisibility(false)} commentsArray={post.commentsArray} />
+            </GestureHandlerRootView>
     );
 };
 

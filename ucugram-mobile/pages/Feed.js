@@ -17,7 +17,7 @@ const Feed = ({ navigation, route }) => {
                     <PostItem 
                         key={index} 
                         post={post} 
-                        user={{ username: post.username, profilePicture: post.profilePicture }} 
+                        user={{ username: post.username, profilePicture: post.profilePicture }}
                     />
                 ))}
             </ScrollView>

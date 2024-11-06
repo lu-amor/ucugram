@@ -46,6 +46,14 @@ export default function App() {
           description: 'work from home tuesdays ☕',
           likes: 7646,
           comments: 654,
+          commentsArray: [
+            { id: 1, userId: 'charlotte', text: 'Love this setup!', date: '2024-10-26' },
+            { id: 2, userId: 'alexander', text: 'Such a cozy vibe. ☕', date: '2024-10-29' },
+            { id: 3, userId: 'mia', text: 'I need a setup like this!', date: '2024-11-01' },
+            { id: 4, userId: 'john', text: 'Great place to work from home.', date: '2024-11-01' },
+            { id: 5, userId: 'emily', text: 'Where did you get that mug? 😍', date: '2024-11-02' },
+            { id: 6, userId: 'laurent', text: 'Looks so comfortable!', date: '2024-11-03' }
+          ],
           date: '31-10-2024'
         }
       ]
@@ -283,7 +291,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Feed" component={Feed} initialParams={{ user, allFriendPosts }} options={{ headerShown: false }} />
+        <Stack.Screen name="Feed" component={Feed} initialParams={{ user, allFriendPosts, friends }} options={{ headerShown: false }} />
         {friends.map((friend, index) => (
           <Stack.Screen 
             key={index} 

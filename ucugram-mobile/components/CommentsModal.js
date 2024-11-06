@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, LayoutAnimation } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
 
-const CommentsModal = ({ visible, onClose, comments }) => {
+const CommentsModal = ({ visible, onClose, commentsArray }) => {
     const [newComment, setNewComment] = useState('');
-    const [contentHeight, setContentHeight] = useState(560);
-
-    useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', () => {
-            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-            setContentHeight(750);
-        });
-        const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-            setContentHeight(560);
-        });
-
-        return () => {
-            keyboardDidShowListener.remove();
-            keyboardDidHideListener.remove();
-        };
-    }, []);
 
     const handleAddComment = () => {
         /* funcion agregar comentario */
@@ -38,21 +21,26 @@ const CommentsModal = ({ visible, onClose, comments }) => {
                     <TouchableWithoutFeedback>
                         <KeyboardAvoidingView
                             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                            style={[styles.modalContent, { height: contentHeight }]}
+                            style={styles.modalContent}
                         >
                             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10}}>
                                 <Text style={styles.modalTitle}>Comments</Text>
                             </View>
                             <FlatList
-                                data={comments}
+                                data={commentsArray}
                                 keyExtractor={(item) => item.id.toString()}
                                 renderItem={({ item }) => (
                                     <View style={styles.commentItem}>
-                                        <Text>{item.text}</Text>
+                                        <Text style={styles.commentUser}>{item.userId}</Text>
+                                        <Text style={styles.commentDate}>{item.date}</Text>
+                                        <Text style={styles.commentText}>{item.text}</Text>
                                     </View>
                                 )}
+                                ListEmptyComponent={<Text style={styles.noCommentsText}>Be the first one to comment!</Text>}
+                                style={{ flex: 1 }}
+                                contentContainerStyle={{ paddingBottom: 200 }}
                             />
-                            <View style={[styles.inputWrapper, (contentHeight===560) ? { marginBottom: 35 } : { marginBottom: 15 }]}>
+                            <View style={styles.inputWrapper}>
                                 <TextInput
                                     style={styles.input}
                                     placeholder="Write a comment"
@@ -80,24 +68,45 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         backgroundColor: 'white',
-        padding: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+        paddingTop: 20,
+        height: 560,
     },
     modalTitle: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#173363',
+        marginLeft: 20,
     },
     commentItem: {
         padding: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        flexDirection: 'row'
+    },
+    commentUser: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#173363',
+    },
+    commentDate: {
+        fontSize: 12,
+        color: '#808080',
+    },
+    commentText: {
+        fontSize: 16,
+        color: "black",
     },
     inputWrapper: {
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#ffffff',
+        width: '100%',
         marginTop: 10,
+        paddingTop: 15,
+        paddingHorizontal: 20,
+        paddingBottom: 25,
     },
     input: {
         flex: 1,
