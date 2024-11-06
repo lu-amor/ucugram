@@ -7,12 +7,14 @@ import { useProfile } from "../../context/ProfileContext";
 import { useGetProfile } from "../../hooks/useGetProfile.jsx";
 import { PROFILE_ACTIONS } from "./../../context/ProfileContext.jsx";
 import classes from "./FriendProfile.module.css";
+import useFriend from "./../../hooks/useFriends.jsx";
 
 function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
   const { state: authState, dispatch: authDispatch } = useAuth();
-  const [isfriend, setIsFriend] = useState();
+  const [isFriend, setIsFriend] = useState();
   const getProfile = useGetProfile();
+  const { addFriend, removeFriend } = useFriend();
 
   useEffect(() => {
     const getData = async () => {
@@ -42,6 +44,16 @@ function FriendProfile({ user }) {
     }
   }, [profileState, authState]);
 
+  const handleToggleFirend = async () => {
+    if (isFriend) {
+      const removed = await removeFriend(profileState.user._id);
+      removed === true ? setIsFriend(false) : setIsFriend(isFriend);
+    } else {
+      const added = await addFriend(profileState.user._id);
+      added === true ? setIsFriend(true) : setIsFriend(false);
+    }
+  }
+
   return (
     <div className="columns">
       <>
@@ -70,9 +82,9 @@ function FriendProfile({ user }) {
                       <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
                         <strong>{profileState.user?.username}</strong>
                       </p>
-                      <button className={`button ${classes.profileButton}`}>
-                        {isfriend ? (
-                          <span>delete friend</span>
+                      <button className={`button ${classes.profileButton}`} onClick={() => handleToggleFirend()}>
+                        {isFriend ? (
+                          <span>remove friend</span>
                         ) : (
                           <span>add friend</span>
                         )}

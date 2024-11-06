@@ -3,7 +3,6 @@ import classes from "./avatar.module.css";
 
 // por ahora user va a emular un objeto usuario que tiene la información de la foto de perfil para crear el avatar
 function Avatar({ user }) {
-  console.log("user  friend: ", user);
   return (
     <>
       <img
