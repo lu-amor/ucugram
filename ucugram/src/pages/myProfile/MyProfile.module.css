@@ -1,61 +1,62 @@
 .profileContainer {
     margin: 20px;
     padding: 10px;
-    min-width: 400px;
-    max-width: 1500px;
+    width: 90%;
 }
 
 .header {
-    display: grid;
-    grid-template-columns: 200px minmax(150px, 50%) auto;
     height: auto;
-    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .avatar {
-    grid-column: 1 ;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
-    height: auto; 
-    margin-left: 20px;
-}
-
-.profileInformation {
-    grid-column: 2;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    min-width: 300px;
+    width: 6rem;
+    height: auto;
+    margin-right: 3rem;
 }
 
 .profileButton {
     background-color: rgb(223, 223, 223);
     padding: 5px;
-    margin-top: 5px;
-    width: 160px;
+    margin-top: 10px;
+    width: 100px;
+    align-self: flex-end;
 }
-
 
 .accountInformation {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;  
     gap: 20px;  
-    justify-content: flex-start; 
+    justify-content: flex-start;
+    margin-top: 12px;
+}
+
+.topInfo {
+    display: flex;
+    flex-direction: row;
+}
+
+.topTopInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .statItem {
     display: flex;
-    flex-direction: column;  /* Número y texto en vertical */
+    flex-direction: column;
     align-items: start; 
-    min-width: 100px;  /* Asegura que cada elemento tenga un espacio mínimo */
-    margin-top: 10px;
-}
-
-.statItem span {
-    white-space: nowrap;  /* Evita que el número y la palabra se separen en dos líneas */
+    min-width: 70px; 
+    margin-right: 10px;
+    white-space: nowrap;
+    font-size: 20px;
 }
 
 .profileDescription {
@@ -64,5 +65,27 @@
 }
 
 .postsContainer {
-    margin-top:5rem;
+    margin-top: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 950px) {
+    .profileButton {
+        width: 110px;
+        margin-top: 0px;
+        align-self: center;
+    }
+
+    .accountInformation {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;  
+        gap: 20px;  
+        justify-content: flex-start;
+        margin-top: none;
+    }
+
+    .profileDescription {
+        margin-top: 10px;
+    }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import UseAddComment from "ucugram/src/hooks/useAddComment.jsx";
-import "ucugram/src/components/commentInput/commentInput.css";
+import classes from "ucugram/src/components/commentInput/commentInput.module.css";
 import Icon from '@mdi/react';
 import { mdiSend, mdiLoading } from '@mdi/js';
 
@@ -37,19 +37,19 @@ export default function CommentInput({ postId, handleCommentPublished }) {
         value={inputValue}
         onChange={handleInputChange}
         placeholder="Add a comment..."
-        className="input_holder is-small has-text-white has-text-weight-bold"
+        className={`${classes.inputHolder} is-small has-text-info has-text-weight-bold`}
         disabled={loading}
       />
 
       <button 
         type="submit" 
-        className="button publish-button is-small is-danger has-text-white"
+        className={`button ${classes.publishButton} is-small is-danger has-text-white`}
         onClick={handleCommentPublished}
         disabled={loading}>
-        {loading ? <Icon path={mdiLoading} size={0.7} className="spinner" /> : <Icon path={mdiSend} size={0.7} />}
+        {loading ? <Icon path={mdiLoading} size={0.7} className={classes.spinner} /> : <Icon path={mdiSend} size={0.7} />}
       </button>
 
-      {error && <div className="error-message">{error}</div>}
+      {error && <div>{error}</div>}
     </form>
   );
 }

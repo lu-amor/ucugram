@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import classes from "./feedPage.module.css";
@@ -6,12 +6,36 @@ import PostContainer from "../../components/postContainer/postContainer";
 
 const FeedPage = () => {
   const { posts, loading, error } = useFetchPosts();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWindowWidth);
+    return () => window.removeEventListener("resize", updateWindowWidth);
+  }, []);
 
   return (
-    <div className="columns">
+    <div className="columns mr-0">
       <SideNavBar />
-      <div className={`column is-10 ${classes.feedContent}`}>
-        <div>
+      {windowWidth > 950 ? (
+        <div className={`column is-10 ${classes.feedContent}`}>
+          <div>
+            {loading && <div>Loading posts...</div>}
+            {error && <div>Error loading posts!</div>}
+            {posts && (
+              <div className={classes.postContainer}>
+                {posts.map((post) => (
+                  <PostContainer key={post.id} post={post} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className={`${classes.feedContent}`}>
           {loading && <div>Loading posts...</div>}
           {error && <div>Error loading posts!</div>}
           {posts && (
@@ -22,7 +46,7 @@ const FeedPage = () => {
             </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 };

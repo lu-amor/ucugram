@@ -1,27 +1,27 @@
 import React from 'react';
 import Avatar from '../avatar/avatar';
 import FollowButton from '../followButton/followButton';
-import 'ucugram/src/components/allSuggestions/allSuggestions.css';
+import classes from 'ucugram/src/components/allSuggestions/allSuggestions.module.css';
 
 const AllSuggestions = ({ suggestions, onBack }) => {
   return (
-    <div className="all-suggestions">
+    <div className={classes.allSuggestions}>
 
-      <h2 className="title all-sugg-title is-4 has-text-centered ">All suggestions</h2>
+      <h2 className={`title ${classes.allSuggTitle} is-4 has-text-centered`}>All suggestions</h2>
 
-      <ul className="suggestions-list">
+      <ul className={classes.suggestionsList}>
         {suggestions.map((suggestion) => (
-          <li key={suggestion.id} className="suggestion-item">
+          <li key={suggestion.id} className={classes.suggestionItem}>
 
-            <div className="item-avatar">
+            <div className={classes.itemAvatar}>
               <Avatar user={suggestion} ></Avatar>
             </div>
 
-            <div className="item-info">
-              <h3 className="sugg-user has-text-dark">{suggestion.name}</h3>
+            <div className={classes.itemInfo}>
+              <h3 className={`${classes.suggUser} has-text-dark`}>{suggestion.name}</h3>
             </div>
 
-            <div className="follow-section">
+            <div className={classes.followSection}>
               <FollowButton userId={suggestion.id} initialFollows={suggestion.follows}/>
             </div>
 
@@ -29,7 +29,7 @@ const AllSuggestions = ({ suggestions, onBack }) => {
         ))}
       </ul>
 
-      <button onClick={onBack} className="back-button button is-primary mt-4">go back</button>
+      <button onClick={onBack} className={`${classes.backButton} button is-primary mt-4`}>go back</button>
 
     </div>
   );

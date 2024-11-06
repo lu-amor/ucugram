@@ -1,9 +1,9 @@
-.suggestions-preview {
+.suggestionsPreview {
     width: 90%;
     margin: 0 auto;
   }
   
-  .slick-slide {
+  .slickSlide {
     display: flex;
     justify-content: center;
   }
@@ -12,9 +12,7 @@
     color: #173363; 
   }
   
-  .suggestion-card {
-    /* background-color: #f8f9fa; */
-    /* background-color: #fff; */
+  .suggestionCard {
     background-color: #a189bd;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,11 +22,11 @@
     transition: transform 0.3s ease;
   }
   
-  .suggestion-card:hover {
+  .suggestionCard:hover {
     transform: scale(1.05);
   }
 
-  .card-avatar img {
+  .cardAvatar img {
     /* width: 80px;
     height: 80px; */
     width: 100px; 

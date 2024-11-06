@@ -26,11 +26,17 @@ function LoginForm({ createAccount, closeModal }) {
       alert("Por favor, ingresa un email válido de la UCU.");
       return;
     }
-
     // aca se hace algo más
 
     navigate("/myProfile"); // aca va a tener que estar la ruta del usuario
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleLoginBtn();
+    }
+  };
+
 
   return (
     <div className={classes.modal}>
@@ -66,6 +72,7 @@ function LoginForm({ createAccount, closeModal }) {
               type="password"
               placeholder="Enter password"
               ref={passwordRef}
+              onKeyDown={handleKeyDown}
             ></input>
           </div>
           <div className={classes.buttonContainer}>

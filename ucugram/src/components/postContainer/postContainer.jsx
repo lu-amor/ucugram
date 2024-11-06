@@ -3,10 +3,10 @@ import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
 import Avatar from 'ucugram/src/components/avatar/avatar.jsx';
 import PostModal from "../postModal/postModal";
 import Icon from '@mdi/react';
-import { mdiShare, mdiComment } from '@mdi/js';
+import { mdiShareVariant, mdiComment } from '@mdi/js';
 import useComment from 'ucugram/src/hooks/useComment';
 import CommentInput from 'ucugram/src/components/commentInput/commentInput.jsx';
-import './postContainer.css';
+import classes from './postContainer.module.css';
 
 const PostContainer = ({ post }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,20 +19,16 @@ const PostContainer = ({ post }) => {
         }
     };
 
-    const handleModalOpen = () => {
-        setIsModalOpen(true);
-    };
-
     const handleModalClose = () => {
         setIsModalOpen(false);
     };
 
     return (
-        <div className="individual-post-container">
-            <div className="post-container-header">
-                <Avatar className="user-avatar" user={post.user}></Avatar>
-                <h3 className="post-username"><strong className="has-text-white">{post.user}</strong></h3>
-                <p className="post-date-info">{post.date}</p>
+        <div className={`${classes.individualPostContainer}`}>
+            <div className={`${classes.postContainerHeader}`}>
+                <Avatar className={`${classes.userAvatar}`} user={post.user}></Avatar>
+                <h3 className={`${classes.postUsername}`}><strong className="has-text-info has-text-weight-bold">{post.user}</strong></h3>
+                <p className={`${classes.postDateInfo}`}>{post.date}</p>
             </div>
 
             <div className="columns is-centered m-0">
@@ -43,28 +39,29 @@ const PostContainer = ({ post }) => {
                 </div>
 
                 <div className="column is-half p-0">
-                    <div className="data-box">
+                    <div className={`${classes.dataBox}`}>
                         <div className="buttons mt-1">
-                            <LikeButton className="like-section" ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={false} />
+                            <LikeButton className={`${classes.likeSection}`} ref={likeButtonRef} postId={post.id} initialLikes={post.likes} modal={false} />
                             <Icon path={mdiComment} size={1.6} onClick={toggleCommentVisibility} className='ml-auto' color='#ea5b0c'/>
-                            <Icon path={mdiShare} size={2} color='#ea5b0c'/>
+                            <Icon path={mdiShareVariant} size={1.7} color='#ea5b0c'/>
                         </div>
                         {isCommentVisible && (
-                            <div className="comment-input-section mb-4">
+                            <div className={`${classes.commentInputSection} mb-4`}>
                             <CommentInput postId={post.id} handleCommentPublished={hideComment} />
                             </div>
                         )}
-                        <p className="picture-description mt-3"><strong className="has-text-white">{post.user}</strong> {post.description}</p>
-                        <ul className="comments-box mt-4">
+                        <p className={`${classes.pictureDescription} mt-3`}><strong className="has-text-info">{post.user}</strong> {post.description}</p>
+                        <ul className={`${classes.commentsBox} mt-4`}>
                             {post.comments.map((comment) => (
                                 <li key={comment.id} className="mb-2">
-                                    <p><strong className="has-text-white">{comment.user}</strong> {comment.text} </p>
+                                    <p><strong className="has-text-info">{comment.user}</strong> {comment.text} </p>
                                 </li>
                             ))}
                         </ul>
                     </div>
                 </div>
             </div>
+            <div className={classes.divider}/>
 
             <PostModal post={post} isOpen={isModalOpen} onClose={handleModalClose} />
         </div>

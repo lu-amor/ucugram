@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import FollowButton from '../followButton/followButton';
 import Avatar from '../avatar/avatar';
-import 'ucugram/src/components/suggestionsPreview/suggestionsPreview.css';
+import classes from 'ucugram/src/components/suggestionsPreview/suggestionsPreview.module.css';
 
 const SuggestionsPreview = ({ suggestions }) => {
   const settings = {
@@ -22,18 +22,18 @@ const SuggestionsPreview = ({ suggestions }) => {
   };
 
   return (
-    <div className="suggestions-preview">
-      <h2 className="title is-4 has-text-centered">Suggestions for you</h2> 
+    <div className={classes.suggestionsPreview}>
+      <h2 className={`${classes.title} is-4 has-text-centered`}>Suggestions for you</h2> 
       <Slider {...settings}>
         {suggestions.map((suggestion) => (
-          <div key={suggestion.id} className="suggestion-card card "> 
-            <div className="card-avatar">
+          <div key={suggestion.id} className={`${classes.suggestionCard} card `}> 
+            <div className={classes.cardAvatar}>
               <Avatar user={suggestion} ></Avatar>
             </div>
-            <div className="card-info">
-              <h3 className="title is-6 has-text-weight-semibold ">{suggestion.name}</h3> 
+            <div className={classes.cardInfo}>
+              <h3 className={`${classes.title} is-6 has-text-weight-semibold `}>{suggestion.name}</h3> 
             </div>
-            <div className="follow-section mt-2">
+            <div className={`${classes.followSection} mt-2`}>
               <FollowButton userId={suggestion.id} initialFollows={suggestion.follows}/>
             </div>
 
