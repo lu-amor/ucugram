@@ -58,7 +58,7 @@ const PostModal = ({ post, onClose }) => {
   };
 
   return (
-    <div className={`modal ${classes.modalStyle} is-active"`}>
+    <div className={`modal ${classes.modalStyle} is-active`}>
       <div className={`modal-background`} onClick={onClose}></div>
       <button
         className={`${classes.modalClose} is-large has-text-white`}
@@ -84,10 +84,18 @@ const PostModal = ({ post, onClose }) => {
                   >
                     {/* style={{ width: "25px", height: "25px" }} */}
 
-                    <Avatar
-                      className={`${classes.userAvatar}`}
-                      user={user}
-                    ></Avatar>
+                    <div
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        marginLeft: "5px",
+                      }}
+                    >
+                      <Avatar
+                        className={`${classes.userAvatar}`}
+                        user={user}
+                      ></Avatar>
+                    </div>
                     <h3 className="ml-2">
                       <strong className="has-text-white">
                         {user.username}
