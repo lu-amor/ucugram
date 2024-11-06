@@ -22,20 +22,11 @@ function FriendProfile({ user }) {
     if (localStorage.getItem("friend-id") !== null) {
       dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
       getProfile(localStorage.getItem("friend-id")).then(() => {
-        handleReload(localStorage.getItem("token"), authDispatch).then(() => {
-          console.log("authState.user: ", localStorage.getItem("token"));
+          console.log("authState.user: ", authState);
           const find = authState.user.friends.find(
             (friend) => friend._id === profileState.user?._id
           );
           setIsFriend(find !== undefined);
-        });
-        // authDispatch({
-        //   type: AUTH_ACTIONS.RELOAD,
-        //   payload: {
-        //     token: localStorage.getItem("token"),
-        //     dispatch: authDispatch,
-        //   },
-        // });
       });
     } else {
       const find = authState.user.friends.find(

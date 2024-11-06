@@ -8,12 +8,15 @@ import Notification from "../notification/notification";
 import Icon from "@mdi/react";
 import { mdiMenu } from "@mdi/js";
 import { useLogout } from "../../services/authService";
+import { useAuth } from "../../context/AuthContext";
+import Avatar from "../avatar/avatar";
 
 const NavBar = () => {
   const navigate = useNavigate();
   const [showDropdown, setShowDropdown] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const logout = useLogout();
+  const { state: authState } = useAuth();
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
@@ -35,8 +38,8 @@ const NavBar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('./home')
-  }
+    navigate("./home");
+  };
 
   useEffect(() => {
     window.addEventListener("resize", updateWindowWidth);
@@ -69,7 +72,11 @@ const NavBar = () => {
           </button>
           <button onClick={goMyProfile}>
             <a className="has-text-black has-text-weight-medium">
-              <NavBarItem icono="profile" link="" nombre="My profile" />
+              <NavBarItem
+                icono="profile"
+                link={<Avatar user={authState.user}/>}
+                nombre="My profile"
+              />
             </a>
           </button>
         </div>
@@ -95,13 +102,11 @@ const NavBar = () => {
         </li>
         <li onClick={goMyProfile}>
           <a>
-            <NavBarItem icono="profile" link="" nombre="My profile" />
+            <NavBarItem icono="profile" link={<Avatar user={authState.user}/>} nombre="My profile" />
           </a>
         </li>
         <li>
-          <button onClick={handleLogout}>
-            logout
-          </button>
+          <button onClick={handleLogout}>logout</button>
         </li>
       </ul>
     </aside>

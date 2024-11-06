@@ -13,7 +13,7 @@ const useLike = (post) => {
 
   const getLikes = async (action) => {
     try {
-      console.log("action " + action);
+      // console.log("action " + action);
       const response = await fetch(url + `posts/${post._id}/like`, {
         method: action,
         headers: {
@@ -24,7 +24,7 @@ const useLike = (post) => {
 
       const data = await response.json();
       if (response.ok) {
-        console.log("data: ", data);
+        // console.log("data: ", data);
         if (data && data.likes) {
           setLikes(data.likes.length);
           const find = data.likes.find((id) => id === authState.user?._id);
@@ -50,7 +50,7 @@ const useLike = (post) => {
   };
 
   useEffect(() => {
-    console.log("isLiked: " + isLiked);
+    // console.log("isLiked: " + isLiked);
   }, [isLiked]);
 
   return {

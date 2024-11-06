@@ -38,10 +38,10 @@ function LoginForm({ createAccount, closeModal }) {
   return (
     <div className={classes.modal}>
       <div className={classes.modalContent}>
-        <button
+        <buttona
           className={`${classes.delete} delete`}
           onClick={closeModal}
-        ></button>
+        ></buttona>
         <div className={classes.modalContainer}>
           <div className={classes.logoContainer}>
             <img src="/ucugram-logo.png" className={classes.logo} />

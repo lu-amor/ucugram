@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import classes from "./feedPage.module.css";
@@ -9,13 +9,15 @@ const FeedPage = () => {
   const { posts, loading, error } = useFetchPosts();
   const { state: authState } = useAuth();
 
-  const handleNotAuthenticatedUser = () => {
-    navigate("./home");
-  };
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      navigate("./home");
+    }
+  }, []);
+
 
   return (
     <>
-      {!authState.isAuthenticated && handleNotAuthenticatedUser}
       <div className="columns">
         <SideNavBar />
         <div className={`column is-10 ${classes.feedContent}`}>

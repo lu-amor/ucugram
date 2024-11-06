@@ -22,10 +22,10 @@ export const AUTH_ACTIONS = {
 // la función reducer va a devolver el estado actualizado dependiendo de la acción.
 // state va a ser el objeto pasado por parámetro en el useReducer
 function authReducer(state, action) {
-  console.log("action:", action)
+  // console.log("action:", action);
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN:
-      console.log("user: ", action.payload.user);
+      // console.log("user: ", action.payload.user);
       return {
         ...state,
         isAuthenticated: true,
@@ -52,7 +52,7 @@ function authReducer(state, action) {
       };
     case AUTH_ACTIONS.RELOAD:
       handleReload(action.payload.token, action.payload.dispatch);
-      return {...state}
+      return { ...state };
     default:
       return state;
   }
@@ -92,7 +92,7 @@ export const handleReload = async (token, dispatch) => {
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isAuthenticated: !!localStorage.getItem("token"),
-    user: null,
+    user: sessionStorage.getItem("user"),
     token: localStorage.getItem("token"),
     loading: false,
     error: null,
@@ -103,9 +103,22 @@ export const AuthProvider = ({ children }) => {
   // para cuando se refresca la página
   useEffect(() => {
     if (token !== null && token !== undefined) {
-      handleReload(token, dispatch);
+      handleReload(token, dispatch).then(() => {
+        // console.log("entra al effect del context")
+        // console.log("userrr_: ", state.user)
+        sessionStorage.setItem("user",  JSON.parse(JSON.stringify(state.user)));
+      });
     }
   }, [token]);
+  
+  // useEffect(() => {
+  //   const isReload = sessionStorage.getItem("isReload");
+  //   if (isReload) {
+  //     handleReload(token, dispatch);
+  //   } else {
+  //     sessionStorage.setItem("isReload", "true");
+  //   }
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
