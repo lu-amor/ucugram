@@ -1,11 +1,5 @@
-import React, {
-  createContext,
-  useContext,
-  useReducer,
-  useEffect,
-  useState,
-} from "react";
 import { jwtDecode } from "jwt-decode";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { url } from "../App";
 
 const AuthContext = createContext();
@@ -25,11 +19,11 @@ function authReducer(state, action) {
   // console.log("action:", action);
   switch (action.type) {
     case AUTH_ACTIONS.LOGIN:
-      // console.log("user: ", action.payload.user);
+      // console.log("user: ", action.payload.user.user);
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        user: action.payload.user.user,
         token: action.payload.token,
         loading: false,
         error: null,
@@ -50,9 +44,6 @@ function authReducer(state, action) {
         loading: true,
         error: null,
       };
-    case AUTH_ACTIONS.RELOAD:
-      handleReload(action.payload.token, action.payload.dispatch);
-      return { ...state };
     default:
       return state;
   }
@@ -77,22 +68,21 @@ export const handleReload = async (token, dispatch) => {
   const decoded = jwtDecode(token);
   const userId = decoded.id;
   dispatch({ type: AUTH_ACTIONS.LOADING });
-  let userName = getUserProfile(userId, token);
-  userName.then((data) => {
-    dispatch({
-      type: AUTH_ACTIONS.LOGIN,
-      payload: {
-        user: data.user,
-        token: token,
-      },
-    });
+  const user = await getUserProfile(userId, token);
+
+  dispatch({
+    type: AUTH_ACTIONS.LOGIN,
+    payload: {
+      user: user,
+      token: token,
+    },
   });
 };
 
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isAuthenticated: !!localStorage.getItem("token"),
-    user: sessionStorage.getItem("user"),
+    user: "null",
     token: localStorage.getItem("token"),
     loading: false,
     error: null,
@@ -102,23 +92,10 @@ export const AuthProvider = ({ children }) => {
 
   // para cuando se refresca la página
   useEffect(() => {
-    if (token !== null && token !== undefined) {
-      handleReload(token, dispatch).then(() => {
-        // console.log("entra al effect del context")
-        // console.log("userrr_: ", state.user)
-        sessionStorage.setItem("user",  JSON.parse(JSON.stringify(state.user)));
-      });
+    if (token) {
+      handleReload(token, dispatch);
     }
   }, [token]);
-  
-  // useEffect(() => {
-  //   const isReload = sessionStorage.getItem("isReload");
-  //   if (isReload) {
-  //     handleReload(token, dispatch);
-  //   } else {
-  //     sessionStorage.setItem("isReload", "true");
-  //   }
-  // }, []);
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>

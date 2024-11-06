@@ -28,7 +28,6 @@ const useLike = (post) => {
         if (data && data.likes) {
           setLikes(data.likes.length);
           const find = data.likes.find((id) => id === authState.user?._id);
-          console.log("find: ", find !== undefined);
           setIsLiked(find !== undefined);
         } else {
           setIsLiked(false);

@@ -1,15 +1,14 @@
-import { useEffect } from "react";
-import { useProfile, PROFILE_ACTIONS } from "../context/ProfileContext";
-import { useAuth } from "../context/AuthContext";
 import { url } from "../App";
+import { useAuth } from "../context/AuthContext";
+import { PROFILE_ACTIONS, useProfile } from "../context/ProfileContext";
 
 export const useGetProfile = () => {
   const { state: authState } = useAuth();
   const { dispatch } = useProfile();
 
-  const getProfile = async ( userId) => {
+  const getProfile = async (userId) => {
     try {
-      dispatch({ type: PROFILE_ACTIONS.SET_LOADING });
+      dispatch({ type: PROFILE_ACTIONS.LOADING });
       const response = await fetch(url + "user/profile/" + userId, {
         headers: {
           "Content-Type": "application/json",

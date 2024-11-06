@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import classes from "./FriendProfile.module.css";
-import SideNavBar from "../../components/sideNavBar/sideNavBar";
+import React, { useEffect, useState } from "react";
 import Avatar from "../../components/avatar/avatar.jsx";
 import PostGrid from "../../components/postGrid/postGrid";
+import SideNavBar from "../../components/sideNavBar/sideNavBar";
+import { handleReload, useAuth } from "../../context/AuthContext.jsx";
 import { useProfile } from "../../context/ProfileContext";
-import {
-  AUTH_ACTIONS,
-  useAuth,
-  handleReload,
-} from "../../context/AuthContext.jsx";
-import { PROFILE_ACTIONS } from "./../../context/ProfileContext.jsx";
 import { useGetProfile } from "../../hooks/useGetProfile.jsx";
+import { PROFILE_ACTIONS } from "./../../context/ProfileContext.jsx";
+import classes from "./FriendProfile.module.css";
 
 function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
@@ -19,25 +15,33 @@ function FriendProfile({ user }) {
   const getProfile = useGetProfile();
 
   useEffect(() => {
-    if (localStorage.getItem("friend-id") !== null) {
-      dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
-      getProfile(localStorage.getItem("friend-id")).then(() => {
-          console.log("authState.user: ", authState);
-          const find = authState.user.friends.find(
-            (friend) => friend._id === profileState.user?._id
-          );
-          setIsFriend(find !== undefined);
-      });
-    } else {
-      const find = authState.user.friends.find(
-        (friend) => friend._id === profileState.user?._id
-      );
-      setIsFriend(find !== undefined);
-      localStorage.setItem("friend-id", profileState.user?._id);
-    }
+    const getData = async () => {
+      if (localStorage.getItem("friend-id")) {
+        dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
+        await getProfile(localStorage.getItem("friend-id"));
+        await handleReload(localStorage.getItem("token"), authDispatch);
+      }
+    };
+    getData();
   }, []);
 
-  console.log("posts: ", profileState.user);
+  useEffect(() => {
+    if (authState.user.friends) {
+      if (localStorage.getItem("friend-id") && authState.user.friends) {
+        const find = authState.user.friends.find(
+          (friend) => friend._id === profileState.user?._id
+        );
+        setIsFriend(find !== undefined);
+      } else {
+        const find = authState.user.friends.find(
+          (friend) => friend._id === profileState.user?._id
+        );
+        setIsFriend(find !== undefined);
+        localStorage.setItem("friend-id", profileState.user?._id);
+      }
+    }
+  }, [profileState, authState]);
+
   return (
     <div className="columns">
       <>

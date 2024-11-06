@@ -1,14 +1,13 @@
-import React, { useEffect, useReducer, useState } from "react";
-import classes from "./MyProfile.module.css";
-import Avatar from "../../components/avatar/avatar";
-import SideNavBar from "../../components/sideNavBar/sideNavBar";
-import PostGrid from "../../components/postGrid/postGrid";
-import { useAuth } from "./../../context/AuthContext";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useGetProfile } from "../../hooks/useGetProfile";
-import profileReducer, { initialState } from "../../services/profileReducer";
-import { useProfile } from "../../context/ProfileContext";
+import Avatar from "../../components/avatar/avatar";
+import PostGrid from "../../components/postGrid/postGrid";
+import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import UploadPhotoModal from "../../components/uploadPhotoModal/uploadPhotoModal";
+import { useProfile } from "../../context/ProfileContext";
+import { useGetProfile } from "../../hooks/useGetProfile";
+import { useAuth } from "./../../context/AuthContext";
+import classes from "./MyProfile.module.css";
 
 function MyProfile({ user1 }) {
   const { state: profileState } = useProfile();
@@ -16,7 +15,7 @@ function MyProfile({ user1 }) {
   const { state: authState } = useAuth();
   const navigate = useNavigate();
   const getProfile = useGetProfile();
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const userId = authState.user?._id;
@@ -94,7 +93,9 @@ function MyProfile({ user1 }) {
                     +
                   </button>
                 </div>
-                {isModalOpen && <UploadPhotoModal closeModal={() => setIsModalOpen(false)}/>}
+                {isModalOpen && (
+                  <UploadPhotoModal closeModal={() => setIsModalOpen(false)} />
+                )}
               </div>
             </div>
           </div>
