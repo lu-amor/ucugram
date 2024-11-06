@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from "react";
 import Profile from './pages/Profile';
+import LogInPage from './pages/LogInPage';
+import SignUpPage from './pages/SignUpPage';
 import Feed from './pages/Feed';
 import Add from './pages/Add';
 import Notifications from './pages/Notifications';
@@ -226,7 +228,9 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={LogInPage} options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }}  />
         <Stack.Screen name="Feed" component={Feed} initialParams={{ user, allFriendPosts }} options={{ headerShown: false }} />
         {friends.map((friend, index) => (
           <Stack.Screen 
