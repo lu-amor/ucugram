@@ -48,7 +48,7 @@ const PostContainer = ({ post }) => {
   const handleGoProfile = async (username, userId) => {
     if (username !== authState.user.username) {
       await getProfile(userId)
-      navigate(`/friendProfile/${username}`)
+      navigate(`/profile/${username}`)
     } else {
       navigate("/myProfile")
     }
@@ -106,7 +106,7 @@ const PostContainer = ({ post }) => {
               </div>
             )}
             <p className={`${classes.pictureDescription} mt-3`}>
-              <strong className="has-text-white">{post.user.username}</strong>{" "}
+              <strong>{post.user.username}</strong>{" "}
               {post.caption}
             </p>
             <ul className={`${classes.commentsBox} mt-4`}>
@@ -115,7 +115,7 @@ const PostContainer = ({ post }) => {
                 return (
                   <li key={info._id} className="mb-2">
                     <p>
-                      <strong className="has-text-white">
+                      <strong>
                         {info.user.username}
                       </strong>{" "}
                       {info.content}{" "}

@@ -31,6 +31,10 @@ function MyProfile({ user1 }) {
     }
   }, []);
 
+  const handleEditProfile = () => {
+    navigate("/account/edit")
+  }
+
   return (
     <>
       {profileState?.loading || authState.loading ? (
@@ -59,7 +63,7 @@ function MyProfile({ user1 }) {
                       <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
                         <strong>{profileState.user?.username}</strong>
                       </p>
-                      <button className={`button ${classes.profileButton}`}>
+                      <button className={`button ${classes.profileButton}`} onClick={handleEditProfile}>
                         Edit profile
                       </button>
                     </div>
