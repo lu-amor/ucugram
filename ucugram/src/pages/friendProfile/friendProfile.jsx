@@ -121,6 +121,7 @@ function FriendProfile({ user }) {
                     <div></div>
                   </div>
                 </div>
+                <div className={classes.divider}/>
                 <div className={classes.postsContainer}>
                   <PostGrid posts={profileState.posts} />
                 </div>

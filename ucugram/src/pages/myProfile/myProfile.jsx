@@ -87,6 +87,7 @@ function MyProfile({ user1 }) {
                     <div></div>
                   </div>
                 </div>
+                <div className={classes.divider}/>
                 <div className={classes.postsContainer}>
                   {/* <img src={"http://localhost:3001/" + state.posts[0]?.imageUrl} alt="imagen 1" /> */}
                   <PostGrid posts={profileState.posts} />

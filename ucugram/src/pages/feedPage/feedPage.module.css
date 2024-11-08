@@ -1,11 +1,12 @@
 .postContainer {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 30px;
     width: 100%;
     margin-left: 5px;
-    margin-top: 15px;
+    margin-top: 35px;
     margin-right: 0;
+    align-items: center;
 }
 
 .feedContent {

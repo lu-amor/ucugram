@@ -17,14 +17,14 @@ export default function SuggestionCard(suggestion) {
 
 
   return (
-    <div className={`${classes.suggestionCard} card `} onClick={handleGoProfile}>
+    <div className={`${classes.suggestionCard} card `} >
       <div className={classes.cardAvatar}>
         <Avatar user={suggestedUser}></Avatar>
       </div>
       <div className={classes.cardInfo}>
-        <h3 className={`${classes.title} is-6 has-text-weight-semibold `}>
+        <button className={`${classes.title} is-6 has-text-weight-semibold `} onClick={handleGoProfile}>
           {suggestedUser.username}
-        </h3>
+        </button>
       </div>
       <div className={`${classes.followSection} mt-2`}>
         <FollowButton
