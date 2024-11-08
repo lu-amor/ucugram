@@ -4,9 +4,6 @@ import NavBarItem from "../navBarItem/navBarItem";
 import houseIcon from "../../assets/house-icon.png";
 import bellIcon from "../../assets/bell-icon.png";
 import { useNavigate } from "react-router-dom";
-import Notification from "../notification/notification";
-import Icon from "@mdi/react";
-import { mdiMenu } from "@mdi/js";
 import { useLogout } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
 import Avatar from "../avatar/avatar";
@@ -51,7 +48,7 @@ const NavBar = () => {
             <NavBarItem icono="home" link={houseIcon} nombre="Home" />
           </a>
         </button>
-        <button>
+        <button onClick={goNotifications}>
           <a className="has-text-black has-text-weight-medium">
             <NavBarItem
               icono="notifications"
@@ -98,8 +95,14 @@ const NavBar = () => {
             />
           </a>
         </li>
-        <li>
-          <button onClick={handleLogout}>logout</button>
+        <li onClick={handleLogout}>
+          <a>
+            <NavBarItem
+              icono="exit"
+              link={bellIcon}
+              nombre="Logout"
+            />
+          </a>
         </li>
       </ul>
     </aside>

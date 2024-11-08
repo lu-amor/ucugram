@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
 import classes from "./navBarItem.module.css";
+import IonIcon from '@reacticons/ionicons';
 
 const NavBarItem = ({ icono, link, nombre }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const isImage = typeof link === 'string';
+    const isIcon = typeof link === 'string';
 
     const updateWindowWidth = () => {
         setWindowWidth(window.innerWidth);
@@ -16,17 +17,17 @@ const NavBarItem = ({ icono, link, nombre }) => {
 
     return windowWidth > 950 ? (
         <div className={classes.navBarItem}>
-            {isImage ? (
-                <img src={link} alt={icono} className={classes.icono} />
+            {isIcon ? (
+                <IonIcon name={icono} style={{color: '#173363', width: '25px', marginLeft: '21px', marginTop: '-9px', marginRight: '5px'}}/>
             ) : (
                 <div className={classes.avatar}>{link}</div>
             )}
-            <p className="has-text-weight-bold">{nombre}</p>
+            <p className="has-text-weight-bold has-text-info">{nombre}</p>
         </div>
     ) : (
         <div className={classes.navBarItemH}>
-            {isImage ? (
-                <img src={link} alt={icono} className={classes.iconoH} />
+            {isIcon ? (
+                <IonIcon name={icono} style={{color: '#173363', width: '25px', marginTop: '-9px'}}/>
             ) : (
                 <div className={classes.avatarH}>{link}</div>
             )}

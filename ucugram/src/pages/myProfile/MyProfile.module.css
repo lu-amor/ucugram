@@ -69,15 +69,13 @@
 }
 
 .addPictureButton {
-    font-size: 24px;
-    font-weight: bold;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #3b82f6;
+    background-color: #ea5b0c;
     color: white;
     border: none;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -89,6 +87,15 @@
     bottom: 20px;
     right: 20px;
     z-index: 10;
+}
+
+@media (max-width: 950px) {
+    .buttonContainer {
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        z-index: 10;
+    }
 }
 
 .addPictureButton:hover {

@@ -9,6 +9,7 @@ import { useProfile } from "../../context/ProfileContext";
 import { useGetProfile } from "../../hooks/useGetProfile";
 import { useAuth } from "./../../context/AuthContext";
 import classes from "./MyProfile.module.css";
+import IonIcon from "@reacticons/ionicons";
 
 function MyProfile({ user1 }) {
   const { state: profileState } = useProfile();
@@ -91,7 +92,7 @@ function MyProfile({ user1 }) {
                     className={classes.addPictureButton}
                     onClick={() => setIsModalOpen(true)}
                   >
-                    +
+                    <IonIcon name="add" size='meduim' />
                   </button>
                 </div>
                 {isModalOpen && (
