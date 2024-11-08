@@ -29,8 +29,8 @@ const PostContainer = ({ post }) => {
   useEffect(() => {
     const loadComments = async () => {
       const loadedComments = await Promise.all(
-        post.comments.map(async (commentId) => {
-          const commentInfo = await getComment(commentId);
+        post.comments.map(async (comment) => {
+          const commentInfo = await getComment(comment._id);
           return { commentInfo };
         })
       );

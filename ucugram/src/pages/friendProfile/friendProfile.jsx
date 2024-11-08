@@ -28,7 +28,7 @@ function FriendProfile({ user }) {
   }, []);
 
   useEffect(() => {
-    if (authState.user.friends) {
+    if (authState.user) {
       if (localStorage.getItem("friend-id") && authState.user.friends) {
         const find = authState.user.friends.find(
           (friend) => friend._id === profileState.user?._id

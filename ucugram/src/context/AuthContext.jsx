@@ -82,7 +82,7 @@ export const handleReload = async (token, dispatch) => {
 export const AuthProvider = ({ children }) => {
   const initialState = {
     isAuthenticated: !!localStorage.getItem("token"),
-    user: "null",
+    user: null,
     token: localStorage.getItem("token"),
     loading: false,
     error: null,

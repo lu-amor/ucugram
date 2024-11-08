@@ -19,6 +19,7 @@ const FeedPage = () => {
     if (!authState.isAuthenticated) {
       navigate("./home");
     }
+    localStorage.removeItem("friend-id");
     window.addEventListener("resize", updateWindowWidth);
     return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
@@ -46,7 +47,7 @@ const FeedPage = () => {
           </div>
         ) : (
           <div className={`${classes.feedContent}`}>
-            <SuggestionsPreview suggestions={posts} />
+            {/* <SuggestionsPreview suggestions={posts} /> */}
             {loading && <div>Loading posts...</div>}
             {error && <div>Error loading posts!</div>}
             {posts && (
