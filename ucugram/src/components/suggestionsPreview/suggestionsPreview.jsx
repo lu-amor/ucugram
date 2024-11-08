@@ -16,9 +16,15 @@ const SuggestionsPreview = () => {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 680,
+        settings: {
+          slidesToShow: 3,
         },
       },
     ],
@@ -30,10 +36,8 @@ const SuggestionsPreview = () => {
 
   return (
     <div className={classes.suggestionsPreview}>
-      <h2 className={`title is-4`}>
-        Suggestions for you
-      </h2>
-      <Slider {...settings} >
+      <h2 className={`title is-4`}>Suggestions for you</h2>
+      <Slider {...settings}>
         {suggestions.map((suggestion, index) => (
           <div key={index} className="suggestionWrapper">
             <SuggestionCard suggestion={suggestion} />

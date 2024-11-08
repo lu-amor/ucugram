@@ -52,6 +52,7 @@ const FeedPage = () => {
             {error && <div>Error loading posts!</div>}
             {posts && (
               <>
+                <SuggestionsPreview suggestions={posts} />
                 <div className={classes.postContainer}>
                   {posts.map((post) => (
                     <PostContainer key={post.id} post={post} />

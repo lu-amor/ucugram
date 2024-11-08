@@ -15,6 +15,7 @@ export default function EditProfilePage() {
   const getProfile = useGetProfile();
   const [username, setUsername] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
+  const [description, setDescription] = useState("")
   const { updateProfile, loading, error } = useUpdateProfileInfo();
 
   useEffect(() => {
@@ -22,6 +23,8 @@ export default function EditProfilePage() {
       if (authState.user._id) {
         dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
         await getProfile(authState.user._id);
+        setUsername(authState.user.username);
+        setDescription(authState.user.description);
       }
     };
 
@@ -34,7 +37,7 @@ export default function EditProfilePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newInfo = { username, profilePicture };
+    const newInfo = { username, profilePicture, description };
     console.log("entra al handle");
     const result = await updateProfile(newInfo);
     result === true ? navigate("/myProfile") : window.alert("algo salió mal");
@@ -95,8 +98,8 @@ export default function EditProfilePage() {
                     <input
                       className="input"
                       type="text"
-                      defaultValue={"default description"}
-                      onChange={(e) => setUsername(e.target.value)}
+                      defaultValue={authState.user.description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></input>
                   </div>
                   <div className={classes.buttonsContainer}>

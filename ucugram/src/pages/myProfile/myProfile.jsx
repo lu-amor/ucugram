@@ -81,7 +81,7 @@ function MyProfile({ user1 }) {
                         </span>
                       </div>
                       <div className={classes.profileDescription}>
-                        <p>{user1.description}</p>
+                        <p>{profileState.user?.description}</p>
                       </div>
                     </div>
                     <div></div>
