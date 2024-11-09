@@ -57,7 +57,7 @@ const Post = ({ post }) => {
   return (
     <>
       <div className={classes.postConatiner}>
-        <header>
+        <header className={classes.header}>
           <div>
             <div>
               <Avatar

@@ -62,19 +62,19 @@ figure.image.is-square img {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
-header {
+.header {
   max-height: 70px;
   min-height: 70px;
   display: flex !important;
   align-items: center;
 }
 
-header div {
+.header div {
   display: flex !important;
   align-items: center;
 }
 
-header div div {
+.header div div {
   width: 45px;
   height: 45px;
   margin-left: 10px;
