@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { url } from './../App.jsx';
-import { useAuth } from '../context/AuthContext.jsx';
+import { url } from "./../App.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 // const url = "http://localhost:3000/posts";
 
@@ -9,30 +9,33 @@ const useUploadPhoto = () => {
   const [error, setError] = useState(null);
   const { state: authState } = useAuth();
 
-  const uploadPhoto = async (imageUrl, caption) => {
-    try {
-      setLoading(true);
-      setError(null);
-      const formData = new FormData();
-      formData.append("image", imageUrl); 
-      formData.append("caption", caption); 
+  const uploadPhoto = async (file, caption) => {
+    setLoading(true);
+    setError(null);
 
-      console.log(imageUrl.path)
-      const response = await fetch(url + `posts/upload`, {
+    const formData = new FormData();
+    formData.append("image", file);
+    formData.append("caption", caption);
+
+    try {
+      const response = await fetch( url + "posts/upload", {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${authState.token}`,
         },
         body: formData,
       });
 
-      const data = await response.json();
-      setLoading(false);
-      console.log("upload post result: ", data);
-      return data;
+      if (!response.ok) {
+        throw new Error("Error uploading the photo");
+      }
+
+      const result = await response.json();
+      console.log("Upload successful:", result);
     } catch (err) {
       setError(err.message);
+      console.error("Upload failed:", err);
+    } finally {
       setLoading(false);
     }
   };
