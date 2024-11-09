@@ -1,55 +1,51 @@
-import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
+import React from 'react';
+import { FlatList, StyleSheet, Dimensions, View } from 'react-native';
+import ProfilePost from './ProfilePost';
 
-const ProfileGrid = ({posts}) => {
+const ProfileGrid = ({ posts, user }) => {
+    const numColumns = 3;
+
+    const renderItem = ({ item, index }) => {
+        const isLastRowItem = (posts.length % numColumns !== 0) && index >= posts.length - (posts.length % numColumns);
+
+        return (
+            <View style={isLastRowItem ? styles.centeredGridItem : styles.gridItem}>
+                <ProfilePost
+                    idx={index}
+                    post={item}
+                    user={user}
+                />
+            </View>
+        );
+    };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.grid}>
-{/*                 <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/post_img-by-AI.jpeg')} style={styles.gridImage} /> */}
-
-                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
-                <Image source={require('../assets/posts/charlotte_post_img-by-AI.jpeg')} style={styles.gridImage} />
-
-{/*                 {posts.map((post, index) => {
-                    return (
-                        <View key={index} style={styles.gridImage}>
-                            <Image source={{ uri: post.imageUrl }} style={styles.gridImage} />
-                        </View>
-                    );
-                })} */}
-            </View>
-        </View>
+        <FlatList
+            data={posts}
+            renderItem={renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            numColumns={numColumns}
+            contentContainerStyle={styles.gridContainer}
+        />
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
+    gridContainer: {
+        paddingVertical: 20,
+    },
+    gridItem: {
         flex: 1,
-        marginTop: 20,
+        margin: 1,
+        maxWidth: Dimensions.get('window').width / 3,
+        height: Dimensions.get('window').width / 3,
     },
-    grid: {
-        flexDirection: "row",
-        flexWrap: "wrap",
-    },
-    gridImage: {
-        width: Dimensions.get("window").width / 3,
-        height: Dimensions.get("window").width / 3,
+    centeredGridItem: {
+        flex: 1,
+        margin: 1,
+        maxWidth: Dimensions.get('window').width / 3,
+        height: Dimensions.get('window').width / 3,
+        alignSelf: 'center', // centra el elemento en la fila si es el último de una fila incompleta
     },
 });
 

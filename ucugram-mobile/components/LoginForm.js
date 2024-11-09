@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef} from "react";
 import { View, Image, Text, TextInput, TouchableOpacity , StyleSheet} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 

@@ -1,12 +1,13 @@
-import React, {useState} from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions,  TouchableOpacity } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Avatar from "./Avatar";
 
-const PostItem = ({ post, user, navigation }) => {
+const FeedPost = ({ post, user, navigation }) => {
     const scale = useSharedValue(1);
     const isZooming = useSharedValue(false);
+
 
     const pinchGesture = Gesture.Pinch()
         .onStart(() => {
@@ -44,7 +45,9 @@ const PostItem = ({ post, user, navigation }) => {
         <GestureHandlerRootView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate(post.username, { friend: { username: post.username, profilePicture: post.profilePicture, bio: post.description } })}>
                 <View style={styles.userInfo}>
-                    <Image source={post.profilePicture} style={styles.avatar} />
+                    <View style={styles.avatar}>
+                    <Avatar user={user} ></Avatar>
+                    </View>
                     <Text style={styles.usernameTop}>{post.username}</Text>
                     <Text style={styles.postDate}>{post.date}</Text>
                 </View>
@@ -52,7 +55,7 @@ const PostItem = ({ post, user, navigation }) => {
             <View style={styles.postCard}>
                 <GestureDetector gesture={pinchGesture}>
                     <Animated.View style={[styles.cardImage, animatedImageStyle]}>
-                        <Image source={post.imageUrl} style={styles.image} />
+                        <Image source={post.imageUrl } style={styles.image} />
                     </Animated.View>
                 </GestureDetector>
             </View>
@@ -91,13 +94,14 @@ const styles = StyleSheet.create({
         paddingVertical: 8,
         backgroundColor: "white",
     },
-    avatar: {
+    avatar : {
         width: 40,
         height: 40,
-        borderRadius: 100,
+        borderRadius: 20,
         borderColor: "#808080",
         borderWidth: 1,
-        marginRight: 12,
+        marginRight: 10,
+        marginLeft: 0,
     },
     usernameTop: {
         fontSize: 18,
@@ -149,4 +153,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default PostItem;
+export default FeedPost;

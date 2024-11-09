@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Image, StyleSheet, ScrollView } from "react-native";
 import NavBar from "../components/NavBar";
-import PostItem from "../components/PostItem";
+import FeedPost from "../components/FeedPost";
+import Suggestions from "../components/Suggestions";
 
 const Feed = ({ navigation, route }) => {
-    const { user, allFriendPosts } = route.params;
+    const { user, allFriendPosts, suggestedFollows} = route.params;
 
     return (
         <View style={styles.container}>
@@ -13,11 +14,15 @@ const Feed = ({ navigation, route }) => {
                     source={require('../assets/ucugram texto.png')} 
                     style={styles.headerImage} 
                 />
+
+                <Suggestions suggestedFollows={suggestedFollows} navigation={navigation}/>
+
                 {allFriendPosts.map((post, index) => (
-                    <PostItem 
+                    <FeedPost
                         key={index} 
                         post={post} 
                         user={{ username: post.username, profilePicture: post.profilePicture }} 
+                        navigation={navigation}
                     />
                 ))}
             </ScrollView>

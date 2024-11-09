@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { TouchableOpacity, View, StyleSheet, Image, TextInput, Text } from "react-native";
 
 function SignUpForm({ goLogin }) {

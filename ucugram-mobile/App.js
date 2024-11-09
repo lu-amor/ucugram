@@ -1,22 +1,25 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import React from "react";
 import Profile from './pages/Profile';
 import LogInPage from './pages/LogInPage';
 import SignUpPage from './pages/SignUpPage';
 import Feed from './pages/Feed';
+import SuggestedFriends from './pages/SuggestedFriends';
 import Add from './pages/Add';
 import Notifications from './pages/Notifications';
 import FriendProfile from './pages/FriendProfile';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-    const user = {
+  
+  const user = {
         username: 'username', 
         profilePicture: require('./assets/profile_img-by-AI.jpeg'),
-        posts: 15,
+        posts: 5,
         followers: 250,
         bio: 'I love this app so much'
     };
@@ -26,7 +29,7 @@ export default function App() {
       username: 'charlotte', 
       profilePicture: require('./assets/pfps/charlotte_profile_img-by-AI.jpeg'),
       posts: 3,
-      followers: 315,
+      followers: 2008,
       bio: 'I love travelling around europe',
       posts: [
         {
@@ -50,7 +53,7 @@ export default function App() {
       username: 'alexander', 
       profilePicture: require('./assets/pfps/alexander.jpeg'),
       posts: 3,
-      followers: 421,
+      followers: 796,
       bio: 'work hard play hard',
       posts: [
         {
@@ -74,7 +77,7 @@ export default function App() {
       username: 'mia', 
       profilePicture: require('./assets/pfps/mia.jpeg'),
       posts: 4,
-      followers: 150,
+      followers: 1508,
       bio: 'architecture enthusiast',
       posts: [
         {
@@ -103,7 +106,7 @@ export default function App() {
       username: 'john', 
       profilePicture: require('./assets/pfps/john.jpeg'),
       posts: 6,
-      followers: 100,
+      followers: 2585,
       bio: 'your travel buddy',
       posts: [
         {
@@ -181,7 +184,7 @@ export default function App() {
       username: 'laurent', 
       profilePicture: require('./assets/pfps/laurent.jpeg'),
       posts: 6,
-      followers: 100,
+      followers: 1432,
       bio: 'the world is my oyster',
       posts: [
         {
@@ -226,26 +229,81 @@ export default function App() {
     }))
   ).sort((a, b) => new Date(b.date) - new Date(a.date));
 
+  const suggestions = [
+    { id: 1, username: 'laurent', profilePicture: require('./assets/pfps/laurent.jpeg') , followers: 1432},
+    { id: 2, username: 'emily', profilePicture: require('./assets/pfps/emily.jpeg'),  followers: 7065 },
+    { id: 3, username: 'alexander', profilePicture: require('./assets/pfps/alexander.jpeg'), followers: 796 },
+    { id: 4, username: 'mia', profilePicture: require('./assets/pfps/mia.jpeg'), followers: 1508 },
+    { id: 5, username: 'john', profilePicture: require('./assets/pfps/john.jpeg'), followers: 2585 },
+    { id: 6, username: 'charlotte', profilePicture: require('./assets/pfps/charlotte_profile_img-by-AI.jpeg'), followers: 2008 },
+  ]
+
+  const userPosts = [
+    {
+        id: 1,
+        user: 'username',
+        date: '2024-11-08',
+        imageUrl: require('./assets/userPosts/image1.jpg'),
+        description: 'first morning coffee',
+        likes: 120
+    },
+    {
+        id: 2,
+        user: 'username',
+        date: '2024-11-07',
+        imageUrl: require('./assets/userPosts/image2.jpg'),
+        description: 'A beautiful sunset',
+        likes: 150
+    },
+    {
+        id: 3,
+        user: 'username',
+        date: '2024-11-06',
+        imageUrl: require('./assets/userPosts/image3.jpg'),
+        description: 'Another amazing day!',
+        likes: 200
+    },
+    {
+        id: 4,
+        user: 'username',
+        date: '2024-11-05',
+        imageUrl: require('./assets/userPosts/image4.jpg'),
+        description: 'Exploring the city',
+        likes: 175
+    },
+    {
+        id: 5,
+        user: 'username',
+        date: '2024-11-04',
+        imageUrl: require('./assets/userPosts/image5.jpg'),
+        description: 'Feeling grateful!',
+        likes: 210
+    }
+];
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={LogInPage} options={{ headerShown: false }} />
-      <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }}  />
-        <Stack.Screen name="Feed" component={Feed} initialParams={{ user, allFriendPosts }} options={{ headerShown: false }} />
+      {/* <Stack.Screen name="Login" component={LogInPage} options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }}  /> */}
+        <Stack.Screen name="Feed" component={Feed} initialParams={{ user, allFriendPosts, suggestedFollows: suggestions }} options={{ headerShown: false }} />
         {friends.map((friend, index) => (
           <Stack.Screen 
             key={index} 
             name={friend.username} 
             component={FriendProfile} 
-            initialParams={{ user, friend, posts: allFriendPosts }} 
+            initialParams={{ user, friend, posts: allFriendPosts}} 
             options={{ headerShown: false }} 
           />
         ))}
+        <Stack.Screen name="SuggestedFriends" component={SuggestedFriends} initialParams= {{suggestedFollows : suggestions}} options={{ headerShown: false }}/>
         <Stack.Screen name="Add" component={Add} initialParams={{ user }} options={{ headerShown: false }} />
         <Stack.Screen name="Notifications" component={Notifications} initialParams={{ user }} options={{ headerShown: false }} />
-        <Stack.Screen name="Profile" component={Profile} initialParams={{ user }} options={{ headerShown: false }} />
+        <Stack.Screen name="Profile" component={Profile} initialParams={{ user, userPosts }} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
+
   );
 }
 
@@ -255,3 +313,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
+
+
+
