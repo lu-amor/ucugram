@@ -25,7 +25,7 @@ const FeedPage = () => {
 
   return (
     <>
-      <div className="columns  mr-0">
+      <div className="columns mr-0">
         <SideNavBar />
         {windowWidth > 950 ? (
         <div className={`column is-10 ${classes.feedContent}`}>
@@ -42,7 +42,7 @@ const FeedPage = () => {
             )}
           </div>
         </div>
-         ) : (
+        ) : (
           <div className={`${classes.feedContent}`}>
             {loading && <div>Loading posts...</div>}
             {error && <div>Error loading posts!</div>}
