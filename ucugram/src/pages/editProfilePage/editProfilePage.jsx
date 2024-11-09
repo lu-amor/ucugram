@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import classes from "./EditProfilePage.module.css";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth, handleReload } from "../../context/AuthContext";
 import { PROFILE_ACTIONS, useProfile } from "../../context/ProfileContext";
 import Avatar from "../../components/avatar/avatar.jsx";
 import SideNavBar from "./../../components/sideNavBar/sideNavBar";
 import { useGetProfile } from "../../hooks/useGetProfile.jsx";
 import useUpdateProfileInfo from "./../../hooks/useUpdateProfileInfo.jsx";
+import ProfileImgPreview from "../../components/profileImagePreview/profileImgPreview.jsx";
 
 export default function EditProfilePage() {
   const navigate = useNavigate();
@@ -15,21 +16,23 @@ export default function EditProfilePage() {
   const getProfile = useGetProfile();
   const [username, setUsername] = useState("");
   const [profilePicture, setProfilePicture] = useState("");
-  const [description, setDescription] = useState("")
+  const [description, setDescription] = useState("");
   const { updateProfile, loading, error } = useUpdateProfileInfo();
+  const fileInputRef = useRef(null);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [previewURL, setPreviewURL] = useState(null);
 
   useEffect(() => {
     const reload = async () => {
-      if (authState.user._id) {
+      if (authState.user) {
         dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
         await getProfile(authState.user._id);
         setUsername(authState.user.username);
         setDescription(authState.user.description);
       }
     };
-
     reload();
-  }, [authState.user._id]);
+  }, [authState]);
 
   const goHome = () => {
     navigate("/myProfile");
@@ -41,6 +44,32 @@ export default function EditProfilePage() {
     console.log("entra al handle");
     const result = await updateProfile(newInfo);
     result === true ? navigate("/myProfile") : window.alert("algo salió mal");
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleSelectedPic = () => {
+    setShowPreviewModal(true);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    console.log("file: ", file);
+    if (file) {
+      setPreviewURL(URL.createObjectURL(file)); // genera la URL de vista previa
+      setShowPreviewModal(true); 
+      event.target.value = ''; // lo vacío para que se vuelva a abrir si se elige otra foto
+    } else {
+      setPreviewURL(null);
+      setShowPreviewModal(false); 
+    }
+  };
+
+  const handleCloseModal = () => {
+    setShowPreviewModal(false); 
+    setPreviewURL(null); 
   };
 
   return (
@@ -69,9 +98,28 @@ export default function EditProfilePage() {
                         <strong>{profileState.user?.username}</strong>
                       </p>
                     </div>
-                    <button className={`button`} id={classes.profileButton}>
+                    <button
+                      className={`button`}
+                      id={classes.profileButton}
+                      onClick={handleButtonClick}
+                    >
                       Change picture
                     </button>
+                    <input
+                      type="file"
+                      id="fileUpload"
+                      accept="image/*"
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      className={classes.fileInput}
+                      onChange={handleFileChange}
+                    />
+                    {showPreviewModal && (
+                      <ProfileImgPreview
+                        closeModal={handleCloseModal}
+                        imgPreview={previewURL}
+                      />
+                    )}
                   </div>
                 </div>
                 <form
@@ -81,7 +129,7 @@ export default function EditProfilePage() {
                     width: "100%",
                     flexDirection: "column",
                     alignItems: "flex-start",
-                    height:"100%"
+                    height: "100%",
                   }}
                 >
                   <div className={classes.field}>
@@ -98,7 +146,7 @@ export default function EditProfilePage() {
                     <input
                       className="input"
                       type="text"
-                      defaultValue={authState.user.description}
+                      defaultValue={authState.user?.description}
                       onChange={(e) => setDescription(e.target.value)}
                     ></input>
                   </div>
