@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import classes from "./footer.module.css";
+import IonIcon from '@reacticons/ionicons';
 
 const Footer = () => {
     const navigate = useNavigate();
@@ -41,11 +42,21 @@ const Footer = () => {
             <div className={`${classes.redes}`}>
                 <p className={`${classes.copyright}`}>&copy; 2024 Ucugram</p>
                 <div className={`${classes.socialMediaIcons}`}>
-                    <img src='sn-facebook-w.svg' alt='facebook icon' className={`${classes.icon}`}/>
-                    <img src='sn-instagram-w.svg' alt='instagram icon' className={`${classes.icon}`}/>
-                    <img src='sn-linkedin-w.svg' alt='linkedin icon' className={`${classes.icon}`}/>
-                    <img src='sn-twitter-w.svg' alt='twitter icon' className={`${classes.icon}`}/>
-                    <img src='sn-youtube-w.svg' alt='youtube icon' className={`${classes.icon}`}/>
+                    <a href="https://www.facebook.com/ucuoficial/" target="_blank" rel="noopener noreferrer">
+                        <IonIcon name='logo-facebook' className={`${classes.icon}`}/>
+                    </a>
+                    <a href="https://www.instagram.com/ucuoficial/" target="_blank" rel="noopener noreferrer">
+                        <IonIcon name='logo-instagram' className={`${classes.icon}`}/>
+                    </a>
+                    <a href="https://www.linkedin.com/school/universidad-catolica-del-uruguay/posts/?feedView=all" target="_blank" rel="noopener noreferrer">
+                        <IonIcon name='logo-linkedin' className={`${classes.icon}`}/>
+                    </a>
+                    <a href="https://x.com/UCUoficial" target="_blank" rel="noopener noreferrer">
+                        <IonIcon name='logo-twitter' className={`${classes.icon}`}/>
+                    </a>
+                    <a href="https://www.youtube.com/user/MediatecaUCU" target="_blank" rel="noopener noreferrer">
+                        <IonIcon name='logo-youtube' className={`${classes.icon}`}/>
+                    </a>
                 </div>
             </div>
         </footer>
