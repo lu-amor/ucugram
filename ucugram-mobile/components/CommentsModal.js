@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Modal, FlatList, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, ScrollView } from 'react-native';
+import CommentItem from './CommentItem';
 
 const CommentsModal = ({ visible, onClose, commentsArray }) => {
     const [newComment, setNewComment] = useState('');
@@ -30,14 +31,10 @@ const CommentsModal = ({ visible, onClose, commentsArray }) => {
                                 data={commentsArray}
                                 keyExtractor={(item) => item.id.toString()}
                                 renderItem={({ item }) => (
-                                    <View style={styles.commentItem}>
-                                        <Text style={styles.commentUser}>{item.userId}</Text>
-                                        <Text style={styles.commentDate}>{item.date}</Text>
-                                        <Text style={styles.commentText}>{item.text}</Text>
-                                    </View>
+                                    <CommentItem comment={item} />
                                 )}
                                 ListEmptyComponent={<Text style={styles.noCommentsText}>Be the first one to comment!</Text>}
-                                style={{ flex: 1 }}
+                                style={{ flex: 1, marginHorizontal: 15 }}
                                 contentContainerStyle={{ paddingBottom: 200 }}
                             />
                             <View style={styles.inputWrapper}>
@@ -78,6 +75,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#173363',
         marginLeft: 20,
+        marginBottom: 10,
+    },
+    noCommentsText: {
+        textAlign: 'center',
+        color: '#888',
+        fontSize: 16,
+        marginTop: 20,
     },
     commentItem: {
         padding: 10,

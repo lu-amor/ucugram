@@ -52,7 +52,13 @@ export default function App() {
             { id: 3, userId: 'mia', text: 'I need a setup like this!', date: '2024-11-01' },
             { id: 4, userId: 'john', text: 'Great place to work from home.', date: '2024-11-01' },
             { id: 5, userId: 'emily', text: 'Where did you get that mug? 😍', date: '2024-11-02' },
-            { id: 6, userId: 'laurent', text: 'Looks so comfortable!', date: '2024-11-03' }
+            { id: 6, userId: 'laurent', text: 'Looks so comfortable!', date: '2024-11-03' },
+            { id: 7, userId: 'charlotte', text: 'Thanks everyone! 😊', date: '2024-11-03' },
+            { id: 8, userId: 'alexander', text: 'Where did you get that chair? 😍', date: '2024-11-03' },
+            { id: 9, userId: 'charlotte', text: 'I got it from a local shop! 😊', date: '2024-11-03' },
+            { id: 10, userId: 'mia', text: 'I love your workspace! 😍', date: '2024-11-03' },
+            { id: 11, userId: 'charlotte', text: 'Thank you! 😊', date: '2024-11-03' },
+            { id: 12, userId: 'john', text: 'I love your workspace! 😍', date: '2024-11-03' }
           ],
           date: '31-10-2024'
         }
