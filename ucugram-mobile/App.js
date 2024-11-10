@@ -3,6 +3,7 @@ import React from "react";
 import Profile from './pages/Profile';
 import Feed from './pages/Feed';
 import Add from './pages/Add';
+import Search from './pages/Search';
 import Notifications from './pages/Notifications';
 import FriendProfile from './pages/FriendProfile';
 import {NavigationContainer} from '@react-navigation/native';
@@ -307,6 +308,7 @@ export default function App() {
             options={{ headerShown: false }} 
           />
         ))}
+        <Stack.Screen name="Search" component={Search} initialParams={{ friends, user }} options={{ headerShown: false }} />
         <Stack.Screen name="Add" component={Add} initialParams={{ user }} options={{ headerShown: false }} />
         <Stack.Screen name="Notifications" component={Notifications} initialParams={{ user }} options={{ headerShown: false }} />
         <Stack.Screen name="Profile" component={Profile} initialParams={{ user }} options={{ headerShown: false }} />

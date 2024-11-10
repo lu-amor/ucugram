@@ -13,6 +13,12 @@ const NavBar = ({ user, activePage, navigation }) => {
                     onPress = {() => navigation.navigate('Feed')}
                 />
                 <Ionicons
+                    name = {activePage === "search" ? "search" : "search-outline"}
+                    size = {35}
+                    color = "#173363"
+                    onPress = {() => navigation.navigate('Search')}
+                />
+                <Ionicons
                     name = {activePage === "add" ? "add-circle" : "add-circle-outline"}
                     size = {35}
                     color = "#173363"
