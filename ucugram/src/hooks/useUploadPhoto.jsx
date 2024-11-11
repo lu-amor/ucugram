@@ -18,7 +18,7 @@ const useUploadPhoto = () => {
     formData.append("caption", caption);
 
     try {
-      const response = await fetch( url + "posts/upload", {
+      const response = await fetch(url + "posts/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${authState.token}`,
@@ -26,17 +26,16 @@ const useUploadPhoto = () => {
         body: formData,
       });
 
-      if (!response.ok) {
-        throw new Error("Error uploading the photo");
-      }
-
       const result = await response.json();
-      console.log("Upload successful:", result);
+      setLoading(false);
+
+      if (!response.ok) {
+        return false
+      }
+      return true;
     } catch (err) {
       setError(err.message);
       console.error("Upload failed:", err);
-    } finally {
-      setLoading(false);
     }
   };
 
