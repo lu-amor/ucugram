@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "./sideNavBar.module.css";
 import NavBarItem from "../navBarItem/navBarItem";
-import houseIcon from "../../assets/house-icon.png";
-import bellIcon from "../../assets/bell-icon.png";
 import { useNavigate } from "react-router-dom";
 import { useLogout } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
@@ -16,6 +14,10 @@ const NavBar = () => {
 
   const goFeed = () => {
     navigate("/feed");
+  };
+
+  const goSearch = () => {
+    navigate("/search");
   };
 
   const goNotifications = () => {
@@ -45,14 +47,19 @@ const NavBar = () => {
       <div className={classes.dropdownMenu}>
         <button onClick={goFeed}>
           <a className="has-text-black has-text-weight-medium">
-            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" />
+          </a>
+        </button>
+        <button onClick={goSearch}>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem icono="search" link={'null'} nombre="Search" />
           </a>
         </button>
         <button onClick={goNotifications}>
           <a className="has-text-black has-text-weight-medium">
             <NavBarItem
               icono="notifications"
-              link={bellIcon}
+              link={'null'}
               nombre="Notifications"
             />
           </a>
@@ -74,14 +81,19 @@ const NavBar = () => {
       <ul className={`menu-list ${classes.menuItems}`}>
         <li onClick={goFeed}>
           <a>
-            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" />
+          </a>
+        </li>
+        <li onClick={goSearch}>
+          <a>
+            <NavBarItem icono="search" link={'null'} nombre="Search" />
           </a>
         </li>
         <li onClick={goNotifications}>
           <a>
             <NavBarItem
               icono="notifications"
-              link={bellIcon}
+              link={'null'}
               nombre="Notifications"
             />
           </a>
@@ -99,7 +111,7 @@ const NavBar = () => {
           <a>
             <NavBarItem
               icono="exit"
-              link={bellIcon}
+              link={'null'}
               nombre="Logout"
             />
           </a>

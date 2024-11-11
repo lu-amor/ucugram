@@ -27,7 +27,7 @@ const FeedPage = () => {
 
   return (
     <>
-      <div className="columns  mr-0">
+      <div className="columns mr-0">
         <SideNavBar />
         {/* {windowWidth > 950 ? ( */}
           <div className={`column is-10 ${classes.feedContent}`}>

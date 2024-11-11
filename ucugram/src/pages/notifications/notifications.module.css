@@ -1,16 +1,43 @@
 .header {
-    background-color: #009ce6;
+    padding-left: 15px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: left;
-    text-align: left;
     color: #173363;
-    font-size: 2.3rem;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
     margin-bottom: 20px;
+    width: 100%;
+}
+
+.notificationContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 0;
 }
 
 .goBack {
-    cursor: pointer;
+    align-self: center;
+    margin-top: -5px;
+}
+
+@media (max-width: 950px) {
+    .header {
+        font-size: 1.5rem;
+    }
+    .goBack {
+        margin-top: -3px;
+    }
+}
+
+.pageContent {
+    height: 100vh; 
+    overflow-y: auto;
+    width: 100%;
+    min-width: 300px;
 }

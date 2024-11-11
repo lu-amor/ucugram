@@ -13,6 +13,7 @@ import { AuthProvider } from "./context/AuthContext";
 import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
 import EditProfilePage from "./pages/editProfilePage/editProfilePage";
+import SearchPage from "./pages/searchPage/searchPage";
 
 export const url = "http://localhost:3001/api/";
 
@@ -112,6 +113,7 @@ function App() {
                 />
               }
             ></Route>
+            <Route path="/search" element={<SearchPage />}></Route>
           </>
           <Route path="/documentation" element={<DocPage />}></Route>
           <Route

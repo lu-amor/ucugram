@@ -70,11 +70,11 @@
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
+    gap: 5px;
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
+    color: white;
     cursor: pointer;
 }
 
