@@ -30,10 +30,6 @@ const SuggestionsPreview = () => {
     ],
   };
 
-  useEffect(() => {
-    console.log("suggestions: ", suggestions);
-  }, [suggestions]);
-
   return (
     <div className={classes.suggestionsPreview}>
       <h2 className={`title is-4`}>Suggestions for you</h2>

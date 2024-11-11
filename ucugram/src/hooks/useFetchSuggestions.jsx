@@ -12,8 +12,8 @@ const useFetchSuggestions = () => {
 
   const getSuggestions = async () => {
     const allUsers = await getAllUsers();
-    console.log("allUsers: ", allUsers);
-    console.log("authState: ", authState);
+/*     console.log("allUsers: ", allUsers);
+    console.log("authState: ", authState); */
 
     // obtengo todos los usuarios que no son amigos del autenticado
     const notFriends = allUsers.filter((user) => {
@@ -37,7 +37,7 @@ const useFetchSuggestions = () => {
   useEffect(() => {
     if(authState.user) {
       const a = async () => {
-        console.log("entra");
+/*         console.log("entra"); */
         setLoading(true);
         const sugg = await getSuggestions();
         setSuggestions(sugg);

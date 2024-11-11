@@ -15,7 +15,6 @@ export default function SuggestionCard(suggestion) {
     navigate('/profile/' + suggestedUser.username)
   }
 
-
   return (
     <div className={`${classes.suggestionCard} card `} >
       <div className={classes.cardAvatar}>
