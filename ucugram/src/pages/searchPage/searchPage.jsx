@@ -55,7 +55,7 @@ const SearchPage = () => {
     };
 
     return (
-        <>
+        <div className="columns">
             <NavBar />
             <div className={`column ${windowWidth > 950 ? "is-10" : ""} ${classes.searchPage}`}>
                 <div>
@@ -82,7 +82,7 @@ const SearchPage = () => {
                     ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
