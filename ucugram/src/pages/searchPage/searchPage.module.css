@@ -20,8 +20,10 @@
 }
 
 .searchResults {
-    margin-top: 15px;
+    margin-top: 20px;
     margin-bottom: 4rem;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .searchResult {
@@ -35,13 +37,6 @@
     border-bottom-width: 1px;
     margin-bottom: 5px;
     cursor: pointer;
-}
-
-.pfp {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: orange;
 }
 
 .username {

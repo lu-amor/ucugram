@@ -8,6 +8,7 @@ import SideNavBar from "./../../components/sideNavBar/sideNavBar";
 import { useGetProfile } from "../../hooks/useGetProfile.jsx";
 import useUpdateProfileInfo from "./../../hooks/useUpdateProfileInfo.jsx";
 import ProfileImgPreview from "../../components/profileImagePreview/profileImgPreview.jsx";
+import Loader from "../../components/loader/loader.jsx";
 
 export default function EditProfilePage() {
   const navigate = useNavigate();
@@ -75,7 +76,7 @@ export default function EditProfilePage() {
   return (
     <>
       {profileState?.loading || authState.loading ? (
-        <p>Loading profile...</p> // hacer algo más lindo
+        <Loader />
       ) : (
         <>
           <div className="columns">

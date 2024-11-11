@@ -54,6 +54,10 @@ const SearchPage = () => {
         }
     };
 
+    function getProfilePicture(profilePicture) {
+        return profilePicture ? profilePicture : "../../../public/default-profilePicture.jpg";
+    }    
+
     return (
         <div className="columns">
             <NavBar />
@@ -73,10 +77,12 @@ const SearchPage = () => {
                 <div className={classes.searchResults}>
                     {searchResults.map((user) => (
                         <div key={user._id} className={classes.searchResult} onClick={() => handleGoProfile(user.username, user._id)}>
-                            <div>
-                                <img src={user.profilePicture || "/default-profile.png"} alt={`${user.username}'s profile`} />
-                            </div>
-                            <div className={classes.pfp}/>
+                            <figure className="image is-32x32">
+                                <img
+                                    src={getProfilePicture(user.profilePicture)}
+                                    className='is-rounded'
+                                />
+                            </figure>
                             <p className={classes.username}>{user.username}</p>
                         </div>
                     ))}

@@ -10,6 +10,7 @@ import { useGetProfile } from "../../hooks/useGetProfile";
 import { useAuth } from "./../../context/AuthContext";
 import classes from "./MyProfile.module.css";
 import IonIcon from "@reacticons/ionicons";
+import Loader from "../../components/loader/loader";
 
 function MyProfile({ user1 }) {
   const { state: profileState } = useProfile();
@@ -39,7 +40,7 @@ function MyProfile({ user1 }) {
   return (
     <>
       {profileState?.loading || authState.loading ? (
-        <p>Loading profile...</p> // hacer algo más lindo
+        <Loader />
       ) : (
         <>
           <div className="columns">

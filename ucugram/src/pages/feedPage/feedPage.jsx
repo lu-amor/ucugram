@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import useFetchPosts from "ucugram/src/hooks/useFetchPosts.jsx";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
 import classes from "./feedPage.module.css";
-import PostContainer from "../../components/postContainer/postContainer";
 import Post from "../../components/post/post";
 import { useAuth } from "../../context/AuthContext";
 import SuggestionsPreview from "./../../components/suggestionsPreview/suggestionsPreview";
+import Loader from "../../components/loader/loader";
+import Icon from '@mdi/react';
+import { mdiEmoticonSadOutline } from '@mdi/js';
 
 const FeedPage = () => {
   const { posts, loading, error } = useFetchPosts();
@@ -32,9 +34,10 @@ const FeedPage = () => {
         {/* {windowWidth > 950 ? ( */}
           <div className={`column is-10 ${classes.feedContent}`}>
             <div>
-              {loading && <div>Loading posts...</div>}
-              {error && <div>Error loading posts!</div>}
-              {posts && (
+              {loading && <Loader />}
+              {error && <div className={classes.errorMessage}>Error loading posts<Icon path={mdiEmoticonSadOutline} size={0.9} />
+              </div>}
+              {!posts && (
                 <>
                   <SuggestionsPreview suggestions={posts} />
                   <div className={classes.postContainer}>

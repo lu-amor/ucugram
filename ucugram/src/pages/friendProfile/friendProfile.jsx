@@ -8,6 +8,7 @@ import { useGetProfile } from "../../hooks/useGetProfile.jsx";
 import { PROFILE_ACTIONS } from "./../../context/ProfileContext.jsx";
 import classes from "./FriendProfile.module.css";
 import useFriend from "./../../hooks/useFriends.jsx";
+import Loader from "../../components/loader/loader.jsx";
 
 function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
@@ -70,7 +71,7 @@ function FriendProfile({ user }) {
     <div className="columns">
       <>
         {profileState.loading ? (
-          <p>Loading...</p>
+          <Loader />
         ) : (
           <>
             <SideNavBar user={user} />
