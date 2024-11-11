@@ -1,0 +1,81 @@
+.pageContainer {
+    margin: 20px;
+    padding: 10px;
+    height: 100vh;
+    min-width: 400px;
+    max-width: 1500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+#profileButton {
+    background-color: rgb(160, 188, 239);
+    padding: 5px;
+    margin-top: 5px;
+    width: 160px;
+}
+
+#profileButton:hover {
+    background-color: rgb(136, 167, 224);
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    height: auto; 
+    margin-left: 10px;
+}
+
+.pictureContainer {
+    display: flex;
+    background-color: rgb(235, 235, 235);
+    width: 80%;
+    height: 100px;
+    justify-content: space-between;
+    padding: 20px;
+    align-items: center;
+    border-radius: 25px;
+    padding-right: 30px;
+}
+
+.showPicture {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    gap: 15px;
+}
+
+.field {
+    margin-top: 25px;
+    width: 40%; /* Ocupa todo el ancho */
+    display: block; 
+}
+
+.buttonsContainer {
+    justify-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    height: 40%;
+    margin-left: 10px;
+}
+
+.buttonsContainer #profileButton {
+    height: 40px;
+    width: 90px;
+    background-color: rgb(235, 235, 235);
+    align-self: flex-end;
+}
+
+.buttonsContainer #profileButton:hover {
+    background-color: rgb(185, 182, 182);
+}

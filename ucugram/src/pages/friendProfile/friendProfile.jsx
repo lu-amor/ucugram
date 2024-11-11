@@ -13,6 +13,7 @@ function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
   const { state: authState, dispatch: authDispatch } = useAuth();
   const [isFriend, setIsFriend] = useState();
+  const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
   const { addFriend, removeFriend } = useFriend();
 
@@ -28,7 +29,7 @@ function FriendProfile({ user }) {
   }, []);
 
   useEffect(() => {
-    if (authState.user.friends) {
+    if (authState.user) {
       if (localStorage.getItem("friend-id") && authState.user.friends) {
         const find = authState.user.friends.find(
           (friend) => friend._id === profileState.user?._id
@@ -41,16 +42,27 @@ function FriendProfile({ user }) {
         setIsFriend(find !== undefined);
         localStorage.setItem("friend-id", profileState.user?._id);
       }
+      setFriendsNum(profileState.user?.friends.length)
     }
   }, [profileState, authState]);
 
   const handleToggleFirend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
-      removed === true ? setIsFriend(false) : setIsFriend(isFriend);
+      if(removed === true) {
+        setIsFriend(false);
+        setFriendsNum(friendsNum - 1)
+      } else { // no cambia
+        setIsFriend(true)
+      }
     } else {
       const added = await addFriend(profileState.user._id);
-      added === true ? setIsFriend(true) : setIsFriend(false);
+      if(added === true) {
+        setIsFriend(true);
+        setFriendsNum(friendsNum + 1)
+      } else { // no cambia
+        setIsFriend(false)
+      }
     }
   }
 
@@ -98,17 +110,18 @@ function FriendProfile({ user }) {
                       </div>
                       <div className={classes.statItem}>
                         <span>
-                          <strong>{profileState.user?.friends.length}</strong>{" "}
+                          <strong>{friendsNum}</strong>{" "}
                           friends
                         </span>
                       </div>
                       <div className={classes.profileDescription}>
-                        <p>{user.description}</p>
+                        <p>{profileState.user?.description}</p>
                       </div>
                     </div>
                     <div></div>
                   </div>
                 </div>
+                <div className={classes.divider}/>
                 <div className={classes.postsContainer}>
                   <PostGrid posts={profileState.posts} />
                 </div>

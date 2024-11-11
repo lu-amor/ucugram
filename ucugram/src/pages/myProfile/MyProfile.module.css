@@ -14,12 +14,12 @@
 }
 
 .avatar {
-    grid-column: 1 ;
+    grid-column: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 60%;
-    height: auto; 
+    height: auto;
     margin-left: 20px;
 }
 
@@ -41,21 +41,24 @@
 
 .accountInformation {
     display: flex;
-    flex-wrap: wrap;  
-    gap: 20px;  
-    justify-content: flex-start; 
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
 }
 
 .statItem {
     display: flex;
-    flex-direction: column;  /* Número y texto en vertical */
-    align-items: start; 
-    min-width: 100px;  /* Asegura que cada elemento tenga un espacio mínimo */
+    flex-direction: column;
+    /* Número y texto en vertical */
+    align-items: start;
+    min-width: 100px;
+    /* Asegura que cada elemento tenga un espacio mínimo */
     margin-top: 10px;
 }
 
 .statItem span {
-    white-space: nowrap;  /* Evita que el número y la palabra se separen en dos líneas */
+    white-space: nowrap;
+    /* Evita que el número y la palabra se separen en dos líneas */
 }
 
 .profileDescription {
@@ -64,7 +67,7 @@
 }
 
 .postsContainer {
-    margin-top:5rem;
+    margin-top: 5em;
     height: 100%;
 }
 

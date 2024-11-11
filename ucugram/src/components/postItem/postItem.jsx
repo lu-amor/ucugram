@@ -6,7 +6,6 @@ const PostItem = ({ post }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-    console.log("abre modal")
     setIsModalOpen(true);
   };
 

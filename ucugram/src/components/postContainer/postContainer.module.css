@@ -46,6 +46,7 @@ figure.image.is-square img {
   overflow-y: auto;
   border-top: 2px solid #009ce6;
   padding-top: 10px;
+  max-height: 450px;
 }
 
 .commentsBox p {

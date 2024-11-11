@@ -3,6 +3,7 @@ import { url } from "../App.jsx";
 
 export default function useFriend() {
   const token = localStorage.getItem("token");
+  
   const addFriend = async (friendId) => {
     try {
       const response = await fetch(`${url}user/add-friend/${friendId}`, {
