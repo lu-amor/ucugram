@@ -56,7 +56,7 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <div className={classes.postConatiner}>
+      <div className={classes.postContainer}>
         <header className={classes.header}>
           <div>
             <div>
@@ -85,6 +85,7 @@ const Post = ({ post }) => {
             <img
               src={"http://localhost:3001/" + post.imageUrl}
               alt={post.caption}
+              style={{ objectFit: "cover", width: "100%", height: "100%" }}
             />
           </figure>
         </div>
@@ -92,6 +93,7 @@ const Post = ({ post }) => {
           <div className={classes.buttonsContainer}>
             <LikeButton
               className={`${classes.likeSection}`}
+              style={{ cursor: "pointer" }}
               ref={likeButtonRef}
               post={post}
               initialLikes={post.likes.length}
@@ -104,8 +106,9 @@ const Post = ({ post }) => {
                 onClick={() => setIsCommentVisible(!isCommentVisible)}
                 className="ml-auto"
                 color="#ea5b0c"
+                style={{ cursor: "pointer" }}
               />
-              <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" />
+              <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }}/>
             </div>
           </div>
           <p className={`${classes.pictureDescription} mt-3`}>

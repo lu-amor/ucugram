@@ -37,7 +37,7 @@ const useFetchSuggestions = () => {
   useEffect(() => {
     if(authState.user) {
       const a = async () => {
-/*         console.log("entra"); */
+        // console.log("entra"); 
         setLoading(true);
         const sugg = await getSuggestions();
         setSuggestions(sugg);

@@ -12,6 +12,7 @@ import Loader from "../../components/loader/loader.jsx";
 
 function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { state: authState, dispatch: authDispatch } = useAuth();
   const [isFriend, setIsFriend] = useState();
   const [friendsNum, setFriendsNum] = useState();
@@ -27,6 +28,19 @@ function FriendProfile({ user }) {
       }
     };
     getData();
+  }, []);
+
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      navigate("./home");
+    }
+    localStorage.removeItem("friend-id");
+    window.addEventListener("resize", updateWindowWidth);
+    return () => window.removeEventListener("resize", updateWindowWidth);
   }, []);
 
   useEffect(() => {
@@ -76,7 +90,7 @@ function FriendProfile({ user }) {
           <>
             <SideNavBar user={user} />
             <div
-              className="column is-10"
+              className={`column ${windowWidth > 950 ? "is-10" : ""}`}
               style={{ height: "100vh", overflowY: "auto" }}
             >
               <div className={classes.profileContainer}>
@@ -106,13 +120,14 @@ function FriendProfile({ user }) {
                     <div className={classes.accountInformation}>
                       <div className={classes.statItem}>
                         <span>
-                          <strong>{profileState.posts.length}</strong> posts
+                          <strong>{profileState.posts.length}</strong>
+                          {profileState.posts.length === 1 ? " post" : " posts"}
                         </span>
                       </div>
                       <div className={classes.statItem}>
                         <span>
                           <strong>{friendsNum}</strong>{" "}
-                          friends
+                          {friendsNum === 1 ? "friend" : "friends"}
                         </span>
                       </div>
                       <div className={classes.profileDescription}>

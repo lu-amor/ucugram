@@ -32,12 +32,12 @@ const FeedPage = () => {
       <div className="columns mr-0">
         <SideNavBar />
         {/* {windowWidth > 950 ? ( */}
-          <div className={`column is-10 ${classes.feedContent}`}>
+          <div className={`column ${windowWidth > 950 ? "is-10" : ""} ${classes.feedContent}`}>
             <div>
               {loading && <Loader />}
               {error && <div className={classes.errorMessage}>Error loading posts<Icon path={mdiEmoticonSadOutline} size={0.9} />
               </div>}
-              {!posts && (
+              {posts && (
                 <>
                   <SuggestionsPreview suggestions={posts} />
                   <div className={classes.postContainer}>
