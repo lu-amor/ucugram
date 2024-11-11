@@ -4,7 +4,7 @@ import IonIcon from '@reacticons/ionicons';
 
 const NavBarItem = ({ icono, link, nombre }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const isIcon = typeof link === 'string';
+    const isIcon = link === 'null';
 
     const updateWindowWidth = () => {
         setWindowWidth(window.innerWidth);
