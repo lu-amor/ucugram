@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
+import { View,  Image, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const NavBar = ({ user, activePage, navigation }) => {
@@ -11,6 +11,12 @@ const NavBar = ({ user, activePage, navigation }) => {
                     size = {35}
                     color = "#173363"
                     onPress = {() => navigation.navigate('Feed')}
+                />
+                <Ionicons
+                    name = {activePage === "search" ? "search" : "search-outline"}
+                    size = {35}
+                    color = "#173363"
+                    onPress = {() => navigation.navigate('Search')}
                 />
                 <Ionicons
                     name = {activePage === "add" ? "add-circle" : "add-circle-outline"}

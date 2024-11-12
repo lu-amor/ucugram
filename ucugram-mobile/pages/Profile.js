@@ -1,18 +1,21 @@
 import React from "react";
-import { View, Text, Image, StatusBar, StyleSheet, Dimensions, Button, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, StatusBar, StyleSheet, TouchableOpacity} from "react-native";
 import ProfileGrid from "../components/ProfileGrid";
 import NavBar from "../components/NavBar";
+import Avatar from "../components/Avatar";
+
+// pends : agrandar Avatar Icon 
 
 const Profile = ({ navigation, route }) => {
-    const { user, posts } = route.params;
+    const { user, userPosts } = route.params;
+
     return (
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" backgroundColor='#ffffff'/>
-            <ScrollView>
                 <View style={{paddingHorizontal: 20}}>
                     <View style={styles.topInfo}>
-                        <View>
-                            <Image source={user.profilePicture} style={styles.avatar} />
+                        <View style={styles.avatar}>
+                         <Avatar user={user} ></Avatar> 
                         </View>
                         <View style={styles.nextToAvatar}>
                             <View style={styles.profileData}>
@@ -37,23 +40,27 @@ const Profile = ({ navigation, route }) => {
                         <Text style={styles.description}>{user.bio}</Text>
                     </View>
                 </View>
-                <ProfileGrid posts={posts}/>
-            </ScrollView>
+                <ProfileGrid posts={userPosts} user={user} navigation={navigation}/> 
             <NavBar user={user} activePage="profile" navigation={navigation} />
         </View>
     );
     };
 
     const styles = StyleSheet.create({
+    alertContainer: {
+        flex: 1,
+        alignItems:'center',
+        justifyContent: 'center',
+    },
     container: {
         flex: 1,
         marginTop: 45,
         backgroundColor: "white",
     },
     avatar: {
-        width: 120,
-        height: 120,
-        borderRadius: 100,
+        width: 80,
+        height: 80,
+        borderRadius: 60,
         borderColor: "#808080",
         borderWidth: 3,
         marginRight: 15,

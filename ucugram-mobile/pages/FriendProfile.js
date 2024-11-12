@@ -24,7 +24,7 @@ const FriendProfile = ({ navigation, route }) => {
                 <View style={styles.nextToAvatar}>
                 <View style={styles.profileData}>
                     <View style={styles.individualData}>
-                    <Text style={styles.dataContent}>{friend.posts.length}</Text>
+                    <Text style={styles.dataContent}>{friend.posts}</Text>
                     <Text style={styles.dataDescription}>Posts</Text>
                     </View>
                     <View style={styles.individualData}>
