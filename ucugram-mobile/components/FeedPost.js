@@ -3,8 +3,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import Avatar from "./Avatar";
+import CommentsModal from './CommentsModal';
 
-const FeedPost = ({ post, user, navigation }) => {
+export default function PostItem({ post, user, navigation }) {
+    const [liked, setLiked] = useState(false);
+    const [commentsVisibility, setCommentsVisibility] = useState(false);
+
     const scale = useSharedValue(1);
     const isZooming = useSharedValue(false);
 
@@ -41,6 +45,10 @@ const FeedPost = ({ post, user, navigation }) => {
             };
         });
 
+    const handleLike = () => {
+        setLiked(!liked);
+    };
+
     return (
         <GestureHandlerRootView style={styles.container}>
             <TouchableOpacity onPress={() => navigation.navigate(post.username, { friend: { username: post.username, profilePicture: post.profilePicture, bio: post.description } })}>
@@ -61,24 +69,27 @@ const FeedPost = ({ post, user, navigation }) => {
             </View>
             <Animated.View style={[styles.belowPicture, belowPictureStyle]}>
                 <View style={styles.actionButtonsContainer}>
-                    <TouchableOpacity>
-                        <Ionicons name="heart-outline" color='#ea5b0c' size={32} />
+                    <TouchableOpacity onPress={() => handleLike()}>
+                        <Ionicons name={liked ? "heart" : "heart-outline"} color='#ea5b0c' size={32} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Ionicons name="chatbubble-outline" color='#ea5b0c' size={30} />
+                    <Text style={styles.likes}>{post.likes}</Text>
+                    <TouchableOpacity onPress={() => setCommentsVisibility(true)}>
+                        <Ionicons name={"chatbubble-outline"} color='#ea5b0c' size={30} />
                     </TouchableOpacity>
+                    <Text style={styles.likes}>{post.comments}</Text>
                     <TouchableOpacity style={{ marginLeft: 'auto', marginRight: 5 }}>
                         <Ionicons name="share-social-outline" color='#ea5b0c' size={30} />
                     </TouchableOpacity>
                 </View>
                 <View style={styles.userDesc}>
                     <Text>
-                        <Text style={styles.usernameBottom}>{user.username}  </Text>
+                        <Text style={styles.usernameBottom}>{user.username}  </Text> {/* no saquen los espacios porque queda feo y no me deja poner margen :( */}
                         <Text style={styles.postDescription}>{post.description}</Text>
                     </Text>
                 </View>
             </Animated.View>
-        </GestureHandlerRootView>
+            <CommentsModal visible={commentsVisibility} onClose={() => setCommentsVisibility(false)} commentsArray={post.commentsArray} />
+            </GestureHandlerRootView>
     );
 };
 
@@ -135,9 +146,15 @@ const styles = StyleSheet.create({
     },
     actionButtonsContainer: {
         flexDirection: "row",
-        gap: 10,
+        gap: 2,
         marginBottom: 10,
         alignItems: "center",
+    },
+    likes: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#173363",
+        marginRight: 10,
     },
     userDesc: {
         flexDirection: "row",
@@ -152,5 +169,3 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
 });
-
-export default FeedPost;
