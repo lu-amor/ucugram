@@ -11,7 +11,8 @@ const PostModal = ({ isVisible, onClose, post, user }) => {
             animationType="fade"
             onRequestClose={onClose}
         >
-            <Pressable style={styles.overlay} onPressOut={onClose}>
+            <View style={styles.overlay} >
+                <Pressable style={StyleSheet.absoluteFill} onPressOut={onClose} />
                 <View style={styles.modalContent}>
                     
                     <View style={styles.header}>
@@ -29,7 +30,7 @@ const PostModal = ({ isVisible, onClose, post, user }) => {
                         <Ionicons name="share-social-outline" size={24} color="black" style={styles.icon} />
                     </View>
                 </View>
-            </Pressable>
+            </View>
         </Modal>
     );
 };

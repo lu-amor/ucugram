@@ -9,6 +9,7 @@ import Add from './pages/Add';
 import Search from './pages/Search';
 import Notifications from './pages/Notifications';
 import FriendProfile from './pages/FriendProfile';
+import Post from './pages/Post'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -374,6 +375,7 @@ export default function App() {
         <Stack.Screen name="Add" component={Add} initialParams={{ user }} options={{ headerShown: false }} />
         <Stack.Screen name="Notifications" component={Notifications} initialParams={{ user }} options={{ headerShown: false }} />
         <Stack.Screen name="Profile" component={Profile} initialParams={{ user, userPosts }} options={{ headerShown: false }} />
+        <Stack.Screen name="Post" component={Post} initialParams={{ user }} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 

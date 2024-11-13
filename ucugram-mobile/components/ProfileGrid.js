@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, StyleSheet, Dimensions, View } from 'react-native';
 import ProfilePost from './ProfilePost';
 
-const ProfileGrid = ({ posts, user }) => {
+const ProfileGrid = ({ posts, user, navigation }) => {
     const numColumns = 3;
 
     const renderItem = ({ item, index }) => {
@@ -14,6 +14,7 @@ const ProfileGrid = ({ posts, user }) => {
                     idx={index}
                     post={item}
                     user={user}
+                    navigation={navigation}
                 />
             </View>
         );
