@@ -11,7 +11,7 @@ const SuggestedFriends = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <SuggestedFollows suggestions={suggestedFollows} onBack={handleBack} />
+      <SuggestedFollows onBack={handleBack} />
     </View>
   );
 };

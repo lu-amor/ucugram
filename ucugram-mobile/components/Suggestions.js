@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import SuggestionsPreview from './SuggestionsPreview';
+import useFetchSuggestions from '../hooks/useFetchSuggestions.js';
 
-const Suggestions = ({suggestedFollows, navigation}) => {
+const Suggestions = ({navigation}) => {
+  const { suggestions, loading, error } = useFetchSuggestions();
+
 return (
     <View style={styles.container}>
-      <SuggestionsPreview suggestions={suggestedFollows} />
+      <SuggestionsPreview suggestions={suggestions} />
       <View style={styles.footer}>
        {/* onPress={() => navigation.navigate('SuggestedFriends',{suggestedFollows})}  */}
       <TouchableOpacity onPress={() => navigation.navigate('SuggestedFriends')} style={styles.showAllButton}>
