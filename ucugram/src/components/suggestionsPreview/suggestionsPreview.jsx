@@ -34,13 +34,14 @@ const SuggestionsPreview = () => {
   return (
     suggestions.length !== 0 ? (
       <div className={classes.suggestionsPreview}>
-        <h2 className={`title is-4`}>Suggestions for you</h2>
+        <h2 className={`title is-4 has-text-info`}>Suggestions for you</h2>
         <Slider {...settings}>
           {suggestions.map((suggestion, index) => (
             <div key={index} className="suggestionWrapper">
               <SuggestionCard suggestion={suggestion} />
             </div>
           ))}
+          {console.log(suggestions)}
         </Slider>
       </div>
     ) : null
