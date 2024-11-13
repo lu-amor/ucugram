@@ -2,8 +2,8 @@
     margin: 20px;
     padding: 10px;
     height: 100vh;
-    min-width: 400px;
-    max-width: 1500px;
+    min-width: 200px;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -16,10 +16,12 @@
 }
 
 #profileButton {
-    background-color: rgb(160, 188, 239);
+    background-color: rgb(214, 225, 245);
     padding: 5px;
     margin-top: 5px;
-    width: 160px;
+    margin-left: auto;
+    justify-self: flex-end;
+    width: 130px;
 }
 
 #profileButton:hover {
@@ -31,49 +33,78 @@
     justify-content: center;
     align-items: center;
     width: 65px;
-    height: auto; 
-    margin-left: 10px;
+    min-width: 55px;
+    max-width: 65px;
+    margin-right: 15px;
+}
+
+.username {
+    font-size: 25px;
+    margin-right: auto;
+}
+
+@media (max-width: 500px) {
+    .username {
+        margin-top: 5px;
+        font-size: 20px;
+    }
 }
 
 .pictureContainer {
     display: flex;
     background-color: rgb(235, 235, 235);
-    width: 80%;
+    width: 100%;
     height: 100px;
-    justify-content: space-between;
     padding: 20px;
     align-items: center;
     border-radius: 25px;
-    padding-right: 30px;
 }
 
 .showPicture {
     display: flex;
-    width: 50%;
+    width: 100%;
     align-items: center;
-    gap: 15px;
+    padding-right: 15px;
 }
 
 .field {
     margin-top: 25px;
-    width: 40%; /* Ocupa todo el ancho */
+    width: 50%;
     display: block; 
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 405px) {
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #profileButton {
+        margin-left: 0px;
+    }
 }
 
 .buttonsContainer {
     justify-self: flex-end;
     display: flex;
-    justify-content: space-between;
-    width: 80%;
-    height: 40%;
-    margin-left: 10px;
+    justify-content: flex-end;
+    width: 100%;
+    height: 19%;
+    margin-top: auto;
 }
 
 .buttonsContainer #profileButton {
     height: 40px;
     width: 90px;
     background-color: rgb(235, 235, 235);
-    align-self: flex-end;
+    margin-left: 10px;
 }
 
 .buttonsContainer #profileButton:hover {

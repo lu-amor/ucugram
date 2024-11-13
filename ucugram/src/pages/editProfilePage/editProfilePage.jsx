@@ -22,6 +22,20 @@ export default function EditProfilePage() {
   const fileInputRef = useRef(null);
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [previewURL, setPreviewURL] = useState(null);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    if (!authState.isAuthenticated) {
+      navigate("./home");
+    }
+    localStorage.removeItem("friend-id");
+    window.addEventListener("resize", updateWindowWidth);
+    return () => window.removeEventListener("resize", updateWindowWidth);
+  }, []);
 
   useEffect(() => {
     const reload = async () => {
@@ -82,30 +96,32 @@ export default function EditProfilePage() {
           <div className="columns">
             <SideNavBar />
             <div
-              className="column is-10"
-              style={{ height: "100vh", overflowY: "auto" }}
+              className={`column ${windowWidth > 950 ? "is-10" : ""}`}
+              style={{ height: "110vh", overflowY: "auto" }}
             >
               <div className={classes.pageContainer}>
                 <div>
                   <div className={classes.header}>
-                    <h1 className="title is-1">Edit Profile</h1>
+                    <h1 className="title is-1 has-text-info">Edit Profile</h1>
                   </div>
                   <div className={classes.pictureContainer}>
                     <div className={classes.showPicture}>
                       <div className={classes.avatar}>
                         <Avatar user={profileState.user} />
                       </div>
-                      <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
-                        <strong>{profileState.user?.username}</strong>
-                      </p>
+                      <div className={classes.container}>
+                        <p className={classes.username}>
+                          <strong>{profileState.user?.username}</strong>
+                        </p>
+                        <button
+                          className={`button`}
+                          id={classes.profileButton}
+                          onClick={handleButtonClick}
+                        >
+                          Change picture
+                        </button>
+                      </div>
                     </div>
-                    <button
-                      className={`button`}
-                      id={classes.profileButton}
-                      onClick={handleButtonClick}
-                    >
-                      Change picture
-                    </button>
                     <input
                       type="file"
                       id="fileUpload"

@@ -61,7 +61,7 @@ function FriendProfile({ user }) {
     }
   }, [profileState, authState]);
 
-  const handleToggleFirend = async () => {
+  const handleToggleFriend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
       if(removed === true) {
@@ -82,13 +82,13 @@ function FriendProfile({ user }) {
   }
 
   return (
-    <div className="columns">
-      <>
-        {profileState.loading ? (
-          <Loader />
-        ) : (
-          <>
-            <SideNavBar user={user} />
+    <>
+      {profileState?.loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="columns">
+            <SideNavBar user={user}/>
             <div
               className={`column ${windowWidth > 950 ? "is-10" : ""}`}
               style={{ height: "100vh", overflowY: "auto" }}
@@ -104,12 +104,13 @@ function FriendProfile({ user }) {
                         display: "flex",
                         width: "100%",
                         flexWrap: "wrap",
+                        alignItems: "center",
                       }}
                     >
-                      <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
+                      <p className={classes.username}>
                         <strong>{profileState.user?.username}</strong>
                       </p>
-                      <button className={`button ${classes.profileButton}`} onClick={() => handleToggleFirend()}>
+                      <button className={`button ${windowWidth < 950 ? 'is-small' : ''} ${classes.profileButton}`} onClick={() => handleToggleFriend()}>
                         {isFriend ? (
                           <span>remove friend</span>
                         ) : (
@@ -118,35 +119,36 @@ function FriendProfile({ user }) {
                       </button>
                     </div>
                     <div className={classes.accountInformation}>
-                      <div className={classes.statItem}>
-                        <span>
-                          <strong>{profileState.posts.length}</strong>
-                          {profileState.posts.length === 1 ? " post" : " posts"}
-                        </span>
-                      </div>
-                      <div className={classes.statItem}>
-                        <span>
-                          <strong>{friendsNum}</strong>{" "}
-                          {friendsNum === 1 ? "friend" : "friends"}
-                        </span>
+                      <div className={classes.stats}>
+                        <div className={classes.statItem}>
+                          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <strong>{profileState.posts?.length}</strong>
+                            <p>{profileState.posts?.length === 1 ? " post" : " posts"}</p>
+                          </div>
+                        </div>
+                        <div className={classes.statItem}>
+                          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <strong>{profileState.user?.friends.length}</strong>{" "}
+                            <p>{profileState.user?.friends.length === 1 ? "friend" : "friends"}</p>
+                          </div>
+                        </div>
                       </div>
                       <div className={classes.profileDescription}>
                         <p>{profileState.user?.description}</p>
                       </div>
                     </div>
-                    <div></div>
                   </div>
                 </div>
                 <div className={classes.divider}/>
                 <div className={classes.postsContainer}>
-                  <PostGrid posts={profileState.posts} />
+                  <PostGrid posts={profileState.posts} user={profileState.user} />
                 </div>
               </div>
             </div>
-          </>
-        )}
-      </>
-    </div>
+          </div>
+        </>
+      )}
+    </>
   );
 }
 

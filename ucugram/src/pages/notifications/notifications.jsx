@@ -66,12 +66,6 @@ function Notifications({ user, notificationsList }) {
                     <div className={`column is-10 ${classes.pageContent}`}>
                         <div>
                             <h1 className={classes.header}>
-                                <IonIcon
-                                    name="chevron-back-outline"
-                                    className={`${classes.goBack}`}
-                                    style={{ '--ionicon-stroke-width': '16px', 'cursor': 'pointer' }}
-                                    onClick={goFeed}
-                                />
                                 Notifications
                             </h1>
                             {sortedNotifications.map(notification => (

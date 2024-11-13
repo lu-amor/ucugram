@@ -3,7 +3,7 @@ import LikeButton from "ucugram/src/components/likeButton/likeButton.jsx";
 import classes from './postContainer.module.css';
 import Avatar from "ucugram/src/components/avatar/avatar.jsx";
 import Icon from "@mdi/react";
-import { mdiShare,mdiShareVariant, mdiComment } from "@mdi/js";
+import {mdiShareVariant, mdiComment } from "@mdi/js";
 import useComment from "ucugram/src/hooks/useComment";
 import CommentInput from "ucugram/src/components/commentInput/commentInput.jsx";
 import useGetComment from "./../../hooks/useGetComment.jsx";
