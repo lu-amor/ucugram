@@ -11,6 +11,7 @@ import {
   GestureHandlerRootView,
   GestureDetector,
   Gesture,
+  Pressable,
 } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -21,12 +22,14 @@ import Avatar from "./Avatar";
 import CommentsModal from "./CommentsModal";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { useGetProfile } from "../hooks/useGetProfile";
 
 export default function FeedPost({ post, navigation }) {
   const [liked, setLiked] = useState(false);
   console.log(post.imageUrl)
   const [commentsVisibility, setCommentsVisibility] = useState(false);
   const {state: authState} = useAuth();
+  const getProfile = useGetProfile();  
 
   const scale = useSharedValue(1);
   const isZooming = useSharedValue(false);
@@ -67,18 +70,24 @@ export default function FeedPost({ post, navigation }) {
     setLiked(!liked);
   };
 
+  const handleGoProfile = async () => {
+    const userId = post.user._id;
+    const username = post.user.username;
+    console.log("go friend profile: ", username)
+    console.log("id friend profile: ", userId)
+    
+    if (username !== authState.user.username) {
+      await getProfile(userId);
+      navigation.navigate("FriendProfile", { userId, username });
+    } else {
+      navigation.navigate('Profile');
+    }
+  };
+
   return (
     <GestureHandlerRootView style={styles.container}>
       <TouchableOpacity
-        onPress={() =>
-          navigation.navigate(post.user.username, {
-            friend: {
-              username: post.user.username,
-              profilePicture: post.user.profilePicture,
-              bio: post.user.description,
-            },
-          })
-        }
+        onPress={handleGoProfile}
       >
         <View style={styles.userInfo}>
           <View style={styles.avatar}>

@@ -23,7 +23,7 @@ const ProfileGrid = ({ posts, user }) => {
         <FlatList
             data={posts}
             renderItem={renderItem}
-            keyExtractor={(item, index) => index.toString()}
+            keyExtractor={(item) => item._id}
             numColumns={numColumns}
             contentContainerStyle={styles.gridContainer}
         />

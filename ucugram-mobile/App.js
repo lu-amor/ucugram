@@ -1,18 +1,18 @@
-import { StyleSheet } from "react-native";
-import React from "react";
-import Profile from "./pages/Profile";
-import LogInPage from "./pages/LogInPage";
-import SignUpPage from "./pages/SignUpPage";
-import Feed from "./pages/Feed";
-import SuggestedFriends from "./pages/SuggestedFriends";
-import Add from "./pages/Add";
-import Search from "./pages/Search";
-import Notifications from "./pages/Notifications";
-import FriendProfile from "./pages/FriendProfile";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { AuthProvider } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
+import Add from "./pages/Add";
+import Feed from "./pages/Feed";
+import LogInPage from "./pages/LogInPage";
+import Notifications from "./pages/Notifications";
+import Profile from "./pages/Profile";
+import Search from "./pages/Search";
+import SignUpPage from "./pages/SignUpPage";
+import SuggestedFriends from "./pages/SuggestedFriends";
+import FriendProfile from "./pages/[FriendProfile]";
 
 const Stack = createNativeStackNavigator();
 export const url = "http://172.20.10.2:3001/api/"; // para levantar en mobile
@@ -451,8 +451,16 @@ export default function App() {
       <ProfileProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Login" component={LogInPage} options={{ headerShown: false }} />
-      <Stack.Screen name="SignUp" component={SignUpPage} options={{ headerShown: false }}  />
+            <Stack.Screen
+              name="Login"
+              component={LogInPage}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignUp"
+              component={SignUpPage}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Feed"
               component={Feed}
@@ -472,6 +480,12 @@ export default function App() {
                 options={{ headerShown: false }}
               />
             ))}
+            <Stack.Screen
+              name="FriendProfile"
+              component={FriendProfile}
+              initialParams={{ user, posts: allFriendPosts }}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Search"
               component={Search}

@@ -6,6 +6,11 @@ import Avatar from "./Avatar";
 
 const NavBar = ({ user, activePage, navigation }) => {
   const { state: authState } = useAuth();
+
+  const handleGoProfile = async () => {
+    navigation.navigate("Profile");
+  };
+
   return (
     <View style={styles.navBar}>
       <View style={styles.navBarIcons}>
@@ -38,7 +43,7 @@ const NavBar = ({ user, activePage, navigation }) => {
           color="#173363"
           onPress={() => navigation.navigate("Notifications")}
         />
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <TouchableOpacity onPress={handleGoProfile}>
           <View style={styles.avatar}>
             <Avatar user={authState.user}></Avatar>
           </View>

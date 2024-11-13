@@ -12,21 +12,28 @@ import Avatar from "../components/Avatar";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile.js";
 import { useProfile } from "../context/ProfileContext.js";
+import { useIsFocused } from '@react-navigation/native';
 
 // pends : agrandar Avatar Icon
 
-const Profile = ({ navigation, route }) => {
-  const { user, userPosts } = route.params;
+const Profile = ({ navigation }) => {
   const { state: authState } = useAuth();
   const { state: profileState } = useProfile();
   const getProfile = useGetProfile();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    const userId = authState.user?._id;
-    if (userId) {
-      getProfile(userId);
+    const resetProfile = async () => {
+      const userId = authState.user?._id;
+      if (userId) {
+        await getProfile(userId);
+      }
+    };
+
+    if (isFocused) {
+      resetProfile();
     }
-  }, [authState?.user?._id]);
+  }, [isFocused, authState.user?._id]);
 
   return (
     <View style={styles.container}>
@@ -43,12 +50,12 @@ const Profile = ({ navigation, route }) => {
               <View style={styles.nextToAvatar}>
                 <View style={styles.profileData}>
                   <View style={styles.individualData}>
-                    <Text style={styles.dataContent}>{user.posts}</Text>
+                    <Text style={styles.dataContent}>{profileState.posts.length}</Text>
                     <Text style={styles.dataDescription}>Posts</Text>
                   </View>
                   <View style={styles.individualData}>
-                    <Text style={styles.dataContent}>{user.followers}</Text>
-                    <Text style={styles.dataDescription}>Followers</Text>
+                    <Text style={styles.dataContent}>{profileState.user?.friends.length}</Text>
+                    <Text style={styles.dataDescription}>Friends</Text>
                   </View>
                 </View>
                 <View style={styles.editProfileButton}>
@@ -61,12 +68,12 @@ const Profile = ({ navigation, route }) => {
               </View>
             </View>
             <View>
-              <Text style={styles.username}>{user.username}</Text>
-              <Text style={styles.description}>{user.bio}</Text>
+              <Text style={styles.username}>{profileState.user?.username}</Text>
+              <Text style={styles.description}>{profileState.user?.description}</Text>
             </View>
           </View>
-          <ProfileGrid posts={userPosts} user={user} navigation={navigation} />
-          <NavBar user={user} activePage="profile" navigation={navigation} />
+          <ProfileGrid posts={profileState.posts} user={profileState.user} navigation={navigation} />
+          <NavBar user={profileState.user} activePage="profile" navigation={navigation} />
         </>
       )}
     </View>
