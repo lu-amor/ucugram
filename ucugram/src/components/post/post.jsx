@@ -10,6 +10,9 @@ import useGetComment from "./../../hooks/useGetComment.jsx";
 import { useGetProfile } from "../../hooks/useGetProfile";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext.jsx";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import Toastify from "toastify-js"
+import 'toastify-js/src/toastify.css'
 
 const Post = ({ post }) => {
   const [isCommentVisible, setIsCommentVisible] = useState();
@@ -24,6 +27,19 @@ const Post = ({ post }) => {
     if (likeButtonRef.current !== null) {
       likeButtonRef.current.click(); // simulo el click en el botón de like
     }
+  };
+
+  const handleShare = () => {
+    Toastify({
+      text: "Link copied to clipboard!",
+      className: "info",
+      style: {
+        background: "linear-gradient(135deg, #ea5b0c, #009ce6)",
+        width: "220px",
+        maxWidth: "220px",
+        borderRadius: "8px",
+      }
+    }).showToast();
   };
 
   useEffect(() => {
@@ -108,7 +124,9 @@ const Post = ({ post }) => {
                 color="#ea5b0c"
                 style={{ cursor: "pointer" }}
               />
-              <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }}/>
+              <CopyToClipboard text={"http://localhost:5173/profile/" + post.user.username}>
+                <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }} onClick={handleShare}/>
+              </CopyToClipboard>
             </div>
           </div>
           <p className={`${classes.pictureDescription} mt-3`}>

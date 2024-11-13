@@ -9,6 +9,9 @@ import useComment from "ucugram/src/hooks/useComment";
 import CommentInput from "ucugram/src/components/commentInput/commentInput.jsx";
 import useGetComment from "./../../hooks/useGetComment.jsx";
 import { useProfile } from "../../context/ProfileContext";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Toastify from "toastify-js"
+import 'toastify-js/src/toastify.css'
 
 const PostModal = ({ post, user, onClose }) => {
   const { state: profileState } = useProfile();
@@ -17,6 +20,19 @@ const PostModal = ({ post, user, onClose }) => {
   const likeButtonRef = useRef(null);
   const [comments, setComments] = useState([]);
   const getComment = useGetComment();
+
+  const handleShare = () => {
+    Toastify({
+      text: "Link copied to clipboard!",
+      className: "info",
+      style: {
+        background: "linear-gradient(135deg, #ea5b0c, #009ce6)",
+        width: "220px",
+        maxWidth: "220px",
+        borderRadius: "8px",
+      }
+    }).showToast();
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -114,7 +130,9 @@ const PostModal = ({ post, user, onClose }) => {
                   color="#ea5b0c"
                   style={{ cursor: "pointer" }}
                 />
-                <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }}/>
+              <CopyToClipboard text={"http://localhost:5173/profile/" + user.username}>
+                <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }} onClick={handleShare}/>
+              </CopyToClipboard>
               </div>
             </div>
             <p className={`${classes.pictureDescription} mt-3`}>
