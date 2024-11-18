@@ -471,15 +471,6 @@ export default function App() {
               }}
               options={{ headerShown: false }}
             />
-            {friends.map((friend, index) => (
-              <Stack.Screen
-                key={index}
-                name={friend.username}
-                component={FriendProfile}
-                initialParams={{ user, friend, posts: allFriendPosts }}
-                options={{ headerShown: false }}
-              />
-            ))}
             <Stack.Screen
               name="FriendProfile"
               component={FriendProfile}

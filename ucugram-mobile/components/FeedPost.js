@@ -26,7 +26,6 @@ import { useGetProfile } from "../hooks/useGetProfile";
 
 export default function FeedPost({ post, navigation }) {
   const [liked, setLiked] = useState(false);
-  console.log(post.imageUrl)
   const [commentsVisibility, setCommentsVisibility] = useState(false);
   const {state: authState} = useAuth();
   const getProfile = useGetProfile();  
