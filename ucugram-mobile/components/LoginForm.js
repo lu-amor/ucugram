@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useLogin } from "../services/authService";
-import { handleReload, useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function LoginForm({ createAccount, onLoginSuccess }) {
@@ -19,7 +19,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
   const passwordRef = useRef("");
   const login = useLogin();
   const navigation = useNavigation();
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const { state: authState, handleReload } = useAuth();
   const [isLoading, setIsLoading] = useState();
   const handleCreateAccountBtn = () => {
     // logica para crear cuenta here
@@ -38,17 +38,13 @@ function LoginForm({ createAccount, onLoginSuccess }) {
 
   useEffect(() => {
     const start = async () => {
-      const token = await AsyncStorage.getItem("token");
-      if (token) {
-        await handleReload(token, authDispatch);
-
-        if (authState.isAuthenticated) {
-          navigation.navigate("Profile");
-        }
+      await handleReload();
+      if (authState.isAuthenticated) {
+        onLoginSuccess();
       }
     };
     start();
-  }, []);
+  }, [authState?.loading]);
 
   const handleLoginBtn = async () => {
     // if (!validateEmail(email)) {

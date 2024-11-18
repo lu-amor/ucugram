@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { handleReload, useAuth } from "../context/AuthContext.js";
+import { useAuth } from "../context/AuthContext.js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import useGetAllUsers from "./useGetAllUsers.js";
 
@@ -8,7 +8,7 @@ const useFetchSuggestions = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const getAllUsers = useGetAllUsers();
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const { state: authState, handleReload } = useAuth();
 
   const getSuggestions = async () => {
     const allUsers = await getAllUsers();
@@ -28,11 +28,10 @@ const useFetchSuggestions = () => {
   };
 
   useEffect(() => {
-    const a = async () => {
-      const token = await AsyncStorage.getItem("token");
-      await handleReload(token , authDispatch);
+    const reload = async () => {
+      await handleReload();
     };
-    a();
+    reload();
   }, []);
 
   useEffect(() => {

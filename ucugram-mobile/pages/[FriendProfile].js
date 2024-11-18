@@ -19,7 +19,7 @@ import Avatar from "../components/Avatar";
 
 const FriendProfile = ({ navigation, route }) => {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const { state: authState, handleReload} = useAuth();
   const [isFriend, setIsFriend] = useState();
   const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
@@ -28,11 +28,10 @@ const FriendProfile = ({ navigation, route }) => {
   useEffect(() => {
     const getData = async () => {
       const friendId = await AsyncStorage.getItem("friend-id");
-      const token = await AsyncStorage.getItem("token");
       if (friendId) {
         dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
         await getProfile(friendId);
-        await handleReload(token, authDispatch);
+        await handleReload();
       }
     };
     getData();
