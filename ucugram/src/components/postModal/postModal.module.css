@@ -1,192 +1,110 @@
-.modalStyle {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: rgba(34, 34, 34, 0.74);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* z-index: 1000; */
-  }
+.modalContent {
+  width: 100%;
+  min-width: 100%;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
 
-  .modalContent {
-    justify-content: center;
-    display: flex;
-    margin-left: 50px;
-    margin-right: 50px;
-  }
-  
-  .modalCardBody {
-    display: flex;
-    flex-direction: row;
-    min-height: 300px;
-  }
-  
-  @media (min-width: 951px) {
-    .modalContent {
-      width: 90%;
-      max-width: 1000px;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-  
-    .modalCardBody {
-      width: 100%;
-    }
-  }
-  
-  .pic {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
-  .pic img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-  }
-  
-  .dataContainer{
-    width: 100%;
-    min-width: 250px;
-    background-color: #009ce6;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    border-left: 5px solid #f7c600;
-  }
+.modalClose {
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  cursor: pointer;
+}
 
-  .userInfo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-  
-  .userAvatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-  }
+.userAvatar {
+  width: 40px;
+  height: 40px;
+}
 
-  .postHeader {
-    /* border-bottom: 1px solid #353536;  */
-    border-bottom: 1px solid #173363
-  }
-  
-  .postDate {
-    /* color: #8e8e8e; */
-    color: #173363;
-    font-size: 12px;
-    margin-top: 5px;
-    font-weight: 700;
-  }
+.postUsername {
+  margin-left: 10px;
+  font-size: 18px;
+}
 
-  .picDescription {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #ffffff;
-    font-weight: 600;
-  }
+.postDateInfo {
+  color: #948c9c;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: 25px;
+}
 
-  .commentsSection {
-    /* margin-top: 10px; */
-    /* border-top: 1px solid #353536; */
-    border-top: 1px solid #173363;
-    padding-top: 10px;
-  }
+figure.image.is-square img {
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
 
-  .commentsSection p {
-    font-size: 14px;
-    color: #ffffff;
-  }
-  
-  .modalClose {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    color: white;
-    background-color: transparent;
-    border: none;
-    font-size: 2em; 
-  }
+.dataBox {
+  padding: 20px;
+  height: 100%;
+}
 
-  .postText {
-    max-height: 200px;
-    overflow-y: auto;    
-  }
+.pictureDescription {
+  font-size: 18px;
+  color: #173363;
+  margin-bottom: 20px;
+}
 
-  @media (max-width: 950px) {
-    .modalCardBody {
-      margin: 10px;
-      flex-direction: column;
-      width: 100%;
-      max-width: 600px;
-    }
-  
-    .modalContent {
-      margin-top: 60px;
-      margin-bottom: 60px;
-    }
-  
-    .dataContainer {
-      padding: 10px;
-    }
+.commentsBox {
+  overflow-y: auto;
+  border-top: 2px solid rgb(192, 190, 190);
+  max-height: 200px;
+}
 
-    .dataContainer {
-      border-top: 5px solid #f7c600;
-      border-left: none;
-    }
-  }
-  
-  @media (max-width: 580px) {
-    .modalContent {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      height: auto;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-  
-    .modalCardBody {
-      flex-direction: column;
-      width: 90%;
-    }
+.commentsBox p {
+  font-size: 17px;
+  color: #173363;
+}
 
-    .pic {
-      position: relative;
-      width: 50%;
-      max-width: 50%;
-      overflow: hidden;
-    }
-    
-    .pic img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      height: 50%;
-      object-fit: cover;
-      transform: translate(-50%, -50%);
-    }
-  
-    .commentsSection {
-      max-height: 120px;
-    }
+.likeSection,
+.commentButton,
+.shareButton {
+  color: #ea5b0c;
+  cursor: pointer;
+}
 
-    .dataContainer {
-      border-top: 5px solid #f7c600;
-      border-left: none;
-    }
-  }
+.postContainer {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  min-width: 200px;
+  max-width: 500px;
+  height: fit-content;
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 
+.header {
+  max-height: 70px;
+  min-height: 70px;
+  display: flex !important;
+  align-items: center;
+}
 
+.header div {
+  display: flex !important;
+  align-items: center;
+}
 
-  
+.header div div {
+  width: 45px;
+  height: 45px;
+  margin-left: 10px;
+}
+
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  width: 100%;
+}
+
+.commentInputSection {
+  margin-top: 15px;
+}

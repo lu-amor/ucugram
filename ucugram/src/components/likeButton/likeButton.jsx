@@ -11,11 +11,8 @@ const LikeButton = forwardRef(({ post, modal, initialLikes }, ref) => {
       <div>
         <button
           ref={ref}
-          className={`button ${isLiked ? "is-info" : ""}`}
-          style={{
-            borderRadius: "8px",
-            color: isLiked ? "#ffffff" : "#173363",
-          }}
+          className={`button`}
+          style={{backgroundColor: "transparent", borderWidth:"0px"}}
           onClick={toggleLike}
         >
           {isLiked ? (

@@ -1,0 +1,46 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #173363;
+}
+
+.searchPage {
+    overflow-y: auto;
+    width: 100%;
+}
+
+.searchContent {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.searchResults {
+    margin-top: 20px;
+    margin-bottom: 4rem;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.searchResult {
+    display: flex;
+    flex-direction: row;
+    gap: 0px 5px;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-bottom: #888;
+    border-bottom-width: 1px;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: 600;
+    color: #173363;
+}

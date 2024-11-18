@@ -12,6 +12,8 @@ import Notifications from "./pages/notifications/notifications";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
+import EditProfilePage from "./pages/editProfilePage/editProfilePage";
+import SearchPage from "./pages/searchPage/searchPage";
 
 export const url = "http://localhost:3001/api/";
 
@@ -97,10 +99,11 @@ function App() {
               element={<MyProfile user1={user} />}
             ></Route>
             <Route
-              path="/friendProfile/:username"
+              path="/profile/:username"
               element={<FriendProfile user={friend} />}
             ></Route>
             <Route path="/feed" element={<FeedPage />}></Route>
+            <Route path="/account/edit" element={<EditProfilePage />}></Route>
             <Route
               path="/notifications"
               element={
@@ -110,6 +113,7 @@ function App() {
                 />
               }
             ></Route>
+            <Route path="/search" element={<SearchPage />}></Route>
           </>
           <Route path="/documentation" element={<DocPage />}></Route>
           <Route

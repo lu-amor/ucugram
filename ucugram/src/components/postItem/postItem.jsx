@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import PostModal from "ucugram/src/components/postModal/postModal.jsx";
 import classes from "ucugram/src/components/postItem/postItem.module.css";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, user }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-    console.log("abre modal")
     setIsModalOpen(true);
   };
 
@@ -23,7 +22,7 @@ const PostItem = ({ post }) => {
           </figure>
         </div>
       </div>
-      {isModalOpen && <PostModal post={post} onClose={handleModalClose}/>}
+      {isModalOpen && <PostModal post={post} user={user} onClose={handleModalClose}/>}
     </div>
   );
 };

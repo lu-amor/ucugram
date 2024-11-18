@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import classes from "./sideNavBar.module.css";
 import NavBarItem from "../navBarItem/navBarItem";
-import houseIcon from "../../assets/house-icon.png";
-import bellIcon from "../../assets/bell-icon.png";
 import { useNavigate } from "react-router-dom";
-import Notification from "../notification/notification";
-import Icon from "@mdi/react";
-import { mdiMenu } from "@mdi/js";
 import { useLogout } from "../../services/authService";
 import { useAuth } from "../../context/AuthContext";
 import Avatar from "../avatar/avatar";
@@ -19,6 +14,10 @@ const NavBar = () => {
 
   const goFeed = () => {
     navigate("/feed");
+  };
+
+  const goSearch = () => {
+    navigate("/search");
   };
 
   const goNotifications = () => {
@@ -48,15 +47,21 @@ const NavBar = () => {
       <div className={classes.dropdownMenu}>
         <button onClick={goFeed}>
           <a className="has-text-black has-text-weight-medium">
-            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" disabled={false}/>
           </a>
         </button>
-        <button>
+        <button onClick={goSearch}>
+          <a className="has-text-black has-text-weight-medium">
+            <NavBarItem icono="search" link={'null'} nombre="Search" disabled={false} />
+          </a>
+        </button>
+        <button onClick={goNotifications}>
           <a className="has-text-black has-text-weight-medium">
             <NavBarItem
               icono="notifications"
-              link={bellIcon}
+              link={'null'}
               nombre="Notifications"
+              disabled = {true}
             />
           </a>
         </button>
@@ -66,6 +71,7 @@ const NavBar = () => {
               icono="profile"
               link={<Avatar user={authState.user} />}
               nombre="My profile"
+              disabled={false}
             />
           </a>
         </button>
@@ -77,15 +83,21 @@ const NavBar = () => {
       <ul className={`menu-list ${classes.menuItems}`}>
         <li onClick={goFeed}>
           <a>
-            <NavBarItem icono="home" link={houseIcon} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" disabled={false} />
+          </a>
+        </li>
+        <li onClick={goSearch}>
+          <a>
+            <NavBarItem icono="search" link={'null'} nombre="Search" disabled={false}/>
           </a>
         </li>
         <li onClick={goNotifications}>
           <a>
             <NavBarItem
               icono="notifications"
-              link={bellIcon}
+              link={'null'}
               nombre="Notifications"
+              disabled={true}
             />
           </a>
         </li>
@@ -95,11 +107,19 @@ const NavBar = () => {
               icono="profile"
               link={<Avatar user={authState.user} />}
               nombre="My profile"
+              disabled={false}
             />
           </a>
         </li>
-        <li>
-          <button onClick={handleLogout}>logout</button>
+        <li onClick={handleLogout}>
+          <a>
+            <NavBarItem
+              icono="exit"
+              link={'null'}
+              nombre="Logout"
+              disabled={false}
+            />
+          </a>
         </li>
       </ul>
     </aside>
