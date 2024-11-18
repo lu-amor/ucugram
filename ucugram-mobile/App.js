@@ -2,8 +2,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import Post from './pages/Post'
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { StyleSheet } from "react-native";
 import { AuthProvider } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
@@ -15,10 +13,10 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import SignUpPage from "./pages/SignUpPage";
 import SuggestedFriends from "./pages/SuggestedFriends";
-import FriendProfile from "./pages/[FriendProfile]";
+import FriendProfile from "./pages/FriendProfile";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://172.20.10.2:3001/api/"; // para levantar en mobile
+export const url = "http://172.20.10.13:3001/api/"; // para levantar en mobile
 // export const url = "http://localhost:3001/api/"; // para levantar en web
 
 export default function App() {
@@ -455,7 +453,7 @@ export default function App() {
       <ProfileProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Login"
               component={LogInPage}
               options={{ headerShown: false }}
@@ -464,7 +462,7 @@ export default function App() {
               name="SignUp"
               component={SignUpPage}
               options={{ headerShown: false }}
-            />
+            /> */}
             <Stack.Screen
               name="Feed"
               component={Feed}

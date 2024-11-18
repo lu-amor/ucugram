@@ -1,8 +1,4 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Dimensions,  TouchableOpacity } from "react-native";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import {
   View,
   Text,
@@ -25,7 +21,6 @@ import Animated, {
 } from "react-native-reanimated";
 import Avatar from "./Avatar";
 import CommentsModal from "./CommentsModal";
-import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile";
 

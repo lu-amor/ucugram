@@ -60,7 +60,7 @@ const FriendProfile = ({ navigation, route }) => {
     start();
   }, [profileState, authState]);
 
-  const handleToggleFirend = async () => {
+  const handleToggleFriend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
       if (removed === true) {
@@ -107,7 +107,7 @@ const FriendProfile = ({ navigation, route }) => {
                 style={
                   isFriend ? styles.addedFriendButton : styles.addFriendButton
                 }
-                onPress={handleToggleFirend}
+                onPress={handleToggleFriend}
               >
                 <Text
                   style={
@@ -128,10 +128,10 @@ const FriendProfile = ({ navigation, route }) => {
             </Text>
           </View>
         </View>
-        <ProfileGrid posts={profileState.posts} />
+        <ProfileGrid posts={profileState.posts} user={profileState.user} navigation={navigation}/>
       <NavBar
         user={profileState.user}
-        activePage="profile"
+        activePage="FriendProfile"
         navigation={navigation}
       />
     </View>
