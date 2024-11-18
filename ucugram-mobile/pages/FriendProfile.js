@@ -6,7 +6,6 @@ import NavBar from "../components/NavBar";
 const FriendProfile = ({ navigation, route }) => {
     const { user, friend, posts: allFriendPosts } = route.params;
     const [following, setFollowing] = useState(false);
-    const friendPosts = allFriendPosts.filter((post) => post.username === friend.username);
 
     const handleAddFriend = () => {
         setFollowing(!following);

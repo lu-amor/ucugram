@@ -26,6 +26,7 @@ export default function App() {
         bio: 'I love this app so much'
     };
 
+
   const friends = [
     {
       username: 'charlotte', 
