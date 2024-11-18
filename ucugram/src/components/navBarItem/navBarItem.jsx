@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import classes from "./navBarItem.module.css";
 import IonIcon from '@reacticons/ionicons';
 
-const NavBarItem = ({ icono, link, nombre }) => {
+const NavBarItem = ({ icono, link, nombre, disabled }) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const isIcon = link === 'null';
 
@@ -18,7 +18,7 @@ const NavBarItem = ({ icono, link, nombre }) => {
     return windowWidth > 950 ? (
         <div className={classes.navBarItem}>
             {isIcon ? (
-                <IonIcon name={icono} style={{color: '#173363', width: '25px', marginLeft: '21px', marginTop: '-9px', marginRight: '5px'}}/>
+                <IonIcon name={icono} style={{color: disabled ? '#8b9ab1' : '#173363', width: '25px', marginLeft: '21px', marginTop: '-9px', marginRight: '5px'}}/>
             ) : (
                 <div className={classes.avatar}>{link}</div>
             )}
@@ -27,7 +27,7 @@ const NavBarItem = ({ icono, link, nombre }) => {
     ) : (
         <div className={classes.navBarItemH}>
             {isIcon ? (
-                <IonIcon name={icono} style={{color: '#173363', width: '25px', marginTop: '-9px'}}/>
+                <IonIcon name={icono} style={{color: disabled ? '#8b9ab1' : '#173363', width: '25px', marginTop: '-9px'}}/>
             ) : (
                 <div className={classes.avatarH}>{link}</div>
             )}

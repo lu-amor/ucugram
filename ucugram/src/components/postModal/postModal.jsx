@@ -75,7 +75,7 @@ const PostModal = ({ post, user, onClose }) => {
   return (
     <div className={`modal ${classes.modalStyle} is-active`}>
       <div className={`modal-background`} onClick={onClose}></div>
-      <div className={`modal-content ${classes.modalContent}`}>
+      <div className={`modal-content ${classes.modalContent}`} onClick={onClose}>
         <>
         <div className={classes.postContainer}>
           <header className={classes.header}>
@@ -93,7 +93,6 @@ const PostModal = ({ post, user, onClose }) => {
                   }
                 >
                   <strong>{user.username}</strong>
-                  {console.log(user)}
                 </button>
               </h3>
             </div>

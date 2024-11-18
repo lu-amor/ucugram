@@ -47,12 +47,12 @@ const NavBar = () => {
       <div className={classes.dropdownMenu}>
         <button onClick={goFeed}>
           <a className="has-text-black has-text-weight-medium">
-            <NavBarItem icono="home" link={'null'} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" disabled={false}/>
           </a>
         </button>
         <button onClick={goSearch}>
           <a className="has-text-black has-text-weight-medium">
-            <NavBarItem icono="search" link={'null'} nombre="Search" />
+            <NavBarItem icono="search" link={'null'} nombre="Search" disabled={false} />
           </a>
         </button>
         <button onClick={goNotifications}>
@@ -61,6 +61,7 @@ const NavBar = () => {
               icono="notifications"
               link={'null'}
               nombre="Notifications"
+              disabled = {true}
             />
           </a>
         </button>
@@ -70,6 +71,7 @@ const NavBar = () => {
               icono="profile"
               link={<Avatar user={authState.user} />}
               nombre="My profile"
+              disabled={false}
             />
           </a>
         </button>
@@ -81,12 +83,12 @@ const NavBar = () => {
       <ul className={`menu-list ${classes.menuItems}`}>
         <li onClick={goFeed}>
           <a>
-            <NavBarItem icono="home" link={'null'} nombre="Home" />
+            <NavBarItem icono="home" link={'null'} nombre="Home" disabled={false} />
           </a>
         </li>
         <li onClick={goSearch}>
           <a>
-            <NavBarItem icono="search" link={'null'} nombre="Search" />
+            <NavBarItem icono="search" link={'null'} nombre="Search" disabled={false}/>
           </a>
         </li>
         <li onClick={goNotifications}>
@@ -95,6 +97,7 @@ const NavBar = () => {
               icono="notifications"
               link={'null'}
               nombre="Notifications"
+              disabled={true}
             />
           </a>
         </li>
@@ -104,6 +107,7 @@ const NavBar = () => {
               icono="profile"
               link={<Avatar user={authState.user} />}
               nombre="My profile"
+              disabled={false}
             />
           </a>
         </li>
@@ -113,6 +117,7 @@ const NavBar = () => {
               icono="exit"
               link={'null'}
               nombre="Logout"
+              disabled={false}
             />
           </a>
         </li>

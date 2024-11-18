@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../../components/avatar/avatar.jsx";
 import PostGrid from "../../components/postGrid/postGrid";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
@@ -18,6 +19,7 @@ function FriendProfile({ user }) {
   const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
   const { addFriend, removeFriend } = useFriend();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
