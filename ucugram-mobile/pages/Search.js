@@ -15,22 +15,27 @@ import useFetchSuggestions from "../hooks/useFetchSuggestions";
 import { useAuth } from "../context/AuthContext";
 import Avatar from "../components/Avatar";
 import { useGetProfile } from "../hooks/useGetProfile";
+import useGetAllUsers from "../hooks/useGetAllUsers";
 
 const Search = ({ navigation }) => {
   const { state: authState } = useAuth();
-  const { suggestions } = useFetchSuggestions();
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState(suggestions);
+  const [searchResults, setSearchResults] = useState([]);
   const getProfile = useGetProfile();  
+  const getAllUsers = useGetAllUsers();
 
   useEffect(() => {
-    if (authState.user) {
-      setSearchResults(
-        suggestions.filter((user) =>
-          user.username.toLowerCase().startsWith(search.toLowerCase())
-        )
-      );
+    const loadUsers = async () => {
+        if (authState.user) {
+        const allUsers = await getAllUsers();
+          setSearchResults(
+            allUsers.filter((user) =>
+              user.username.toLowerCase().startsWith(search.toLowerCase()) && user.username !== authState.user.username
+            )
+          );
+        }
     }
+    loadUsers();
   }, [search, authState.user]);
 
   const handleGoProfile = async (user) => {
