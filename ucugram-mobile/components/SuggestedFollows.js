@@ -2,15 +2,19 @@ import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import Avatar from './Avatar'; 
 import FollowButton from './FollowButton'; 
+import useFetchSuggestions from '../hooks/useFetchSuggestions';
 
-const SuggestedFollows = ({ suggestions, onBack }) => {
+const SuggestedFollows = ({ onBack }) => {
+  const { suggestions, loading, error } = useFetchSuggestions();
+  // console.log("suggestions: ", suggestions)
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All suggestions</Text>
 
       <FlatList
         data={suggestions}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <View style={styles.suggestionItem}>
             <View style={styles.itemAvatar}>
@@ -22,7 +26,7 @@ const SuggestedFollows = ({ suggestions, onBack }) => {
             </View>
 
             <View style={styles.followSection}>
-              <FollowButton userId={item.id} initialFollows={item.followers} />
+              <FollowButton userId={item._id} initialFollows={[]} />
             </View>
           </View>
         )}

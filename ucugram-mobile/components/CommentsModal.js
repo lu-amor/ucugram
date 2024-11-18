@@ -29,7 +29,7 @@ const CommentsModal = ({ visible, onClose, commentsArray }) => {
                             </View>
                             <FlatList
                                 data={commentsArray}
-                                keyExtractor={(item) => item.id.toString()}
+                                keyExtractor={(index) => index}
                                 renderItem={({ item }) => (
                                     <CommentItem comment={item} />
                                 )}
