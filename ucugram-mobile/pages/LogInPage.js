@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import LoginForm from "../components/LoginForm";
-import { useAuth } from "../context/AuthContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginPage = ({ navigation }) => {
-  const { handleReload } = useAuth();
   const navigateToSignUp = () => navigation.navigate("SignUp");
   const navigateToFeed = () => navigation.replace("Feed");
 
-  // useEffect(() => {
-  //   const reload = async () => {
-  //     await handleReload();
-  //   }
-  //   reload();
-  // }, []);
+  useEffect(() => {
+    const token = AsyncStorage.getItem("token");
+    if (token) {
+      navigation.navigate("Profile");
+    }
+  }, []);
 
   return (
     <View style={styles.container}>

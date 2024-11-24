@@ -10,7 +10,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { useLogin } from "../services/authService";
 import { useAuth } from "../context/AuthContext";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function LoginForm({ createAccount, onLoginSuccess }) {
   const [email, setEmail] = useState("");
@@ -21,8 +20,8 @@ function LoginForm({ createAccount, onLoginSuccess }) {
   const navigation = useNavigation();
   const { state: authState, handleReload } = useAuth();
   const [isLoading, setIsLoading] = useState();
+
   const handleCreateAccountBtn = () => {
-    // logica para crear cuenta here
     createAccount();
   };
 
@@ -32,40 +31,24 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     return ucuEmailPattern.test(email);
   };
 
-  useEffect(() => {
-    setIsLoading(authState.loading);
-  }, [authState.loading]);
-
-  useEffect(() => {
-    const start = async () => {
-      await handleReload();
-      if (authState.isAuthenticated) {
-        onLoginSuccess();
-      }
-    };
-    start();
-  }, [authState?.loading]);
-
   const handleLoginBtn = async () => {
-    // if (!validateEmail(email)) {
-    //   alert("Por favor, ingresa un email válido de la UCU.");
-    //   return;
-    // }
+    if (!validateEmail(email)) {
+      alert("Por favor, ingresa un email válido de la UCU.");
+      return;
+    }
 
+    setIsLoading(true);
     const isLogged = await login(email, password);
+    setIsLoading(false);
 
     if (isLogged) {
+      console.log("authState.user:", authState.user);
       console.log("email", email);
       navigation.navigate("Profile");
     } else {
       window.alert("Email o contraseña incorrecta");
       navigation.navigate("Login");
     }
-
-    // aca se hace algo más, logica de autenticacion
-
-    // onLoginSuccess();
-    //navigate('Feed');
   };
 
   return (

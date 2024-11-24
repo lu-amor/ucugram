@@ -1,14 +1,28 @@
-import React from "react";
-import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Vibration,
+} from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useAuth } from "../context/AuthContext";
 import Avatar from "./Avatar";
+import LogoutModal from "./LogoutModal";
+import * as Haptics from 'expo-haptics';
 
 const NavBar = ({ user, activePage, navigation }) => {
   const { state: authState } = useAuth();
+  const [logoutModalVisible, setLogoutModalVisible] = useState(false);
 
   const handleGoProfile = async () => {
     navigation.navigate("Profile");
+  };
+
+  const handleLogout = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    setLogoutModalVisible(true);
   };
 
   return (
@@ -43,11 +57,21 @@ const NavBar = ({ user, activePage, navigation }) => {
           color="#173363"
           onPress={() => navigation.navigate("Notifications")}
         />
-        <TouchableOpacity onPress={handleGoProfile}>
+        <TouchableOpacity
+          onPress={handleGoProfile}
+          onLongPress={handleLogout}
+        >
           <View style={styles.avatar}>
             <Avatar user={authState.user}></Avatar>
           </View>
         </TouchableOpacity>
+        {logoutModalVisible && (
+          <LogoutModal
+            navigation={navigation}
+            isVisible={logoutModalVisible}
+            onClose={() => setLogoutModalVisible(false)}
+          />
+        )}
       </View>
     </View>
   );

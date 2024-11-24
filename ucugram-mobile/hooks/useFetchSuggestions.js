@@ -30,22 +30,15 @@ const useFetchSuggestions = () => {
   useEffect(() => {
     const reload = async () => {
       await handleReload();
-    };
-    reload();
-  }, []);
-
-  useEffect(() => {
-    if (authState.user) {
-      const a = async () => {
-        console.log("entra");
+      if (authState.user) {
         setLoading(true);
         const sugg = await getSuggestions();
         setSuggestions(sugg);
         setLoading(false);
-      };
-      a();
-    }
-  }, [authState]);
+      }
+    };
+    reload();
+  }, []);
 
   return { suggestions, loading, error };
 };

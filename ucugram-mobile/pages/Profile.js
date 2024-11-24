@@ -5,6 +5,7 @@ import {
   StatusBar,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import ProfileGrid from "../components/ProfileGrid";
 import NavBar from "../components/NavBar";
@@ -12,7 +13,7 @@ import Avatar from "../components/Avatar";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile.js";
 import { useProfile } from "../context/ProfileContext.js";
-import { useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from "@react-navigation/native";
 
 // pends : agrandar Avatar Icon
 
@@ -21,61 +22,85 @@ const Profile = ({ navigation }) => {
   const { state: profileState } = useProfile();
   const getProfile = useGetProfile();
   const isFocused = useIsFocused();
+  const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     const resetProfile = async () => {
       const userId = authState.user?._id;
       if (userId) {
+        setLoading(true);
         await getProfile(userId);
+        setLoading(false);
       }
     };
 
     if (isFocused) {
       resetProfile();
     }
-  }, [isFocused, authState.user?._id]);
+  }, [isFocused]);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      const userId = authState.user?._id;
+      if (userId) {
+        setLoading(true);
+        await getProfile(userId);
+        setLoading(false);
+      }
+    };
+    getUserProfile();
+  }, [authState.user?._id]);
 
   return (
     <View style={styles.container}>
-      {profileState?.loading || authState.loading ? (
-        <Text>laoding profile</Text>
-      ) : (
-        <>
-          <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-          <View style={{ paddingHorizontal: 20 }}>
-            <View style={styles.topInfo}>
-              <View style={styles.avatar}>
-                <Avatar user={profileState.user}></Avatar>
-              </View>
-              <View style={styles.nextToAvatar}>
-                <View style={styles.profileData}>
-                  <View style={styles.individualData}>
-                    <Text style={styles.dataContent}>{profileState.posts.length}</Text>
-                    <Text style={styles.dataDescription}>Posts</Text>
-                  </View>
-                  <View style={styles.individualData}>
-                    <Text style={styles.dataContent}>{profileState.user?.friends.length}</Text>
-                    <Text style={styles.dataDescription}>Friends</Text>
-                  </View>
-                </View>
-                <View style={styles.editProfileButton}>
-                  <TouchableOpacity style={styles.editProfileButton}>
-                    <Text style={styles.editProfileButtonText}>
-                      Edit Profile
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+      {loading && <ActivityIndicator size="large" color="grey"/>}
+      <>
+        <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+        <View style={{ paddingHorizontal: 20 }}>
+          <View style={styles.topInfo}>
+            <View style={styles.avatar}>
+              <Avatar user={profileState.user}></Avatar>
             </View>
-            <View>
-              <Text style={styles.username}>{profileState.user?.username}</Text>
-              <Text style={styles.description}>{profileState.user?.description}</Text>
+            <View style={styles.nextToAvatar}>
+              <View style={styles.profileData}>
+                <View style={styles.individualData}>
+                  <Text style={styles.dataContent}>
+                    {profileState.posts.length}
+                  </Text>
+                  <Text style={styles.dataDescription}>Posts</Text>
+                </View>
+                <View style={styles.individualData}>
+                  <Text style={styles.dataContent}>
+                    {profileState.user?.friends.length}
+                  </Text>
+                  <Text style={styles.dataDescription}>Friends</Text>
+                </View>
+              </View>
+              <View style={styles.editProfileButton}>
+                <TouchableOpacity style={styles.editProfileButton}>
+                  <Text style={styles.editProfileButtonText}>Edit Profile</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <ProfileGrid posts={profileState.posts} user={profileState.user} navigation={navigation} />
-          <NavBar user={profileState.user} activePage="profile" navigation={navigation} />
-        </>
-      )}
+          <View>
+            <Text style={styles.username}>{profileState.user?.username}</Text>
+            <Text style={styles.description}>
+              {profileState.user?.description}
+            </Text>
+          </View>
+        </View>
+        <ProfileGrid
+          posts={profileState.posts}
+          user={profileState.user}
+          navigation={navigation}
+        />
+        <NavBar
+          user={profileState.user}
+          activePage="profile"
+          navigation={navigation}
+        />
+      </>
     </View>
   );
 };

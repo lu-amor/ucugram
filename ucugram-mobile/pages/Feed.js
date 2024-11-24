@@ -7,7 +7,7 @@ import useFetchPosts from "../hooks/useFetchPosts";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../context/AuthContext";
 
-const Feed = ({ navigation, route }) => {
+const Feed = ({ navigation }) => {
   const { posts, loading, error } = useFetchPosts();
   const { state: authState } = useAuth();
 
@@ -20,12 +20,6 @@ const Feed = ({ navigation, route }) => {
     };
     removeFriendId();
   }, []);
-
-  useEffect(() => {
-    if (posts) {
-      console.log("are loading: ", loading, "posts", posts);
-    }
-  }, [posts]);
 
   return (
     <View style={styles.container}>
@@ -47,20 +41,6 @@ const Feed = ({ navigation, route }) => {
             />
           ))
         )}
-        {/* {!loading &&
-          !error &&
-          posts &&
-          posts.map((post) => (
-            <FeedPost
-              key={post._id}
-              post={post}
-              user={{
-                username: post.username,
-                profilePicture: post.profilePicture,
-              }}
-              navigation={navigation}
-            />
-          ))} */}
       </ScrollView>
       <NavBar user={authState.user} activePage="home" navigation={navigation} />
     </View>

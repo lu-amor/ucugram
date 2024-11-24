@@ -90,24 +90,19 @@ export const AuthProvider = ({ children }) => {
 
   // Cargar el token desde AsyncStorage al iniciar la app
   const handleReload = async () => {
-    console.log("entra al handler")
-    const token = await AsyncStorage.getItem("token");
-    if (token) {
-      console.log("tiene token")
-      const decoded = jwtDecode(token);
+    const retrieved_token = await AsyncStorage.getItem("token");
+    if (retrieved_token) {
+      const decoded = jwtDecode(retrieved_token);
       const userId = decoded.id;
       dispatch({ type: AUTH_ACTIONS.LOADING });
-      const user = await getUserProfile(userId, token);
-      console.log('user: ', user, state.loading)
+      const user = await getUserProfile(userId, retrieved_token);
       dispatch({
         type: AUTH_ACTIONS.LOGIN,
         payload: {
           user: user,
-          token: token,
+          token: retrieved_token,
         },
       });
-      console.log("is loading: ", state.loading)
-      console.log("is atuthenticated: ", state.isAuthenticated)
     }
   };
 
