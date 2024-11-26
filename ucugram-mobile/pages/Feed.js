@@ -6,6 +6,9 @@ import Suggestions from "../components/Suggestions";
 import useFetchPosts from "../hooks/useFetchPosts";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../context/AuthContext";
+import { Dimensions } from "react-native";
+
+const screenWidth = Dimensions.get("window").width;
 
 const Feed = ({ navigation }) => {
   const { posts, loading, error } = useFetchPosts();
@@ -28,7 +31,6 @@ const Feed = ({ navigation }) => {
           source={require("../assets/ucugram texto.png")}
           style={styles.headerImage}
         />
-
         <Suggestions navigation={navigation} />
         {loading ? (
           <Text>loading posts...</Text>
@@ -54,10 +56,10 @@ const styles = StyleSheet.create({
     marginTop: 45,
   },
   headerImage: {
-    width: "40%",
-    height: 30,
+    width: screenWidth > 450 ? "40%" : "40%",
+    height: screenWidth > 450 ? 70 : 30,
     alignSelf: "center",
-    marginTop: 15,
+    marginTop: 10,
   },
 });
 

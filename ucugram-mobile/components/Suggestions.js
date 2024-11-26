@@ -8,12 +8,16 @@ const Suggestions = ({navigation}) => {
 
 return (
     <View style={styles.container}>
-      <SuggestionsPreview suggestions={suggestions} />
-      <View style={styles.footer}>
-      <TouchableOpacity onPress={() => navigation.navigate('SuggestedFriends')} style={styles.showAllButton}>
-        <Text style={styles.showAllButtonText}>See all</Text>    
-      </TouchableOpacity>
-      </View>
+    {suggestions.length > 0 && (
+      <>
+        <SuggestionsPreview suggestions={suggestions} />
+        <View style={styles.footer}>
+          <TouchableOpacity onPress={() => navigation.navigate('SuggestedFriends')} style={styles.showAllButton}>
+            <Text style={styles.showAllButtonText}>See all</Text>    
+          </TouchableOpacity>
+        </View>
+      </>
+    )}
     </View>
   );
 };

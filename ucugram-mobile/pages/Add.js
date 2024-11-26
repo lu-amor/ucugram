@@ -73,7 +73,6 @@ const handleCameraLaunch = async () => {
         }
     };
 
-
 const handleNewPost = async () => {
     Keyboard.dismiss();
         if (!selectedImage) {
