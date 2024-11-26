@@ -1,171 +1,171 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, Button, Alert, StyleSheet, TouchableOpacity, KeyboardAvoidingView, TextInput, Platform, Keyboard } from "react-native";
-import * as ImagePicker from 'expo-image-picker';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, { useState } from "react";
+import { 
+View, 
+Text, 
+Image, 
+Button, 
+Alert, 
+StyleSheet, 
+TouchableOpacity, 
+TextInput, 
+KeyboardAvoidingView, 
+Keyboard, 
+Platform 
+} from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import useUploadPhoto from "../hooks/useUploadPhoto";
 
-const Add = ({navigation}) => {
-    const [loadingState, setLoadingState] = useState(false);
-    const [selectedImage, setSelectedImage] = useState('');
-    const [caption, setCaption] = useState('');
-    const { uploadPhoto, loading, error} = useUploadPhoto();
+const Add = ({ navigation }) => {
+const [selectedImage, setSelectedImage] = useState(null);
+const [caption, setCaption] = useState("");
+const [loadingState, setLoadingState] = useState(false);
+const { uploadPhoto } = useUploadPhoto();
 
-    const openImagePicker = async () => {
-        setLoadingState(true);
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-            Alert.alert("Permission Denied", "We need access to your photos to select an image.");
-            setLoadingState(false);
-            return;
+const openImagePicker = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+    Alert.alert("Permission Denied", "We need access to your photos.");
+    return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+    quality: 1,
+    aspect: [1, 1],
+    });
+
+    if (!result.canceled) {
+    setSelectedImage(result.assets[0]);
+    }
+};
+
+const handleCameraLaunch = async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+    Alert.alert("Permission Denied", "We need access to your camera.");
+    return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+    quality: 1,
+    aspect: [1, 1],
+    });
+
+    if (!result.canceled) {
+    setSelectedImage(result.assets[0]);
+    }
+};
+
+    const handleSelectImage = async (source) => {
+        let selectedImage = null;
+
+        if (source === "gallery") {
+            selectedImage = await selectImageFromGallery();
+        } else if (source === "camera") {
+            selectedImage = await takePhotoWithCamera();
         }
-    
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.Images,
-            quality: 1,
-            maxWidth: '100%',
-            maxHeight: '100%',
-            aspect: [1, 1],
-        });
-    
-        setLoadingState(false);
-    
-        if (!result.canceled) {
-            setSelectedImage({ ...result.assets[0], from: 'gallery' });
+
+        if (selectedImage) {
+            setSelectedImage(selectedImage);
+            console.log("Selected image:", selectedImage);
+        } else {
+            Alert.alert("No Image Selected", "Please try again.");
         }
     };
-    
-    const handleCameraLaunch = async () => {
-        setLoadingState(true);
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== 'granted') {
-            Alert.alert("Permission Denied", "We need access to your camera to take a photo.");
-            setLoadingState(false);
-            return;
-        }
-    
-        const result = await ImagePicker.launchCameraAsync({
-            saveToPhotos: true,
-            quality: 1,
-            maxWidth: '100%',
-            maxHeight: '100%',
-            aspect: [1, 1],
-        });
-    
-        setLoadingState(false);
-    
-        if (!result.canceled) {
-            setSelectedImage({ ...result.assets[0], from: 'camera' });
-        }
-    };
-    
 
-    const handleNewPost = async () => {
-        Keyboard.dismiss();
+
+const handleNewPost = async () => {
+    Keyboard.dismiss();
         if (!selectedImage) {
             Alert.alert("No Image Selected", "Please select an image to post.");
             return;
         }
-    
-        try {
-            setLoadingState(true);
-    
-            let file;
-    
-            if (selectedImage.from === 'camera') {
-                console.log("Processing image from camera...");
-                await new Promise(resolve => setTimeout(resolve, 500));
-            } else if (selectedImage.from === 'gallery') {
-                console.log("Processing image from gallery...");
-                await new Promise(resolve => setTimeout(resolve, 500));
-            }
-    
-            const response = await fetch(selectedImage.uri);
-            const blob = await response.blob();
-    
-            const fileName = selectedImage.uri.split('/').pop();
-            file = new File([blob], fileName, { type: blob.type });
-    
-            console.log('File created:', file);
-    
-            const isUploaded = await uploadPhoto(file, caption);
-            setLoadingState(false);
-    
-            if (isUploaded) {
-                Alert.alert("Success", "Your post has been successfully uploaded.");
-                navigation.reset({
-                    index: 0,
-                    routes: [{ name: "Feed" }],
-                });
-            } else {
-                Alert.alert("Error", "There was an error uploading your post.");
-            }
-    
-            setCaption('');
-            setSelectedImage(null);
-        } catch (err) {
-            setLoadingState(false);
-            console.error("Error handling new post:", err);
-            Alert.alert("Error", "There was an error processing the file.");
-        }
-    };
-    
 
-    const handleGoBack = () => {
-        setCaption('');
+    try {
+        setLoadingState(true);
+
+        const response = await fetch(selectedImage.uri);
+        console.log("response: ", response);
+        const blob = await response.blob();
+        console.log("blob: ", blob);
+        const fileName = selectedImage.uri.split("/").pop();
+        console.log("filename: ", fileName);
+        const file = new File([blob], fileName, { type: blob.type });
+        console.log("file: ", file);
+
+    const isUploaded = await uploadPhoto(file, caption);
+    setLoadingState(false);
+
+    if (isUploaded) {
+        Alert.alert("Success", "Your post has been successfully uploaded.");
+        navigation.reset({
+        index: 0,
+        routes: [{ name: "Feed" }],
+        });
+        setCaption("");
         setSelectedImage(null);
+    } else {
+        Alert.alert("Error", "There was an error uploading your post.");
     }
+    } catch (err) {
+    setLoadingState(false);
+    console.error("Upload failed:", err);
+    Alert.alert("Error", "There was an issue processing your image.");
+    }
+};
 
-    return (
-        <View style={{ flex: 1, marginTop: 45 }}>
-            {loadingState && <Ionicons name="heart" size="1" color="#173363" style={{ marginVertical: 20 }} />}
-            {selectedImage && (
-                <View style={{ flex: 1 }}>
-                    <View style={styles.topInfoContainer}>
-                        <TouchableOpacity style={styles.backButtonContainer} onPress={() => handleGoBack()}>
-                            <Ionicons name="chevron-back-outline" color='#173363' size={32} style={styles.backButton} />
-                        </TouchableOpacity>
-                        <Text style={styles.newPostText}>New Post</Text>
-                    </View>
-                    <View style={{ width: 350, height: 350, alignSelf: 'center' }}>
-                        <Image
-                            source={{ uri: selectedImage.uri }}
-                            style={{ width: 350, height: 350 }}
-                            resizeMode="cover"
-                        />
-                    </View>
-                    <View style={styles.writeCaptionContainer}>
-                        <KeyboardAvoidingView
-                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                            style={styles.writeCaptionWrapper}>
-                            <TextInput 
-                                style={styles.input} 
-                                placeholder={'Write a caption'} 
-                                value={caption} 
-                                onChangeText={text => setCaption(text)}
-                            />
-                        </KeyboardAvoidingView>
-                    </View>
-                    <View style={styles.publishButtonContainer}>
-                        <TouchableOpacity onPress={handleNewPost}>
-                            <View style={styles.addWrapper} >
-                                <Text style={styles.addText}>Publish</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            )}
-            { (!selectedImage) && (
-                <View style={styles.optionsContainer}>
-                    <View style={{ marginTop: 20 }}>
-                        <Button title="Choose from Device" onPress={openImagePicker}/>
-                    </View>
-                    <View style={{ marginTop: 20, marginBottom: 50 }}>
-                        <Button title="Open Camera" onPress={handleCameraLaunch} />
-                    </View>
-                </View>
-            )}
+const handleGoBack = () => {
+    setCaption("");
+    setSelectedImage(null);
+};
+
+return (
+    <View style={{ flex: 1, marginTop: 45 }}>
+    {loadingState && <Ionicons name="heart" size={24} color="#173363" style={{ marginVertical: 20 }} />}
+    {selectedImage ? (
+        <View style={{ flex: 1 }}>
+        <View style={styles.topInfoContainer}>
+            <TouchableOpacity style={styles.backButtonContainer} onPress={handleGoBack}>
+            <Ionicons name="chevron-back-outline" color="#173363" size={32} style={styles.backButton} />
+            </TouchableOpacity>
+            <Text style={styles.newPostText}>New Post</Text>
         </View>
-    );
+        <View style={{ width: 350, height: 350, alignSelf: "center" }}>
+            <Image source={{ uri: selectedImage.uri }} style={{ width: 350, height: 350 }} resizeMode="cover" />
+        </View>
+        <View style={styles.writeCaptionContainer}>
+            <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.writeCaptionWrapper}
+            >
+            <TextInput
+                style={styles.input}
+                placeholder="Write a caption"
+                value={caption}
+                onChangeText={setCaption}
+            />
+            </KeyboardAvoidingView>
+        </View>
+        <View style={styles.publishButtonContainer}>
+            <TouchableOpacity onPress={handleNewPost}>
+            <View style={styles.addWrapper}>
+                <Text style={styles.addText}>Publish</Text>
+            </View>
+            </TouchableOpacity>
+        </View>
+        </View>
+    ) : (
+        <View style={styles.optionsContainer}>
+        <View style={{ marginTop: 20 }}>
+            <Button title="Choose from Device" onPress={openImagePicker} />
+        </View>
+        <View style={{ marginTop: 20, marginBottom: 50 }}>
+            <Button title="Open Camera" onPress={handleCameraLaunch} />
+        </View>
+        </View>
+    )}
+    </View>
+);
 };
 
 const styles = StyleSheet.create({

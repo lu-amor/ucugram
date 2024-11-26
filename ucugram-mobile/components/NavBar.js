@@ -33,7 +33,7 @@ const NavBar = ({ user, activePage, navigation }) => {
           size={35}
           color="#173363"
           onPress={() => navigation.navigate("Feed")}
-        />
+        />        
         <Ionicons
           name={activePage === "search" ? "search" : "search-outline"}
           size={35}

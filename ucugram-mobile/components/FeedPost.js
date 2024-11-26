@@ -84,7 +84,7 @@ export default function FeedPost({ post, navigation }) {
         <GestureDetector gesture={pinchGesture}>
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
             <Image
-              source={{ uri: `http://172.20.10.2:3001/${post.imageUrl.replace(/\\/g, '/')}`}}
+              source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}}
               style={styles.image}
             />
           </Animated.View>
@@ -104,7 +104,7 @@ export default function FeedPost({ post, navigation }) {
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
           {/* <Text style={styles.likes}>{post.comments}</Text> */}
-          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }}>
+          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => copyToClipboard()}>
             <Ionicons name="share-social-outline" color="#ea5b0c" size={30} />
           </TouchableOpacity>
         </View>

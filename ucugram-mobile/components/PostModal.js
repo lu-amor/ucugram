@@ -25,7 +25,7 @@ const PostModal = ({ isVisible, onClose, post }) => {
                         <Text style={styles.username}>{profileState.user?.username}</Text>
                     </View>
 
-                    <Image source={{ uri: `http://172.20.10.2:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.postImage} />
+                    <Image source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.postImage} />
 
                     <View style={styles.footer}>
                         <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
