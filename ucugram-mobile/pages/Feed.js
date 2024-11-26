@@ -28,21 +28,16 @@ const Feed = ({ navigation }) => {
           source={require("../assets/ucugram texto.png")}
           style={styles.headerImage}
         />
-
         <Suggestions navigation={navigation} />
         {loading ? (
           <Text>loading posts...</Text>
         ) : (
           posts?.map((post) => (
-            <FeedPost
-              key={post._id}
-              post={post}
-              navigation={navigation}
-            />
+            <FeedPost key={post._id} post={post} navigation={navigation} />
           ))
         )}
       </ScrollView>
-      <NavBar user={authState.user} activePage="home" navigation={navigation} />
+      {/* <NavBar user={authState.user} activePage="home" navigation={navigation} /> */}
     </View>
   );
 };

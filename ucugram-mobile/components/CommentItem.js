@@ -1,19 +1,18 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity } from "react-native";
+import Avatar from "./Avatar";
 
 const CommentItem = ({ comment }) => {
+    const info = comment.commentInfo
+    console.log("info:", info)
     return (
         <View style={styles.commentItem}>
-{/*             <Image
-                source={{ uri: comment.userAvatar }}
-                style={{ width: 30, height: 30, borderRadius: 15, marginRight: 10 }}
-            /> */}
-            <View style={{ width: 30, height: 30, borderRadius: 15, marginRight: 10, backgroundColor: "#ccc" }} />
+            <View style={styles.avatarContainer}><Avatar user={info.user}/></View>
             <Text style={styles.commentContent}>
-                <Text style={styles.commentUser}>{comment.userId}  </Text>
-                <Text style={styles.commentText}>{comment.text}</Text>
+                <Text style={styles.commentUser}>{info.user?.username}  </Text>
+                <Text style={styles.commentText}>{info.content}</Text>
             </Text>
-            <Text style={styles.commentDate}>{comment.date}</Text>
+            <Text style={styles.commentDate}>{info.createdAt?.split("T")[0]}</Text>
         </View>
     );
 };
@@ -44,6 +43,11 @@ const styles = StyleSheet.create({
     commentText: {
         flex: 1,
     },
+    avatarContainer: {
+        width: 30, 
+        height: 30,
+        marginRight: 10
+    }
 });
 
 export default CommentItem;

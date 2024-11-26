@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import LoginForm from "../components/LoginForm";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -8,10 +8,15 @@ const LoginPage = ({ navigation }) => {
   const navigateToFeed = () => navigation.replace("Feed");
 
   useEffect(() => {
-    const token = AsyncStorage.getItem("token");
-    if (token) {
-      navigation.navigate("Profile");
-    }
+    const checkToken = async () => {
+      const token = await AsyncStorage.getItem("token");
+      console.log("token", token);
+      if (token) {
+        navigation.replace("Main", {screen: "Profile"});
+      }
+    };
+
+    checkToken();
   }, []);
 
   return (

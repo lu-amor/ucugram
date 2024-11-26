@@ -11,10 +11,13 @@ import { useAuth } from "../context/AuthContext";
 import Avatar from "./Avatar";
 import LogoutModal from "./LogoutModal";
 import * as Haptics from 'expo-haptics';
+import { useNavigation } from "@react-navigation/native";
 
-const NavBar = ({ user, activePage, navigation }) => {
+const NavBar = () => {
   const { state: authState } = useAuth();
   const [logoutModalVisible, setLogoutModalVisible] = useState(false);
+  const navigation = useNavigation();
+  const [currentPage, setCurrentPage] = useState("profile"); 
 
   const handleGoProfile = async () => {
     navigation.navigate("Profile");
@@ -25,37 +28,42 @@ const NavBar = ({ user, activePage, navigation }) => {
     setLogoutModalVisible(true);
   };
 
+  const handleActivePage = (page, iconName) => {
+    setCurrentPage(iconName);
+    navigation.navigate(page);
+  };
+  
   return (
     <View style={styles.navBar}>
       <View style={styles.navBarIcons}>
         <Ionicons
-          name={activePage === "home" ? "home" : "home-outline"}
+          name={currentPage === "home" ? "home" : "home-outline"}
           size={35}
           color="#173363"
-          onPress={() => navigation.navigate("Feed")}
+          onPress={()=> handleActivePage("Feed", "home")}
         />
         <Ionicons
-          name={activePage === "search" ? "search" : "search-outline"}
+          name={currentPage === "search" ? "search" : "search-outline"}
           size={35}
           color="#173363"
-          onPress={() => navigation.navigate("Search")}
+          onPress={()=> handleActivePage("Search", "search")}
         />
         <Ionicons
-          name={activePage === "add" ? "add-circle" : "add-circle-outline"}
+          name={currentPage === "add" ? "add-circle" : "add-circle-outline"}
           size={35}
           color="#173363"
-          onPress={() => navigation.navigate("Add")}
+          onPress={()=> handleActivePage("Add", "add")}
           r
         />
         <Ionicons
           name={
-            activePage === "notifications"
+            currentPage === "notifications"
               ? "notifications"
               : "notifications-outline"
           }
           size={35}
           color="#173363"
-          onPress={() => navigation.navigate("Notifications")}
+          onPress={()=> handleActivePage("Notifications", "notifications")}
         />
         <TouchableOpacity
           onPress={handleGoProfile}
