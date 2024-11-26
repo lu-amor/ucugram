@@ -4,21 +4,17 @@ import FollowButton from "./FollowButton";
 import Avatar from "./Avatar";
 
 const SuggestionsPreview = ({ suggestions }) => {
-  console.log("suggestions: ", suggestions);
 
   const renderItem = ({ item }) => {
-    console.log("Render item:", item); // Verifica el contenido de item
     return (
       <View style={styles.suggestionCard}>
         <View style={styles.cardAvatar}>
           <Avatar user={item} />
         </View>
         <View style={styles.cardInfo}>
-          {/* Asegúrate de que item.username sea una cadena */}
           <Text style={styles.name}>{item.username || "Nombre no disponible"}</Text>
         </View>
         <View style={styles.followSection}>
-          {/* Revisa que item._id esté bien definido */}
           <FollowButton userId={item._id} initialFollows={[]} />
         </View>
       </View>

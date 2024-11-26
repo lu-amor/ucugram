@@ -17,9 +17,9 @@ import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile";
 import Avatar from "../components/Avatar";
 
-const FriendProfile = ({ navigation, route }) => {
+const FriendProfile = ({ navigation }) => {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const { state: authState, handleReload } = useAuth();
   const [isFriend, setIsFriend] = useState();
   const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
@@ -28,11 +28,10 @@ const FriendProfile = ({ navigation, route }) => {
   useEffect(() => {
     const getData = async () => {
       const friendId = await AsyncStorage.getItem("friend-id");
-      const token = await AsyncStorage.getItem("token");
       if (friendId) {
         dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
         await getProfile(friendId);
-        await handleReload(token, authDispatch);
+        await handleReload();
       }
     };
     getData();
@@ -60,9 +59,10 @@ const FriendProfile = ({ navigation, route }) => {
     start();
   }, [profileState, authState]);
 
-  const handleToggleFirend = async () => {
+  const handleToggleFriend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
+      console.log("entra");
       if (removed === true) {
         setIsFriend(false);
         setFriendsNum(friendsNum - 1);
@@ -85,50 +85,50 @@ const FriendProfile = ({ navigation, route }) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-        <View style={{ paddingHorizontal: 20 }}>
-          <View style={styles.topInfo}>
-            <View style={styles.avatar}>
-              <Avatar user={profileState.user}></Avatar>
-            </View>
-            <View style={styles.nextToAvatar}>
-              <View style={styles.profileData}>
-                <View style={styles.individualData}>
-                  <Text style={styles.dataContent}>
-                    {profileState.posts.length}
-                  </Text>
-                  <Text style={styles.dataDescription}>Posts</Text>
-                </View>
-                <View style={styles.individualData}>
-                  <Text style={styles.dataContent}>{friendsNum}</Text>
-                  <Text style={styles.dataDescription}>Friends</Text>
-                </View>
-              </View>
-              <TouchableOpacity
-                style={
-                  isFriend ? styles.addedFriendButton : styles.addFriendButton
-                }
-                onPress={handleToggleFirend}
-              >
-                <Text
-                  style={
-                    isFriend
-                      ? styles.addedFriendButtonText
-                      : styles.addFriendButtonText
-                  }
-                >
-                  {isFriend ? "Remove Friend" : "Add Friend"}
-                </Text>
-              </TouchableOpacity>
-            </View>
+      <View style={{ paddingHorizontal: 20 }}>
+        <View style={styles.topInfo}>
+          <View style={styles.avatar}>
+            <Avatar user={profileState.user}></Avatar>
           </View>
-          <View>
-            <Text style={styles.username}>{profileState.user?.username}</Text>
-            <Text style={styles.description}>
-              {profileState.user?.description}
-            </Text>
+          <View style={styles.nextToAvatar}>
+            <View style={styles.profileData}>
+              <View style={styles.individualData}>
+                <Text style={styles.dataContent}>
+                  {profileState.posts.length}
+                </Text>
+                <Text style={styles.dataDescription}>Posts</Text>
+              </View>
+              <View style={styles.individualData}>
+                <Text style={styles.dataContent}>{friendsNum}</Text>
+                <Text style={styles.dataDescription}>Friends</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              style={
+                isFriend ? styles.addedFriendButton : styles.addFriendButton
+              }
+              onPress={handleToggleFriend}
+            >
+              <Text
+                style={
+                  isFriend
+                    ? styles.addedFriendButtonText
+                    : styles.addFriendButtonText
+                }
+              >
+                {isFriend ? "remove friend" : "add friend"}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
-        <ProfileGrid posts={profileState.posts} />
+        <View>
+          <Text style={styles.username}>{profileState.user?.username}</Text>
+          <Text style={styles.description}>
+            {profileState.user?.description}
+          </Text>
+        </View>
+      </View>
+      <ProfileGrid posts={profileState.posts} />
       <NavBar
         user={profileState.user}
         activePage="profile"

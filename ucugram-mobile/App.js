@@ -13,7 +13,7 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import SignUpPage from "./pages/SignUpPage";
 import SuggestedFriends from "./pages/SuggestedFriends";
-import FriendProfile from "./pages/[FriendProfile]";
+import FriendProfile from "./pages/FriendProfile";
 
 const Stack = createNativeStackNavigator();
 export const url = "http://172.20.10.4:3001/api/"; // para levantar en mobile
@@ -473,15 +473,6 @@ export default function App() {
               }}
               options={{ headerShown: false }}
             />
-            {friends.map((friend, index) => (
-              <Stack.Screen
-                key={index}
-                name={friend.username}
-                component={FriendProfile}
-                initialParams={{ user, friend, posts: allFriendPosts }}
-                options={{ headerShown: false }}
-              />
-            ))}
             <Stack.Screen
               name="FriendProfile"
               component={FriendProfile}

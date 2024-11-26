@@ -10,7 +10,6 @@ return (
     <View style={styles.container}>
       <SuggestionsPreview suggestions={suggestions} />
       <View style={styles.footer}>
-       {/* onPress={() => navigation.navigate('SuggestedFriends',{suggestedFollows})}  */}
       <TouchableOpacity onPress={() => navigation.navigate('SuggestedFriends')} style={styles.showAllButton}>
         <Text style={styles.showAllButtonText}>See all</Text>    
       </TouchableOpacity>
