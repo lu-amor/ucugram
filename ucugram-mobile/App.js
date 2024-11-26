@@ -28,7 +28,6 @@ function StackNavigatorComponent() {
 
   const activePage = useNavigationState((state) => {
     const route = state.routes[state.index];
-    console.log("page: ", route.name);
     return route.name;
   });
 

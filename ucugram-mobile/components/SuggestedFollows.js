@@ -6,7 +6,6 @@ import useFetchSuggestions from '../hooks/useFetchSuggestions';
 
 const SuggestedFollows = ({ onBack }) => {
   const { suggestions, loading, error } = useFetchSuggestions();
-  // console.log("suggestions: ", suggestions)
 
   return (
     <View style={styles.container}>
@@ -44,6 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     backgroundColor: '#fff',
+    marginTop: 40,
   },
   title: {
     fontSize: 24,

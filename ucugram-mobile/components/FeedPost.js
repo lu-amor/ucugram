@@ -87,15 +87,17 @@ export default function FeedPost({ post, navigation }) {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <TouchableOpacity onPress={handleGoProfile}>
-        <View style={styles.userInfo}>
-          <View style={styles.avatar}>
-            <Avatar user={post.user}></Avatar>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleGoProfile}>
+          <View style={styles.userInfo}>
+            <View style={styles.avatar}>
+              <Avatar user={post.user}></Avatar>
+            </View>
+            <Text style={styles.usernameTop}>{post.user.username}</Text>
           </View>
-          <Text style={styles.usernameTop}>{post.user.username}</Text>
-          <Text style={styles.postDate}>{post.createdAt}</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <Text style={styles.postDate}>{post.createdAt?.split("T")[0]}</Text>
+      </View>
       <View style={styles.postCard}>
         <GestureDetector gesture={pinchGesture}>
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
@@ -138,10 +140,7 @@ export default function FeedPost({ post, navigation }) {
         </View>
       </Animated.View>
       {isModalOpen && (
-        <CommentsModal
-          onClose={() => setIsModalOpen(false)}
-          post={post}
-        />
+        <CommentsModal onClose={() => setIsModalOpen(false)} post={post} />
       )}
     </GestureHandlerRootView>
   );
@@ -158,6 +157,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 8,
     backgroundColor: "white",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    alignItems: "center",
+    paddingRight: 10,
   },
   avatar: {
     width: 40,
