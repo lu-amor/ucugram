@@ -71,14 +71,11 @@ const Add = ({navigation}) => {
     
             let file;
     
-            // Determinar el origen de la imagen y realizar acciones previas si es necesario
             if (selectedImage.from === 'camera') {
                 console.log("Processing image from camera...");
-                // Simula un await si necesitas realizar una acción previa
                 await new Promise(resolve => setTimeout(resolve, 500));
             } else if (selectedImage.from === 'gallery') {
                 console.log("Processing image from gallery...");
-                // Simula un await si necesitas realizar una acción previa
                 await new Promise(resolve => setTimeout(resolve, 500));
             }
     
@@ -95,7 +92,10 @@ const Add = ({navigation}) => {
     
             if (isUploaded) {
                 Alert.alert("Success", "Your post has been successfully uploaded.");
-                navigation.navigate("Feed");
+                navigation.reset({
+                    index: 0,
+                    routes: [{ name: "Feed" }],
+                });
             } else {
                 Alert.alert("Error", "There was an error uploading your post.");
             }
