@@ -57,6 +57,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     // }
 
     const isLogged = await login(email, password);
+    console.log("entra al handler")
 
     if (isLogged) {
       console.log("email", email);

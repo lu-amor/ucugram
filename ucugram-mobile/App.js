@@ -1,5 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import Post from './pages/Post'
 import {NavigationContainer} from '@react-navigation/native';
@@ -18,7 +16,7 @@ import SuggestedFriends from "./pages/SuggestedFriends";
 import FriendProfile from "./pages/[FriendProfile]";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://172.20.10.2:3001/api/"; // para levantar en mobile
+export const url = "http://172.20.10.4:3001/api/"; // para levantar en mobile
 // export const url = "http://localhost:3001/api/"; // para levantar en web
 
 export default function App() {

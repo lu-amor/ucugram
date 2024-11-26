@@ -33,7 +33,7 @@ const NavBar = ({ user, activePage, navigation }) => {
           onPress={() => navigation.navigate("Add")}
           r
         />
-        <Ionicons
+{/*         <Ionicons
           name={
             activePage === "notifications"
               ? "notifications"
@@ -42,7 +42,7 @@ const NavBar = ({ user, activePage, navigation }) => {
           size={35}
           color="#173363"
           onPress={() => navigation.navigate("Notifications")}
-        />
+        /> */}
         <TouchableOpacity onPress={handleGoProfile}>
           <View style={styles.avatar}>
             <Avatar user={authState.user}></Avatar>
