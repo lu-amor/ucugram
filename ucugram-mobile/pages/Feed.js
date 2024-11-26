@@ -1,5 +1,13 @@
-import React, { useEffect } from "react";
-import { View, Image, StyleSheet, ScrollView, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Text,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native";
 import NavBar from "../components/NavBar";
 import FeedPost from "../components/FeedPost";
 import Suggestions from "../components/Suggestions";
@@ -8,8 +16,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useAuth } from "../context/AuthContext";
 
 const Feed = ({ navigation }) => {
-  const { posts, loading, error } = useFetchPosts();
+  const { fetchPosts, posts, loading, error } = useFetchPosts();
   const { state: authState } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     if (!authState.isAuthenticated) {
@@ -21,13 +30,24 @@ const Feed = ({ navigation }) => {
     removeFriendId();
   }, []);
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchPosts(); // Llama a la función para recargar los posts
+    setRefreshing(false);
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <Image
           source={require("../assets/ucugram texto.png")}
           style={styles.headerImage}
         />
+        {refreshing && <ActivityIndicator size={20} color="white" />}
         <Suggestions navigation={navigation} />
         {loading ? (
           <Text>loading posts...</Text>

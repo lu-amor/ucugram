@@ -1,26 +1,47 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import FollowButton from "./FollowButton";
 import Avatar from "./Avatar";
+import { useNavigation } from "@react-navigation/native";
+import { useGetProfile } from "../hooks/useGetProfile";
 
 const SuggestionsPreview = ({ suggestions }) => {
+  const navigation = useNavigation();
+  const getProfile = useGetProfile();
+
+  const handleGoProfile = async (user) => {
+    const userId = user._id;
+    const username = user.username;
+    await getProfile(userId);
+    navigation.navigate("FriendProfile", { userId, username });
+  };
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.suggestionCard}>
-        <View style={styles.cardAvatar}>
-          <Avatar user={item} />
-        </View>
-        <View style={styles.cardInfo}>
-          <Text style={styles.name}>{item.username || "Nombre no disponible"}</Text>
-        </View>
+        <TouchableOpacity onPress={() => handleGoProfile(item)}>
+          <View style={styles.cardAvatar}>
+            <Avatar user={item} />
+          </View>
+          <View style={styles.cardInfo}>
+            <Text style={styles.name}>
+              {item.username || "Nombre no disponible"}
+            </Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.followSection}>
-          <FollowButton userId={item._id} initialFollows={[]} />
+          <FollowButton user={item} />
         </View>
       </View>
     );
   };
-  
 
   return (
     <View style={styles.container}>
@@ -56,8 +77,8 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 20,
     marginTop: 5,
-    paddingTop:10,
-    paddingBottom:10,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   cardAvatar: {
     marginBottom: 10,
