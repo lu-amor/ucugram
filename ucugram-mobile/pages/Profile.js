@@ -95,11 +95,12 @@ const Profile = ({ navigation }) => {
           user={profileState.user}
           navigation={navigation}
         />
-        <NavBar
+        {/* <NavBar
+        
           user={profileState.user}
           activePage="profile"
           navigation={navigation}
-        />
+        /> */}
       </>
     </View>
   );

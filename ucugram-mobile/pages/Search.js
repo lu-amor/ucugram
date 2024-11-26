@@ -73,11 +73,11 @@ const Search = ({ navigation }) => {
           </TouchableOpacity>
         ))}
       </ScrollView>
-      <NavBar
+      {/* <NavBar
         user={authState.user}
         activePage="search"
         navigation={navigation}
-      />
+      /> */}
     </View>
   );
 };

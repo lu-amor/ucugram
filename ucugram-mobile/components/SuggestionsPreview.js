@@ -1,37 +1,55 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 import FollowButton from "./FollowButton";
 import Avatar from "./Avatar";
+import { useNavigation } from "@react-navigation/native";
+import { useGetProfile } from "../hooks/useGetProfile";
 
 const SuggestionsPreview = ({ suggestions }) => {
+  const navigation = useNavigation();
+  const getProfile = useGetProfile();
+
+  const handleGoProfile = async (user) => {
+    const userId = user._id;
+    const username = user.username;
+    await getProfile(userId);
+    navigation.navigate("FriendProfile", { userId, username });
+  };
 
   const renderItem = ({ item }) => {
     return (
       <View style={styles.suggestionCard}>
-        <View style={styles.cardAvatar}>
-          <Avatar user={item} />
-        </View>
-        <View style={styles.cardInfo}>
-          <Text style={styles.name}>{item.username || "Nombre no disponible"}</Text>
-        </View>
+        <TouchableOpacity onPress={() => handleGoProfile(item)}>
+          <View style={styles.cardAvatar}>
+            <Avatar user={item} />
+          </View>
+          <View style={styles.cardInfo}>
+            <Text style={styles.name}>
+              {item.username || "Nombre no disponible"}
+            </Text>
+          </View>
+        </TouchableOpacity>
         <View style={styles.followSection}>
-          <FollowButton userId={item._id} initialFollows={[]} />
+          <FollowButton user={item} />
         </View>
       </View>
     );
   };
-  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Suggestions for you</Text>
-
       <FlatList
         data={suggestions}
         keyExtractor={(item) => item._id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        pagingEnabled
         snapToAlignment="center"
         decelerationRate="fast"
         renderItem={renderItem}
@@ -44,36 +62,31 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 20,
     backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 10,
   },
   suggestionCard: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 10,
-    marginHorizontal: 10,
-    width: Dimensions.get("window").width * 0.6,
+    width: Dimensions.get("window").width * 0.35,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    borderWidth: 0.5,
+    borderColor: "lightgrey",
     elevation: 3,
     flexDirection: "column",
+    margin: 5,
+    marginBottom: 20,
+    marginTop: 5,
+    paddingTop: 10,
+    paddingBottom: 10,
   },
   cardAvatar: {
     marginBottom: 10,
-    width: 80,
-    height: 80,
-    borderRadius: 60,
-    borderColor: "#808080",
-    borderWidth: 3,
+    width: 70,
+    height: 70,
+    borderRadius: 100,
+    borderColor: "grey",
+    borderWidth: 2,
   },
   cardInfo: {
     alignItems: "center",

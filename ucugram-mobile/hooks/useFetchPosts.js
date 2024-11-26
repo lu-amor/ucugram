@@ -32,7 +32,7 @@ const useFetchPosts = () => {
     fetchPosts();
   }, []);
 
-  return { posts, loading, error };
+  return {fetchPosts, posts, loading, error };
 };
 
 export default useFetchPosts;

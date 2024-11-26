@@ -1,5 +1,13 @@
-import React, { useEffect } from "react";
-import { View, Image, StyleSheet, ScrollView, Text } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Text,
+  RefreshControl,
+  ActivityIndicator,
+} from "react-native";
 import NavBar from "../components/NavBar";
 import FeedPost from "../components/FeedPost";
 import Suggestions from "../components/Suggestions";
@@ -11,8 +19,9 @@ import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("window").width;
 
 const Feed = ({ navigation }) => {
-  const { posts, loading, error } = useFetchPosts();
+  const { fetchPosts, posts, loading, error } = useFetchPosts();
   const { state: authState } = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     if (!authState.isAuthenticated) {
@@ -24,27 +33,34 @@ const Feed = ({ navigation }) => {
     removeFriendId();
   }, []);
 
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await fetchPosts(); // Llama a la función para recargar los posts
+    setRefreshing(false);
+  };
+
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <Image
           source={require("../assets/ucugram texto.png")}
           style={styles.headerImage}
         />
+        {refreshing && <ActivityIndicator size={20} color="white" />}
         <Suggestions navigation={navigation} />
         {loading ? (
           <Text>loading posts...</Text>
         ) : (
           posts?.map((post) => (
-            <FeedPost
-              key={post._id}
-              post={post}
-              navigation={navigation}
-            />
+            <FeedPost key={post._id} post={post} navigation={navigation} />
           ))
         )}
       </ScrollView>
-      <NavBar user={authState.user} activePage="home" navigation={navigation} />
+      {/* <NavBar user={authState.user} activePage="home" navigation={navigation} /> */}
     </View>
   );
 };
@@ -59,7 +75,7 @@ const styles = StyleSheet.create({
     width: screenWidth > 450 ? "40%" : "40%",
     height: screenWidth > 450 ? 70 : 30,
     alignSelf: "center",
-    marginTop: 10,
+    marginTop: 20,
   },
 });
 

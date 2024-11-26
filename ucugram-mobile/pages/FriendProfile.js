@@ -129,11 +129,6 @@ const FriendProfile = ({ navigation }) => {
         </View>
       </View>
       <ProfileGrid posts={profileState.posts} />
-      <NavBar
-        user={profileState.user}
-        activePage="profile"
-        navigation={navigation}
-      />
     </View>
   );
 };

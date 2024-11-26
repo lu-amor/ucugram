@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useLogin } from "../services/authService";
@@ -36,7 +37,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
       alert("Por favor, ingresa un email válido de la UCU.");
       return;
     }
-
+    
     setIsLoading(true);
     const isLogged = await login(email, password);
     setIsLoading(false);
@@ -44,7 +45,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     if (isLogged) {
       console.log("authState.user:", authState.user);
       console.log("email", email);
-      navigation.navigate("Profile");
+      navigation.replace("Main", {screen: "Profile"});
     } else {
       window.alert("Email o contraseña incorrecta");
       navigation.navigate("Login");
@@ -55,7 +56,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     <View style={styles.content}>
       <View style={styles.container}>
         {isLoading ? (
-          <Text>loading profile...</Text>
+           <ActivityIndicator size="small" color="black" />
         ) : (
           <>
             <View style={styles.logoContainer}>

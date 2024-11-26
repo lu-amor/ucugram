@@ -7,14 +7,16 @@ import Avatar from "./Avatar";
 import CommentsModal from "./CommentsModal";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile";
+import useLike from "./../hooks/useLike.js";
 
 const screenWidth = Dimensions.get("window").width;
 
 export default function FeedPost({ post, navigation }) {
   const [liked, setLiked] = useState(false);
-  const [commentsVisibility, setCommentsVisibility] = useState(false);
-  const {state: authState} = useAuth();
-  const getProfile = useGetProfile();  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { state: authState } = useAuth();
+  const getProfile = useGetProfile();
+  const { likes, isLiked, toggleLike } = useLike(post);
 
   const scale = useSharedValue(1);
   const isZooming = useSharedValue(false);
@@ -58,35 +60,40 @@ export default function FeedPost({ post, navigation }) {
   const handleGoProfile = async () => {
     const userId = post.user._id;
     const username = post.user.username;
-    console.log("go friend profile: ", username)
-    console.log("id friend profile: ", userId)
-    
+    // console.log("go friend profile: ", username)
+    // console.log("id friend profile: ", userId)
+
     if (username !== authState.user.username) {
       await getProfile(userId);
       navigation.navigate("FriendProfile", { userId, username });
     } else {
-      navigation.navigate('Profile');
+      navigation.navigate("Profile");
     }
   };
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      <TouchableOpacity
-        onPress={handleGoProfile}
-      >
-        <View style={styles.userInfo}>
-          <View style={styles.avatar}>
-            <Avatar user={post.user}></Avatar>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleGoProfile}>
+          <View style={styles.userInfo}>
+            <View style={styles.avatar}>
+              <Avatar user={post.user}></Avatar>
+            </View>
+            <Text style={styles.usernameTop}>{post.user.username}</Text>
           </View>
-          <Text style={styles.usernameTop}>{post.user.username}</Text>
-          <Text style={styles.postDate}>{post.createdAt}</Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+        <Text style={styles.postDate}>{post.createdAt?.split("T")[0]}</Text>
+      </View>
       <View style={styles.postCard}>
         <GestureDetector gesture={pinchGesture}>
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
             <Image
-              source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}}
+              source={{
+                uri: `http://172.20.10.2:3001/${post.imageUrl.replace(
+                  /\\/g,
+                  "/"
+                )}`,
+              }}
               style={styles.image}
             />
           </Animated.View>
@@ -94,15 +101,15 @@ export default function FeedPost({ post, navigation }) {
       </View>
       <Animated.View style={[styles.belowPicture, belowPictureStyle]}>
         <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity onPress={() => handleLike()}>
+          <TouchableOpacity onPress={toggleLike}>
             <Ionicons
-              name={liked ? "heart" : "heart-outline"}
+              name={isLiked ? "heart" : "heart-outline"}
               color="#ea5b0c"
               size={32}
             />
           </TouchableOpacity>
-          <Text style={styles.likes}>{post.likes.length}</Text>
-          <TouchableOpacity onPress={() => setCommentsVisibility(true)}>
+          <Text style={styles.likes}>{likes}</Text>
+          <TouchableOpacity onPress={() => setIsModalOpen(true)}>
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
             <Text style={styles.likes}>{post.comments.length}</Text>
@@ -118,11 +125,9 @@ export default function FeedPost({ post, navigation }) {
           </Text>
         </View>
       </Animated.View>
-      <CommentsModal
-        visible={commentsVisibility}
-        onClose={() => setCommentsVisibility(false)}
-        commentsArray={post.commentsArray}
-      />
+      {isModalOpen && (
+        <CommentsModal onClose={() => setIsModalOpen(false)} post={post} />
+      )}
     </GestureHandlerRootView>
   );
 }
