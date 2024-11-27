@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { View, Image, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
+import Post from '../pages/Post.js'
 import PostModal from './PostModal.js';
 
-const ProfilePost = ({ idx, post, user }) => {
+const ProfilePost = ({ idx, post, user, navigation }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openPostScreen = () => {
+        //navigation.navigate("Post", { post, user });
+        navigation.navigate("Post", {post});
+    };
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
 
 
     return (
         <View style={styles.container}>
                     <TouchableOpacity key={idx} style={styles.cardImage} onPress={() => setIsModalOpen(true)}>
-                        <Image source={{ uri: `http://172.20.10.2:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.image} />
+                        <Image source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.image} />
                     </TouchableOpacity>
 
             <PostModal

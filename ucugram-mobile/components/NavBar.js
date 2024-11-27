@@ -55,7 +55,7 @@ const NavBar = () => {
           onPress={()=> handleActivePage("Add", "add")}
           r
         />
-        <Ionicons
+{/*         <Ionicons
           name={
             currentPage === "notifications"
               ? "notifications"
@@ -64,7 +64,7 @@ const NavBar = () => {
           size={35}
           color="#173363"
           onPress={()=> handleActivePage("Notifications", "notifications")}
-        />
+        />*/}
         <TouchableOpacity
           onPress={handleGoProfile}
           onLongPress={handleLogout}

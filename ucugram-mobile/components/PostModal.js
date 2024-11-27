@@ -1,11 +1,22 @@
-import React from 'react';
-import { Modal, View, Text, StyleSheet, Pressable, Image } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { Modal, View, Text, StyleSheet, Pressable, Image, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons'; 
 import Avatar from './Avatar';
 import { useProfile } from "../context/ProfileContext";
 
 const PostModal = ({ isVisible, onClose, post }) => {
     const { state: profileState, dispatch: dispatchProfile } = useProfile();
+    const [imageSize, setImageSize] = useState(Dimensions.get("window").width);
+
+    useEffect(() => {
+        const handleResize = () => setImageSize(Dimensions.get("window").width * 0.9);
+    
+        const subscription = Dimensions.addEventListener("change", handleResize);
+    
+        return () => subscription?.remove();
+    }, []);
+
+    const isLargeScreen = imageSize > 450;
     
     return (
         <Modal
@@ -14,8 +25,14 @@ const PostModal = ({ isVisible, onClose, post }) => {
             animationType="fade"
             onRequestClose={onClose}
         >
-            <Pressable style={styles.overlay} onPressOut={onClose}>
-                <View style={styles.modalContent}>
+            <View style={styles.overlay} >
+                <Pressable style={StyleSheet.absoluteFill} onPressOut={onClose} />
+                <View style={isLargeScreen ? {
+                    width: imageSize * 0.7,
+                    backgroundColor: 'white',
+                    borderRadius: 10,
+                    overflow: 'hidden',
+                } : styles.modalContent}>
                     
                     <View style={styles.header}>
                         <View style={styles.avatar}>
@@ -24,7 +41,11 @@ const PostModal = ({ isVisible, onClose, post }) => {
                         <Text style={styles.username}>{profileState.user?.username}</Text>
                     </View>
 
-                    <Image source={{ uri: `http://172.20.10.2:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.postImage} />
+                    <Image source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={[
+                        styles.postImage, {
+                            width: isLargeScreen ? imageSize * 0.7 : imageSize,
+                            height: isLargeScreen ? imageSize * 0.7 : imageSize * 0.9,
+                    }]} />
 
                     <View style={styles.footer}>
                         <Ionicons name="heart-outline" size={24} color="black" style={styles.icon} />
@@ -32,7 +53,7 @@ const PostModal = ({ isVisible, onClose, post }) => {
                         <Ionicons name="share-social-outline" size={24} color="black" style={styles.icon} />
                     </View>
                 </View>
-            </Pressable>
+            </View>
         </Modal>
     );
 };
@@ -70,8 +91,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     postImage: {
-        width: '100%',
-        height: 300,
+        justifyContent: 'center',
         resizeMode: 'cover',
     },
     footer: {
