@@ -30,7 +30,6 @@ const CommentsModal = ({ onClose, post }) => {
 
       const result = await addComment(content, post._id);
       if (result._id !== undefined) {
-        /* funcion agregar comentario */
         const commentInfo = await getComment(result._id);
         setComments((prevComments) => [...prevComments, { commentInfo }]);
         setNewComment("");
@@ -51,8 +50,8 @@ const CommentsModal = ({ onClose, post }) => {
     loadComments();
   }, [post.comments]);
 
-  const renderItem = ({ item }) => {
-    return <CommentItem comment={item} />;
+  const renderItem = ({ item, index }) => {
+    return <CommentItem index={index} comment={item} />;
   };
 
   return (
@@ -76,7 +75,7 @@ const CommentsModal = ({ onClose, post }) => {
               </View>
               <FlatList
                 data={comments}
-                keyExtractor={(item) => item._id}
+                keyExtractor={(index) => index}
                 renderItem={renderItem}
                 ListEmptyComponent={
                   <Text style={styles.noCommentsText}>

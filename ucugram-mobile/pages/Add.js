@@ -87,7 +87,6 @@ const Add = ({ navigation }) => {
       setLoadingState(false);
 
       if (isUploaded) {
-        Alert.alert("Success", "Your post has been successfully uploaded.");
         navigation.reset({
           index: 0,
           routes: [{ name: "Feed" }],

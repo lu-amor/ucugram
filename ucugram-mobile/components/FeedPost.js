@@ -4,6 +4,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  ActivityIndicator,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -71,8 +72,6 @@ export default function FeedPost({ post, navigation }) {
   const handleGoProfile = async () => {
     const userId = post.user._id;
     const username = post.user.username;
-    // console.log("go friend profile: ", username)
-    // console.log("id friend profile: ", userId)
 
     if (username !== authState.user.username) {
       await getProfile(userId);
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: isLargeScreen ? "10%" : 0,
     alignItems: "center",
     marginBottom: 10,
-    height:"ajust-content",
+    height: "ajust-content",
     paddingVertical: 10,
   },
   userInfo: {
@@ -215,7 +214,7 @@ const styles = StyleSheet.create({
   belowPicture: {
     backgroundColor: "white",
     padding: 15,
-    width:"100%",
+    width: "100%",
     alignSelf: "center",
     height: "ajust-content",
   },
