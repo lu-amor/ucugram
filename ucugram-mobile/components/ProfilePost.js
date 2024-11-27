@@ -19,7 +19,7 @@ const ProfilePost = ({ idx, post, user, navigation }) => {
     return (
         <View style={styles.container}>
                     <TouchableOpacity key={idx} style={styles.cardImage} onPress={() => setIsModalOpen(true)}>
-                        <Image source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.image} />
+                        <Image source={{ uri: `http://192.168.1.10:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.image} />
                     </TouchableOpacity>
 
             <PostModal

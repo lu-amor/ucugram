@@ -56,7 +56,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     <View style={styles.content}>
       <View style={styles.container}>
         {isLoading ? (
-           <ActivityIndicator size="small" color="black" />
+          <ActivityIndicator size="small" color="black" />
         ) : (
           <>
             <View style={styles.logoContainer}>
@@ -88,7 +88,7 @@ function LoginForm({ createAccount, onLoginSuccess }) {
               </Text>
               <TextInput
                 style={styles.input}
-                placeholder="Enter password"
+                placeholder="Enter your password"
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
@@ -130,6 +130,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "auto",
   },
+  label: {
+    fontSize: 14,
+    fontWeight: 600,
+    color: "rgb(30, 30, 109)",
+    marginBottom: 5,
+  },
+  input: {
+    width: "100%",
+    marginTop: 3,
+    fontSize: 18,
+  },
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -140,6 +151,10 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 30,
     width: "100%",
+    fontSize: 16,
+    borderBottomColor: "rgb(30, 30, 109)",
+    borderBottomWidth: 1,
+    padding: 3,
   },
   loginButton: {
     backgroundColor: "rgb(30, 30, 109)",
@@ -150,6 +165,8 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: "white",
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 16,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -157,7 +174,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     width: "100%",
     marginTop: 10,
-    paddingTop: 50,
+    paddingTop: 40,
   },
   buttonTextContainer: {
     flexDirection: "row",
@@ -170,14 +187,14 @@ const styles = StyleSheet.create({
   },
   isologo: {
     width: "90%",
-    height: "10%",
+    height: "12%",
     paddingBottom: 30,
     resizeMode: "contain",
   },
   logo: {
-    width: "50%",
-    height: "10%",
-    marginBottom: 20,
+    width: "55%",
+    height: "11%",
+    marginBottom: 12,
     resizeMode: "contain",
   },
   delete: {
@@ -187,10 +204,12 @@ const styles = StyleSheet.create({
   },
   createAccountText: {
     color: "rgb(30, 30, 109)",
+    fontSize: 16,
   },
   hereText: {
     color: "rgb(30, 30, 109)",
     fontWeight: "bold",
+    fontSize: 16,
   },
 });
 

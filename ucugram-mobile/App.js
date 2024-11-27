@@ -19,7 +19,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigationState } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://172.20.10.4:3001/api/";
+export const url = "http://192.168.1.10:3001/api/";
 
 function StackNavigatorComponent() {
   const route = useRoute();

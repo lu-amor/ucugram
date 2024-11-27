@@ -41,7 +41,7 @@ const PostModal = ({ isVisible, onClose, post }) => {
                         <Text style={styles.username}>{profileState.user?.username}</Text>
                     </View>
 
-                    <Image source={{ uri: `http://172.20.10.4:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={[
+                    <Image source={{ uri: `http://192.168.1.10:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={[
                         styles.postImage, {
                             width: isLargeScreen ? imageSize * 0.7 : imageSize,
                             height: isLargeScreen ? imageSize * 0.7 : imageSize * 0.9,
