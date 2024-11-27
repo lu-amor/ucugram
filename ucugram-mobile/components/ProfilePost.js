@@ -1,51 +1,73 @@
 import React, { useState } from "react";
-import { View, Image, StyleSheet, Dimensions, TouchableOpacity} from "react-native";
-import Post from '../pages/Post.js'
-import PostModal from './PostModal.js';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import PostModal from "./PostModal.js";
+import * as Haptics from 'expo-haptics';
 
 const ProfilePost = ({ idx, post, user, navigation }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const openPostScreen = () => {
-        //navigation.navigate("Post", { post, user });
-        navigation.navigate("Post", {post});
-    };
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
+  const handleOpenModal = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    setIsModalOpen(true)
+  };
 
 
-    return (
-        <View style={styles.container}>
-                    <TouchableOpacity key={idx} style={styles.cardImage} onPress={() => setIsModalOpen(true)}>
-                        <Image source={{ uri: `http://192.168.1.10:3001/${post.imageUrl.replace(/\\/g, '/')}`}} style={styles.image} />
-                    </TouchableOpacity>
+  const openPostScreen = () => {
+    //navigation.navigate("Post", { post, user });
+    navigation.navigate("Post", { post, user });
+  };
 
-            <PostModal
-                isVisible={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                post={post}
-                user={user}
-            />
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity
+        key={idx}
+        style={styles.cardImage}
+        onLongPress={handleOpenModal}
+      >
+        <Image
+          source={{
+            uri: `http://192.168.1.88:3001/${post.imageUrl.replace(
+              /\\/g,
+              "/"
+            )}`,
+          }}
+          style={styles.image}
+        />
+      </TouchableOpacity>
 
-        </View>
-    );
+      <PostModal
+        isVisible={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        post={post}
+        user={user}
+      />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    cardImage: {
-        width: Dimensions.get("window").width/3,
-        height: Dimensions.get("window").width/3,
-    },
-    image: {
-        width: "100%",
-        height: "100%",
-        resizeMode: "cover",
-    },
+  container: {
+    flex: 1,
+  },
+  cardImage: {
+    width: Dimensions.get("window").width / 3,
+    height: Dimensions.get("window").width / 3,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
 });
 
 export default ProfilePost;

@@ -1,12 +1,11 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions, Button, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet} from "react-native";
 import Avatar from "./Avatar";
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ index, comment }) => {
     const info = comment.commentInfo
-    console.log("info:", info)
     return (
-        <View style={styles.commentItem}>
+        <View key={index} style={styles.commentItem}>
             <View style={styles.avatarContainer}><Avatar user={info.user}/></View>
             <Text style={styles.commentContent}>
                 <Text style={styles.commentUser}>{info.user?.username}  </Text>

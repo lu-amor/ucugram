@@ -1,34 +1,42 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import FeedPost  from '../components/FeedPost';
-import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { View, Image, ActivityIndicator, StyleSheet } from 'react-native';
 
-const Post = ({route, navigation}) => {
-    const {user, post} = route.params;
+const Post = () => {
+  const [loading, setLoading] = useState(true);
 
-    const handleGesture = (event) => {
-        if (event.nativeEvent.translationX > 100) {
-          navigation.navigate('Profile'); 
-        }
-      };
-
-    return (
+  return (
+    <View style={styles.container}>
+      {loading && (
+        <ActivityIndicator 
+          size="large" 
+          color="#007bff" 
+          style={styles.loader} 
+        />
+      )}
         <GestureHandlerRootView style={styles.container}>
-        <PanGestureHandler onGestureEvent={handleGesture}>
-          <View style={styles.container}>
-            <FeedPost post={post} user={user} navigation={navigation} />
-          </View>
-        </PanGestureHandler>
-      </GestureHandlerRootView>
-    );
-
-}
+      <PanGestureHandler onGestureEvent={handleGesture}>
+        <View style={styles.container}>
+          <FeedPost post={post} user={user} navigation={navigation} />
+        </View>
+      </PanGestureHandler>
+    </GestureHandlerRootView>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-  });
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loader: {
+    position: 'absolute',
+  },
+  image: {
+    width: 300,
+    height: 300,
+    borderRadius: 10,
+  },
+});
 
 export default Post;

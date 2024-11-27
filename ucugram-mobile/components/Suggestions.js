@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, TouchableOpacity, StyleSheet, RefreshControl } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
 import SuggestionsPreview from "./SuggestionsPreview";
 import useFetchSuggestions from "../hooks/useFetchSuggestions.js";
+
+const screenWidth = Dimensions.get("window").width;
 
 const Suggestions = ({ navigation, refreshing }) => {
   const { reloadSuggestions, suggestions, loading, error } = useFetchSuggestions();
@@ -41,6 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     marginTop: 30,
+    maxHeight: "ajust-content",
   },
   footer: {
     marginTop: 10,
