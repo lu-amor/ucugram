@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar";
 import { AuthProvider } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
 import Add from "./pages/Add";
+import EditProfile from "./pages/EditProfile";
 import Feed from "./pages/Feed";
 import FriendProfile from "./pages/FriendProfile";
 import LogInPage from "./pages/LogInPage";
@@ -18,11 +19,9 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import SignUpPage from "./pages/SignUpPage";
 import SuggestedFriends from "./pages/SuggestedFriends";
-import EditProfile from "./pages/EditProfile";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://192.168.1.88:3001/api/";
-
+export const url = "http://172.20.10.2:3001/api/";
 
 function StackNavigatorComponent() {
   const route = useRoute();
@@ -95,7 +94,7 @@ function StackNavigatorComponent() {
           name="Edit"
           component={EditProfile}
           options={{
-            headerShown: false
+            headerShown: false,
           }}
         />
       </Stack.Navigator>

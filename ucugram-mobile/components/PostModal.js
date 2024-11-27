@@ -8,7 +8,6 @@ import {
   Text,
   View,
 } from "react-native";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { useProfile } from "../context/ProfileContext";
 import Avatar from "./Avatar";
 
@@ -57,7 +56,7 @@ const PostModal = ({ isVisible, onClose, post }) => {
 
           <Image
             source={{
-              uri: `http://192.168.1.88:3001/${post.imageUrl.replace(
+              uri: `http://172.20.10.2:3001/${post.imageUrl.replace(
                 /\\/g,
                 "/"
               )}`,

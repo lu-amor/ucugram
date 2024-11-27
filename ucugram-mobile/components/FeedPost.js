@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import {
   Dimensions,
   Image,
+  Linking,
   StyleSheet,
   Text,
-  ActivityIndicator,
   TouchableOpacity,
   View,
-  Linking,
 } from "react-native";
 import {
   Gesture,
@@ -99,7 +98,7 @@ export default function FeedPost({ post, navigation }) {
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
             <Image
               source={{
-                uri: `http://192.168.1.88:3001/${post.imageUrl.replace(
+                uri: `http://172.20.10.2:3001/${post.imageUrl.replace(
                   /\\/g,
                   "/"
                 )}`,
@@ -122,8 +121,15 @@ export default function FeedPost({ post, navigation }) {
           <TouchableOpacity onPress={() => setIsModalOpen(true)}>
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
-            <Text style={styles.likes}>{post.comments.length}</Text>
-          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => Linking.openURL('https://www.youtube.com/watch?v=AoQMHzkj2x0&ab_channel=ConorMaynard.com')}>
+          <Text style={styles.likes}>{post.comments.length}</Text>
+          <TouchableOpacity
+            style={{ marginLeft: "auto", marginRight: 5 }}
+            onPress={() =>
+              Linking.openURL(
+                "https://www.youtube.com/watch?v=AoQMHzkj2x0&ab_channel=ConorMaynard.com"
+              )
+            }
+          >
             <Ionicons name="share-social-outline" color="#ea5b0c" size={30} />
           </TouchableOpacity>
         </View>

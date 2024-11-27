@@ -1,3 +1,4 @@
+import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import {
   Dimensions,
@@ -7,16 +8,14 @@ import {
   View,
 } from "react-native";
 import PostModal from "./PostModal.js";
-import * as Haptics from 'expo-haptics';
 
 const ProfilePost = ({ idx, post, user, navigation }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-    setIsModalOpen(true)
+    setIsModalOpen(true);
   };
-
 
   const openPostScreen = () => {
     //navigation.navigate("Post", { post, user });
@@ -26,7 +25,7 @@ const ProfilePost = ({ idx, post, user, navigation }) => {
   const openModal = () => {
     setIsModalOpen(true);
   };
-  
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -36,10 +35,7 @@ const ProfilePost = ({ idx, post, user, navigation }) => {
       >
         <Image
           source={{
-            uri: `http://192.168.1.88:3001/${post.imageUrl.replace(
-              /\\/g,
-              "/"
-            )}`,
+            uri: `http://172.20.10.2:3001/${post.imageUrl.replace(/\\/g, "/")}`,
           }}
           style={styles.image}
         />

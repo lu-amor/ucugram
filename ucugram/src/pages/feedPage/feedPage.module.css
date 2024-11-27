@@ -11,6 +11,7 @@
 
 .feedContent {
     height: 80%; 
+    max-height: 100vh;
     overflow-y: auto;
     width: 100%;
     margin-bottom: 4.7rem;
