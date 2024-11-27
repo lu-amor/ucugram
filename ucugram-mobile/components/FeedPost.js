@@ -1,13 +1,28 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Dimensions,  TouchableOpacity } from "react-native";
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import Avatar from "./Avatar";
-import CommentsModal from "./CommentsModal";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile";
 import useLike from "./../hooks/useLike.js";
+import Avatar from "./Avatar";
+import CommentsModal from "./CommentsModal";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -85,7 +100,7 @@ export default function FeedPost({ post, navigation }) {
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
             <Image
               source={{
-                uri: `http://172.20.10.4:3001/${post.imageUrl.replace(
+                uri: `http://192.168.1.88:3001/${post.imageUrl.replace(
                   /\\/g,
                   "/"
                 )}`,
@@ -108,8 +123,11 @@ export default function FeedPost({ post, navigation }) {
           <TouchableOpacity onPress={() => setIsModalOpen(true)}>
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
-            <Text style={styles.likes}>{post.comments.length}</Text>
-          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => copyToClipboard()}>
+          <Text style={styles.likes}>{post.comments.length}</Text>
+          <TouchableOpacity
+            style={{ marginLeft: "auto", marginRight: 5 }}
+            onPress={() => copyToClipboard()}
+          >
             <Ionicons name="share-social-outline" color="#ea5b0c" size={30} />
           </TouchableOpacity>
         </View>
@@ -133,19 +151,30 @@ const isLargeScreen = screenWidth > 450;
 const styles = StyleSheet.create({
   container: {
     flex: isLargeScreen ? 1.2 : 1,
-    paddingTop: isLargeScreen ? 70 : 10,
-    paddingHorizontal: isLargeScreen ? "10%" : 0,
+    backgroundColor: "white",
+    // paddingTop: isLargeScreen ? 70 : 10,
+    // paddingHorizontal: isLargeScreen ? "10%" : 0,
     alignItems: "center",
+    marginBottom: 10,
+    height:"ajust-content",
+    paddingVertical: 10,
   },
   userInfo: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 15,
-    paddingVertical: 8,
+    // paddingVertical: 8,
     backgroundColor: "white",
-    width: isLargeScreen ? "180%" : "100%",
     alignSelf: "center",
     marginBottom: 10,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    // width: isLargeScreen ? "180%" : "100%",
+    width: "100%",
+    marginRight: 10,
   },
   avatar: {
     width: 40,
@@ -167,7 +196,7 @@ const styles = StyleSheet.create({
   },
   postCard: {
     backgroundColor: "white",
-    width: isLargeScreen ? "80%" : "100%",
+    width: "100%",
     height: isLargeScreen ? screenWidth * 0.6 : screenWidth,
     justifyContent: "center",
     alignItems: "center",
@@ -186,9 +215,9 @@ const styles = StyleSheet.create({
   belowPicture: {
     backgroundColor: "white",
     padding: 15,
-    width: isLargeScreen ? "80%" : "100%",
+    width:"100%",
     alignSelf: "center",
-    borderRadius: isLargeScreen ? 10 : 0,
+    height: "ajust-content",
   },
   actionButtonsContainer: {
     flexDirection: "row",
@@ -205,7 +234,9 @@ const styles = StyleSheet.create({
   userDesc: {
     flexDirection: "row",
     alignItems: "center",
-    flexWrap: "wrap",
+    height: "ajust-content",
+    // marginBottom: 10,
+    // flexWrap: "wrap",
   },
   usernameBottom: {
     fontSize: 16,

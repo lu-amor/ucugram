@@ -47,6 +47,7 @@ const Feed = ({ navigation }) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
+        contentContainerStyle={styles.content}
       >
         <Image
           source={require("../assets/ucugram texto.png")}
@@ -74,11 +75,15 @@ const styles = StyleSheet.create({
     marginTop: 45,
   },
   headerImage: {
-    width: screenWidth > 450 ? "40%" : "40%",
+    width: "40%",
     height: screenWidth > 450 ? 70 : 30,
     alignSelf: "center",
     marginTop: 20,
   },
+  content: {
+    maxWidth: screenWidth > 450 ? "90%" : "100%",
+    alignSelf: "center",
+  }
 });
 
 export default Feed;

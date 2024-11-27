@@ -1,25 +1,26 @@
+import {
+  NavigationContainer,
+  useNavigationState,
+  useRoute,
+} from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
-import Post from './pages/Post'
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { View, StyleSheet, Image } from "react-native";
+import { StyleSheet, View } from "react-native";
+import NavBar from "./components/NavBar";
 import { AuthProvider } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
 import Add from "./pages/Add";
 import Feed from "./pages/Feed";
+import FriendProfile from "./pages/FriendProfile";
 import LogInPage from "./pages/LogInPage";
 import Notifications from "./pages/Notifications";
 import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import SignUpPage from "./pages/SignUpPage";
 import SuggestedFriends from "./pages/SuggestedFriends";
-import FriendProfile from "./pages/FriendProfile";
-import NavBar from "./components/NavBar";
-import { useRoute } from "@react-navigation/native";
-import { useNavigationState } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://172.20.10.4:3001/api/";
+export const url = "http://192.168.1.88:3001/api/";
 
 function StackNavigatorComponent() {
   const route = useRoute();

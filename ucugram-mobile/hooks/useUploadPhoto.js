@@ -9,14 +9,14 @@ const useUploadPhoto = () => {
   const [error, setError] = useState(null);
   const { state: authState } = useAuth();
 
-  const uploadPhoto = async (file, caption) => {
+  const uploadPhoto = async (imageUrl, caption) => {
     setLoading(true);
     setError(null);
-
+    console.log("entraaaaa")
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image",{uri: imageUrl, name: "image.jpg", type: "image/jpeg"});
     formData.append("caption", caption);
-
+    console.log("data: ", formData["image"]);
     try {
       const response = await fetch(url + "posts/upload", {
         method: "POST",

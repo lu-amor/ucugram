@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   suggestionCard: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    width: Dimensions.get("window").width * 0.35,
+    width: 150,
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 0.5,
