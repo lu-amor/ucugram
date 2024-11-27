@@ -109,7 +109,7 @@ export default function FeedPost({ post, navigation }) {
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
             <Text style={styles.likes}>{post.comments.length}</Text>
-          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => Linking.openURL('https://www.youtube.com/watch?v=AoQMHzkj2x0&ab_channel=ConorMaynard.com')}>>
+          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => Linking.openURL('https://www.youtube.com/watch?v=AoQMHzkj2x0&ab_channel=ConorMaynard.com')}>
             <Ionicons name="share-social-outline" color="#ea5b0c" size={30} />
           </TouchableOpacity>
         </View>
