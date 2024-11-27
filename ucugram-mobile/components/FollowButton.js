@@ -19,7 +19,6 @@ const FollowButton = ({ user }) => {
       setLoading(true);
       const removed = await removeFriend(user._id);
       setLoading(false);
-      console.log("entra");
       if (removed === true) {
         setIsFriend(false);
       } else {

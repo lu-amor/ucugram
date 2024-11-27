@@ -10,7 +10,6 @@ const LoginPage = ({ navigation }) => {
   useEffect(() => {
     const checkToken = async () => {
       const token = await AsyncStorage.getItem("token");
-      console.log("token", token);
       if (token) {
         navigation.replace("Main", {screen: "Profile"});
       }

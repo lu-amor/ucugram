@@ -9,7 +9,6 @@ const updateProfileInfo = () => {
 
   const updateProfile = async (newInfo) => {
     try {
-      console.log("entra");
       setLoading(true);
       setError(null);
       const response = await fetch(url + `user/profile/edit/`, {
@@ -23,7 +22,6 @@ const updateProfileInfo = () => {
 
       const data = await response.json();
       setLoading(false);
-      console.log("update result: ", data);
       return response.ok;
     } catch (err) {
       setError(err.message);

@@ -14,7 +14,6 @@ import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile.js";
 import { useProfile } from "../context/ProfileContext.js";
 import { useIsFocused } from "@react-navigation/native";
-
 // pends : agrandar Avatar Icon
 
 const Profile = ({ navigation }) => {
@@ -23,7 +22,6 @@ const Profile = ({ navigation }) => {
   const getProfile = useGetProfile();
   const isFocused = useIsFocused();
   const [loading, setLoading] = React.useState(false);
-  // console.log(authState.user?.friends)
 
   useEffect(() => {
     const resetProfile = async () => {
@@ -52,13 +50,22 @@ const Profile = ({ navigation }) => {
     getUserProfile();
   }, [authState.user?._id]);
 
+  useEffect(() => {
+    const start = async () => {
+      if (authState.user?._id) {
+        await getProfile(authState.user?._id);
+      }
+    };
+    start();
+  }, []);
+
   const handleGoEditProfile = () => {
     navigation.navigate("Edit");
   };
 
   return (
     <View style={styles.container}>
-      {loading && <ActivityIndicator size="large" color="grey"/>}
+      {loading && <ActivityIndicator size="large" color="grey" />}
       <>
         <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
         <View style={{ paddingHorizontal: 20 }}>
@@ -82,7 +89,10 @@ const Profile = ({ navigation }) => {
                 </View>
               </View>
               <View style={styles.editProfileButton}>
-                <TouchableOpacity style={styles.editProfileButton} onPress={handleGoEditProfile}>
+                <TouchableOpacity
+                  style={styles.editProfileButton}
+                  onPress={handleGoEditProfile}
+                >
                   <Text style={styles.editProfileButtonText}>Edit Profile</Text>
                 </TouchableOpacity>
               </View>

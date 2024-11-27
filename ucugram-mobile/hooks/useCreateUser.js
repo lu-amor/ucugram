@@ -9,7 +9,6 @@ const useCreateUser = () => {
   const postUserAW = async (user) => {
     setLoading(true);
     setError(null);
-    // console.log(url);
 
     try {
       const response = await fetch(`${url}auth/register`, {

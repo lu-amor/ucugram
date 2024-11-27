@@ -43,8 +43,6 @@ function LoginForm({ createAccount, onLoginSuccess }) {
     setIsLoading(false);
 
     if (isLogged) {
-      console.log("authState.user:", authState.user);
-      console.log("email", email);
       navigation.replace("Main", {screen: "Profile"});
     } else {
       window.alert("Email o contraseña incorrecta");

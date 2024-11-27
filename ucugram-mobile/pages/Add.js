@@ -68,7 +68,6 @@ const Add = ({ navigation }) => {
 
     if (selectedImage) {
       setSelectedImage(selectedImage);
-      console.log("Selected image:", selectedImage);
     } else {
       Alert.alert("No Image Selected", "Please try again.");
     }

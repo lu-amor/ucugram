@@ -7,7 +7,6 @@ export default function useFriend() {
   const addFriend = async (friendId) => {
     try {
       const token = await AsyncStorage.getItem("token")
-      console.log("entra al hook")
       const response = await fetch(`${url}user/add-friend/${friendId}`, {
         method: "POST",
         headers: {

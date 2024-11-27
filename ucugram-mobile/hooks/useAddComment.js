@@ -24,7 +24,6 @@ const useAddComment = () => {
 
       const data = await response.json();
       setLoading(false);
-      console.log("post result: ", data);
       return data;
     } catch (err) {
       setError(err.message);

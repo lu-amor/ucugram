@@ -45,11 +45,9 @@ const FriendProfile = ({ navigation }) => {
         break;
       }
     }
-    //setIsFriend(profileState.user?.friends?.some(friend => friend._id === authState.user?._id));
   }, [isFocused])
 
     
-  useEffect(() => {console.log("isFriend:" , isFriend)}, [isFriend])
 
   useEffect(() => {
     const getData = async () => {
@@ -71,12 +69,10 @@ const FriendProfile = ({ navigation }) => {
           const find = authState.user.friends.find(
             (friend) => friend._id === profileState.user?._id
           );
-       //   setIsFriend(find !== undefined);
         } else {
           const find = authState.user.friends.find(
             (friend) => friend._id === profileState.user?._id
           );
-       //   setIsFriend(find !== undefined);
           await AsyncStorage.setItem("friend-id", profileState.user?._id);
         }
         setFriendsNum(profileState.user?.friends.length);
@@ -89,7 +85,6 @@ const FriendProfile = ({ navigation }) => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
       if (removed === true) {
-        console.log("eliminado");
         setIsFriend(false);
         setFriendsNum(friendsNum - 1);
       } else {

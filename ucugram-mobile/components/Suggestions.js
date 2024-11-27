@@ -12,7 +12,6 @@ const Suggestions = ({ navigation, refreshing }) => {
     if (refreshing) {
       (async () => {
         await reloadSuggestions();
-        console.log("Suggestions reloaded");
       })();
     }
   }, [refreshing]);
