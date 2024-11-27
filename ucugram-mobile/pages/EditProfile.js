@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Alert, TextInput, TouchableOpacity } from "reac
 import { useAuth, handleReload } from "../context/AuthContext";
 import { PROFILE_ACTIONS, useProfile } from "../context/ProfileContext";
 import { useGetProfile } from "../hooks/useGetProfile";
-import Avatar from "./Avatar";
+import Avatar from "../components/Avatar";
 import useUpdateProfileInfo from "../hooks/useUpdateProfileInfo";
 
 const EditProfile = ({ navigation }) => {
@@ -46,6 +46,7 @@ const EditProfile = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
+            <Text style={styles.title}>Edit Profile</Text>
             <View style={styles.field}>
                 <Text aria-label="username" style={styles.label}>
                     username
@@ -100,6 +101,12 @@ const styles = StyleSheet.create({
         marginBottom: 40,
         justifyContent: "center",
         paddingHorizontal: 20,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: "bold",
+        marginBottom: 20,
+        color: "rgb(30, 30, 109)",
     },
     username: {
         fontSize: 20,

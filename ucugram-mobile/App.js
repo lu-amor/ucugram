@@ -17,7 +17,7 @@ import FriendProfile from "./pages/FriendProfile";
 import NavBar from "./components/NavBar";
 import { useRoute } from "@react-navigation/native";
 import { useNavigationState } from "@react-navigation/native";
-import EditProfile from "./components/EditProfile";
+import EditProfile from "./pages/EditProfile";
 
 const Stack = createNativeStackNavigator();
 export const url = "http://192.168.1.10:3001/api/";
