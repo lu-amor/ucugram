@@ -64,21 +64,21 @@ function App() {
   const developers = [
     {
       name: "Manuela",
-      avatar: "../public/profile_img-by-AI.jpeg",
-      github: "manuela",
+      avatar: "../public/manu - ai.png",
+      github: "https://github.com/ManuGuedez",
       mail: "manuela.guedez@correo.ucu.edu.uy",
       linkedin: "ManuGuedez",
     },
     {
       name: "Paulina",
-      avatar: "../public/profile_img-by-AI.jpeg",
-      github: "paulina",
+      avatar: "../public/pau - ai.png",
+      github: "https://github.com/PaulinaVidal22",
       mail: "paulina.vidal@correo.ucu.edu.uy",
       linkedin: "PaulinaVidal22",
     },
     {
       name: "Lucía",
-      avatar: "../public/profile_img-by-AI.jpeg",
+      avatar: "../public/lu - ai.png",
       github: "https://github.com/lu-amor",
       mail: "lucia.amor@correo.ucu.edu.uy",
       linkedin: "https://www.linkedin.com/in/luc%C3%ADa-amor-9183192b4/",
