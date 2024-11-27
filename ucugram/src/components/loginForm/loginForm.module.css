@@ -69,12 +69,23 @@
 }
 
 .delete {
-   margin-left: 95%;
+    margin-left: 95%;
 }
 
 @media (max-width: 450px) {
     .modalContent {
-        width: 90%; 
+        width: 90%;
         max-width: none;
+    }
+}
+
+@media (max-height: 680px) {
+    .modalContent {
+        max-height: 80vh; 
+        overflow-y: auto;
+    }
+
+    .logo{
+        display: none;
     }
 }

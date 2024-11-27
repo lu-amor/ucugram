@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import classes from "./UploadPhotoModal.module.css";
 import useUploadPhoto from "../../hooks/useUploadPhoto";
+import { useNavigate } from "react-router-dom";
 
 function UploadPhotoModal({ closeModal, onUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewURL, setPreviewURL] = useState(null);
   const [caption, setCaption] = useState("");
   const { uploadPhoto, loading, error } = useUploadPhoto();
+  const navigate = useNavigate()
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -21,9 +23,10 @@ function UploadPhotoModal({ closeModal, onUpload }) {
   const handleUpload = async (e) => {
     e.preventDefault();
     if (selectedFile) {
-      await uploadPhoto(selectedFile, caption);
-    //   console.log("file: " + selectedFile)
-    //   onUpload(selectedFile, caption);
+      const result = await uploadPhoto(selectedFile, caption);
+      if (result) {
+        navigate('/feed');
+      }
       closeModal();
       URL.revokeObjectURL(previewURL); // limpia la URL temporal después de subir
     } else {

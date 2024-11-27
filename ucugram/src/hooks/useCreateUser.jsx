@@ -10,20 +10,20 @@ const useCreateUser = () => {
     setLoading(true);
     setError(null);
     // console.log(url);
-    
+
     try {
-        const response = await fetch(`${url}auth/register`, {
+      const response = await fetch(`${url}auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
-    });
-    
-    if (!response.ok) {
+      });
+
+      if (!response.ok) {
         throw new Error(`Error creating user: ${response.statusText}`);
       }
-      
+
       const newUserWithId = await response.json();
       setCreatedUser(newUserWithId); // se actualiza el estado con el usuario creado
       setLoading(false);

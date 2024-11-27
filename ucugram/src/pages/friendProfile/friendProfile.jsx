@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "../../components/avatar/avatar.jsx";
 import PostGrid from "../../components/postGrid/postGrid";
 import SideNavBar from "../../components/sideNavBar/sideNavBar";
@@ -8,13 +9,17 @@ import { useGetProfile } from "../../hooks/useGetProfile.jsx";
 import { PROFILE_ACTIONS } from "./../../context/ProfileContext.jsx";
 import classes from "./FriendProfile.module.css";
 import useFriend from "./../../hooks/useFriends.jsx";
+import Loader from "../../components/loader/loader.jsx";
 
 function FriendProfile({ user }) {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { state: authState, dispatch: authDispatch } = useAuth();
   const [isFriend, setIsFriend] = useState();
+  const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
   const { addFriend, removeFriend } = useFriend();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getData = async () => {
@@ -27,8 +32,21 @@ function FriendProfile({ user }) {
     getData();
   }, []);
 
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
   useEffect(() => {
-    if (authState.user.friends) {
+    if (!authState.isAuthenticated) {
+      navigate("./home");
+    }
+    localStorage.removeItem("friend-id");
+    window.addEventListener("resize", updateWindowWidth);
+    return () => window.removeEventListener("resize", updateWindowWidth);
+  }, []);
+
+  useEffect(() => {
+    if (authState.user) {
       if (localStorage.getItem("friend-id") && authState.user.friends) {
         const find = authState.user.friends.find(
           (friend) => friend._id === profileState.user?._id
@@ -41,29 +59,40 @@ function FriendProfile({ user }) {
         setIsFriend(find !== undefined);
         localStorage.setItem("friend-id", profileState.user?._id);
       }
+      setFriendsNum(profileState.user?.friends.length)
     }
   }, [profileState, authState]);
 
-  const handleToggleFirend = async () => {
+  const handleToggleFriend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
-      removed === true ? setIsFriend(false) : setIsFriend(isFriend);
+      if(removed === true) {
+        setIsFriend(false);
+        setFriendsNum(friendsNum - 1)
+      } else { // no cambia
+        setIsFriend(true)
+      }
     } else {
       const added = await addFriend(profileState.user._id);
-      added === true ? setIsFriend(true) : setIsFriend(false);
+      if(added === true) {
+        setIsFriend(true);
+        setFriendsNum(friendsNum + 1)
+      } else { // no cambia
+        setIsFriend(false)
+      }
     }
   }
 
   return (
-    <div className="columns">
-      <>
-        {profileState.loading ? (
-          <p>Loading...</p>
-        ) : (
-          <>
-            <SideNavBar user={user} />
+    <>
+      {profileState?.loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div className="columns">
+            <SideNavBar user={user}/>
             <div
-              className="column is-10"
+              className={`column ${windowWidth > 950 ? "is-10" : ""}`}
               style={{ height: "100vh", overflowY: "auto" }}
             >
               <div className={classes.profileContainer}>
@@ -77,12 +106,13 @@ function FriendProfile({ user }) {
                         display: "flex",
                         width: "100%",
                         flexWrap: "wrap",
+                        alignItems: "center",
                       }}
                     >
-                      <p style={{ font: "25px Segoe UI", marginRight: "10%" }}>
+                      <p className={classes.username}>
                         <strong>{profileState.user?.username}</strong>
                       </p>
-                      <button className={`button ${classes.profileButton}`} onClick={() => handleToggleFirend()}>
+                      <button className={`button ${windowWidth < 950 ? 'is-small' : ''} ${classes.profileButton}`} onClick={() => handleToggleFriend()}>
                         {isFriend ? (
                           <span>remove friend</span>
                         ) : (
@@ -91,33 +121,36 @@ function FriendProfile({ user }) {
                       </button>
                     </div>
                     <div className={classes.accountInformation}>
-                      <div className={classes.statItem}>
-                        <span>
-                          <strong>{profileState.posts.length}</strong> posts
-                        </span>
-                      </div>
-                      <div className={classes.statItem}>
-                        <span>
-                          <strong>{profileState.user?.friends.length}</strong>{" "}
-                          friends
-                        </span>
+                      <div className={classes.stats}>
+                        <div className={classes.statItem}>
+                          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <strong>{profileState.posts?.length}</strong>
+                            <p>{profileState.posts?.length === 1 ? " post" : " posts"}</p>
+                          </div>
+                        </div>
+                        <div className={classes.statItem}>
+                          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                            <strong>{profileState.user?.friends.length}</strong>{" "}
+                            <p>{profileState.user?.friends.length === 1 ? "friend" : "friends"}</p>
+                          </div>
+                        </div>
                       </div>
                       <div className={classes.profileDescription}>
-                        <p>{user.description}</p>
+                        <p>{profileState.user?.description}</p>
                       </div>
                     </div>
-                    <div></div>
                   </div>
                 </div>
+                <div className={classes.divider}/>
                 <div className={classes.postsContainer}>
-                  <PostGrid posts={profileState.posts} />
+                  <PostGrid posts={profileState.posts} user={profileState.user} />
                 </div>
               </div>
             </div>
-          </>
-        )}
-      </>
-    </div>
+          </div>
+        </>
+      )}
+    </>
   );
 }
 

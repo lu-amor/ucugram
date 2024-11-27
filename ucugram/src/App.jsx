@@ -12,6 +12,8 @@ import Notifications from "./pages/notifications/notifications";
 import { AuthProvider } from "./context/AuthContext";
 import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
+import EditProfilePage from "./pages/editProfilePage/editProfilePage";
+import SearchPage from "./pages/searchPage/searchPage";
 
 export const url = "http://localhost:3001/api/";
 
@@ -62,21 +64,21 @@ function App() {
   const developers = [
     {
       name: "Manuela",
-      avatar: "../public/profile_img-by-AI.jpeg",
-      github: "manuela",
+      avatar: "../public/manu - ai.png",
+      github: "https://github.com/ManuGuedez",
       mail: "manuela.guedez@correo.ucu.edu.uy",
       linkedin: "ManuGuedez",
     },
     {
       name: "Paulina",
-      avatar: "../public/profile_img-by-AI.jpeg",
-      github: "paulina",
+      avatar: "../public/pau - ai.png",
+      github: "https://github.com/PaulinaVidal22",
       mail: "paulina.vidal@correo.ucu.edu.uy",
       linkedin: "PaulinaVidal22",
     },
     {
       name: "Lucía",
-      avatar: "../public/profile_img-by-AI.jpeg",
+      avatar: "../public/lu - ai.png",
       github: "https://github.com/lu-amor",
       mail: "lucia.amor@correo.ucu.edu.uy",
       linkedin: "https://www.linkedin.com/in/luc%C3%ADa-amor-9183192b4/",
@@ -97,10 +99,11 @@ function App() {
               element={<MyProfile user1={user} />}
             ></Route>
             <Route
-              path="/friendProfile/:username"
+              path="/profile/:username"
               element={<FriendProfile user={friend} />}
             ></Route>
             <Route path="/feed" element={<FeedPage />}></Route>
+            <Route path="/account/edit" element={<EditProfilePage />}></Route>
             <Route
               path="/notifications"
               element={
@@ -110,6 +113,7 @@ function App() {
                 />
               }
             ></Route>
+            <Route path="/search" element={<SearchPage />}></Route>
           </>
           <Route path="/documentation" element={<DocPage />}></Route>
           <Route
