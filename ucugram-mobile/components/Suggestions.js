@@ -1,20 +1,24 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import SuggestionsPreview from './SuggestionsPreview';
-import useFetchSuggestions from '../hooks/useFetchSuggestions.js';
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import SuggestionsPreview from "./SuggestionsPreview";
+import useFetchSuggestions from "../hooks/useFetchSuggestions.js";
 
-const Suggestions = ({navigation}) => {
+const Suggestions = ({ navigation }) => {
   const { suggestions, loading, error } = useFetchSuggestions();
 
-return (
+  return (
     <View style={styles.container}>
-      <SuggestionsPreview suggestions={suggestions} />
-      <View style={styles.footer}>
-       {/* onPress={() => navigation.navigate('SuggestedFriends',{suggestedFollows})}  */}
-      <TouchableOpacity onPress={() => navigation.navigate('SuggestedFriends')} style={styles.showAllButton}>
-        <Text style={styles.showAllButtonText}>See all</Text>    
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <Text style={styles.title}>Suggestions for you</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("SuggestedFriends")}
+          style={styles.showAllButton}
+        >
+          <Text style={styles.showAllButtonText}>See all</Text>
+        </TouchableOpacity>
       </View>
+      <SuggestionsPreview suggestions={suggestions} />
+      <View style={styles.footer}></View>
     </View>
   );
 };
@@ -22,23 +26,39 @@ return (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
+    marginTop: 30,
   },
   footer: {
     marginTop: 10,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginLeft: 15,
   },
   showAllButton: {
-    backgroundColor: 'rgb(30, 30, 109)',
+    // backgroundColor: 'rgb(30, 30, 109)',
+    backgroundColor: "transparent",
     paddingVertical: 12,
-    paddingHorizontal: 20,
+    paddingHorizontal: 8,
     borderRadius: 8,
+    marginRight: 15,
+    alignItems: "flex-end",
   },
   showAllButtonText: {
-    color: '#fff',
-    fontSize: 12,
-    textAlign: 'center',
+    color: "#1e90ff",
+    fontSize: 15,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 10,
   },
 });
 

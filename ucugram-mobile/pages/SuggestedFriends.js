@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import SuggestedFollows from '../components/SuggestedFollows'; 
 
 const SuggestedFriends = ({ route, navigation }) => {
-  const { suggestedFollows } = route.params; 
 
   const handleBack = () => {
     navigation.goBack(); 

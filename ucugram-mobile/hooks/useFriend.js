@@ -1,19 +1,21 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { url } from "../App.js";
 import { useAuth } from "../context/AuthContext.js";
 
 export default function useFriend() {
-  const {state: authState} = useAuth();
   
   const addFriend = async (friendId) => {
     try {
+      const token = await AsyncStorage.getItem("token")
+      console.log("entra al hook")
       const response = await fetch(`${url}user/add-friend/${friendId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${authState.token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
-
+      
       if (!response.ok) {
         return false;
       }
@@ -22,9 +24,10 @@ export default function useFriend() {
       throw new Error(response.json().message);
     }
   };
-
+  
   const removeFriend = async (friendId) => {
     try {
+      const token = await AsyncStorage.getItem("token")
       const response = await fetch(`${url}user/remove-friend/${friendId}`, {
         method: "DELETE",
         headers: {
@@ -32,7 +35,7 @@ export default function useFriend() {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      
       const data = response.json();
       console.log("data", data);
 

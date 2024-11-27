@@ -62,7 +62,9 @@ export const useLogin = () => {
 export const useLogout = () => {
   const { dispatch } = useAuth();
   const logout = () => {
+    AsyncStorage.removeItem("token");
     dispatch({ type: AUTH_ACTIONS.LOGOUT });
+    return true
   };
   return logout;
 };

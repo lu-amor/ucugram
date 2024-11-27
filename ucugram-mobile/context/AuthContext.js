@@ -58,21 +58,23 @@ const getUserProfile = async (userId, token) => {
   }
 };
 
-export const handleReload = async (token, dispatch) => {
-  console.log("token: ", token)
-  const decoded = jwtDecode(token);
-  const userId = decoded.id;
-  dispatch({ type: AUTH_ACTIONS.LOADING });
-  const user = await getUserProfile(userId, token);
-
-  dispatch({
-    type: AUTH_ACTIONS.LOGIN,
-    payload: {
-      user: user,
-      token: token,
-    },
-  });
-};
+// export const handleReload = async (dispatch) => {
+//   const token = await AsyncStorage.getItem("token");
+//   if (token) {
+//     const decoded = jwtDecode(token);
+//     const userId = decoded.id;
+//     dispatch({ type: AUTH_ACTIONS.LOADING });
+//     const user = await getUserProfile(userId, token);
+  
+//     dispatch({
+//       type: AUTH_ACTIONS.LOGIN,
+//       payload: {
+//         user: user,
+//         token: token,
+//       },
+//     });
+//   }
+// };
 
 export const AuthProvider = ({ children }) => {
   const initialState = {
@@ -87,19 +89,29 @@ export const AuthProvider = ({ children }) => {
   const { token } = state;
 
   // Cargar el token desde AsyncStorage al iniciar la app
-  useEffect(() => {
-    const reload = async () => {
-      const token = await AsyncStorage.getItem("token");
-      if (token) {
-        handleReload(token, dispatch);
-      }
+  const handleReload = async () => {
+    const retrieved_token = await AsyncStorage.getItem("token");
+    if (retrieved_token) {
+      const decoded = jwtDecode(retrieved_token);
+      const userId = decoded.id;
+      dispatch({ type: AUTH_ACTIONS.LOADING });
+      const user = await getUserProfile(userId, retrieved_token);
+      dispatch({
+        type: AUTH_ACTIONS.LOGIN,
+        payload: {
+          user: user,
+          token: retrieved_token,
+        },
+      });
     }
+  };
 
-    reload()
+  useEffect(() => {
+    handleReload();
   }, [token]);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ state, dispatch, handleReload }}>
       {children}
     </AuthContext.Provider>
   );

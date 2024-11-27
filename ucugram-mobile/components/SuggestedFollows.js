@@ -1,12 +1,28 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import Avatar from './Avatar'; 
-import FollowButton from './FollowButton'; 
-import useFetchSuggestions from '../hooks/useFetchSuggestions';
+import React from "react";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import Avatar from "./Avatar";
+import FollowButton from "./FollowButton";
+import useFetchSuggestions from "../hooks/useFetchSuggestions";
+import { useGetProfile } from "../hooks/useGetProfile";
+import { useNavigation } from "@react-navigation/native";
 
 const SuggestedFollows = ({ onBack }) => {
   const { suggestions, loading, error } = useFetchSuggestions();
-  // console.log("suggestions: ", suggestions)
+  const getProfile = useGetProfile();
+  const navigation = useNavigation();
+
+  const handleGoProfile = async (user) => {
+    const userId = user._id;
+    const username = user.username;
+    await getProfile(userId);
+    navigation.navigate("FriendProfile", { userId, username });
+  };
 
   return (
     <View style={styles.container}>
@@ -17,23 +33,27 @@ const SuggestedFollows = ({ onBack }) => {
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => (
           <View style={styles.suggestionItem}>
-            <View style={styles.itemAvatar}>
-              <Avatar user={item} />
-            </View>
+            <TouchableOpacity
+              style={styles.profileButton}
+              onPress={() => handleGoProfile(item)}
+            >
+              <View style={styles.itemAvatar}>
+                <Avatar user={item} />
+              </View>
 
-            <View style={styles.itemInfo}>
-              <Text style={styles.suggestionName}>{item.username}</Text>
-            </View>
-
+              <View style={styles.itemInfo}>
+                <Text style={styles.suggestionName}>{item.username}</Text>
+              </View>
+            </TouchableOpacity>
             <View style={styles.followSection}>
-              <FollowButton userId={item._id} initialFollows={[]} />
+              <FollowButton user={item} />
             </View>
           </View>
         )}
       />
 
       <TouchableOpacity style={styles.backButton} onPress={onBack}>
-        <Text style={styles.backButtonText}>{'<'} Go Back</Text>
+        <Text style={styles.backButtonText}>{"<"} Go Back</Text>
       </TouchableOpacity>
     </View>
   );
@@ -43,20 +63,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
+    marginTop: 40,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   suggestionItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: "#ddd",
+    justifyContent: "space-between",
+    width: "100%",
   },
   itemAvatar: {
     marginRight: 16,
@@ -73,23 +96,30 @@ const styles = StyleSheet.create({
   },
   suggestionName: {
     fontSize: 18,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   followSection: {
     marginLeft: 16,
+    marginRight: 10,
   },
   backButton: {
-    backgroundColor: 'rgb(30, 30, 109)',
+    backgroundColor: "rgb(30, 30, 109)",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 8,
     marginTop: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   backButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
+  },
+  profileButton: {
+    flexDirection: "row",
+    width: "ajust-content",
+    alignItems: "center",
+    flex: 1,
   },
 });
 
