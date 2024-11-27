@@ -11,7 +11,7 @@ import { useAuth } from "../context/AuthContext";
 const FollowButton = ({ user }) => {
   const {state: authState} = useAuth();
   const { addFriend, removeFriend } = useFriend();
-  const [isFriend, setIsFriend] = useState(user?.friends.includes(authState.user._id));
+  const [isFriend, setIsFriend] = useState(user?.friends.includes(authState.user?._id));
   const [loading, setLoading] = useState(false);
 
   const handleToggleFriend = async () => {

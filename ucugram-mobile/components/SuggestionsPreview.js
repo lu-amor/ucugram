@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  AccessibilityInfo
 } from "react-native";
 import FollowButton from "./FollowButton";
 import Avatar from "./Avatar";
@@ -13,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useGetProfile } from "../hooks/useGetProfile";
 
 const SuggestionsPreview = ({ suggestions }) => {
+
   const navigation = useNavigation();
   const getProfile = useGetProfile();
 
