@@ -53,7 +53,6 @@ const NavBar = () => {
           size={35}
           color="#173363"
           onPress={()=> handleActivePage("Add", "add")}
-          r
         />
 {/*         <Ionicons
           name={

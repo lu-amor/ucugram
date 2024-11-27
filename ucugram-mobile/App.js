@@ -17,6 +17,7 @@ import FriendProfile from "./pages/FriendProfile";
 import NavBar from "./components/NavBar";
 import { useRoute } from "@react-navigation/native";
 import { useNavigationState } from "@react-navigation/native";
+import EditProfile from "./components/EditProfile";
 
 const Stack = createNativeStackNavigator();
 export const url = "http://192.168.1.10:3001/api/";
@@ -86,6 +87,13 @@ function StackNavigatorComponent() {
             headerShown: false,
             gestureEnabled: false,
             animation: "none",
+          }}
+        />
+        <Stack.Screen
+          name="Edit"
+          component={EditProfile}
+          options={{
+            headerShown: false
           }}
         />
       </Stack.Navigator>
