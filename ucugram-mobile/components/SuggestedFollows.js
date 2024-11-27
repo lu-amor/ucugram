@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  ActivityIndicator,
 } from "react-native";
 import Avatar from "./Avatar";
 import FollowButton from "./FollowButton";
@@ -13,7 +14,7 @@ import { useGetProfile } from "../hooks/useGetProfile";
 import { useNavigation } from "@react-navigation/native";
 
 const SuggestedFollows = ({ onBack }) => {
-  const { suggestions, loading, error } = useFetchSuggestions();
+  const { getSuggestions, suggestions, loading, error } = useFetchSuggestions();
   const getProfile = useGetProfile();
   const navigation = useNavigation();
 
@@ -24,33 +25,43 @@ const SuggestedFollows = ({ onBack }) => {
     navigation.navigate("FriendProfile", { userId, username });
   };
 
+  useEffect(() => {
+    const start = async () => {
+      await getSuggestions();
+    };
+    start();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>All suggestions</Text>
+      {loading ? (
+        <ActivityIndicator size="large" color="black" />
+      ) : (
+        <FlatList
+          data={suggestions}
+          keyExtractor={(item) => item._id}
+          renderItem={({ item }) => (
+            <View style={styles.suggestionItem}>
+              <TouchableOpacity
+                style={styles.profileButton}
+                onPress={() => handleGoProfile(item)}
+              >
+                <View style={styles.itemAvatar}>
+                  <Avatar user={item} />
+                </View>
 
-      <FlatList
-        data={suggestions}
-        keyExtractor={(item) => item._id}
-        renderItem={({ item }) => (
-          <View style={styles.suggestionItem}>
-            <TouchableOpacity
-              style={styles.profileButton}
-              onPress={() => handleGoProfile(item)}
-            >
-              <View style={styles.itemAvatar}>
-                <Avatar user={item} />
+                <View style={styles.itemInfo}>
+                  <Text style={styles.suggestionName}>{item.username}</Text>
+                </View>
+              </TouchableOpacity>
+              <View style={styles.followSection}>
+                <FollowButton user={item} />
               </View>
-
-              <View style={styles.itemInfo}>
-                <Text style={styles.suggestionName}>{item.username}</Text>
-              </View>
-            </TouchableOpacity>
-            <View style={styles.followSection}>
-              <FollowButton user={item} />
             </View>
-          </View>
-        )}
-      />
+          )}
+        />
+      )}
 
       <TouchableOpacity style={styles.backButton} onPress={onBack}>
         <Text style={styles.backButtonText}>{"<"} Go Back</Text>

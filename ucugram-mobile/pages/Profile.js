@@ -23,6 +23,7 @@ const Profile = ({ navigation }) => {
   const getProfile = useGetProfile();
   const isFocused = useIsFocused();
   const [loading, setLoading] = React.useState(false);
+  // console.log(authState.user?.friends)
 
   useEffect(() => {
     const resetProfile = async () => {
@@ -95,12 +96,6 @@ const Profile = ({ navigation }) => {
           user={profileState.user}
           navigation={navigation}
         />
-        {/* <NavBar
-        
-          user={profileState.user}
-          activePage="profile"
-          navigation={navigation}
-        /> */}
       </>
     </View>
   );
