@@ -43,10 +43,6 @@ function AuthNavBar({navItem}) {
     navigate("/home");
   };
 
-  const goDoc = () => {
-    navigate("/documentation");
-  };
-
   const goAboutUs = () => {
     navigate("/about-us");
   };
@@ -72,15 +68,6 @@ function AuthNavBar({navItem}) {
                 <span>Home</span>
               )}
             </button>
-            <button onClick={goDoc} className={classes.underlineButton}>
-              {navItem === "documentation" ? (
-                <strong>
-                  Documentation
-                </strong>
-              ) : (
-                <span>Documentation</span>
-              )}
-            </button>
             <button onClick={goAboutUs} className={classes.underlineButton}>
               {navItem === "about-us" ? (
                 <strong>
@@ -97,7 +84,6 @@ function AuthNavBar({navItem}) {
           {showMenu && (
             <div className={classes.menu}>
               <button onClick={goHome}>Home</button>
-              <button onClick={goDoc}>Documentation</button>
               <button onClick={goAboutUs}>About us</button>
             </div>
           )}

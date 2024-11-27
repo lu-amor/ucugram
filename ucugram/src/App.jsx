@@ -4,13 +4,11 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import "ucugram/src/App.css";
 import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 import AuthPage from "./pages/authPage/AuthPage";
-import DocPage from "./pages/DocPage/DocPage";
 import FeedPage from "./pages/feedPage/feedPage";
 import FriendProfile from "./pages/friendProfile/friendProfile";
 import MyProfile from "./pages/myProfile/myProfile";
 import Notifications from "./pages/notifications/notifications";
 import { AuthProvider } from "./context/AuthContext";
-import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
 import EditProfilePage from "./pages/editProfilePage/editProfilePage";
 import SearchPage from "./pages/searchPage/searchPage";
@@ -45,40 +43,24 @@ function App() {
     },
   ];
 
-  const user = {
-    profilePicture: "/ucugram-logo.png",
-    name: "nombre_ususario",
-    posts: 11, // después esto va a ser una lista por ej.
-    friends: 17, // lista o dict con usuarios amigos
-    description: "This is the best app I have ever seen! 😊",
-  };
-
-  const friend = {
-    profilePicture: "/profile_img-by-AI.jpeg",
-    name: "nombre_amigo",
-    posts: 1.861, // después esto va a ser una lista por ej.
-    friends: 454, // lista o dict con usuarios amigos
-    description: "This is my profile description 😊",
-  };
-
   const developers = [
     {
       name: "Manuela",
-      avatar: "../public/manu - ai.png",
+      avatar: "../public/default-profilePicture.jpg",
       github: "https://github.com/ManuGuedez",
       mail: "manuela.guedez@correo.ucu.edu.uy",
       linkedin: "ManuGuedez",
     },
     {
       name: "Paulina",
-      avatar: "../public/pau - ai.png",
+      avatar: "../public/default-profilePicture.jpg",
       github: "https://github.com/PaulinaVidal22",
       mail: "paulina.vidal@correo.ucu.edu.uy",
       linkedin: "PaulinaVidal22",
     },
     {
       name: "Lucía",
-      avatar: "../public/lu - ai.png",
+      avatar: "../public/default-profilePicture.jpg",
       github: "https://github.com/lu-amor",
       mail: "lucia.amor@correo.ucu.edu.uy",
       linkedin: "https://www.linkedin.com/in/luc%C3%ADa-amor-9183192b4/",
@@ -114,7 +96,6 @@ function App() {
             ></Route>
             <Route path="/search" element={<SearchPage />}></Route>
           </>
-          <Route path="/documentation" element={<DocPage />}></Route>
           <Route
             path="/about-us"
             element={<AboutUsPage developers={developers} />}
