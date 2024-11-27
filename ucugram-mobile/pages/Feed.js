@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
   },
   content: {
     maxWidth: screenWidth > 450 ? "90%" : "100%",
-    alignSelf: "center",
   }
 });
 
