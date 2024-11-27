@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Dimensions,  TouchableOpacity } from "react-native";
+import { View, Text, Image, StyleSheet, Dimensions,  TouchableOpacity, Linking } from "react-native";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { GestureHandlerRootView, GestureDetector, Gesture } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
@@ -109,7 +109,7 @@ export default function FeedPost({ post, navigation }) {
             <Ionicons name={"chatbubble-outline"} color="#ea5b0c" size={30} />
           </TouchableOpacity>
             <Text style={styles.likes}>{post.comments.length}</Text>
-          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => copyToClipboard()}>
+          <TouchableOpacity style={{ marginLeft: "auto", marginRight: 5 }} onPress={() => Linking.openURL('https://www.youtube.com/watch?v=AoQMHzkj2x0&ab_channel=ConorMaynard.com')}>>
             <Ionicons name="share-social-outline" color="#ea5b0c" size={30} />
           </TouchableOpacity>
         </View>
