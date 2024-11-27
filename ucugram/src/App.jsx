@@ -96,11 +96,11 @@ function App() {
           <>
             <Route
               path="/myProfile"
-              element={<MyProfile user1={user} />}
+              element={<MyProfile />}
             ></Route>
             <Route
               path="/profile/:username"
-              element={<FriendProfile user={friend} />}
+              element={<FriendProfile />}
             ></Route>
             <Route path="/feed" element={<FeedPage />}></Route>
             <Route path="/account/edit" element={<EditProfilePage />}></Route>
@@ -108,7 +108,6 @@ function App() {
               path="/notifications"
               element={
                 <Notifications
-                  user={user}
                   notificationsList={notificationsList}
                 />
               }

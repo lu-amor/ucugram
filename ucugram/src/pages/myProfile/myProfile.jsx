@@ -12,9 +12,8 @@ import classes from "./MyProfile.module.css";
 import IonIcon from "@reacticons/ionicons";
 import Loader from "../../components/loader/loader";
 
-function MyProfile({ user1 }) {
+function MyProfile() {
   const { state: profileState } = useProfile();
-  // const [state, dispatch] = useReducer(profileReducer, initialState);
   const { state: authState } = useAuth();
   const navigate = useNavigate();
   const getProfile = useGetProfile();

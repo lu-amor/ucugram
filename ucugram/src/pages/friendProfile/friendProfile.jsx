@@ -11,7 +11,7 @@ import classes from "./FriendProfile.module.css";
 import useFriend from "./../../hooks/useFriends.jsx";
 import Loader from "../../components/loader/loader.jsx";
 
-function FriendProfile({ user }) {
+function FriendProfile() {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const { state: authState, dispatch: authDispatch } = useAuth();
@@ -90,7 +90,7 @@ function FriendProfile({ user }) {
       ) : (
         <>
           <div className="columns">
-            <SideNavBar user={user}/>
+            <SideNavBar />
             <div
               className={`column ${windowWidth > 950 ? "is-10" : ""}`}
               style={{ height: "100vh", overflowY: "auto" }}

@@ -77,7 +77,7 @@ const PostModal = ({ post, user, onClose }) => {
       <div className={`modal-background`} onClick={onClose}></div>
       <div className={`modal-content ${classes.modalContent}`} onClick={onClose}>
         <>
-        <div className={classes.postContainer}>
+        <div className={classes.postContainer} onClick={(event) => event.stopPropagation()}>
           <header className={classes.header}>
             <div>
               <div>
@@ -110,56 +110,7 @@ const PostModal = ({ post, user, onClose }) => {
               />
             </figure>
           </div>
-          <div className={`${classes.dataBox}`}>
-            <div className={classes.buttonsContainer}>
-              <LikeButton
-                className={`${classes.likeSection}`}
-                style={{ cursor: "pointer" }}
-                ref={likeButtonRef}
-                post={post}
-                initialLikes={post.likes.length}
-                modal={false}
-              />
-              <div>
-                <Icon
-                  path={mdiComment}
-                  size={1.6}
-                  onClick={() => setIsCommentVisible(!isCommentVisible)}
-                  className="ml-auto"
-                  color="#ea5b0c"
-                  style={{ cursor: "pointer" }}
-                />
-              <CopyToClipboard text={"http://localhost:5173/profile/" + user.username}>
-                <Icon path={mdiShareVariant} size={1.7} color="#ea5b0c" style={{ cursor: "pointer" }} onClick={handleShare}/>
-              </CopyToClipboard>
-              </div>
-            </div>
-            <p className={`${classes.pictureDescription} mt-3`}>
-              <strong>{post.user.username}</strong> {post.caption}
-            </p>
-            {isCommentVisible && (
-              <>
-              <ul className={`${classes.commentsBox} mt-4`}>
-                {comments.map((comment) => {
-                    const info = comment.commentInfo;
-                    return (
-                        <li key={info._id} className="mb-2">
-                      <p>
-                        <strong>{info.user.username}</strong> {info.content}{" "}
-                      </p>
-                    </li>
-                  );
-              })}
-              </ul>
-              <div className={`${classes.commentInputSection} mb-4`}>
-                <CommentInput
-                  postId={post._id}
-                  handleCommentPublished={handleCommentPublished}
-                />
-              </div>
-              </>
-            )}
-          </div>
+          <div className={`${classes.dataBox}`}/>
         </div>
         </>
       </div>

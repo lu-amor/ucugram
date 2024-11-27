@@ -17,18 +17,20 @@
 
 .avatar {
     width: 25px;
-    height: auto;
-    border-radius: 100%;
+    height: 25px;
+    border-radius: 50%; 
     margin-right: 8px;
     margin-left: 21px;
-    padding-top: 5px;
+    object-fit: cover; 
+    overflow: hidden; 
 }
 
 .avatarH {
     width: 31px;
-    height: auto;
-    border-radius: 100%;
+    height: 31px;
+    border-radius: 50%;
     margin-right: 8px;
     margin-left: 21px;
-    padding-top: 5px;
+    object-fit: cover;
+    overflow: hidden;
 }

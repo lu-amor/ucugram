@@ -24,7 +24,7 @@ const unit = time.slice(-1);
     }
 };
 
-function Notifications({ user, notificationsList }) {
+function Notifications({ notificationsList }) {
     const navigate = useNavigate();
     const [notifications, setNotifications] = useState(notificationsList);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);

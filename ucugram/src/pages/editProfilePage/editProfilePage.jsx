@@ -19,9 +19,6 @@ export default function EditProfilePage() {
   const [profilePicture, setProfilePicture] = useState("");
   const [description, setDescription] = useState("");
   const { updateProfile, loading, error } = useUpdateProfileInfo();
-  const fileInputRef = useRef(null);
-  const [showPreviewModal, setShowPreviewModal] = useState(false);
-  const [previewURL, setPreviewURL] = useState(null);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const updateWindowWidth = () => {
@@ -61,32 +58,6 @@ export default function EditProfilePage() {
     result === true ? navigate("/myProfile") : window.alert("algo salió mal");
   };
 
-  const handleButtonClick = () => {
-    fileInputRef.current.click();
-  };
-
-  const handleSelectedPic = () => {
-    setShowPreviewModal(true);
-  };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    console.log("file: ", file);
-    if (file) {
-      setPreviewURL(URL.createObjectURL(file)); // genera la URL de vista previa
-      setShowPreviewModal(true); 
-      event.target.value = ''; // lo vacío para que se vuelva a abrir si se elige otra foto
-    } else {
-      setPreviewURL(null);
-      setShowPreviewModal(false); 
-    }
-  };
-
-  const handleCloseModal = () => {
-    setShowPreviewModal(false); 
-    setPreviewURL(null); 
-  };
-
   return (
     <>
       {profileState?.loading || authState.loading ? (
@@ -113,30 +84,8 @@ export default function EditProfilePage() {
                         <p className={classes.username}>
                           <strong>{profileState.user?.username}</strong>
                         </p>
-                        <button
-                          className={`button`}
-                          id={classes.profileButton}
-                          onClick={handleButtonClick}
-                        >
-                          Change picture
-                        </button>
                       </div>
                     </div>
-                    <input
-                      type="file"
-                      id="fileUpload"
-                      accept="image/*"
-                      ref={fileInputRef}
-                      style={{ display: "none" }}
-                      className={classes.fileInput}
-                      onChange={handleFileChange}
-                    />
-                    {showPreviewModal && (
-                      <ProfileImgPreview
-                        closeModal={handleCloseModal}
-                        imgPreview={previewURL}
-                      />
-                    )}
                   </div>
                 </div>
                 <form
@@ -165,6 +114,15 @@ export default function EditProfilePage() {
                       type="text"
                       defaultValue={authState.user?.description}
                       onChange={(e) => setDescription(e.target.value)}
+                    ></input>
+                  </div>
+                  <div className={classes.field}>
+                    <label className="label">profile picture</label>
+                    <input
+                      className="input"
+                      type="text"
+                      defaultValue={authState.user?.profilePicture}
+                      onChange={(e) => setProfilePicture(e.target.value)}
                     ></input>
                   </div>
                   <div className={classes.buttonsContainer}>

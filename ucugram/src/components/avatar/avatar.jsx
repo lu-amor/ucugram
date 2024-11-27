@@ -1,19 +1,19 @@
 import React from "react";
 import classes from "./avatar.module.css";
 
-// por ahora user va a emular un objeto usuario que tiene la información de la foto de perfil para crear el avatar
 function Avatar({ user }) {
   return (
-    <>
+    <div className={classes.avatarContainer}>
       <img
         className={classes.avatar}
         src={
-          user?.profilePicture === ""
-            ? "/public/default-profilePicture.jpg"
-            : user?.profilePicture
+          user?.profilePicture
+            ? user.profilePicture
+            : "/default-profilePicture.jpg"
         }
+        alt="Avatar"
       />
-    </>
+    </div>
   );
 }
 
