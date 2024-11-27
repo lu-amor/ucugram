@@ -70,27 +70,6 @@ const PostModal = ({ isVisible, onClose, post }) => {
               },
             ]}
           />
-
-          <View style={styles.footer}>
-            <Ionicons
-              name="heart-outline"
-              size={24}
-              color="black"
-              style={styles.icon}
-            />
-            <Ionicons
-              name="chatbubble-outline"
-              size={24}
-              color="black"
-              style={styles.icon}
-            />
-            <Ionicons
-              name="share-social-outline"
-              size={24}
-              color="black"
-              style={styles.icon}
-            />
-          </View>
         </View>
       </View>
     </Modal>
@@ -100,7 +79,7 @@ const PostModal = ({ isVisible, onClose, post }) => {
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     justifyContent: "center",
     alignItems: "center",
   },

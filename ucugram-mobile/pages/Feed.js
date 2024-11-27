@@ -36,7 +36,7 @@ const Feed = ({ navigation }) => {
 
   const onRefresh = async () => {
     setRefreshing(true);
-    setRefresh(!refresh)
+    setRefresh(!refresh);
     await fetchPosts(); // Llama a la función para recargar los posts
     setRefreshing(false);
   };
@@ -56,7 +56,7 @@ const Feed = ({ navigation }) => {
         {refreshing && <ActivityIndicator size={20} color="white" />}
         <Suggestions navigation={navigation} refreshing={refreshing} />
         {loading ? (
-          <Text>loading posts...</Text>
+          <ActivityIndicator size={50} color="black" />
         ) : (
           posts?.map((post) => (
             <FeedPost key={post._id} post={post} navigation={navigation} />
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   content: {
     maxWidth: screenWidth > 450 ? "90%" : "100%",
-  }
+  },
 });
 
 export default Feed;

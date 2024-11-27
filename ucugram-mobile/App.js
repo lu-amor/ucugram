@@ -18,6 +18,7 @@ import Profile from "./pages/Profile";
 import Search from "./pages/Search";
 import SignUpPage from "./pages/SignUpPage";
 import SuggestedFriends from "./pages/SuggestedFriends";
+import Post from "./pages/Post";
 
 const Stack = createNativeStackNavigator();
 export const url = "http://192.168.1.88:3001/api/";

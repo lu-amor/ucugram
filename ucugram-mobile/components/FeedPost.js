@@ -28,7 +28,6 @@ import CommentsModal from "./CommentsModal";
 const screenWidth = Dimensions.get("window").width;
 
 export default function FeedPost({ post, navigation }) {
-  const [liked, setLiked] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { state: authState } = useAuth();
   const getProfile = useGetProfile();

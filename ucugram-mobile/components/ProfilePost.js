@@ -7,13 +7,20 @@ import {
   View,
 } from "react-native";
 import PostModal from "./PostModal.js";
+import * as Haptics from 'expo-haptics';
 
 const ProfilePost = ({ idx, post, user, navigation }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleOpenModal = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    setIsModalOpen(true)
+  };
+
+
   const openPostScreen = () => {
     //navigation.navigate("Post", { post, user });
-    navigation.navigate("Post", { post });
+    navigation.navigate("Post", { post, user });
   };
 
   const openModal = () => {
@@ -25,7 +32,7 @@ const ProfilePost = ({ idx, post, user, navigation }) => {
       <TouchableOpacity
         key={idx}
         style={styles.cardImage}
-        onPress={() => setIsModalOpen(true)}
+        onLongPress={handleOpenModal}
       >
         <Image
           source={{
