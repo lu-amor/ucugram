@@ -85,48 +85,10 @@ const FriendProfile = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
-<<<<<<< HEAD
-        <View style={{ paddingHorizontal: 20 }}>
-          <View style={styles.topInfo}>
-            <View style={styles.avatar}>
-              <Avatar user={profileState.user}></Avatar>
-            </View>
-            <View style={styles.nextToAvatar}>
-              <View style={styles.profileData}>
-                <View style={styles.individualData}>
-                  <Text style={styles.dataContent}>
-                    {profileState.posts.length}
-                  </Text>
-                  <Text style={styles.dataDescription}>Posts</Text>
-                </View>
-                <View style={styles.individualData}>
-                  <Text style={styles.dataContent}>{friendsNum}</Text>
-                  <Text style={styles.dataDescription}>Friends</Text>
-                </View>
-              </View>
-              <TouchableOpacity
-                style={
-                  isFriend ? styles.addedFriendButton : styles.addFriendButton
-                }
-                onPress={handleToggleFriend}
-              >
-                <Text
-                  style={
-                    isFriend
-                      ? styles.addedFriendButtonText
-                      : styles.addFriendButtonText
-                  }
-                >
-                  {isFriend ? "Remove Friend" : "Add Friend"}
-                </Text>
-              </TouchableOpacity>
-            </View>
-=======
       <View style={{ paddingHorizontal: 20 }}>
         <View style={styles.topInfo}>
           <View style={styles.avatar}>
             <Avatar user={profileState.user}></Avatar>
->>>>>>> a0bffbfdb71ff682e8bd032393cd66b7e6c84ed0
           </View>
           <View style={styles.nextToAvatar}>
             <View style={styles.profileData}>
@@ -159,14 +121,6 @@ const FriendProfile = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-<<<<<<< HEAD
-        <ProfileGrid posts={profileState.posts} user={profileState.user} navigation={navigation}/>
-      <NavBar
-        user={profileState.user}
-        activePage="FriendProfile"
-        navigation={navigation}
-      />
-=======
         <View>
           <Text style={styles.username}>{profileState.user?.username}</Text>
           <Text style={styles.description}>
@@ -175,7 +129,6 @@ const FriendProfile = ({ navigation }) => {
         </View>
       </View>
       <ProfileGrid posts={profileState.posts} />
->>>>>>> a0bffbfdb71ff682e8bd032393cd66b7e6c84ed0
     </View>
   );
 };
