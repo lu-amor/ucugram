@@ -1,1 +1,33 @@
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
 
+.like-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+  }
+
+.is-primary {
+    background-color: #173363;
+    color :#f8f9fa;
+}
+
+.show-all-btn {
+  background-color:#173363 ; 
+  border-color: #173363; 
+  color: white; 
+  transition: background-color 0.3s ease;
+}
+
+.show-all-btn:hover {
+  background-color:#ea5b0c; 
+  border-color: #ea5b0c; 
+}
+
+.show-all-btn:focus {
+  background-color: #0dafb1; 
+  border-color: #0dafb1;
+}

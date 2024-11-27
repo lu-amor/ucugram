@@ -1,11 +1,36 @@
 .navBarItem {
     display: flex;
     align-items: center;
+    height: 24px;
 }
 
-.icono {
-    width: 20px;
-    height: auto;
+.navBarItemH {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+}
+
+.menuItems {
+    width: 50px;
+}
+
+.avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
     margin-right: 8px;
-    margin-left: 25px;
+    margin-left: 21px;
+    object-fit: cover; 
+    overflow: hidden; 
+}
+
+.avatarH {
+    width: 31px;
+    height: 31px;
+    border-radius: 50%;
+    margin-right: 8px;
+    margin-left: 21px;
+    object-fit: cover;
+    overflow: hidden;
 }

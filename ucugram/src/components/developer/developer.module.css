@@ -1,0 +1,57 @@
+.devContainer {
+    width: 12rem;
+    padding: 15px;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backgroundLula {
+    background-color: #f7c600;
+}
+
+.backgroundManu {
+    background-color: #0dafb1;
+}
+
+.backgroundPau {
+    background-color: #ea5b0c;
+}
+
+.backgroundDefault {
+    background-color: #009ce6;
+}
+
+.avatar {
+    margin-top: 5px;
+    width: 100px;
+    height: auto;
+    border-radius: 100%;
+}
+
+.name {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.media {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.user {
+    color: white;
+    font-size: 16px;
+}
+
+.icon {
+    color: white;
+    cursor: pointer;
+    margin: 0px 10px 0px 10px;
+}

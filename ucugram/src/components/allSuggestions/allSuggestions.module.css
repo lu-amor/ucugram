@@ -1,0 +1,72 @@
+  .allSuggestions {
+    padding: 20px;
+    background-color: #a189bd; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+.allSuggTitle h2 {
+  color : #173363;
+}
+  
+  .suggestionsList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .suggestionItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffffff; 
+    transition: background-color 0.3s ease;
+  }
+
+  .suggestionItem:hover {
+    background-color: #f7c600; 
+  }
+
+  .itemAvatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .itemInfo h3 {
+    margin: 0;
+    color: #173363;
+  }
+
+  .suggUser {
+    color: #173363;
+  }
+  
+  .followSection {
+    margin-left: auto;
+  } 
+  
+
+  .backButton {
+    margin-top: 20px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color : #173363;
+    transition: background-color 0.3s ease;
+  }
+  
+  .backButton:hover {
+    background-color: #ea5b0c;
+  }
+
+  .backButton:focus {
+    background-color: #0dafb1; 
+    border-color: #0dafb1;
+  }
+  
+  

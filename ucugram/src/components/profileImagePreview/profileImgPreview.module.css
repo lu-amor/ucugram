@@ -1,0 +1,69 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    height: fit-content;
+    max-width: 100%;
+}
+
+.modalContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.delete {
+    position: absolute;
+    margin-left: 95%;
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px
+}
+
+.avatarContainer {
+    width: 180px;
+    height: 180px;
+}
+
+#cancelButton {
+    background-color: rgb(160, 188, 239);   
+}   
+
+#cancelButton:hover {
+    background-color: rgb(136, 167, 224);
+}
+
+#selectButton {
+    background-color: #2563eb;
+    color: white
+}
+
+#selectButton:hover {
+    background-color: #ea5b0c;
+    color: black;
+}

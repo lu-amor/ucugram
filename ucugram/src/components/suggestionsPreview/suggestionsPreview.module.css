@@ -1,0 +1,10 @@
+.suggestionsPreview {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.slickSlide {
+  display: flex;
+  justify-content: center;
+}

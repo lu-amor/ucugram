@@ -1,0 +1,112 @@
+.pageContainer {
+    margin: 20px;
+    padding: 10px;
+    height: 100vh;
+    min-width: 200px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+#profileButton {
+    background-color: rgb(214, 225, 245);
+    padding: 5px;
+    margin-top: 5px;
+    margin-left: auto;
+    justify-self: flex-end;
+    width: 130px;
+}
+
+#profileButton:hover {
+    background-color: rgb(136, 167, 224);
+}
+
+.avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 65px;
+    min-width: 55px;
+    max-width: 65px;
+    margin-right: 15px;
+}
+
+.username {
+    font-size: 25px;
+    margin-right: auto;
+}
+
+@media (max-width: 500px) {
+    .username {
+        margin-top: 5px;
+        font-size: 20px;
+    }
+}
+
+.pictureContainer {
+    display: flex;
+    background-color: rgb(235, 235, 235);
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+    align-items: center;
+    border-radius: 25px;
+}
+
+.showPicture {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.field {
+    margin-top: 25px;
+    width: 50%;
+    display: block; 
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 405px) {
+    .container {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    #profileButton {
+        margin-left: 0px;
+    }
+}
+
+.buttonsContainer {
+    justify-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    height: 19%;
+    margin-top: auto;
+}
+
+.buttonsContainer #profileButton {
+    height: 40px;
+    width: 90px;
+    background-color: rgb(235, 235, 235);
+    margin-left: 10px;
+}
+
+.buttonsContainer #profileButton:hover {
+    background-color: rgb(185, 182, 182);
+}

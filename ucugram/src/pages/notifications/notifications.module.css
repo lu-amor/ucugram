@@ -1,0 +1,43 @@
+.header {
+    padding-left: 15px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    color: #173363;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0px;
+    width: 100%;
+}
+
+.notificationContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-left: 5px;
+    margin-top: 15px;
+    margin-right: 0;
+}
+
+.goBack {
+    align-self: center;
+    margin-top: -5px;
+}
+
+@media (max-width: 950px) {
+    .header {
+        font-size: 1.5rem;
+    }
+    .goBack {
+        margin-top: -3px;
+    }
+}
+
+.pageContent {
+    height: 100vh; 
+    overflow-y: auto;
+    width: 100%;
+    min-width: 300px;
+}

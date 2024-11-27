@@ -1,12 +1,36 @@
 .isologo {
-    width: 75%;
+    width: 175px;
     height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding-top: 60px;
-    padding-left: 45px;
+    padding-top: 45px;
+    padding-left: 30px;
     padding-bottom: 20px;
+}
+
+.dropdownMenu {
+    position: fixed;
+    bottom: 0;
+    background-color: #009ce6;
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    width: 105%;
+    height: 4rem;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dropdownMenu button {
+    width: 12rem;
+    height: 3rem;
+}
+
+@media (min-width: 950px) {
+    .barraLat {
+        width: 18rem;
+    }
 }
 
