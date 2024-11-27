@@ -67,10 +67,6 @@ export default function FeedPost({ post, navigation }) {
     };
   });
 
-  const handleLike = () => {
-    setLiked(!liked);
-  };
-
   const handleGoProfile = async () => {
     const userId = post.user._id;
     const username = post.user.username;

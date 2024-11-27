@@ -24,6 +24,7 @@ const useFetchSuggestions = () => {
         return user;
       }
     });
+    setSuggestions(notFriends);
     return notFriends;
   };
 
@@ -32,15 +33,14 @@ const useFetchSuggestions = () => {
       await handleReload();
       if (authState.user) {
         setLoading(true);
-        const sugg = await getSuggestions();
-        setSuggestions(sugg);
+        await getSuggestions();
         setLoading(false);
       }
     };
     reload();
   }, []);
 
-  return { suggestions, loading, error };
+  return { getSuggestions, suggestions, loading, error };
 };
 
 export default useFetchSuggestions;

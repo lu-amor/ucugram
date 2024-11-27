@@ -19,6 +19,7 @@ const Feed = ({ navigation }) => {
   const { fetchPosts, posts, loading, error } = useFetchPosts();
   const { state: authState } = useAuth();
   const [refreshing, setRefreshing] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if (!authState.isAuthenticated) {
@@ -32,6 +33,7 @@ const Feed = ({ navigation }) => {
 
   const onRefresh = async () => {
     setRefreshing(true);
+    setRefresh(!refresh)
     await fetchPosts(); // Llama a la función para recargar los posts
     setRefreshing(false);
   };
@@ -48,7 +50,7 @@ const Feed = ({ navigation }) => {
           style={styles.headerImage}
         />
         {refreshing && <ActivityIndicator size={20} color="white" />}
-        <Suggestions navigation={navigation} />
+        <Suggestions navigation={navigation} refresh={refresh} />
         {loading ? (
           <Text>loading posts...</Text>
         ) : (

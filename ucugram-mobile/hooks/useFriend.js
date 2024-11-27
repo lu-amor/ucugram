@@ -37,16 +37,13 @@ export default function useFriend() {
       });
       
       const data = response.json();
-      console.log("data", data);
 
       if (!response.ok) {
         return false;
       }
-
       return true;
     } catch (error) {
       return error.message;
-      //   throw new Error(error.message);
     }
   };
 

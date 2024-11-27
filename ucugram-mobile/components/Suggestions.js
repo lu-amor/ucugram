@@ -1,10 +1,23 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  AccessibilityInfo,
+} from "react-native";
 import SuggestionsPreview from "./SuggestionsPreview";
 import useFetchSuggestions from "../hooks/useFetchSuggestions.js";
 
-const Suggestions = ({ navigation }) => {
-  const { suggestions, loading, error } = useFetchSuggestions();
+const Suggestions = ({ navigation, refresh }) => {
+  const { getSuggestions, suggestions, loading, error } = useFetchSuggestions();
+
+  useEffect(() => {
+    const reload = async () => {
+      await getSuggestions();
+    };
+    reload();
+  }, [refresh]);
 
   return (
     <View style={styles.container}>

@@ -16,6 +16,7 @@ import useFriend from "../hooks/useFriend";
 import { useAuth } from "../context/AuthContext";
 import { useGetProfile } from "../hooks/useGetProfile";
 import Avatar from "../components/Avatar";
+import { useIsFocused } from "@react-navigation/native";
 
 const FriendProfile = ({ navigation }) => {
   const { state: profileState, dispatch: dispatchProfile } = useProfile();
@@ -24,6 +25,31 @@ const FriendProfile = ({ navigation }) => {
   const [friendsNum, setFriendsNum] = useState();
   const getProfile = useGetProfile();
   const { addFriend, removeFriend } = useFriend();
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    const getData = async () => {
+      const friendId = await AsyncStorage.getItem("friend-id");
+      if (friendId) {
+        dispatchProfile({ type: PROFILE_ACTIONS.LOADING });
+        await getProfile(friendId);
+        await handleReload();
+      }
+    };
+    getData();
+    let find = false;
+    for (let i = 0; i < profileState.user?.friends.length; i++) {
+      if (profileState.user.friends[i]._id === authState.user?._id) {
+        setIsFriend(true);
+        find = true;
+        break;
+      }
+    }
+    //setIsFriend(profileState.user?.friends?.some(friend => friend._id === authState.user?._id));
+  }, [isFocused])
+
+    
+  useEffect(() => {console.log("isFriend:" , isFriend)}, [isFriend])
 
   useEffect(() => {
     const getData = async () => {
@@ -45,12 +71,12 @@ const FriendProfile = ({ navigation }) => {
           const find = authState.user.friends.find(
             (friend) => friend._id === profileState.user?._id
           );
-          setIsFriend(find !== undefined);
+       //   setIsFriend(find !== undefined);
         } else {
           const find = authState.user.friends.find(
             (friend) => friend._id === profileState.user?._id
           );
-          setIsFriend(find !== undefined);
+       //   setIsFriend(find !== undefined);
           await AsyncStorage.setItem("friend-id", profileState.user?._id);
         }
         setFriendsNum(profileState.user?.friends.length);
@@ -62,8 +88,8 @@ const FriendProfile = ({ navigation }) => {
   const handleToggleFriend = async () => {
     if (isFriend) {
       const removed = await removeFriend(profileState.user._id);
-      console.log("entra");
       if (removed === true) {
+        console.log("eliminado");
         setIsFriend(false);
         setFriendsNum(friendsNum - 1);
       } else {
