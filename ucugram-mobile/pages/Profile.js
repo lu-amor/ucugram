@@ -52,6 +52,10 @@ const Profile = ({ navigation }) => {
     getUserProfile();
   }, [authState.user?._id]);
 
+  const handleGoEditProfile = () => {
+    navigation.navigate("Edit");
+  };
+
   return (
     <View style={styles.container}>
       {loading && <ActivityIndicator size="large" color="grey"/>}
@@ -78,7 +82,7 @@ const Profile = ({ navigation }) => {
                 </View>
               </View>
               <View style={styles.editProfileButton}>
-                <TouchableOpacity style={styles.editProfileButton}>
+                <TouchableOpacity style={styles.editProfileButton} onPress={handleGoEditProfile}>
                   <Text style={styles.editProfileButtonText}>Edit Profile</Text>
                 </TouchableOpacity>
               </View>
@@ -113,9 +117,9 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 60,
+    width: 120,
+    height: 120,
+    borderRadius: 100,
     borderColor: "#808080",
     borderWidth: 3,
     marginRight: 15,

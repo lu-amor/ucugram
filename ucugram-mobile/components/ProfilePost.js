@@ -26,7 +26,7 @@ const ProfilePost = ({ idx, post, user, navigation }) => {
   const openModal = () => {
     setIsModalOpen(true);
   };
-
+  
   return (
     <View style={styles.container}>
       <TouchableOpacity
