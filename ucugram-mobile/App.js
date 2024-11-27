@@ -2,7 +2,6 @@ import React from "react";
 import Post from './pages/Post'
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { StyleSheet } from "react-native";
 import { View, StyleSheet, Image } from "react-native";
 import { AuthProvider } from "./context/AuthContext";
 import { ProfileProvider } from "./context/ProfileContext";
@@ -20,7 +19,7 @@ import { useRoute } from "@react-navigation/native";
 import { useNavigationState } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator();
-export const url = "http://172.20.10.2:3001/api/";
+export const url = "http://172.20.10.4:3001/api/";
 
 function StackNavigatorComponent() {
   const route = useRoute();

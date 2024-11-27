@@ -51,7 +51,7 @@ const Feed = ({ navigation }) => {
           style={styles.headerImage}
         />
         {refreshing && <ActivityIndicator size={20} color="white" />}
-        <Suggestions navigation={navigation} />
+        <Suggestions navigation={navigation} refreshing={refreshing} />
         {loading ? (
           <Text>loading posts...</Text>
         ) : (

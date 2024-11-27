@@ -89,7 +89,7 @@ export default function FeedPost({ post, navigation }) {
           <Animated.View style={[styles.cardImage, animatedImageStyle]}>
             <Image
               source={{
-                uri: `http://172.20.10.2:3001/${post.imageUrl.replace(
+                uri: `http://172.20.10.4:3001/${post.imageUrl.replace(
                   /\\/g,
                   "/"
                 )}`,

@@ -11,36 +11,38 @@ const useFetchSuggestions = () => {
   const { state: authState, handleReload } = useAuth();
 
   const getSuggestions = async () => {
-    const allUsers = await getAllUsers();
-    // console.log("allUsers: ", allUsers);
-    // console.log("authState: ", authState);
+    try {
+      setLoading(true);
+      const allUsers = await getAllUsers();
 
-    // obtengo todos los usuarios que no son amigos del autenticado
-    const notFriends = allUsers.filter((user) => {
-      const find = authState.user.friends.find(
-        (friend) => friend._id === user._id
-      );
-      if (!find && user._id !== authState.user._id) {
-        return user;
-      }
-    });
-    return notFriends;
+      const notFriends = allUsers.filter((user) => {
+        const find = authState.user.friends.find(
+          (friend) => friend._id === user._id
+        );
+        return !find && user._id !== authState.user._id;
+      });
+
+      setSuggestions(notFriends);
+      setLoading(false);
+    } catch (err) {
+      console.error("Error fetching suggestions:", err);
+      setError(err);
+      setLoading(false);
+    }
+  };
+
+  const reloadSuggestions = async () => {
+    await handleReload();
+    if (authState.user) {
+      await getSuggestions();
+    }
   };
 
   useEffect(() => {
-    const reload = async () => {
-      await handleReload();
-      if (authState.user) {
-        setLoading(true);
-        const sugg = await getSuggestions();
-        setSuggestions(sugg);
-        setLoading(false);
-      }
-    };
-    reload();
+    reloadSuggestions();
   }, []);
 
-  return { suggestions, loading, error };
+  return { getSuggestions, suggestions, loading, error, reloadSuggestions };
 };
 
 export default useFetchSuggestions;

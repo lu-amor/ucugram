@@ -1,25 +1,38 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React, {useState, useEffect} from "react";
+import { View, Text, TouchableOpacity, StyleSheet, RefreshControl } from "react-native";
 import SuggestionsPreview from "./SuggestionsPreview";
 import useFetchSuggestions from "../hooks/useFetchSuggestions.js";
 
-const Suggestions = ({ navigation }) => {
-  const { suggestions, loading, error } = useFetchSuggestions();
+const Suggestions = ({ navigation, refreshing }) => {
+  const { reloadSuggestions, suggestions, loading, error } = useFetchSuggestions();
+
+  useEffect(() => {
+    if (refreshing) {
+      (async () => {
+        await reloadSuggestions();
+        console.log("Suggestions reloaded");
+      })();
+    }
+  }, [refreshing]);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Suggestions for you</Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("SuggestedFriends")}
-          style={styles.showAllButton}
-        >
-          <Text style={styles.showAllButtonText}>See all</Text>
-        </TouchableOpacity>
-      </View>
-      <SuggestionsPreview suggestions={suggestions} />
-      <View style={styles.footer}></View>
-    </View>
+    <>
+      {suggestions && suggestions.length > 0 && (
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Suggestions for you</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("SuggestedFriends")}
+              style={styles.showAllButton}
+            >
+              <Text style={styles.showAllButtonText}>See all</Text>
+            </TouchableOpacity>
+          </View>
+          <SuggestionsPreview suggestions={suggestions} />
+          <View style={styles.footer}></View>
+        </View>
+      )}
+    </>
   );
 };
 
